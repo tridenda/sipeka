@@ -150,8 +150,10 @@
                 <li><a href="#" class="dropdown-item">Cashier</a></li>
                 <li><a href="../raw-material/" class="dropdown-item">Raw Material</a></li>
                 <li><a href="../product-list/" class="dropdown-item">Product List</a></li>
-                <li><a href="../user-list/" class="dropdown-item">User List</a></li>
+                <li><a href="<?=site_url('users')?>" class="dropdown-item">Pengguna / Pelanggan</a></li>
+                <?php if( $this->login->user_login()->level == 1 ) : ?>
                 <li><a href="../sellbuy-report/" class="dropdown-item">Sell/Buy Report</a></li>
+                <?php endif; ?>
               </ul>
             </li>
             <li class="nav-item dropdown">
