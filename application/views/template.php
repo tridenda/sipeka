@@ -156,12 +156,12 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user-circle"></i> Admin 
+                <i class="fas fa-user-circle"></i> <?=ucfirst($this->login->user_login()->username)?> 
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="../account/settings.html" class="dropdown-item">Settings</a></li>
                 <li><a href="../account/help.html" class="dropdown-item">Help</a></li>
-                <li><a href="../account/login.html" class="dropdown-item">Logout</a></li>
+                <li><a href="<?=site_url('auth/logout')?>" class="dropdown-item">Keluar</a></li>
               </ul>
             </li>
           </ul>
