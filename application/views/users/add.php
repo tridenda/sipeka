@@ -36,8 +36,8 @@
                 <label for="level">Tingkat *</label>
                 <select name="level" id="level" class="form-control">
                   <option value="">- Pilih - </option>
-                  <option value="1">Admin</option>
-                  <option value="2">Kasir</option>
+                  <option value="1" <?=set_value('level') == "1" ? "selected" : null?>>Admin</option>
+                  <option value="2"  <?=set_value('level') == "2" ? "selected" : null?>>Pramuniaga</option>
                 </select>
                 <small class="text-danger"><?php echo form_error('level'); ?></small>
               </div>

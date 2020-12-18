@@ -25,9 +25,10 @@
             </tr>
           </thead>
           <tbody>
+          <?php $no = 1 ?>
           <?php foreach( $this->User_model->get()->result() as $user ) : ?>
             <tr>
-              <td>1</td>
+              <td><?= $no++ ?></td>
               <td><?= $user->username ?></td>
               <td><?= $user->name ?></td>
               <td><?= $user->address ?></td>

@@ -12,7 +12,7 @@ class Users extends CI_Controller {
 	
 	public function add()
 	{
-		$this->login->check_not_login();		
+		$this->login->check_not_login();	
 		
 		// Load form validation
 		$this->load->library('form_validation');
@@ -31,7 +31,15 @@ class Users extends CI_Controller {
 		if ($this->form_validation->run() == FALSE) {
 			$this->template->load('template', 'users/add');
 		} else {
-			echo "proses simpan";
+			$post = $this->input->post(null, TRUE);
+			$this->load->model('User_model');	
+			$this->User_model->add($post);
+			if( $this->db->affected_rows() > 1 ) {
+				echo "<script>
+						alert('Data berhasil disimpan');
+				</script>";
+			}
+			redirect('users');
 		}
 
 		
