@@ -3,70 +3,23 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Daftar Pengguna</h1>
-      <div class="table-responsive">
-        <div class="d-flex justify-content-between mb-3">
-          <form class="d-flex mr-auto">
-            <input class="form-control form-control-sm" type="text" placeholder="Search material name" aria-label=".form-control-sm example">
-            <button class="btn btn-outline-primary btn-sm mr-5" type="submit"><i class="fas fa-search"></i></button>
-          </form>
-          <a class="btn btn-outline-primary" href="<?=site_url('users/add')?>"><i class="fas fa-plus"></i> Tambah Pengguna</a>
-        </div>        
-        <!-- Begin: Table Material -->
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nama Pengguna</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Tingkat</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php $no = 1 ?>
-          <?php foreach( $row as $user ) : ?>
-            <tr>
-              <td><?= $no++ ?></td>
-              <td><?= $user->username ?></td>
-              <td><?= $user->name ?></td>
-              <td><?= $user->address ?></td>
-              <td><?= $user->level == 1 ? "Admin" : "Pramuniaga" ?></td>
-              <td style="width: 10rem;">
-                <form action="<?=site_url('users/delete')?>" method="post">
-                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$user->user_id?>">
-                    <i class="far fa-edit"></i> Ubah
-                  </a>
-                  <input name="user_id" type="hidden" value="<?=$user->user_id?>">
-                  <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
-                    <i class="far fa-trash-alt"></i> Hapus
-                  </button>
-                </form>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-          </tbody>
-        </table>
-        <!-- End: Table Material -->
-        <div class="d-flex justify-content-between mb-3">
-          <strong class="text-secondary">Showing 1 to 6 of 6 entries</strong>
-          <nav aria-label="...">
-            <ul class="pagination pagination-sm">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div> 
+      <h1 class="h2 text-secondary text-center border-bottom pb-3">Add Unit</h1>
+      <div class="table-responsive d-flex justify-content-center mt-4">       
+        <!-- Begin: Form Add Material -->
+        <form class="row g-2 needs-validation w-50" novalidate>
+          <div class="position-relative">
+            <label for="validationTooltip01" class="form-label">Name</label>
+            <input type="text" class="form-control" id="validationTooltip01" placeholder="Unit name" required>
+            <div class="valid-tooltip">
+              Looks good!
+            </div>
+          </div>
+          <div class="col-12 text-right mt-4">
+            <a class="btn btn-secondary" href="units.html">Cancel</a>
+            <input class="btn btn-primary input" type="submit" value="Submit">
+          </div>
+        </form>
+        <!-- End: Form Add Material --> 
       </div>
     </main>
     <!-- End: Main -->

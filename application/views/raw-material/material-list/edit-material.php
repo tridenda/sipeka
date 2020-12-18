@@ -3,70 +3,76 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Daftar Pengguna</h1>
-      <div class="table-responsive">
-        <div class="d-flex justify-content-between mb-3">
-          <form class="d-flex mr-auto">
-            <input class="form-control form-control-sm" type="text" placeholder="Search material name" aria-label=".form-control-sm example">
-            <button class="btn btn-outline-primary btn-sm mr-5" type="submit"><i class="fas fa-search"></i></button>
-          </form>
-          <a class="btn btn-outline-primary" href="<?=site_url('users/add')?>"><i class="fas fa-plus"></i> Tambah Pengguna</a>
-        </div>        
-        <!-- Begin: Table Material -->
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nama Pengguna</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Tingkat</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php $no = 1 ?>
-          <?php foreach( $row as $user ) : ?>
-            <tr>
-              <td><?= $no++ ?></td>
-              <td><?= $user->username ?></td>
-              <td><?= $user->name ?></td>
-              <td><?= $user->address ?></td>
-              <td><?= $user->level == 1 ? "Admin" : "Pramuniaga" ?></td>
-              <td style="width: 10rem;">
-                <form action="<?=site_url('users/delete')?>" method="post">
-                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$user->user_id?>">
-                    <i class="far fa-edit"></i> Ubah
-                  </a>
-                  <input name="user_id" type="hidden" value="<?=$user->user_id?>">
-                  <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
-                    <i class="far fa-trash-alt"></i> Hapus
-                  </button>
-                </form>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-          </tbody>
-        </table>
-        <!-- End: Table Material -->
-        <div class="d-flex justify-content-between mb-3">
-          <strong class="text-secondary">Showing 1 to 6 of 6 entries</strong>
-          <nav aria-label="...">
-            <ul class="pagination pagination-sm">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div> 
+      <h1 class="h2 text-secondary text-center border-bottom pb-3">Add Material</h1>
+      <div class="table-responsive d-flex justify-content-center mt-4">       
+        <!-- Begin: Form Add Material -->
+        <form class="row g-2 needs-validation w-50" novalidate>
+          <div class="position-relative">
+            <label for="validationTooltip01" class="form-label">First name</label>
+            <input type="text" class="form-control" id="validationTooltip01" value="Mark" required>
+            <div class="valid-tooltip">
+              Looks good!
+            </div>
+          </div>
+          <div class="position-relative">
+            <label for="validationTooltip04" class="form-label">Supplier</label>
+            <select class="form-select" id="validationTooltip04" required>
+              <option selected disabled value="">Choose...</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+            <div class="invalid-tooltip">
+              Please select a valid state.
+            </div>
+          </div>
+          <div class="position-relative">
+            <label for="validationTooltip04" class="form-label">Category</label>
+            <select class="form-select" id="validationTooltip04" required>
+              <option selected disabled value="">Choose...</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+            <div class="invalid-tooltip">
+              Please select a valid state.
+            </div>
+          </div>
+          <div class="col-md-5 position-relative">
+            <label for="validationTooltip03" class="form-label">Price</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Rp</span>
+              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            </div>                
+            <div class="invalid-tooltip">
+              Please provide a valid city.
+            </div>
+          </div>
+          <div class="col-md-4 position-relative">
+            <label for="validationTooltip04" class="form-label">Unit</label>
+            <select class="form-select" id="validationTooltip04" required>
+              <option selected disabled value="">Choose...</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+            <div class="invalid-tooltip">
+              Please select a valid state.
+            </div>
+          </div>
+          <div class="col-md-3 position-relative">
+            <label for="validationTooltip05" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="validationTooltip05" value="0" disabled>
+            <div class="invalid-tooltip">
+              Please provide a valid zip.
+            </div>
+          </div>
+          <div class="col-12 text-right mt-4">
+            <a class="btn btn-secondary" href="index.html">Cancel</a>
+            <input class="btn btn-primary input" type="submit" value="Submit">
+          </div>
+        </form>
+        <!-- End: Form Add Material --> 
       </div>
     </main>
     <!-- End: Main -->
