@@ -16,7 +16,6 @@ Class Login {
 
   public function check_already_login()
   {
-    $this->ci =& get_instance();
     $user_id = $this->ci->session->userdata('userid');
     if( $user_id ) {
       redirect('cashier/index');
@@ -25,11 +24,9 @@ Class Login {
 
   public function check_not_login()
   {
-    $this->ci =& get_instance();
     $user_id = $this->ci->session->userdata('userid');
     if( !$user_id ) {
       redirect('auth/login');
     }
   }
-
 }

@@ -100,7 +100,7 @@ class Users extends CI_Controller {
 	function username_check($str)
 	{
 		$post = $this->input->post(null, TRUE);	
-		$query = $this->db->query("SELECT * FROM users WHERE username = '$post[username]' AND '$post[user_id]'");
+		$query = $this->db->query("SELECT * FROM users WHERE username = '$post[username]' AND user_id !='$post[user_id]'");
 		if( $query->num_rows() > 0 ) {
 			$this->form_validation->set_message('username_check', '{field} sudah terpakai.');
 			return FALSE;
