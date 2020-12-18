@@ -26,13 +26,30 @@ class User_model extends CI_Model
 
   public function add($post)
   {
-    $params = array(
-      'name' => $post["name"],
-      'username' => $post["username"],
-      'password' => sha1($post["password"]),
-      'address' => $post["address"],
-      'level' => $post["level"]
-    );
+    $params['name'] = $post["name"];
+    $params['username'] = $post["username"];
+    $params['password'] = sha1($post["password"]);
+    $params['address'] = $post["address"];
+    $params['level'] = $post["level"];
     $this->db->insert('users', $params);
+  }
+
+  public function delete($id)
+  {
+    $this->db->where('user_id', $id);
+		$this->db->delete('users');
+  }
+
+  public function edit($post)
+  {
+    $params['name'] = $post["name"];
+    $params['username'] = $post["username"];
+    if( !empty($post["password"]) ) {
+      $params['password'] = sha1($post["password"]);
+    }
+    $params['address'] = $post["address"];
+    $params['level'] = $post["level"];
+    $this->db->where('user_id', $post["user_id"]);
+    $this->db->update('users', $params);
   }
 }

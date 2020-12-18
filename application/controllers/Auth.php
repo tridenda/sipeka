@@ -3,17 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
 
-	
+	public function __construct()
+	{
+		parent::__construct();
+		$this->login->check_already_login();
+	}
 
 	public function login()
 	{
-		$this->login->check_already_login();
 		$this->load->view('auth/index');
 	}
 
 	public function process()
 	{
-		$this->login->check_already_login();
 		$post = $this->input->post(null, TRUE);
 		if( isset($post['login']) ) {
 			$this->load->model('user_model');

@@ -26,16 +26,23 @@
           </thead>
           <tbody>
           <?php $no = 1 ?>
-          <?php foreach( $this->User_model->get()->result() as $user ) : ?>
+          <?php foreach( $row as $user ) : ?>
             <tr>
               <td><?= $no++ ?></td>
               <td><?= $user->username ?></td>
               <td><?= $user->name ?></td>
               <td><?= $user->address ?></td>
               <td><?= $user->level == 1 ? "Admin" : "Pramuniaga" ?></td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
+              <td style="width: 10rem;">
+                <form action="<?=site_url('users/delete')?>" method="post">
+                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$user->user_id?>">
+                    <i class="far fa-edit"></i> Ubah
+                  </a>
+                  <input name="user_id" type="hidden" value="<?=$user->user_id?>">
+                  <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
+                    <i class="far fa-trash-alt"></i> Hapus
+                  </button>
+                </form>
               </td>
             </tr>
           <?php endforeach; ?>
