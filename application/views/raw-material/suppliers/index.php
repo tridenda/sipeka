@@ -3,138 +3,49 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary border-bottom pb-3 text-center">Suppliers</h1>
+      <h1 class="h2 text-secondary border-bottom pb-3 text-center">Pemasok</h1>
       <div class="table-responsive">
         <div class="d-flex justify-content-between mb-3">
           <form class="d-flex mr-auto">
             <input class="form-control form-control-sm" type="text" placeholder="Search material name" aria-label=".form-control-sm example">
             <button class="btn btn-outline-primary btn-sm mr-5" type="submit"><i class="fas fa-search"></i></button>
           </form>
-          <a class="btn btn-outline-primary" href="add-supplier.html"><i class="fas fa-plus"></i> Add Supplier</a>
+          <a class="btn btn-outline-primary" href="<?=site_url('raw_material/add_supplier')?>"><i class="fas fa-plus"></i> Tambah Pemasok</a>
         </div>        
         <!-- Begin: Table Material -->
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Description</th>
-              <th>Actions</th>
+              <th>Nama</th>
+              <th>Nomor Telepon</th>
+              <th>Alamat</th>
+              <th>Keterangan</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
+          <?php $no = 1 ?>
+          <?php foreach( $row as $supplier ) : ?>
             <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
+              <td><?= $no++ ?></td>
+              <td><?= $supplier->name ?></td>
+              <td><?= $supplier->phone ?></td>
+              <td><?= $supplier->address ?></td>
+              <td><?= $supplier->notes ?></td>
+              <td style="width: 10rem;">
+                <form action="<?=site_url('raw_material/delete_supplier')?>" method="post">
+                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$supplier->supplier_id?>">
+                    <i class="far fa-edit"></i> Ubah
+                  </a>
+                  <input name="supplier_id" type="hidden" value="<?=$supplier->supplier_id?>">
+                  <button onclick="return confirm('Semua barang dari <?= $supplier->name ?> akan ikut terhapus, yakin?');" class="btn btn-sm btn-outline-danger">
+                    <i class="far fa-trash-alt"></i> Hapus
+                  </button>
+                </form>              
               </td>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td>085155223322</td>
-              <td>Lorem ipsun memeto uptikum ridosum</td>
-              <td>Bibikalabik bakakubik bikbi bak balababik</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
+          <?php endforeach; ?>
           </tbody>
         </table>
         <!-- End: Table Material -->

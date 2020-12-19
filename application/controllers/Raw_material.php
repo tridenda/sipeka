@@ -6,7 +6,9 @@ class Raw_material extends CI_Controller {
   public function __construct()
 	{
 		parent::__construct();
-		$this->login->check_not_login();
+    $this->login->check_not_login();
+    $this->load->model('Material_model');
+		$this->load->library('form_validation');
   }
   
   // Begin: Material List
@@ -63,18 +65,50 @@ class Raw_material extends CI_Controller {
   // Begin: Suppliers
   public function suppliers()
 	{
-		$this->template->load('template', 'raw-material/suppliers/index');
+    $data['row'] = $this->Material_model->get_supplier()->result();
+		$this->template->load('template', 'raw-material/suppliers/index', $data);
   }
 
   public function add_supplier()
-	{
-		$this->template->load('template', 'raw-material/suppliers/add-supplier');
+	{		
+		// Set rules form
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+    
+    // Set message to Indonesian
+		$this->form_validation->set_message('required', '{field} harus terisi.');
+    
+    // Set condition form
+		if ($this->form_validation->run() == FALSE) {
+			$this->template->load('template', 'raw-material/suppliers/add-supplier');
+		} else {
+			$post = $this->input->post(null, TRUE);	
+      $this->Material_model->add_supplier($post);
+			if( $this->db->affected_rows() > 1 ) {
+				echo "<script>
+						alert('Data berhasil disimpan');
+				</script>";
+			}
+			redirect('raw_material/suppliers');
+		}
   }
 
   public function edit_supplier()
 	{
 		$this->template->load('template', 'raw-material/suppliers/edit-supplier');
   }
+
+  public function delete_supplier()
+	{
+		$id = $this->input->post('supplier_id');
+    $this->Material_model->delete_supplier($id);
+
+		if( $this->db->affected_rows() > 1 ) {
+			echo "<script>
+					alert('Data berhasil dihapus');
+			</script>";
+		}
+		redirect('raw_material/suppliers');
+	}
   // End: Suppliers
 
   // Begin: Stock

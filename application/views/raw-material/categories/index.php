@@ -10,7 +10,7 @@
             <input class="form-control form-control-sm" type="text" placeholder="Search material name" aria-label=".form-control-sm example">
             <button class="btn btn-outline-primary btn-sm mr-5" type="submit"><i class="fas fa-search"></i></button>
           </form>
-          <a class="btn btn-outline-primary" href="add-category.html"><i class="fas fa-plus"></i> Add Category</a>
+          <a class="btn btn-outline-primary" href="<?=site_url('raw_material/add_category')?>"><i class="fas fa-plus"></i> Add Category</a>
         </div>        
         <!-- Begin: Table Material -->
         <table class="table table-striped table-sm">
