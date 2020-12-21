@@ -48,18 +48,73 @@ class Raw_material extends CI_Controller {
   // Begin: Units
   public function units()
 	{
-		$this->template->load('template', 'raw-material/units/index');
+    $data['row'] = $this->Material_model->get_unit()->result();
+		$this->template->load('template', 'raw-material/units/index', $data);
   }
 
   public function add_unit()
-	{
-		$this->template->load('template', 'raw-material/units/add-unit');
+	{		
+		// Set rules form
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numeric');
+    
+    // Set condition form
+		if ($this->form_validation->run() == FALSE) {
+			$this->template->load('template', 'raw-material/units/add-unit');
+		} else {
+			$post = $this->input->post(null, TRUE);	
+      $this->Material_model->add_unit($post);
+			if( $this->db->affected_rows() > 1 ) {
+				echo "<script>
+						alert('Data berhasil disimpan');
+				</script>";
+			}
+			redirect('raw_material/units');
+		}
   }
 
-  public function edit_unit()
+  public function edit_unit($id)
 	{
-		$this->template->load('template', 'raw-material/units/edit-unit');
+		// Set rules form
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+
+		// Set condition form
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->Material_model->get_unit($id);
+			if( $query->num_rows() > 0 ) {
+				$data['row'] = $query->row();
+				$this->template->load('template', 'raw-material/units/edit-unit', $data);
+			} else {
+				echo "<script>
+						alert('Data tidak ditemukan.');
+				</script>";
+				redirect('raw_material/units');
+			}
+		} else {
+			$post = $this->input->post(null, TRUE);	
+
+			$this->Material_model->edit_unit($post);
+			if( $this->db->affected_rows() > 1 ) {
+				echo "<script>
+						alert('Data berhasil diubah.');
+				</script>";
+			}
+			redirect('raw_material/units');
+		}
   }
+
+  public function delete_unit()
+	{
+		$id = $this->input->post('unit_id');
+    $this->Material_model->delete_unit($id);
+
+		if( $this->db->affected_rows() > 1 ) {
+			echo "<script>
+					alert('Data berhasil dihapus');
+			</script>";
+		}
+		redirect('raw_material/units');
+	}
   // End: Units
 
   // Begin: Suppliers
@@ -73,7 +128,7 @@ class Raw_material extends CI_Controller {
 	{		
 		// Set rules form
 		$this->form_validation->set_rules('name', 'Nama', 'required');
-		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numberic');
+		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numeric');
     
     // Set condition form
 		if ($this->form_validation->run() == FALSE) {
@@ -94,7 +149,7 @@ class Raw_material extends CI_Controller {
 	{
 		// Set rules form
 		$this->form_validation->set_rules('name', 'Nama', 'required');
-		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numberic');
+		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numeric');
 
 		// Set condition form
 		if ($this->form_validation->run() == FALSE) {

@@ -9,22 +9,22 @@
         <form method="post" class="row g-2 needs-validation w-50" novalidate>
           <div class="position-relative">
             <label for="name" class="form-label">Nama *</label>
-            <input name="name" type="text" class="form-control" id="name" placeholder="Nama supplier" required>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Nama supplier" value="<?=set_value('name')?>">
             <small class="text-danger"><?php echo form_error('name'); ?></small>
           </div>
           <div class="position-relative">
             <label for="phone" class="form-label">Nomor telepon</label>
-            <input name="phone" type="text" class="form-control" id="phone" placeholder="Contoh: 08510001234">
+            <input name="phone" type="number" class="form-control" id="phone" placeholder="Contoh: 08510001234" value="<?=set_value('phone')?>">
             <small class="text-danger"><?php echo form_error('phone'); ?></small>
           </div>
           <div class="position-relative">
             <label for="address" class="form-label">Alamat</label>
-            <textarea name="address" class="form-control" id="address" rows="3" placeholder="Alamat supplier"></textarea>
+            <textarea name="address" class="form-control" id="address" rows="3" placeholder="Alamat supplier"><?=set_value('address')?></textarea>
             <small class="text-danger"><?php echo form_error('address'); ?></small>
           </div>
           <div class="position-relative">
             <label for="notes" class="form-label">Keterangan</label>
-            <textarea name="notes" class="form-control" id="notes" rows="3" placeholder="Keterangan tambahan pemasok"></textarea>
+            <textarea name="notes" class="form-control" id="notes" rows="3" placeholder="Keterangan tambahan pemasok"><?=set_value('notes')?></textarea>
             <small class="text-danger"><?php echo form_error('notes'); ?></small>
           </div>
           <div class="col-12 text-right mt-4">

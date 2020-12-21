@@ -3,16 +3,14 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Add Unit</h1>
+      <h1 class="h2 text-secondary text-center border-bottom pb-3">Tambah Satuan</h1>
       <div class="table-responsive d-flex justify-content-center mt-4">       
         <!-- Begin: Form Add Material -->
-        <form class="row g-2 needs-validation w-50" novalidate>
+        <form method="post" class="row g-2 needs-validation w-50" novalidate>
           <div class="position-relative">
-            <label for="validationTooltip01" class="form-label">Name</label>
-            <input type="text" class="form-control" id="validationTooltip01" placeholder="Unit name" required>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+            <label for="name" class="form-label">Nama</label>
+            <input name="name" type="text" class="form-control" id="name" value="<?=set_value('name')?>">
+            <small class="text-danger"><?php echo form_error('name'); ?></small>
           </div>
           <div class="col-12 text-right mt-4">
             <a class="btn btn-secondary" href="units.html">Cancel</a>

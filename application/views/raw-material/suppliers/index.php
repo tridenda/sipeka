@@ -39,7 +39,7 @@
                     <i class="far fa-edit"></i> Ubah
                   </a>
                   <input name="supplier_id" type="hidden" value="<?=$supplier->supplier_id?>">
-                  <button onclick="return confirm('Semua barang dari <?= $supplier->name ?> akan ikut terhapus, yakin?');" class="btn btn-sm btn-outline-danger">
+                  <button onclick="return confirm('Semua barang yang berhubungan dengan <?= $supplier->name ?> akan ikut terhapus, yakin?');" class="btn btn-sm btn-outline-danger">
                     <i class="far fa-trash-alt"></i> Hapus
                   </button>
                 </form>              
