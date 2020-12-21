@@ -35,7 +35,7 @@
               <td><?= $supplier->notes ?></td>
               <td style="width: 10rem;">
                 <form action="<?=site_url('raw_material/delete_supplier')?>" method="post">
-                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$supplier->supplier_id?>">
+                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('raw_material/edit_supplier')?>/<?=$supplier->supplier_id?>">
                     <i class="far fa-edit"></i> Ubah
                   </a>
                   <input name="supplier_id" type="hidden" value="<?=$supplier->supplier_id?>">

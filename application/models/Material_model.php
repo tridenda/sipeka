@@ -29,5 +29,15 @@ class Material_model extends CI_Model
     $this->db->where('supplier_id', $id);
     $this->db->delete('suppliers');
   }
+
+  public function edit_supplier($post)
+  {
+    $params['name'] = $post["name"];
+    $params['phone'] = $post["phone"];
+    $params['address'] = $post["address"];
+    $params['notes'] = $post["notes"];
+    $this->db->where('supplier_id', $post["supplier_id"]);
+    $this->db->update('suppliers', $params);
+  }
   // End: Suppliers
 }

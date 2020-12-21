@@ -3,41 +3,34 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Add Supplier</h1>
+      <h1 class="h2 text-secondary text-center border-bottom pb-3">Ubah Pemasok</h1>
       <div class="table-responsive d-flex justify-content-center mt-4">       
         <!-- Begin: Form Add Material -->
-        <form class="row g-2 needs-validation w-50" novalidate>
+        <form action="" method="post" class="row g-2 needs-validation w-50" novalidate>
+          <input name="supplier_id" type="hidden" value="<?=$this->input->post('supplier_id') ?? $row->supplier_id?>">
           <div class="position-relative">
-            <label for="validationTooltip01" class="form-label">Name*</label>
-            <input type="text" class="form-control" id="validationTooltip01" placeholder="Category name" required>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+            <label for="name" class="form-label">Nama *</label>
+            <input name="name" type="text" class="form-control" id="name" value="<?=$this->input->post('name') ?? $row->name?>">
+            <small class="text-danger"><?php echo form_error('name'); ?></small>
           </div>
           <div class="position-relative">
-            <label for="validationTooltip01" class="form-label">Phone*</label>
-            <input type="text" class="form-control" id="validationTooltip01" placeholder="Category name" required>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+            <label for="phone" class="form-label">Nomor telepon</label>
+            <input name="phone" type="text" class="form-control" id="phone" value="<?=$this->input->post('phone') ?? $row->phone?>">
+            <small class="text-danger"><?php echo form_error('phone'); ?></small>
           </div>
           <div class="position-relative">
-            <label for="validationTooltip01" class="form-label">Address*</label>
-            <input type="text" class="form-control" id="validationTooltip01" placeholder="Category name" required>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+            <label for="address" class="form-label">Alamat</label>
+            <textarea name="address" class="form-control" id="address" rows="3"><?=$this->input->post('address') ?? $row->address?></textarea>
+            <small class="text-danger"><?php echo form_error('address'); ?></small>
           </div>
           <div class="position-relative">
-            <label for="validationTooltip01" class="form-label">Description</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+            <label for="notes" class="form-label">Keterangan</label>
+            <textarea name="notes" class="form-control" id="notes" rows="3"><?=$this->input->post('notes') ?? $row->notes?></textarea>
+            <small class="text-danger"><?php echo form_error('notes'); ?></small>
           </div>
           <div class="col-12 text-right mt-4">
-            <a class="btn btn-secondary" href="suppliers.html">Cancel</a>
-            <input class="btn btn-primary input" type="submit" value="Submit">
+            <a class="btn btn-secondary" href="<?=site_url('raw_material/suppliers')?>">Batal</a>
+            <input name="submit" class="btn btn-primary input" type="submit" value="Ubah">
           </div>
         </form>
         <!-- End: Form Add Material --> 

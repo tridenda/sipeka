@@ -73,9 +73,11 @@ class Raw_material extends CI_Controller {
 	{		
 		// Set rules form
 		$this->form_validation->set_rules('name', 'Nama', 'required');
+		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numberic');
     
     // Set message to Indonesian
 		$this->form_validation->set_message('required', '{field} harus terisi.');
+		$this->form_validation->set_message('numberic', '{field} hanya bisa diisi dengan angka.');
     
     // Set condition form
 		if ($this->form_validation->run() == FALSE) {
@@ -92,9 +94,39 @@ class Raw_material extends CI_Controller {
 		}
   }
 
-  public function edit_supplier()
+  public function edit_supplier($id)
 	{
-		$this->template->load('template', 'raw-material/suppliers/edit-supplier');
+		// Set rules form
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numberic');
+    
+    // Set message to Indonesian
+		$this->form_validation->set_message('required', '{field} harus terisi.');
+		$this->form_validation->set_message('numberic', '{field} hanya bisa diisi dengan angka.');
+
+		// Set condition form
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->Material_model->get_supplier($id);
+			if( $query->num_rows() > 0 ) {
+				$data['row'] = $query->row();
+				$this->template->load('template', 'raw-material/suppliers/edit-supplier', $data);
+			} else {
+				echo "<script>
+						alert('Data tidak ditemukan.');
+				</script>";
+				redirect('raw_material/suppliers');
+			}
+		} else {
+			$post = $this->input->post(null, TRUE);	
+
+			$this->Material_model->edit_supplier($post);
+			if( $this->db->affected_rows() > 1 ) {
+				echo "<script>
+						alert('Data berhasil diubah.');
+				</script>";
+			}
+			redirect('raw_material/suppliers');
+		}
   }
 
   public function delete_supplier()

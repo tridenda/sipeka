@@ -3,7 +3,7 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Add Supplier</h1>
+      <h1 class="h2 text-secondary text-center border-bottom pb-3">Tambah Pemasok</h1>
       <div class="table-responsive d-flex justify-content-center mt-4">       
         <!-- Begin: Form Add Material -->
         <form method="post" class="row g-2 needs-validation w-50" novalidate>
@@ -28,8 +28,8 @@
             <small class="text-danger"><?php echo form_error('notes'); ?></small>
           </div>
           <div class="col-12 text-right mt-4">
-            <a class="btn btn-secondary" href="suppliers.html">Cancel</a>
-            <input name="submit" class="btn btn-primary input" type="submit" value="Submit">
+            <a class="btn btn-secondary" href="<?=site_url('raw_material/suppliers')?>">Batal</a>
+            <input name="submit" class="btn btn-primary input" type="submit" value="Tambah">
           </div>
         </form>
         <!-- End: Form Add Material --> 
