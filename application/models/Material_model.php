@@ -3,6 +3,38 @@
 class Material_model extends CI_Model 
 {
 
+  // Begin: Categories
+  public function get_category($id = null) 
+  {
+    $this->db->from('categories');
+    if( $id != null ) {
+      $this->db->where('category_id', $id);
+    }
+    $query = $this->db->get();
+    
+    return $query;
+  }
+
+  public function add_category($post)
+  {
+    $params['name'] = $post["name"];
+    $this->db->insert('categories', $params);
+  }
+
+  public function delete_category($id)
+  {
+    $this->db->where('category_id', $id);
+    $this->db->delete('categories');
+  }
+
+  public function edit_category($post)
+  {
+    $params['name'] = $post["name"];
+    $this->db->where('category_id', $post["category_id"]);
+    $this->db->update('categories', $params);
+  }
+  // End: Categories
+
   // Begin: Units
   public function get_unit($id = null) 
   {

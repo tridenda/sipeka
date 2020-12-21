@@ -31,18 +31,73 @@ class Raw_material extends CI_Controller {
   // Begin: Category
   public function categories()
 	{
-		$this->template->load('template', 'raw-material/categories/index');
+    $data['row'] = $this->Material_model->get_category()->result();
+		$this->template->load('template', 'raw-material/categories/index', $data);
   }
 
   public function add_category()
-	{
-		$this->template->load('template', 'raw-material/categories/add-category');
+	{		
+		// Set rules form
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numeric');
+    
+    // Set condition form
+		if ($this->form_validation->run() == FALSE) {
+			$this->template->load('template', 'raw-material/categories/add-category');
+		} else {
+			$post = $this->input->post(null, TRUE);	
+      $this->Material_model->add_category($post);
+			if( $this->db->affected_rows() > 1 ) {
+				echo "<script>
+						alert('Data berhasil disimpan');
+				</script>";
+			}
+			redirect('raw_material/categories');
+		}
   }
 
-  public function edit_category()
+  public function edit_category($id)
 	{
-		$this->template->load('template', 'raw-material/categories/edit-category');
+		// Set rules form
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+
+		// Set condition form
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->Material_model->get_category($id);
+			if( $query->num_rows() > 0 ) {
+				$data['row'] = $query->row();
+				$this->template->load('template', 'raw-material/categories/edit-category', $data);
+			} else {
+				echo "<script>
+						alert('Data tidak ditemukan.');
+				</script>";
+				redirect('raw_material/categories');
+			}
+		} else {
+			$post = $this->input->post(null, TRUE);	
+
+			$this->Material_model->edit_category($post);
+			if( $this->db->affected_rows() > 1 ) {
+				echo "<script>
+						alert('Data berhasil diubah.');
+				</script>";
+			}
+			redirect('raw_material/categories');
+		}
   }
+
+  public function delete_category()
+	{
+		$id = $this->input->post('category_id');
+    $this->Material_model->delete_unit($id);
+
+		if( $this->db->affected_rows() > 1 ) {
+			echo "<script>
+					alert('Data berhasil dihapus');
+			</script>";
+		}
+		redirect('raw_material/categories');
+	}
   // End: Category
   
   // Begin: Units

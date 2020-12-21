@@ -3,20 +3,19 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Add Category</h1>
+      <h1 class="h2 text-secondary text-center border-bottom pb-3">Ubah Kategori</h1>
       <div class="table-responsive d-flex justify-content-center mt-4">       
         <!-- Begin: Form Add Material -->
-        <form class="row g-2 needs-validation w-50" novalidate>
+        <form method="post" class="row g-2 needs-validation w-50" novalidate>
+          <input name="category_id" type="hidden" value="<?=$this->input->post('category_id') ?? $row->category_id?>">
           <div class="position-relative">
-            <label for="validationTooltip01" class="form-label">Name</label>
-            <input type="text" class="form-control" id="validationTooltip01" placeholder="Category name" required>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+            <label for="name" class="form-label">Nama *</label>
+            <input name="name" type="text" class="form-control" id="name" value="<?=$this->input->post('name') ?? $row->name?>">
+            <small class="text-danger"><?php echo form_error('name'); ?></small>
           </div>
           <div class="col-12 text-right mt-4">
-            <a class="btn btn-secondary" href="categories.html">Cancel</a>
-            <input class="btn btn-primary input" type="submit" value="Submit">
+            <a class="btn btn-secondary" href="<?=site_url('raw_material/categories')?>">Batal</a>
+            <input class="btn btn-primary input" type="submit" value="Ubah">
           </div>
         </form>
         <!-- End: Form Add Material --> 
@@ -31,14 +30,14 @@
         <a href="<?=site_url('raw_material/material_list')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Daftar Bahan</a>
         <div class="d-flex justify-content-center">
           <span class="w-50 mr-1"><a href="<?=site_url('raw_material/categories')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Kategori</a></span>
-          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/units')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add unit material">Satuan</a></span>
+          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/units')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add category material">Satuan</a></span>
         </div>
         <a href="<?=site_url('raw_material/suppliers')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Pemasok</a>
         <a href="<?=site_url('raw_material/stock_in')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stok Masuk</a>
         <a href="<?=site_url('raw_material/stock_out')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stok Keluar</a>
         <div class="d-flex justify-content-center">
           <span class="w-50 mr-1"><a href="<?=site_url('raw_material/stock_missing')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stok Hilang</a></span>
-          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/stock_found')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add unit material">Stok Ditemukan</a></span>
+          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/stock_found')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add category material">Stok Ditemukan</a></span>
         </div>
       </div>
       <!-- End: Sidebar menu -->

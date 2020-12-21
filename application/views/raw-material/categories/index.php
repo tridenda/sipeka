@@ -3,73 +3,43 @@
   <div class="row">
     <!-- Begin: Main -->
     <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Categories</h1>
+      <h1 class="h2 text-secondary text-center border-bottom pb-3">Daftar Kategori</h1>
       <div class="table-responsive">
         <div class="d-flex justify-content-between mb-3">
           <form class="d-flex mr-auto">
             <input class="form-control form-control-sm" type="text" placeholder="Search material name" aria-label=".form-control-sm example">
             <button class="btn btn-outline-primary btn-sm mr-5" type="submit"><i class="fas fa-search"></i></button>
           </form>
-          <a class="btn btn-outline-primary" href="<?=site_url('raw_material/add_category')?>"><i class="fas fa-plus"></i> Add Category</a>
+          <a class="btn btn-outline-primary" href="<?=site_url('raw_material/add_category')?>"><i class="fas fa-plus"></i> Tambah Kategori</a>
         </div>        
         <!-- Begin: Table Material -->
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>Actions</th>
+              <th>Nama</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
+          <?php $no = 1 ?>
+          <?php foreach( $row as $category ) : ?>
             <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
+              <td><?= $no++ ?></td>
+              <td><?= $category->name ?></td>
+              <td style="width: 10rem;">
+                <form action="<?=site_url('raw_material/delete_category')?>" method="post">
+                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('raw_material/edit_category')?>/<?=$category->category_id?>">
+                    <i class="far fa-edit"></i> Ubah
+                  </a>
+                  <input name="category_id" type="hidden" value="<?=$category->category_id?>">
+                  <button onclick="return confirm('Semua barang yang berhubungan dengan <?= $category->name ?> akan ikut terhapus, yakin?');" class="btn btn-sm btn-outline-danger">
+                    <i class="far fa-trash-alt"></i> Hapus
+                  </button>
+                </form>              
               </td>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lorem</td>
-              <td style="width: 11rem;">
-                <a class="btn btn-sm btn-outline-primary" href="#"><i class="far fa-edit"></i> Change</a>
-                <a class="btn btn-sm btn-outline-danger" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="far fa-trash-alt"></i> Delete</a>
-              </td>
-            </tr>
+          <?php endforeach; ?>
           </tbody>
         </table>
         <!-- End: Table Material -->
@@ -102,14 +72,14 @@
         <a href="<?=site_url('raw_material/material_list')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Daftar Bahan</a>
         <div class="d-flex justify-content-center">
           <span class="w-50 mr-1"><a href="<?=site_url('raw_material/categories')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Kategori</a></span>
-          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/units')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add unit material">Satuan</a></span>
+          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/units')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add category material">Satuan</a></span>
         </div>
         <a href="<?=site_url('raw_material/suppliers')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Pemasok</a>
         <a href="<?=site_url('raw_material/stock_in')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stok Masuk</a>
         <a href="<?=site_url('raw_material/stock_out')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stok Keluar</a>
         <div class="d-flex justify-content-center">
           <span class="w-50 mr-1"><a href="<?=site_url('raw_material/stock_missing')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stok Hilang</a></span>
-          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/stock_found')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add unit material">Stok Ditemukan</a></span>
+          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/stock_found')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add category material">Stok Ditemukan</a></span>
         </div>
       </div>
       <!-- End: Sidebar menu -->

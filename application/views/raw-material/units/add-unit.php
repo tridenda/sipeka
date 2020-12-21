@@ -13,8 +13,8 @@
             <small class="text-danger"><?php echo form_error('name'); ?></small>
           </div>
           <div class="col-12 text-right mt-4">
-            <a class="btn btn-secondary" href="units.html">Cancel</a>
-            <input class="btn btn-primary input" type="submit" value="Submit">
+            <a class="btn btn-secondary" href="<?=site_url('raw_material/units')?>">Batal</a>
+            <input class="btn btn-primary input" type="submit" value="Tambah">
           </div>
         </form>
         <!-- End: Form Add Material --> 
