@@ -25,11 +25,7 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Kata sandi', 'required|min_length[6]');
 		$this->form_validation->set_rules('confpass', 'Konfirmasi kata sandi', 'required|min_length[6]|matches[password]');
 		$this->form_validation->set_rules('level', 'Tingkat', 'required');
-		// Set message to Indonesian
-		$this->form_validation->set_message('required', '{field} harus terisi.');
-		$this->form_validation->set_message('min_length', '{field} minimal {param} karakter.');
-		$this->form_validation->set_message('matches', '{field} tidak sama dengan {param}.');
-		$this->form_validation->set_message('is_unique', '{field} sudah terdaftar.');
+
 		// Set condition form
 		if ($this->form_validation->run() == FALSE) {
 			$this->template->load('template', 'users/add');
@@ -68,11 +64,7 @@ class Users extends CI_Controller {
 			$this->form_validation->set_rules('confpass', 'Konfirmasi kata sandi', 'required|min_length[6]|matches[password]');
 		}
 		$this->form_validation->set_rules('level', 'Tingkat', 'required');
-		// Set message to Indonesian
-		$this->form_validation->set_message('required', '{field} harus terisi.');
-		$this->form_validation->set_message('min_length', '{field} minimal {param} karakter.');
-		$this->form_validation->set_message('matches', '{field} tidak sama dengan {param}.');
-		$this->form_validation->set_message('is_unique', '{field} sudah terdaftar.');
+
 		// Set condition form
 		if ($this->form_validation->run() == FALSE) {
 			$query = $this->User_model->get($id);

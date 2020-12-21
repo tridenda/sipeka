@@ -75,10 +75,6 @@ class Raw_material extends CI_Controller {
 		$this->form_validation->set_rules('name', 'Nama', 'required');
 		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numberic');
     
-    // Set message to Indonesian
-		$this->form_validation->set_message('required', '{field} harus terisi.');
-		$this->form_validation->set_message('numberic', '{field} hanya bisa diisi dengan angka.');
-    
     // Set condition form
 		if ($this->form_validation->run() == FALSE) {
 			$this->template->load('template', 'raw-material/suppliers/add-supplier');
@@ -99,10 +95,6 @@ class Raw_material extends CI_Controller {
 		// Set rules form
 		$this->form_validation->set_rules('name', 'Nama', 'required');
 		$this->form_validation->set_rules('phone', 'Nomor telepon', 'numberic');
-    
-    // Set message to Indonesian
-		$this->form_validation->set_message('required', '{field} harus terisi.');
-		$this->form_validation->set_message('numberic', '{field} hanya bisa diisi dengan angka.');
 
 		// Set condition form
 		if ($this->form_validation->run() == FALSE) {
