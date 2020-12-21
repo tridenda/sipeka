@@ -52,21 +52,12 @@
     <!-- End: Main -->
     <!-- Begin: Sidebar -->
     <div class="col-md-3 col-lg-3 d-md-block sidebar collapse border-left border-5">
-      <h2 class="fw-bold border-bottom pb-2 text-center text-secondary">Raw Material</h2>
+      <h2 class="fw-bold border-bottom pb-2 text-center text-secondary">Bahan Baku</h2>
       <!-- Begin: Sidebar Menu -->
       <div class="list-group mb-2">
-        <a href="<?=site_url('raw_material/material_list')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Material List</a>
-        <div class="d-flex justify-content-center">
-          <span class="w-50 mr-1"><a href="<?=site_url('raw_material/categories')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Categories</a></span>
-          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/units')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add unit material">Units</a></span>
-        </div>
-        <a href="<?=site_url('raw_material/suppliers')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Suppliers</a>
-        <a href="<?=site_url('raw_material/stock_in')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stock-in</a>
-        <a href="<?=site_url('raw_material/stock_out')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stock-out</a>
-        <div class="d-flex justify-content-center">
-          <span class="w-50 mr-1"><a href="<?=site_url('raw_material/stock_missing')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Stock Missing</a></span>
-          <span class="w-50 ml-1"><a href="<?=site_url('raw_material/stock_found')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1" title="Add unit material">Stock Found</a></span>
-        </div>
+        <a href="<?=site_url('users')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Pengguna</a>
+        <!-- Members haven't finished yet -->
+        <a href="<?=site_url('users')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Pelanggan</a>
       </div>
       <!-- End: Sidebar menu -->
 
@@ -74,6 +65,15 @@
       <ul class="list-group mb-3">
         <li class="list-group-item text-center text-secondary">
           <strong>History Activity</strong>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0 text-muted">Administator</h6>
+            </div>
+            <small class="text-muted">10:00 ~ 02/09/20</small>
+          </div>
+          <small class="text-muted">lorem ipsum dolor sit amet amit.....</small>
         </li>
         <li class="list-group-item">
           <div class="d-flex justify-content-between lh-sm">

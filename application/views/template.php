@@ -148,7 +148,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#" class="dropdown-item">Cashier</a></li>
-                <li><a href="<?=site_url('raw_material/material_list')?>" class="dropdown-item">Raw Material</a></li>
+                <li><a href="<?=site_url('raw_material/material_list')?>" class="dropdown-item">Bahan Baku</a></li>
                 <li><a href="../product-list/" class="dropdown-item">Product List</a></li>
                 <li><a href="<?=site_url('users')?>" class="dropdown-item">Pengguna</a></li>
                 <?php if( $this->login->user_login()->level == 1 ) : ?>
