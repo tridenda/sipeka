@@ -1,152 +1,78 @@
-<!-- Begin: Content -->
-<div class="container-fluid mt-4">
-  <div class="row">
-    <!-- Begin: Main -->
-    <main class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-      <h1 class="h2 text-secondary text-center border-bottom pb-3">Daftar Pengguna</h1>
-      <div class="table-responsive">
-        <div class="d-flex justify-content-between mb-3">
-          <form class="d-flex mr-auto">
-            <input class="form-control form-control-sm" type="text" placeholder="Search material name" aria-label=".form-control-sm example">
-            <button class="btn btn-outline-primary btn-sm mr-5" type="submit"><i class="fas fa-search"></i></button>
-          </form>
-          <a class="btn btn-outline-primary" href="<?=site_url('users/add')?>"><i class="fas fa-plus"></i> Tambah Pengguna</a>
-        </div>        
-        <!-- Begin: Table Material -->
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nama Pengguna</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Tingkat</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php $no = 1 ?>
-          <?php foreach( $row as $user ) : ?>
-            <tr>
-              <td><?= $no++ ?></td>
-              <td><?= $user->username ?></td>
-              <td><?= $user->name ?></td>
-              <td><?= $user->address ?></td>
-              <td><?= $user->level == 1 ? "Admin" : "Pramuniaga" ?></td>
-              <td style="width: 10rem;">
-                <form action="<?=site_url('users/delete')?>" method="post">
-                  <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$user->user_id?>">
-                    <i class="far fa-edit"></i> Ubah
-                  </a>
-                  <input name="user_id" type="hidden" value="<?=$user->user_id?>">
-                  <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
-                    <i class="far fa-trash-alt"></i> Hapus
-                  </button>
-                </form>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-          </tbody>
-        </table>
-        <!-- End: Table Material -->
-        <div class="d-flex justify-content-between mb-3">
-          <strong class="text-secondary">Showing 1 to 6 of 6 entries</strong>
-          <nav aria-label="...">
-            <ul class="pagination pagination-sm">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div> 
-      </div>
-    </main>
-    <!-- End: Main -->
-    <!-- Begin: Sidebar -->
-    <div class="col-md-3 col-lg-3 d-md-block sidebar collapse border-left border-5">
-      <h2 class="fw-bold border-bottom pb-2 text-center text-secondary">Bahan Baku</h2>
-      <!-- Begin: Sidebar Menu -->
-      <div class="list-group mb-2">
-        <a href="<?=site_url('users')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Pengguna</a>
-        <!-- Members haven't finished yet -->
-        <a href="<?=site_url('users')?>" class="list-group-item list-group-item-action list-group-item-secondary text-center mb-1">Pelanggan</a>
-      </div>
-      <!-- End: Sidebar menu -->
+<div class="content-wrapper" style="min-height: 1416.81px;">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+      <div class="container-fluid border-bottom">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Pramuniaga</h1>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-right">
+              <a href="" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i> Tambah Pramuniaga
+              </a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-      <!-- Begin: History Activity -->
-      <ul class="list-group mb-3">
-        <li class="list-group-item text-center text-secondary">
-          <strong>History Activity</strong>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-muted">Administator</h6>
+  <!-- Main content -->
+  <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Nama Pengguna</th>
+                    <th>Alamat</th>
+                    <th>Tingkat</th>
+                    <th>Gambar</th>
+                    <th>Aksi</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php $no=1 ?>
+                  <?php foreach( $row as $user ) : ?>
+                  <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= $user->name ?></td>
+                    <td><?= $user->username ?></td>
+                    <td><?= $user->address ?></td>
+                    <td><?= $user->level == 1 ? "Admin" : "Pramuniaga" ?></td>
+                    <td><?= $user->image ?></td>
+                    <td style="width: 10rem;">
+                      <form action="<?=site_url('users/delete')?>" method="post">
+                        <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$user->user_id?>">
+                          <i class="far fa-edit"></i> Ubah
+                        </a>
+                        <input name="user_id" type="hidden" value="<?=$user->user_id?>">
+                        <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
+                          <i class="far fa-trash-alt"></i> Hapus
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                  <?php endforeach; ?>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
             </div>
-            <small class="text-muted">10:00 ~ 02/09/20</small>
+            <!-- /.card -->
           </div>
-          <small class="text-muted">lorem ipsum dolor sit amet amit.....</small>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-muted">Administator</h6>
-            </div>
-            <small class="text-muted">10:00 ~ 02/09/20</small>
-          </div>
-          <small class="text-muted">lorem ipsum dolor sit amet amit.....</small>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-muted">Administator</h6>
-            </div>
-            <small class="text-muted">10:00 ~ 02/09/20</small>
-          </div>
-          <small class="text-muted">lorem ipsum dolor sit amet amit.....</small>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-muted">Administator</h6>
-            </div>
-            <small class="text-muted">10:00 ~ 02/09/20</small>
-          </div>
-          <small class="text-muted">lorem ipsum dolor sit amet amit.....</small>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-muted">Administator</h6>
-            </div>
-            <small class="text-muted">10:00 ~ 02/09/20</small>
-          </div>
-          <small class="text-muted">lorem ipsum dolor sit amet amit.....</small>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-muted">Administator</h6>
-            </div>
-            <small class="text-muted">10:00 ~ 02/09/20</small>
-          </div>
-          <small class="text-muted">lorem ipsum dolor sit amet amit.....</small>
-        </li>
-        <li class="list-group-item text-center">
-          <a href="" class="link-success">See more</a>
-        </li>
-      </ul>
-      <!-- End: History Activity -->
-    </div>
-    <!-- End: Sidebar -->
-  </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+  <!-- /.content -->
 </div>
-<!-- End: Content -->
