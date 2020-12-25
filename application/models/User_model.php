@@ -26,11 +26,12 @@ class User_model extends CI_Model
 
   public function add($post)
   {
-    $params['name'] = $post["name"];
-    $params['username'] = $post["username"];
-    $params['password'] = sha1($post["password"]);
-    $params['address'] = $post["address"];
-    $params['level'] = $post["level"];
+    $params['name'] = $post['name'];
+    $params['username'] = $post['username'];
+    $params['password'] = sha1($post['password']);
+    $params['address'] = $post['address'];
+    $params['level'] = $post['level'];
+    $params['image'] = $post['image'];
     $this->db->insert('users', $params);
   }
 
@@ -51,5 +52,7 @@ class User_model extends CI_Model
     $params['level'] = $post["level"];
     $this->db->where('user_id', $post["user_id"]);
     $this->db->update('users', $params);
+
+    
   }
 }

@@ -14,31 +14,88 @@ class Users extends CI_Controller {
 	public function index()
 	{
 		$data['row'] = $this->User_model->get()->result();
-		$this->template->load('template', 'users/index', $data);
+		$this->template->load('template', 'users/cashier/index', $data);
 	}
 	
 	public function add()
 	{		
-		// Set rules form
-		$this->form_validation->set_rules('name', 'Nama', 'required');
-		$this->form_validation->set_rules('username', 'Nama pengguna', 'required|min_length[5]|is_unique[users.username]');
-		$this->form_validation->set_rules('password', 'Kata sandi', 'required|min_length[6]');
-		$this->form_validation->set_rules('confpass', 'Konfirmasi kata sandi', 'required|min_length[6]|matches[password]');
-		$this->form_validation->set_rules('level', 'Tingkat', 'required');
+		if( !isset($_POST['add']) ) {
+			$user = new stdClass();
+			$user->user_id = null;
+			$user->name = null;
+			$user->username = null;
+			$user->password = null;
+			$user->passconf = null;
+			$user->address = null;
+			$user->level = null;
+			$user->image = null;
+			$user->created = null;
+			$user->updated = null;
+			$data = array(
+				'page' => 'add',
+				'row' => $user
+			);
 
-		// Set condition form
-		if ($this->form_validation->run() == FALSE) {
-			$this->template->load('template', 'users/add');
-		} else {
-			$post = $this->input->post(null, TRUE);	
-			$this->User_model->add($post);
-			if( $this->db->affected_rows() > 1 ) {
-				echo "<script>
-						alert('Data berhasil disimpan');
-				</script>";
+			$this->template->load('template', 'users/cashier/form', $data);
+		} else if( isset($_POST['add']) ){
+			// Set rules form
+			$this->form_validation->set_rules('name', 'Nama', 'required');
+			$this->form_validation->set_rules('username', 'Nama pengguna', 'required|min_length[5]|is_unique[users.username]');
+			$this->form_validation->set_rules('password', 'Kata sandi', 'required|min_length[6]');
+			$this->form_validation->set_rules('passconf', 'Konfirmasi kata sandi', 'required|min_length[6]|matches[password]');
+			$this->form_validation->set_rules('level', 'Tingkat', 'required');
+
+			// Set condition form
+			if ($this->form_validation->run() == FALSE) {
+				$post = $this->input->post(null, TRUE);	
+				$data = array(
+					'page' => 'add',
+					'row' => $post
+				);
+				$this->template->load('template', 'users/cashier/form', $data);
+			} else {
+				$post = $this->input->post(null, TRUE);	
+				$_SESSION['data'] = array(
+					'page' => 'add',
+					'row' => $post
+				);
+				$this->session->set_flashdata('item');
+				redirect('users/process');
 			}
-			redirect('users');
 		}
+	}
+
+	public function edit($id)
+	{		
+		$query = $this->User_model->get($id);
+		
+		if( $query->num_rows() > 0 ) {
+			$user = $query->row();
+			$user->passconf = null;
+			$data = array(
+				'page' => 'edit',
+				'row' => $user
+			);
+			$this->template->load('template', 'users/cashier/form', $data);
+		} else {
+			echo "<script>alert('Data tidak ditemukan');</script>";
+			echo "<script>window.location='".site_url('users')."'</script>";
+		}
+	}
+
+	public function process()
+	{
+		$post = $_SESSION['data']['row'];	
+		if( isset($post['add']) ) {
+			$this->User_model->add($post);
+		} else if( isset($post['edit']) ) {
+			$this->User_model->edit($post);
+		}
+
+		if( $this->db->affected_rows() > 0 ) {
+			$this->session->set_flashdata('success', 'Data berhasil disimpan.');
+		}
+		redirect('users');
 	}
 
 	public function delete()
@@ -52,41 +109,6 @@ class Users extends CI_Controller {
 			</script>";
 		}
 		redirect('users');
-	}
-
-	public function edit($id)
-	{		
-		// Set rules form
-		$this->form_validation->set_rules('name', 'Nama', 'required');
-		$this->form_validation->set_rules('username', 'Nama pengguna', 'required|min_length[5]|callback_username_check');
-		if( $this->input->post('password') || $this->input->post('confpass') ) {
-			$this->form_validation->set_rules('password', 'Kata sandi', 'required|min_length[6]');
-			$this->form_validation->set_rules('confpass', 'Konfirmasi kata sandi', 'required|min_length[6]|matches[password]');
-		}
-		$this->form_validation->set_rules('level', 'Tingkat', 'required');
-
-		// Set condition form
-		if ($this->form_validation->run() == FALSE) {
-			$query = $this->User_model->get($id);
-			if( $query->num_rows() > 0 ) {
-				$data['row'] = $query->row();
-				$this->template->load('template', 'users/edit', $data);
-			} else {
-				echo "<script>
-						alert('Data tidak ditemukan.');
-				</script>";
-				redirect('users');
-			}
-		} else {
-			$post = $this->input->post(null, TRUE);	
-			$this->User_model->edit($post);
-			if( $this->db->affected_rows() > 1 ) {
-				echo "<script>
-						alert('Data berhasil diubah.');
-				</script>";
-			}
-			redirect('users');
-		}
 	}
 
 	function username_check($str)

@@ -332,13 +332,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=site_url()?>assets/AdminLTE-3.0.5/UI/general.html" class="nav-link">
+                <a href="<?=site_url('users')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pramuniaga</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=site_url()?>assets/AdminLTE-3.0.5/UI/general.html" class="nav-link">
+                <a href="<?=site_url('users/members')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pelanggan</p>
                 </a>
