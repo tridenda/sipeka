@@ -67,19 +67,48 @@ class Users extends CI_Controller {
 
 	public function edit($id)
 	{		
-		$query = $this->User_model->get($id);
-		
-		if( $query->num_rows() > 0 ) {
-			$user = $query->row();
-			$user->passconf = null;
-			$data = array(
-				'page' => 'edit',
-				'row' => $user
-			);
-			$this->template->load('template', 'users/cashier/form', $data);
-		} else {
-			echo "<script>alert('Data tidak ditemukan');</script>";
-			echo "<script>window.location='".site_url('users')."'</script>";
+		if( !isset($_POST['edit']) ) {
+
+			$query = $this->User_model->get($id);	
+			if( $query->num_rows() > 0 ) {
+				$user = $query->row();
+				$user->passconf = null;
+				$data = array(
+					'page' => 'edit',
+					'row' => $user
+				);
+				$this->template->load('template', 'users/cashier/form', $data);
+			} else {
+				echo "<script>alert('Data tidak ditemukan');</script>";
+				echo "<script>window.location='".site_url('users')."'</script>";
+			}
+		} else if( isset($_POST['edit']) ){
+			// Set rules form
+			$this->form_validation->set_rules('name', 'Nama', 'required');
+			$this->form_validation->set_rules('username', 'Nama pengguna', 'required|min_length[5]|callback_username_check');
+			if( $this->input->post('password') || $this->input->post('passconf') ) {
+				$this->form_validation->set_rules('password', 'Kata sandi', 'required|min_length[6]');
+				$this->form_validation->set_rules('passconf', 'Konfirmasi kata sandi', 'required|min_length[6]|matches[password]');
+			}
+			$this->form_validation->set_rules('level', 'Tingkat', 'required');
+
+			// Set condition form
+			if ($this->form_validation->run() == FALSE) {
+				$post = $this->input->post(null, TRUE);	
+				$data = array(
+					'page' => 'edit',
+					'row' => $post
+				);
+				$this->template->load('template', 'users/cashier/form', $data);
+			} else {
+				$post = $this->input->post(null, TRUE);	
+				$_SESSION['data'] = array(
+					'page' => 'edit',
+					'row' => $post
+				);
+				$this->session->set_flashdata('item');
+				redirect('users/process');
+			}
 		}
 	}
 

@@ -23,7 +23,7 @@
         <div class="card-header">
           <h3 class="card-title">Data pramuniaga</h3>
           <div class="float-right">
-            <a href="<?=site_url('users/add')?>" class="btn btn-primary btn-sm">
+            <a href="<?=site_url('users/add')?>" class="btn btn-primary">
               <i class="fa fa-plus"></i> Tambah Pramuniaga
             </a>
           </div>

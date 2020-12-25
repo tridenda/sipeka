@@ -9,7 +9,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Pramuniaga</a></li>
-            <li class="breadcrumb-item active">Tambah pramuniaga</li>
+            <li class="breadcrumb-item active"><?=$page == 'edit' ? 'Ubah' : 'Tambah'?> pramuniaga</li>
           </ol>
         </div>
       </div>
@@ -23,7 +23,7 @@
         <div class="card-header">
           <h3 class="card-title"><?=$page == 'edit' ? 'Ubah' : 'Tambah'?> pramuniaga</h3>
           <div class="float-right">
-            <a href="<?=site_url('users')?>" class="btn btn-warning btn-sm">
+            <a href="<?=site_url('users')?>" class="btn btn-warning">
             <i class="fas fa-reply"></i> Kembali
             </a>
           </div>
