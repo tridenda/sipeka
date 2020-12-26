@@ -45,7 +45,7 @@ class Users extends CI_Controller {
 			$this->form_validation->set_rules('passconf', 'Konfirmasi kata sandi', 'required|min_length[6]|matches[password]');
 			$this->form_validation->set_rules('level', 'Tingkat', 'required');
 
-			// Set condition form
+			// Set condition form, if FALSE process is canceled
 			if ($this->form_validation->run() == FALSE) {
 				$post = $this->input->post(null, TRUE);	
 				$data = array(
@@ -54,13 +54,40 @@ class Users extends CI_Controller {
 				);
 				$this->template->load('template', 'users/cashier/form', $data);
 			} else {
-				$post = $this->input->post(null, TRUE);	
-				$_SESSION['data'] = array(
-					'page' => 'add',
-					'row' => $post
-				);
-				$this->session->set_flashdata('item');
-				redirect('users/process');
+				// Image configuration before upload
+				$config['upload_path'] = './uploads/users/cashier/';
+				$config['allowed_types'] = 'jpg|jpeg|png';
+				$config['max_size'] = 2048;
+				$config['file_name'] = 'user-'.date('ymd').'-'.substr(md5(rand()),0,10);
+				$this->load->library('upload', $config);
+
+				// Image condition if there's an image
+				if( @$_FILES['image']['name'] != null ) {
+					if( $this->upload->do_upload('image') ) {
+						$post = $this->input->post(null, TRUE);	
+						$post['image'] = $this->upload->data('file_name');
+						$_SESSION['data'] = array(
+							'page' => 'add',
+							'row' => $post
+						);
+						$this->session->set_flashdata('item');
+						$this->User_model->add($post);
+						redirect('users');
+					} else {
+						$error = $this->upload->display_errors();
+						$this->session->set_flashdata('error', $error);
+						redirect('users');
+					} 
+				} else {
+					$post = $this->input->post(null, TRUE);
+					$post['image'] = null;	
+					$_SESSION['data'] = array(
+						'page' => 'add',
+						'row' => $post
+					);
+					$this->session->set_flashdata('item');
+					redirect('users/process');
+				}
 			}
 		}
 	}
@@ -68,7 +95,6 @@ class Users extends CI_Controller {
 	public function edit($id)
 	{		
 		if( !isset($_POST['edit']) ) {
-
 			$query = $this->User_model->get($id);	
 			if( $query->num_rows() > 0 ) {
 				$user = $query->row();
@@ -79,8 +105,8 @@ class Users extends CI_Controller {
 				);
 				$this->template->load('template', 'users/cashier/form', $data);
 			} else {
-				echo "<script>alert('Data tidak ditemukan');</script>";
-				echo "<script>window.location='".site_url('users')."'</script>";
+				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
+				redirect('users');
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
@@ -92,7 +118,7 @@ class Users extends CI_Controller {
 			}
 			$this->form_validation->set_rules('level', 'Tingkat', 'required');
 
-			// Set condition form
+			// Set condition form, if FALSE process is canceled
 			if ($this->form_validation->run() == FALSE) {
 				$post = $this->input->post(null, TRUE);	
 				$data = array(
@@ -101,13 +127,46 @@ class Users extends CI_Controller {
 				);
 				$this->template->load('template', 'users/cashier/form', $data);
 			} else {
-				$post = $this->input->post(null, TRUE);	
-				$_SESSION['data'] = array(
-					'page' => 'edit',
-					'row' => $post
-				);
-				$this->session->set_flashdata('item');
-				redirect('users/process');
+				// Image configuration before upload
+				$config['upload_path'] = './uploads/users/cashier/';
+				$config['allowed_types'] = 'jpg|jpeg|png';
+				$config['max_size'] = 2048;
+				$config['file_name'] = 'user-'.date('ymd').'-'.substr(md5(rand()),0,10);
+				$this->load->library('upload', $config);
+
+				// Image condition if there's an image
+				if( @$_FILES['image']['name'] != null ) {
+					if( $this->upload->do_upload('image') ) {
+						$user = $this->User_model->get($post['id'])->row();
+						if( $user->image != null ) {
+							$target_file = './uploads/users/cashier/'.$user->image;
+							unlink($target_file);
+						}
+
+						$post = $this->input->post(null, TRUE);	
+						$post['image'] = $this->upload->data('file_name');
+						$_SESSION['data'] = array(
+							'page' => 'edit',
+							'row' => $post
+						);
+						$this->session->set_flashdata('item');
+						$this->User_model->edit($post);
+						redirect('users');
+					} else {
+						$error = $this->upload->display_errors();
+						$this->session->set_flashdata('error', $error);
+						redirect('users');
+					} 
+				} else {
+					$post = $this->input->post(null, TRUE);
+					$post['image'] = null;	
+					$_SESSION['data'] = array(
+						'page' => 'edit',
+						'row' => $post
+					);
+					$this->session->set_flashdata('item');
+					redirect('users/process');
+				}
 			}
 		}
 	}
@@ -130,13 +189,14 @@ class Users extends CI_Controller {
 	public function delete()
 	{
 		$id = $this->input->post('user_id');
+		$user = $this->User_model->get($id)->row();
+		if( $user->image != null ) {
+			$target_file = './uploads/users/cashier/'.$user->image;
+			unlink($target_file);
+		}
 		$this->User_model->delete($id);
 
-		if( $this->db->affected_rows() > 1 ) {
-			echo "<script>
-					alert('Data berhasil dihapus');
-			</script>";
-		}
+		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
 		redirect('users');
 	}
 

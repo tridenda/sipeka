@@ -10,20 +10,21 @@
 
 <!-- Begin: Empty edit -->
 <?php if( $this->session->has_userdata('empty') ) : ?>
-<div class="modal-content bg-danger">
-  <div class="modal-header">
-    <h4 class="modal-title">Danger Modal</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-  <?=$this->session->flashdata('success');?>
-  </div>
-  <div class="modal-footer justify-content-between">
-    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-outline-light">Save changes</button>
-  </div>
+<div class="alert alert-info alert-dismissible m-3">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fas fa-info"></i> Kosong!</h5>
+  <?=$this->session->flashdata('empty');?>
 </div>
 <?php endif; ?>
 <!-- End: Empty edit -->
+
+
+<!-- Begin: Delete -->
+<?php if( $this->session->has_userdata('deleted') ) : ?>
+  <div class="alert alert-danger alert-dismissible m-3">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fas fa-eraser"></i> Berhasil!</h5>
+  <?=$this->session->flashdata('deleted');?>
+</div>
+<?php endif; ?>
+<!-- End: Delete -->

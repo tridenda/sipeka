@@ -47,11 +47,15 @@
           <?php foreach( $row as $user ) : ?>
           <tr>
             <td><?= $no++ ?></td>
-            <td><?= $user->name ?></td>
+            <td><?= ucwords($user->name) ?></td>
             <td><?= $user->username ?></td>
             <td><?= $user->address ?></td>
             <td><?= $user->level == 1 ? "Admin" : "Pramuniaga" ?></td>
-            <td><?= $user->image ?></td>
+            <td>
+              <?php if( $user->image != null ) : ?>
+              <img src="<?=site_url('uploads/users/cashier/'.$user->image)?>" alt="" style="width: 5rem; height: 5rem">
+              <?php endif; ?>
+            </td>
             <td style="width: 10rem;">
               <form action="<?=site_url('users/delete')?>" method="post">
                 <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$user->user_id?>">

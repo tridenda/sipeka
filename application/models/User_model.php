@@ -44,7 +44,10 @@ class User_model extends CI_Model
     }
     $params['address'] = $post['address'];
     $params['level'] = $post['level'];
-    $params['image'] = $post['image'];
+    if( !empty($post["image"]) ) {
+      $params['image'] = $post['image'];
+    }
+    $params['updated'] = date('Y-m-d H:i:s');
     $this->db->where('user_id', $post["user_id"]);
     $this->db->update('users', $params); 
   }

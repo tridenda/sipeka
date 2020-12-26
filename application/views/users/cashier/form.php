@@ -30,7 +30,7 @@
         </div> 
         <!-- /.card-body -->
         <div class="d-flex justify-content-center mb-4">
-        <form action="" style="width: 30rem;" method="post">
+        <form action="" style="width: 30rem;" method="post" enctype="multipart/form-data">
           <div class="card-body">
             <input name="user_id" type="hidden" value="<?=$this->input->post('user_id') ?? $row->user_id?>">
             <div class="form-group">
@@ -44,12 +44,17 @@
               <small class="text-red font-italic"><?php echo form_error('username'); ?></small>
             </div>
             <div class="form-group">
-              <label for="password">Kata sandi <?= $page == 'add' ? '*' : null?></label>
+              <label for="password">
+                Kata sandi
+                <?=$page == 'edit' ? '<small>(Kosongkan bila tidak ingin diganti)</small>' : '*'?></label>
               <input name="password" type="password" class="form-control" id="password" placeholder="Kata sandi" value="<?=$this->input->post('passconf') ?? $row->passconf?>">
               <small class="text-red font-italic"><?php echo form_error('password'); ?></small>
             </div>
             <div class="form-group">
-              <label for="passconf">Konfirmasi kata sandi <?= $page == 'add' ? '*' : null?></label>
+              <label for="passconf">
+                Konfirmasi kata sandi 
+                <?=$page == 'edit' ? '<small>(Kosongkan bila tidak ingin diganti)</small>' : '*'?></label>
+              </label>
               <input name="passconf" type="password" class="form-control" id="passconf" placeholder="Konfirmasi kata sandi">
               <small class="text-red font-italic"><?php echo form_error('passconf'); ?></small>
             </div>
@@ -68,13 +73,19 @@
               <textarea name="address" id="address" class="form-control" rows="3" placeholder="Alamat"><?=$this->input->post('address') ?? $row->address?></textarea>
             </div>
             <div class="form-group">
-              <label for="image">Gambar</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input name="image" type="file" class="custom-file-input" id="image">
-                  <label class="custom-file-label" for="image">Pilih gambar</label>
+              <label for="formFileLg" class="form-label">
+                Gambar
+                <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
+              </label>
+              <?php if( $page == 'edit' ) {
+                if( $row->image != null ) { ?>
+                <div class="text-center mb-1">
+                <img src="<?=site_url('uploads/users/cashier/'.$row->image)?>" alt="" style="width: 15rem; height: 15rem">
                 </div>
-              </div>
+              <?php
+                }
+              } ?>
+              <input name="image" class="form-control form-control-lg pb-5" id="formFileLg" type="file">
             </div>
           </div>
           <!-- /.card-body -->
