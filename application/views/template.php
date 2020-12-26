@@ -165,8 +165,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4 sidebar-dark-info">
     <!-- Brand Logo -->
-    <a href="<?=site_url()?>assets/AdminLTE-3.0.5/index3.html" class="brand-link elevation-4">
-      <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="<?=site_url()?>" class="brand-link elevation-4">
+      <img src="<?=site_url()?>assets/img/icon.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kedaibutin</span>
     </a>
 
@@ -394,7 +394,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?=site_url('auth/logout')?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Logout</p>
             </a>

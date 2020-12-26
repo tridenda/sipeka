@@ -9,6 +9,7 @@ class Users extends CI_Controller {
 		// $this->login->check_not_login();
 		$this->load->model('User_model');
 		$this->load->library('form_validation');
+		$this->login->check_not_login();
 	}
 
 	public function index()
