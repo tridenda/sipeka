@@ -175,10 +175,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<?=site_url('uploads/users/cashier/').$this->login->user_login()->image?>" alt="User Image" class="bg-white rounded-circle">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Tri Denda</a>
+          <a href="#" class="d-block"><?=ucfirst($this->login->user_login()->username)?></a>
         </div>
       </div>
       <!-- Sidebar user (optional) -->

@@ -39,7 +39,8 @@ class Auth extends CI_Controller {
 			} 
 		} else if( isset($post['guest']) ) {
       $params = array(
-        'guest_name' => $post['guest_name'],
+				'userid' => $post['guest_name'],
+				'guest' => TRUE,
         'level' => '3'
       );
       $this->session->set_userdata($params);
@@ -52,7 +53,7 @@ class Auth extends CI_Controller {
   
   public function logout()
 	{
-		$params = array('userid', 'guest_name', 'level');
+		$params = array('userid', 'level', 'guest');
 		$this->session->unset_userdata($params);
 		redirect('auth/login');
 	}  

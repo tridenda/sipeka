@@ -11,7 +11,7 @@ class Cashier extends CI_Controller {
 
 	public function index()
 	{
-		// $this->login->check_not_login();
+		$this->ci =& get_instance();
 		$this->template->load('template', 'cashier/index');
 	}
 }
