@@ -47,4 +47,22 @@ Class Login {
       redirect('auth/login');
     } 
   }
+
+  public function check_the_cashier()
+  {
+    $level = $this->ci->session->userdata('level');
+
+    if( $level  == '2') {
+      redirect('cashier');
+    } 
+  }
+
+  public function check_the_guest()
+  {
+    $level = $this->ci->session->userdata('level');
+
+    if( $level  == '3') {
+      redirect('cashier');
+    } 
+  }
 }

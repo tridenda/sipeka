@@ -306,6 +306,7 @@
               </li>
             </ul>
           </li>
+          <?php if( $this->login->user_login()->level != '3'  ) : ?>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'users' ? 'menu-open active' : ''?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'users' ? 'active' : ''?>">
               <i class="nav-icon fas fa-user-alt"></i>
@@ -315,12 +316,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php if( $this->login->user_login()->level == '1') : ?>
               <li class="nav-item">
                 <a href="<?=base_url('users')?>" class="nav-link <?= $this->uri->segment(1) == 'users' || $this->uri->segment(1) == '' ? 'active' : ''?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pramuniaga</p>
                 </a>
               </li>
+              <?php endif; ?>
               <li class="nav-item">
                 <a href="<?=base_url('users/members')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -329,6 +332,7 @@
               </li>
             </ul>
           </li>
+          <?php endif; ?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-area"></i>
