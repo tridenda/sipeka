@@ -26,26 +26,29 @@ class User_model extends CI_Model
 
   public function add($post)
   {
-    $params['name'] = $post['name'];
-    $params['username'] = $post['username'];
-    $params['password'] = sha1($post['password']);
-    $params['address'] = $post['address'];
-    $params['level'] = $post['level'];
-    $params['image'] = $post['image'];
+    $params['name'] = htmlspecialchars($post['name']);
+    $params['username'] = htmlspecialchars($post['username']);
+    $params['password'] = sha1(htmlspecialchars($post['password']));
+    $params['address'] = htmlspecialchars($post['address']);
+    $params['level'] = htmlspecialchars($post['level']);
+    $params['image'] = htmlspecialchars($post['image']);
+    if( $post['image'] == null ) {
+      $params['image'] = 'login.jpg';
+    }
     $this->db->insert('users', $params);
   }
 
   public function edit($post)
   {
-    $params['name'] = $post['name'];
-    $params['username'] = $post['username'];
+    $params['name'] = htmlspecialchars($post['name']);
+    $params['username'] = htmlspecialchars($post['username']);
     if( !empty($post["password"]) ) {
-      $params['password'] = sha1($post["password"]);
+      $params['password'] = sha1(htmlspecialchars($post["password"]));
     }
-    $params['address'] = $post['address'];
-    $params['level'] = $post['level'];
+    $params['address'] = htmlspecialchars($post['address']);
+    $params['level'] = htmlspecialchars($post['level']);
     if( !empty($post["image"]) ) {
-      $params['image'] = $post['image'];
+      $params['image'] = htmlspecialchars($post['image']);
     }
     $params['updated'] = date('Y-m-d H:i:s');
     $this->db->where('user_id', $post["user_id"]);

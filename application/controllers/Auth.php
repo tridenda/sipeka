@@ -23,30 +23,30 @@ class Auth extends CI_Controller {
 			if( $query->num_rows() > 0 ) {
 				$row = $query->row();
 				$params = array(
-					'userid' => $row->user_id,
-					'level' => $row->level
+					'userid' => htmlspecialchars($row->user_id),
+					'level' => htmlspecialchars($row->level)
 				);
 				$this->session->set_userdata($params);
 				echo "<script>
 						alert('Selamat, berhasil masuk!');
-						window.location='".site_url('cashier/index')."';
+						window.location='".base_url('cashier/index')."';
 					</script>";
 			} else {
 				echo "<script>
 						alert('Nama pengguna / kata sandi salah!');
-						window.location='".site_url('auth/login')."';
+						window.location='".base_url('auth/login')."';
 					</script>";
 			} 
 		} else if( isset($post['guest']) ) {
       $params = array(
-				'userid' => $post['guest_name'],
+				'userid' => htmlspecialchars($_POST['guest_name']),
 				'guest' => TRUE,
         'level' => '3'
       );
       $this->session->set_userdata($params);
       echo "<script>
 						alert('Selamat, berhasil masuk!');
-						window.location='".site_url('cashier/index')."';
+						window.location='".base_url('cashier/index')."';
 					</script>";
     }
   }

@@ -29,7 +29,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h4 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h4>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -51,7 +51,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h4 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h4>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -73,7 +73,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h4 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h4>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -95,7 +95,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -117,7 +117,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -139,7 +139,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -161,7 +161,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -183,7 +183,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -205,7 +205,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -227,7 +227,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -249,7 +249,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">
@@ -271,7 +271,7 @@
             <div class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 <h3 class="lead text-center border-bottom" style="height: 4.5rem;"><b>Nicole Pearson  Pearson Pearson </b></h3>
-                <img src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
+                <img src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/img/user1-128x128.jpg" alt="" class="w-100">
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-between">

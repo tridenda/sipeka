@@ -23,7 +23,7 @@
         <div class="card-header">
           <h3 class="card-title"><?=$page == 'edit' ? 'Ubah' : 'Tambah'?> pramuniaga</h3>
           <div class="float-right">
-            <a href="<?=site_url('users')?>" class="btn btn-warning">
+            <a href="<?=base_url('users')?>" class="btn btn-warning">
             <i class="fas fa-reply"></i> Kembali
             </a>
           </div>
@@ -80,7 +80,7 @@
               <?php if( $page == 'edit' ) {
                 if( $row->image != null ) { ?>
                 <div class="text-center mb-1">
-                <img src="<?=site_url('uploads/users/cashier/'.$row->image)?>" alt="" style="width: 15rem; height: 15rem">
+                <img src="<?=base_url('uploads/users/cashier/'.$row->image)?>" alt="" style="width: 15rem; height: 15rem">
                 </div>
               <?php
                 }

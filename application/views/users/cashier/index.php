@@ -23,7 +23,7 @@
         <div class="card-header">
           <h3 class="card-title">Data pramuniaga</h3>
           <div class="float-right">
-            <a href="<?=site_url('users/add')?>" class="btn btn-primary">
+            <a href="<?=base_url('users/add')?>" class="btn btn-primary">
               <i class="fa fa-plus"></i> Tambah Pramuniaga
             </a>
           </div>
@@ -53,12 +53,12 @@
             <td><?= $user->level == 1 ? "Admin" : "Pramuniaga" ?></td>
             <td>
               <?php if( $user->image != null ) : ?>
-              <img src="<?=site_url('uploads/users/cashier/'.$user->image)?>" alt="" style="width: 5rem; height: 5rem">
+              <img src="<?=base_url('uploads/users/cashier/'.$user->image)?>" alt="" style="width: 5rem; height: 5rem">
               <?php endif; ?>
             </td>
             <td style="width: 10rem;">
-              <form action="<?=site_url('users/delete')?>" method="post">
-                <a class="btn btn-sm btn-outline-primary" href="<?=site_url('users/edit')?>/<?=$user->user_id?>">
+              <form action="<?=base_url('users/delete')?>" method="post">
+                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('users/edit')?>/<?=$user->user_id?>">
                   <i class="far fa-edit"></i> Ubah
                 </a>
                 <input name="user_id" type="hidden" value="<?=$user->user_id?>">

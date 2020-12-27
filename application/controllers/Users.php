@@ -139,7 +139,7 @@ class Users extends CI_Controller {
 				if( @$_FILES['image']['name'] != null ) {
 					if( $this->upload->do_upload('image') ) {
 						$user = $this->User_model->get($post['id'])->row();
-						if( $user->image != null ) {
+						if( $user->image != null  && $user->image != 'login.jpg') {
 							$target_file = './uploads/users/cashier/'.$user->image;
 							unlink($target_file);
 						}
@@ -191,7 +191,7 @@ class Users extends CI_Controller {
 	{
 		$id = $this->input->post('user_id');
 		$user = $this->User_model->get($id)->row();
-		if( $user->image != null ) {
+		if( $user->image != null && $user->image != 'login.jpg') {
 			$target_file = './uploads/users/cashier/'.$user->image;
 			unlink($target_file);
 		}

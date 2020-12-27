@@ -9,21 +9,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=site_url()?>assets/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?=site_url()?>assets/AdminLTE-3.0.5/plugins/others/ionicons.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/others/ionicons.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="<?=site_url()?>assets/AdminLTE-3.0.5/plugins/others/font.css">
+  <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/others/font.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?=site_url()?>assets/AdminLTE-3.0.5/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <img src="<?=site_url()?>assets/img/icon.png" alt="" class="w-25"><br>
-    <a href="<?=site_url()?>assets/AdminLTE-3.0.5/index2.html">
+    <img src="<?=base_url()?>assets/img/icon.png" alt="" class="w-25"><br>
+    <a href="<?=base_url()?>">
       <b>Kedaibutin</b>
     </a>
   </div>
@@ -32,9 +32,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Masukan nama anda</p>
 
-      <form action="<?=site_url('auth/process')?>" method="post">
+      <form action="<?=base_url('auth/process')?>" method="post">
         <div class="input-group mb-3">
-          <input name="guest_name" type="name" class="form-control" placeholder="Nama anda">
+          <input name="guest_name" type="name" class="form-control" placeholder="Nama anda" maxlength="20" required>
         </div>
         <div class="row">
           <div class="col-8">
@@ -55,7 +55,7 @@
 
       <div class="social-auth-links text-center mb-3">
         <p>- ATAU -</p>
-        <a href="<?=site_url('auth/login')?>" class="btn btn-secondary w-100">Sebagai Member</a>
+        <a href="<?=base_url('auth/login')?>" class="btn btn-secondary w-100">Sebagai Member</a>
       </div>
 
       <!-- /.social-auth-links -->
@@ -66,11 +66,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="<?=site_url()?>assets/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
+<script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="<?=site_url()?>assets/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?=site_url()?>assets/AdminLTE-3.0.5/dist/js/adminlte.min.js"></script>
+<script src="<?=base_url()?>assets/AdminLTE-3.0.5/dist/js/adminlte.min.js"></script>
 
 </body>
 </html>
