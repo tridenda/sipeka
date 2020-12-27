@@ -263,8 +263,20 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'materials'
+          || $this->uri->segment(1) == 'suppliers'
+          || $this->uri->segment(1) == 'units'
+          || $this->uri->segment(1) == 'stock-in'
+          || $this->uri->segment(1) == 'stock-out'
+          || $this->uri->segment(1) == 'stock-missing'
+          || $this->uri->segment(1) == 'stock-founded' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'materials'
+            || $this->uri->segment(1) == 'suppliers'
+            || $this->uri->segment(1) == 'units'
+            || $this->uri->segment(1) == 'stock-in'
+            || $this->uri->segment(1) == 'stock-out'
+            || $this->uri->segment(1) == 'stock-missing'
+            || $this->uri->segment(1) == 'stock-founded' ? 'active' : ''?>">
               <i class="nav-icon fas fa-truck-loading"></i>
               <p>
                 Bahan Baku
@@ -273,33 +285,50 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/layout/fixed-sidebar.html" class="nav-link">
+                <a href="<?=base_url('materials')?>" class="nav-link <?= $this->uri->segment(1) == 'materials' ? 'active' : ''?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Bahan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('categories')?>" class="nav-link <?= $this->uri->segment(1) == 'categories' ? 'active' : ''?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kategori</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('units')?>" class="nav-link <?= $this->uri->segment(1) == 'units' ? 'active' : ''?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Satuan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('suppliers')?>" class="nav-link <?= $this->uri->segment(1) == 'suppliers' ? 'active' : ''?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pemasok</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/layout/fixed-topnav.html" class="nav-link">
+                <a href="<?=base_url('stock-in')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-in' ? 'active' : ''?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bahan Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/layout/fixed-footer.html" class="nav-link">
+                <a href="<?=base_url('stock-out')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-out' ? 'active' : ''?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bahan Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/layout/collapsed-sidebar.html" class="nav-link">
+                <a href="<?=base_url('stock-missing')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-missing' ? 'active' : ''?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bahan Hilang</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/layout/collapsed-sidebar.html" class="nav-link">
+                <a href="<?=base_url('stock-founded')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-founded' ? 'active' : ''?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bahan Ditemukan</p>
                 </a>
@@ -421,7 +450,16 @@
 
 <script>
   $(function () {
-    $("#example1").DataTable({
+    $("#users").DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $("#suppliers").DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,

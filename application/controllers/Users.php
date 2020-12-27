@@ -6,18 +6,17 @@ class Users extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		// $this->login->check_not_login();
-		$this->load->model('User_model');
-		$this->load->library('form_validation');
 		$this->login->check_not_login();
 		$this->login->check_the_cashier();
 		$this->login->check_the_guest();
+		$this->load->model('User_model');
+		$this->load->library('form_validation');
 	}
 
 	public function index()
 	{
 		$data['row'] = $this->User_model->get()->result();
-		$this->template->load('template', 'users/cashier/index', $data);
+		$this->template->load('template', 'users/users/index', $data);
 	}
 	
 	public function add()
@@ -39,7 +38,7 @@ class Users extends CI_Controller {
 				'row' => $user
 			);
 
-			$this->template->load('template', 'users/cashier/form', $data);
+			$this->template->load('template', 'users/users/form', $data);
 		} else if( isset($_POST['add']) ){
 			// Set rules form
 			$this->form_validation->set_rules('name', 'Nama', 'required');
@@ -55,10 +54,10 @@ class Users extends CI_Controller {
 					'page' => 'add',
 					'row' => $post
 				);
-				$this->template->load('template', 'users/cashier/form', $data);
+				$this->template->load('template', 'users/users/form', $data);
 			} else {
 				// Image configuration before upload
-				$config['upload_path'] = './uploads/users/cashier/';
+				$config['upload_path'] = './uploads/users/users/';
 				$config['allowed_types'] = 'jpg|jpeg|png';
 				$config['max_size'] = 2048;
 				$config['file_name'] = 'user-'.date('ymd').'-'.substr(md5(rand()),0,10);
@@ -106,7 +105,7 @@ class Users extends CI_Controller {
 					'page' => 'edit',
 					'row' => $user
 				);
-				$this->template->load('template', 'users/cashier/form', $data);
+				$this->template->load('template', 'users/users/form', $data);
 			} else {
 				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
 				redirect('users');
@@ -128,10 +127,10 @@ class Users extends CI_Controller {
 					'page' => 'edit',
 					'row' => $post
 				);
-				$this->template->load('template', 'users/cashier/form', $data);
+				$this->template->load('template', 'users/users/form', $data);
 			} else {
 				// Image configuration before upload
-				$config['upload_path'] = './uploads/users/cashier/';
+				$config['upload_path'] = './uploads/users/users/';
 				$config['allowed_types'] = 'jpg|jpeg|png';
 				$config['max_size'] = 2048;
 				$config['file_name'] = 'user-'.date('ymd').'-'.substr(md5(rand()),0,10);
@@ -142,7 +141,7 @@ class Users extends CI_Controller {
 					if( $this->upload->do_upload('image') ) {
 						$user = $this->User_model->get($post['id'])->row();
 						if( $user->image != null  && $user->image != 'login.jpg') {
-							$target_file = './uploads/users/cashier/'.$user->image;
+							$target_file = './uploads/users/users/'.$user->image;
 							unlink($target_file);
 						}
 
@@ -194,7 +193,7 @@ class Users extends CI_Controller {
 		$id = $this->input->post('user_id');
 		$user = $this->User_model->get($id)->row();
 		if( $user->image != null && $user->image != 'login.jpg') {
-			$target_file = './uploads/users/cashier/'.$user->image;
+			$target_file = './uploads/users/users/'.$user->image;
 			unlink($target_file);
 		}
 		$this->User_model->delete($id);
