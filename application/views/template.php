@@ -265,6 +265,7 @@
           </li>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'materials'
           || $this->uri->segment(1) == 'suppliers'
+          || $this->uri->segment(1) == 'categories'
           || $this->uri->segment(1) == 'units'
           || $this->uri->segment(1) == 'stock-in'
           || $this->uri->segment(1) == 'stock-out'
@@ -272,6 +273,7 @@
           || $this->uri->segment(1) == 'stock-founded' ? 'menu-open active' : ''?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'materials'
             || $this->uri->segment(1) == 'suppliers'
+            || $this->uri->segment(1) == 'categories'
             || $this->uri->segment(1) == 'units'
             || $this->uri->segment(1) == 'stock-in'
             || $this->uri->segment(1) == 'stock-out'
