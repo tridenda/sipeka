@@ -28,3 +28,13 @@
 </div>
 <?php endif; ?>
 <!-- End: Delete -->
+
+<!-- Begin: Delete -->
+<?php if( $this->session->has_userdata('used') ) : ?>
+<div class="alert alert-warning alert-dismissible m-3">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fas fa-exclamation-triangle"></i> Tidak dapat dihapus!</h5>
+  <?=$this->session->flashdata('used');?>
+</div>
+<?php endif; ?>
+<!-- End: Delete -->
