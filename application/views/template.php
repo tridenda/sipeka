@@ -452,16 +452,7 @@
 
 <script>
   $(function () {
-    $("#users").DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-    $("#suppliers").DataTable({
+    $("#table1").DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,

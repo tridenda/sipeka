@@ -31,7 +31,7 @@
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
         <div class="card-body">
-        <table id="suppliers" class="table table-bordered table-striped">
+        <table id="table1" class="table table-bordered table-striped">
           <thead>
           <tr>
             <th>No</th>
