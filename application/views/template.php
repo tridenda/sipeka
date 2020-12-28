@@ -216,19 +216,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?=base_url()?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>ChartJS</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Flot</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Inline</p>
                 </a>
               </li>
@@ -245,19 +245,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>ChartJS</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Flot</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Inline</p>
                 </a>
               </li>
@@ -289,49 +289,49 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?=base_url('materials')?>" class="nav-link <?= $this->uri->segment(1) == 'materials' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Daftar Bahan</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item ml-4">
                 <a href="<?=base_url('categories')?>" class="nav-link <?= $this->uri->segment(1) == 'categories' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Kategori</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item ml-4">
                 <a href="<?=base_url('units')?>" class="nav-link <?= $this->uri->segment(1) == 'units' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Satuan</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item ml-4">
                 <a href="<?=base_url('suppliers')?>" class="nav-link <?= $this->uri->segment(1) == 'suppliers' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pemasok</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url('stock-in')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-in' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url('stock-out')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-out' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url('stock-missing')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-missing' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Hilang</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url('stock-founded')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-founded' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Ditemukan</p>
                 </a>
               </li>
@@ -350,14 +350,14 @@
               <?php if( $this->login->user_login()->level == '1') : ?>
               <li class="nav-item">
                 <a href="<?=base_url('users')?>" class="nav-link <?= $this->uri->segment(1) == 'users' || $this->uri->segment(1) == '' ? 'active' : ''?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pramuniaga</p>
                 </a>
               </li>
               <?php endif; ?>
               <li class="nav-item">
                 <a href="<?=base_url('users/members')?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pelanggan</p>
                 </a>
               </li>
@@ -375,25 +375,25 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>General Elements</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Advanced Elements</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Editors</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/validation.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Validation</p>
                 </a>
               </li>
