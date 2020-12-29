@@ -79,13 +79,16 @@
                 <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
               </label>
               <?php if( $page == 'edit' ) {
-                if( $row->image != null ) { ?>
+                $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
+
+                if( $image != null ) { ?>
                 <div class="text-center mb-1">
-                <img src="<?=base_url('uploads/users/cashier/'.$row->image)?>" alt="" style="width: 15rem; height: 15rem">
+                <img src="<?=base_url('uploads/users/cashier/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
                 </div>
               <?php
                 }
               } ?>
+              <input name="image_form" type="hidden" value="<?=$image?>">
               <input name="image" class="form-control form-control-lg pb-5" id="formFileLg" type="file">
             </div>
           </div>

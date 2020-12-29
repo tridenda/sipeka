@@ -65,7 +65,7 @@ class Materials extends CI_Controller {
 			$this->template->load('template', 'materials/materials/form', $data);
 		} else if( isset($_POST['add']) ){
 			// Set rules form
-			$this->form_validation->set_rules('barcode', 'Kode bar', 'required|is_unique[materials.barcode]|');
+			$this->form_validation->set_rules('barcode', 'Kode bar', 'required|is_unique[materials.barcode]');
 			$this->form_validation->set_rules('name', 'Nama', 'required');
 			$this->form_validation->set_rules('price', 'Harga', 'required|numeric');
 			$this->form_validation->set_rules('unit', 'Satuan', 'required');
@@ -80,9 +80,9 @@ class Materials extends CI_Controller {
 					'supplier' => $suppliers,
 					'category' => $categories,
 					'unit' => $units,
-					'selected_supplier' => null,
-					'selected_category' => null,
-					'selected_unit' => null
+					'selected_supplier' => $this->input->post('supplier'),
+					'selected_category' => $this->input->post('category'),
+					'selected_unit' => $this->input->post('unit')
 				);
 				$this->template->load('template', 'materials/materials/form', $data);
 			} else {
@@ -126,13 +126,54 @@ class Materials extends CI_Controller {
 
 	public function edit($id)
 	{		
+		$query_material = $this->Material_model->get($id);
+		if( $query_material->num_rows() > 0 ) {
+			$material = $query_material->row();
+			
+			$query_suppliers = $this->Supplier_model->get();
+			$suppliers[''] = '- Pilih - ';
+			foreach( $query_suppliers->result() as $supplier) {
+				$suppliers[$supplier->supplier_id] = $supplier->name;
+			}
+			$query_categories = $this->Category_model->get();
+			$categories[''] = '- Pilih - ';
+			foreach( $query_categories->result() as $category) {
+				$categories[$category->category_id] = $category->name;
+			}
+			$query_units = $this->Unit_model->get();
+			$units[''] = '- Pilih - ';
+			foreach( $query_units->result() as $unit) {
+				$units[$unit->unit_id] = $unit->name;
+			}
+			
+		} else {
+			$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
+			redirect('materials');
+		}
+
+		if( $this->input->post('supplier') ) {
+			$material->supplier_id = $this->input->post('supplier');
+		}
+		if( $this->input->post('category') ) {
+			$material->category_id = $this->input->post('category');
+		}
+		if( $this->input->post('unit') ) {
+			$material->unit_id = $this->input->post('unit');
+		}
+
 		if( !isset($_POST['edit']) ) {
 			$query = $this->Material_model->get($id);	
 			if( $query->num_rows() > 0 ) {
-				$material = $query->row();
+				$post = $query->row();
 				$data = array(
 					'page' => 'edit',
-					'row' => $material
+					'row' => $post,
+					'supplier' => $suppliers,
+					'category' => $categories,
+					'unit' => $units,
+					'selected_supplier' => $material->supplier_id,
+					'selected_category' => $material->category_id,
+					'selected_unit' => $material->unit_id
 				);
 				$this->template->load('template', 'materials/materials/form', $data);
 			} else {
@@ -141,7 +182,7 @@ class Materials extends CI_Controller {
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
-			$this->form_validation->set_rules('barcode', 'Kode bar', 'required|is_unique[materials.barcode]|callback_barcode_check');
+			$this->form_validation->set_rules('barcode', 'Kode bar', 'required|callback_barcode_check');
 			$this->form_validation->set_rules('name', 'Nama', 'required');
 			$this->form_validation->set_rules('price', 'Harga', 'required|numeric');
 
@@ -150,7 +191,13 @@ class Materials extends CI_Controller {
 				$post = $this->input->post(null, TRUE);	
 				$data = array(
 					'page' => 'edit',
-					'row' => $post
+					'row' => $post,
+					'supplier' => $suppliers,
+					'category' => $categories,
+					'unit' => $units,
+					'selected_supplier' => $material->supplier_id,
+					'selected_category' => $material->category_id,
+					'selected_unit' => $material->unit_id
 				);
 				$this->template->load('template', 'materials/materials/form', $data);
 			} else {

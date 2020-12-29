@@ -35,7 +35,7 @@
           <input name="material_id" type="hidden" value="<?=$this->input->post('material_id') ?? $row->material_id?>">
           <div class="form-group">
             <label for="barcode">Kodebar *</label>
-            <input name="barcode" type="text" class="form-control" id="barcode" placeholder="Contoh: A0001, AB0231, atau ZHS001" value="<?=$this->input->post('barcode') ?? $row->barcode?>">
+            <input name="barcode" type="text" class="form-control" id="barcode" placeholder="Contoh: A0001, AB0231, atau ZHS00001" value="<?=$this->input->post('barcode') ?? $row->barcode?>">
             <small class="text-red font-italic"><?php echo form_error('barcode'); ?></small>
           </div>
           <div class="form-group">
@@ -59,7 +59,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Rp</span>
                   </div>
-                  <input name="price" type="text" class="form-control" placeholder="25000">
+                  <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>">
                 </div>
                 <small class="text-red font-italic"><?php echo form_error('unit'); ?></small>
               </div>
@@ -75,24 +75,29 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label>Jumlah</label>
-                <input name="quantitiy" type="number" class="form-control" placeholder="0" disabled="">
+                <input name="quantity" type="hidden" value="<?=$this->input->post('quantity') ?? $row->quantity?>">
+                <input name="" type="number" class="form-control" placeholder="<?=$this->input->post('quantity') ?? $row->quantity?>" disabled="">
               </div>
             </div>
           </div>
           <div class="form-group">
-            <label for="formFileLg" class="form-label">
+            <label for="image" class="form-label">
               Gambar
               <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
             </label>
-            <?php if( $page == 'edit' ) {
-              if( $row->image != null ) { ?>
-              <div class="text-center mb-1">
-              <img src="<?=base_url('uploads/materials/cashier/'.$row->image)?>" alt="" style="width: 15rem; height: 15rem">
-              </div>
-            <?php
+            <?php 
+            $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
+
+            if( $page == 'edit' ) {
+              if( $image != null ) { ?>
+                <div class="text-center mb-1">
+                <img src="<?=base_url('uploads/materials/materials/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
+                </div>
+            <?php 
               }
             } ?>
-            <input name="image" class="form-control form-control-lg pb-5" id="formFileLg" type="file">
+            <input name="image_form" type="hidden" value="<?=$image?>">
+            <input name="image" class="form-control form-control-lg pb-5" id="image" type="file"">
           </div>
           <div class="card-footer">
             <button name="<?=$page?>" type="submit" class="btn btn-primary float-right ml-2"><i class="fas fa-paper-plane"></i> Simpan</button>

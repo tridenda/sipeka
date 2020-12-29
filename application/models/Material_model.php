@@ -10,6 +10,7 @@ class Material_model extends CI_Model
     $this->db->join('suppliers', 'suppliers.supplier_id = materials.supplier_id');
     $this->db->join('categories', 'categories.category_id = materials.category_id');
     $this->db->join('units', 'units.unit_id = materials.unit_id');
+    $this->db->order_by('barcode ASC');
     if( $id != null ) {
       $this->db->where('material_id', $id);
     }
@@ -35,10 +36,10 @@ class Material_model extends CI_Model
   {
     $params['barcode'] = htmlspecialchars($post['barcode']);
     $params['name'] = htmlspecialchars($post['name']);
-    $params['supplier_id'] = htmlspecialchars($post['supplier_id']);
-    $params['category_id'] = htmlspecialchars($post['category_id']);
+    $params['supplier_id'] = htmlspecialchars($post['supplier']);
+    $params['category_id'] = htmlspecialchars($post['category']);
     $params['price'] = htmlspecialchars($post['price']);
-    $params['unit_id'] = htmlspecialchars($post['unit_id']);
+    $params['unit_id'] = htmlspecialchars($post['unit']);
     $params['quantity'] = htmlspecialchars($post['quantity']);
     if( !empty($post["image"]) ) {
       $params['image'] = htmlspecialchars($post['image']);
