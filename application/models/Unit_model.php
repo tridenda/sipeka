@@ -13,6 +13,15 @@ class Unit_model extends CI_Model
     return $query;
   }
 
+  public function get_material($id) 
+  {
+    $this->db->from('materials');
+    $this->db->where('unit_id', $id);
+    $query = $this->db->get();
+    
+    return $query;
+  }
+
   public function add($post)
   {
     $params['name'] = htmlspecialchars($post['name']);

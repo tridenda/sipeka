@@ -112,6 +112,13 @@ class Units extends CI_Controller {
 	public function delete()
 	{
 		$id = $this->input->post('unit_id');
+		$material = $this->Unit_model->get_material($id)->row();
+
+		if( $material != null ) {
+			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar bahan, silahkan hapus semua data bahan yang berhubungan dengan kategori ini.');
+			redirect('units');
+		}
+
 		$this->Unit_model->delete($id);
 
 		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
