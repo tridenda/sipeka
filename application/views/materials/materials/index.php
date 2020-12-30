@@ -22,10 +22,10 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data pramuniaga</h3>
+          <h3 class="card-title">Data pemasok</h3>
           <div class="float-right">
             <a href="<?=base_url('materials/add')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Pramuniaga
+              <i class="fa fa-plus"></i> Tambah Pemasok
             </a>
           </div>
         </div> <!-- /.card-body -->
@@ -37,7 +37,6 @@
             <th>No</th>
             <th>Kodebar</th>
             <th>Nama</th>
-            <th>Pemasok</th>
             <th>Kategori</th>
             <th>Harga</th>
             <th>Satuan</th>
@@ -53,7 +52,6 @@
             <td><?= $no++ ?></td>
             <td><?= $material->barcode ?></td>
             <td><?= ucwords($material->name) ?></td>
-            <td><?= $material->supplier_name ?></td>
             <td><?= $material->category_name ?></td>
             <td><?= $material->price ?></td>
             <td><?= $material->unit_name ?></td>

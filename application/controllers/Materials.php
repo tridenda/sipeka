@@ -12,7 +12,6 @@ class Materials extends CI_Controller {
 		$this->load->model('Material_model');
 		$this->load->model('Unit_model');
 		$this->load->model('Category_model');
-		$this->load->model('Supplier_model');
 		$this->load->library('form_validation');
 	}
 
@@ -24,11 +23,6 @@ class Materials extends CI_Controller {
 	
 	public function add()
 	{		
-		$query_suppliers = $this->Supplier_model->get();
-		$suppliers[''] = '- Pilih - ';
-		foreach( $query_suppliers->result() as $supplier) {
-			$suppliers[$supplier->supplier_id] = $supplier->name;
-		}
 		$query_categories = $this->Category_model->get();
 		$categories[''] = '- Pilih - ';
 		foreach( $query_categories->result() as $category) {
@@ -45,19 +39,17 @@ class Materials extends CI_Controller {
 			$material->material_id = null;
 			$material->barcode = null;
 			$material->name = null;
-			$material->supplier_id = null;
 			$material->category_id = null;
 			$material->price = null;
 			$material->quantity = null;
+			$material->image = null;
 			$material->created = null;
 			$material->updated = null;
 			$data = array(
 				'page' => 'add',
 				'row' => $material,
-				'supplier' => $suppliers,
 				'category' => $categories,
 				'unit' => $units,
-				'selected_supplier' => null,
 				'selected_category' => null,
 				'selected_unit' => null
 			);
@@ -77,10 +69,8 @@ class Materials extends CI_Controller {
 				$data = array(
 					'page' => 'add',
 					'row' => $post,
-					'supplier' => $suppliers,
 					'category' => $categories,
 					'unit' => $units,
-					'selected_supplier' => $this->input->post('supplier'),
 					'selected_category' => $this->input->post('category'),
 					'selected_unit' => $this->input->post('unit')
 				);
@@ -130,11 +120,6 @@ class Materials extends CI_Controller {
 		if( $query_material->num_rows() > 0 ) {
 			$material = $query_material->row();
 			
-			$query_suppliers = $this->Supplier_model->get();
-			$suppliers[''] = '- Pilih - ';
-			foreach( $query_suppliers->result() as $supplier) {
-				$suppliers[$supplier->supplier_id] = $supplier->name;
-			}
 			$query_categories = $this->Category_model->get();
 			$categories[''] = '- Pilih - ';
 			foreach( $query_categories->result() as $category) {
@@ -151,9 +136,6 @@ class Materials extends CI_Controller {
 			redirect('materials');
 		}
 
-		if( $this->input->post('supplier') ) {
-			$material->supplier_id = $this->input->post('supplier');
-		}
 		if( $this->input->post('category') ) {
 			$material->category_id = $this->input->post('category');
 		}
@@ -168,10 +150,8 @@ class Materials extends CI_Controller {
 				$data = array(
 					'page' => 'edit',
 					'row' => $post,
-					'supplier' => $suppliers,
 					'category' => $categories,
 					'unit' => $units,
-					'selected_supplier' => $material->supplier_id,
 					'selected_category' => $material->category_id,
 					'selected_unit' => $material->unit_id
 				);
@@ -192,10 +172,8 @@ class Materials extends CI_Controller {
 				$data = array(
 					'page' => 'edit',
 					'row' => $post,
-					'supplier' => $suppliers,
 					'category' => $categories,
 					'unit' => $units,
-					'selected_supplier' => $material->supplier_id,
 					'selected_category' => $material->category_id,
 					'selected_unit' => $material->unit_id
 				);

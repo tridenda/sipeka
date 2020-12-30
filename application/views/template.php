@@ -305,7 +305,7 @@
                   <p>Satuan</p>
                 </a>
               </li>
-              <li class="nav-item ml-4">
+              <li class="nav-item">
                 <a href="<?=base_url('suppliers')?>" class="nav-link <?= $this->uri->segment(1) == 'suppliers' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pemasok</p>

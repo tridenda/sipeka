@@ -44,10 +44,6 @@
             <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
           </div>
           <div class="form-group">
-            <label for="supplier">Pemasok</label>
-            <?php echo form_dropdown('supplier', $supplier, $selected_supplier, ['class' => 'form-control']) ?>
-          </div>
-          <div class="form-group">
             <label for="category">Kategori</label>
             <?php echo form_dropdown('category', $category, $selected_category, ['class' => 'form-control']) ?>
           </div>
@@ -75,8 +71,7 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label>Jumlah</label>
-                <input name="quantity" type="hidden" value="<?=$this->input->post('quantity') ?? $row->quantity?>">
-                <input name="" type="number" class="form-control" placeholder="<?=$this->input->post('quantity') ?? $row->quantity?>" disabled="">
+                <input name="" type="number" class="form-control" placeholder="<?=$row->quantity == null ? '0' : $row->quantity?>" disabled="">
               </div>
             </div>
           </div>

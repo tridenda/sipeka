@@ -5,9 +5,8 @@ class Material_model extends CI_Model
 
   public function get($id = null) 
   {
-    $this->db->select('materials.*, suppliers.name AS supplier_name, categories.name AS category_name, units.name AS unit_name');
+    $this->db->select('materials.*, categories.name AS category_name, units.name AS unit_name');
     $this->db->from('materials');
-    $this->db->join('suppliers', 'suppliers.supplier_id = materials.supplier_id');
     $this->db->join('categories', 'categories.category_id = materials.category_id');
     $this->db->join('units', 'units.unit_id = materials.unit_id');
     $this->db->order_by('barcode ASC');
@@ -23,7 +22,6 @@ class Material_model extends CI_Model
   {
     $params['barcode'] = htmlspecialchars($post['barcode']);
     $params['name'] = htmlspecialchars($post['name']);
-    $params['supplier_id'] = htmlspecialchars($post['supplier']);
     $params['category_id'] = htmlspecialchars($post['category']);
     $params['price'] = htmlspecialchars($post['price']);
     $params['unit_id'] = htmlspecialchars($post['unit']);
@@ -36,7 +34,6 @@ class Material_model extends CI_Model
   {
     $params['barcode'] = htmlspecialchars($post['barcode']);
     $params['name'] = htmlspecialchars($post['name']);
-    $params['supplier_id'] = htmlspecialchars($post['supplier']);
     $params['category_id'] = htmlspecialchars($post['category']);
     $params['price'] = htmlspecialchars($post['price']);
     $params['unit_id'] = htmlspecialchars($post['unit']);
