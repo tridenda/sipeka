@@ -263,18 +263,18 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'materials'
-          || $this->uri->segment(1) == 'suppliers'
-          || $this->uri->segment(1) == 'categories'
-          || $this->uri->segment(1) == 'units'
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'daftar_bahan'
+          || $this->uri->segment(1) == 'pemasok'
+          || $this->uri->segment(1) == 'kategori'
+          || $this->uri->segment(1) == 'satuan'
           || $this->uri->segment(1) == 'stock-in'
           || $this->uri->segment(1) == 'stock-out'
           || $this->uri->segment(1) == 'stock-missing'
           || $this->uri->segment(1) == 'stock-founded' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'materials'
-            || $this->uri->segment(1) == 'suppliers'
-            || $this->uri->segment(1) == 'categories'
-            || $this->uri->segment(1) == 'units'
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'daftar_bahan'
+            || $this->uri->segment(1) == 'pemasok'
+            || $this->uri->segment(1) == 'kategori'
+            || $this->uri->segment(1) == 'satuan'
             || $this->uri->segment(1) == 'stock-in'
             || $this->uri->segment(1) == 'stock-out'
             || $this->uri->segment(1) == 'stock-missing'
@@ -288,25 +288,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('materials')?>" class="nav-link <?= $this->uri->segment(1) == 'materials' ? 'active' : ''?>">
+                <a href="<?=base_url('daftar_bahan')?>" class="nav-link <?= $this->uri->segment(1) == 'daftar_bahan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Daftar Bahan</p>
                 </a>
               </li>
               <li class="nav-item ml-4">
-                <a href="<?=base_url('categories')?>" class="nav-link <?= $this->uri->segment(1) == 'categories' ? 'active' : ''?>">
+                <a href="<?=base_url('kategori')?>" class="nav-link <?= $this->uri->segment(1) == 'kategori' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Kategori</p>
                 </a>
               </li>
               <li class="nav-item ml-4">
-                <a href="<?=base_url('units')?>" class="nav-link <?= $this->uri->segment(1) == 'units' ? 'active' : ''?>">
+                <a href="<?=base_url('satuan')?>" class="nav-link <?= $this->uri->segment(1) == 'satuan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Satuan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url('suppliers')?>" class="nav-link <?= $this->uri->segment(1) == 'suppliers' ? 'active' : ''?>">
+                <a href="<?=base_url('pemasok')?>" class="nav-link <?= $this->uri->segment(1) == 'pemasok' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pemasok</p>
                 </a>
