@@ -7,11 +7,7 @@
           <h1>Satuan</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('materials')?>">Bahan Baku</a></li>
-            <li class="breadcrumb-item active">Satuan</li>
-          </ol>
+          <?php $this->load->view('materials/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -51,7 +47,7 @@
                   <i class="far fa-edit"></i> Ubah
                 </a>
                 <input name="unit_id" type="hidden" value="<?=$unit->unit_id?>">
-                <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
+                <button onclick="return confirm('Anda akan menghapus data satuan, yakin?');" class="btn btn-sm btn-outline-danger">
                   <i class="far fa-trash-alt"></i> Hapus
                 </button>
               </form>

@@ -53,7 +53,7 @@
                   </div>
                   <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>">
                 </div>
-                <small class="text-red font-italic"><?php echo form_error('price'); ?></small>
+                <small class="text-red font-italic"><?php echo form_error('unit'); ?></small>
               </div>
             </div>
             <div class="col-sm-5">
@@ -67,14 +67,7 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label>Jumlah</label>
-                <?php if( $page == 'edit') { ?>
-                  <input name="quantity" type="hidden" value="<?=$this->input->post('quantity') ?? $row->quantity?>">
-                  <input name="" type="number" class="form-control" placeholder="<?=$this->input->post('quantity') ?? $row->quantity?>">
-                <?php
-                } else { ?>
-                  <input name="quantity" type="number" class="form-control" placeholder="0" disabled="">
-                <?php
-                }?>
+                <input name="" type="number" class="form-control" placeholder="<?=$row->quantity == null ? '0' : $row->quantity?>" disabled="">
               </div>
             </div>
           </div>
@@ -84,16 +77,17 @@
               <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
             </label>
             <?php 
+            $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
+
             if( $page == 'edit' ) {
-              $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
               if( $image != null ) { ?>
                 <div class="text-center mb-1">
-                  <img src="<?=base_url('uploads/materials/materials/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
+                <img src="<?=base_url('uploads/materials/materials/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
                 </div>
-                <input name="image_form" type="hidden" value="<?=$image?>"?>
             <?php 
               }
             } ?>
+            <input name="image_form" type="hidden" value="<?=$image?>">
             <input name="image" class="form-control form-control-lg pb-5" id="image" type="file"">
           </div>
           <div class="card-footer">

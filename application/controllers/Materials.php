@@ -15,6 +15,44 @@ class Materials extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
+	function get_ajax() {
+		$list = $this->Material_model->get_datatables();
+		$data = array();
+		$no = @$_POST['start'];
+		foreach ($list as $material) {
+				$no++;
+				$row = array();
+				$row[] = $no.".";
+				$row[] = $material->barcode;
+				$row[] = $material->name;
+				$row[] = $material->category_name;
+				$row[] = $material->price;
+				$row[] = $material->unit_name;
+				$row[] = $material->quantity;
+				$row[] = $material->image != null ? '<img src="'.base_url('uploads/materials/materials/'.$material->image).'" class="img" alt="Gambar '.$material->name.'" style="width: 5rem; height: 5rem">' : null;
+				// add html for action
+				$row[] = '
+				<form action="'.base_url('daftar_bahan/hapus').'" method="post">
+					<a class="btn btn-sm btn-outline-primary" href="'.base_url('daftar_bahan/ubah/').$material->material_id.'">
+						<i class="far fa-edit"></i> Ubah
+					</a>
+					<input name="material_id" type="hidden" value="'.$material->material_id.'">
+					<button onclick="return confirm(\'Anda akan menghapus data bahan, yakin?\');" class="btn btn-sm btn-outline-danger">
+						<i class="far fa-trash-alt"></i> Hapus
+					</button>
+				</form>';
+				$data[] = $row;
+		}
+		$output = array(
+								"draw" => @$_POST['draw'],
+								"recordsTotal" => $this->Material_model->count_all(),
+								"recordsFiltered" => $this->Material_model->count_filtered(),
+								"data" => $data,
+						);
+		// output to json format
+		echo json_encode($output);
+	}
+
 	public function index()
 	{
 		$data['row'] = $this->Material_model->get()->result();
@@ -94,11 +132,11 @@ class Materials extends CI_Controller {
 						);
 						$this->session->set_flashdata('item');
 						$this->Material_model->add($post);
-						redirect('materials');
+						redirect('daftar_bahan');
 					} else {
 						$error = $this->upload->display_errors();
 						$this->session->set_flashdata('error', $error);
-						redirect('materials');
+						redirect('daftar_bahan');
 					} 
 				} else {
 					$post = $this->input->post(null, TRUE);
@@ -133,7 +171,7 @@ class Materials extends CI_Controller {
 			
 		} else {
 			$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
-			redirect('materials');
+			redirect('daftar_bahan');
 		}
 
 		if( $this->input->post('category') ) {
@@ -158,7 +196,7 @@ class Materials extends CI_Controller {
 				$this->template->load('template', 'materials/materials/form', $data);
 			} else {
 				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
-				redirect('materials');
+				redirect('daftar_bahan');
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
@@ -203,11 +241,11 @@ class Materials extends CI_Controller {
 						);
 						$this->session->set_flashdata('item');
 						$this->Material_model->edit($post);
-						redirect('materials');
+						redirect('daftar_bahan');
 					} else {
 						$error = $this->upload->display_errors();
 						$this->session->set_flashdata('error', $error);
-						redirect('materials');
+						redirect('daftar_bahan');
 					} 
 				} else {
 					$post = $this->input->post(null, TRUE);
@@ -235,7 +273,7 @@ class Materials extends CI_Controller {
 		if( $this->db->affected_rows() > 0 ) {
 			$this->session->set_flashdata('success', 'Data berhasil disimpan.');
 		}
-		redirect('materials');
+		redirect('daftar_bahan');
 	}
 
 	public function delete()
@@ -249,7 +287,7 @@ class Materials extends CI_Controller {
 		$this->Material_model->delete($id);
 
 		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
-		redirect('materials');
+		redirect('daftar_bahan');
 	}
 
 	function barcode_check($str)

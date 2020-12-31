@@ -27,7 +27,7 @@
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
         <div class="card-body">
-        <table id="table2" class="table table-bordered table-striped">
+        <table id="table1" class="table table-bordered table-striped">
           <thead>
           <tr>
             <th>No</th>
@@ -43,7 +43,7 @@
           </thead>
           <tbody>
           <?php $no=1 ?>
-          <!-- <?php foreach( $row as $material ) : ?>
+          <?php foreach( $row as $material ) : ?>
           <tr>
             <td><?= $no++ ?></td>
             <td><?= $material->barcode ?></td>
@@ -69,7 +69,7 @@
               </form>
             </td>
           </tr>
-          <?php endforeach; ?> -->
+          <?php endforeach; ?>
           </tfoot>
         </table>
         </div><!-- /.card-body -->
@@ -78,35 +78,3 @@
   </section>
   <!-- /.content -->
 </div>
-
-<script>
-  $(function () {
-    $("#table2").DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "processing": true,
-      "serverSide": true,
-      "ajax": {
-        "url": "<?=base_url('materials/get_ajax')?>",
-        "type": "POST"
-      },
-      "columnDefs": [
-        {
-          "targets": [0,7,-1],
-          "orderable": false
-        },
-        {
-          "targets": [7,8],
-          "className": 'text-center',
-          "width": '9rem',
-          "height": '9rem'
-        }
-      ]
-    });
-  });
-</script>

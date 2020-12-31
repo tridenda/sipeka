@@ -7,11 +7,7 @@
           <h1>Kategori</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('materials')?>">Bahan Baku</a></li>
-            <li class="breadcrumb-item active">Kategori</li>
-          </ol>
+          <?php $this->load->view('materials/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -24,7 +20,7 @@
         <div class="card-header">
           <h3 class="card-title"><?=$page == 'edit' ? 'Ubah' : 'Tambah'?> kategori</h3>
           <div class="float-right">
-            <a href="<?=base_url('categories')?>" class="btn btn-warning">
+            <a href="<?=base_url('kategori')?>" class="btn btn-warning">
             <i class="fas fa-reply"></i> Kembali
             </a>
           </div>

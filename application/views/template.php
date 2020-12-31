@@ -264,18 +264,20 @@
             </ul>
           </li>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'daftar_bahan'
+          || $this->uri->segment(1) == 'bahan_baku'
           || $this->uri->segment(1) == 'pemasok'
           || $this->uri->segment(1) == 'kategori'
           || $this->uri->segment(1) == 'satuan'
-          || $this->uri->segment(1) == 'stock-in'
+          || $this->uri->segment(1) == 'persediaan/masuk'
           || $this->uri->segment(1) == 'stock-out'
           || $this->uri->segment(1) == 'stock-missing'
           || $this->uri->segment(1) == 'stock-founded' ? 'menu-open active' : ''?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'daftar_bahan'
+            || $this->uri->segment(1) == 'bahan_baku'
             || $this->uri->segment(1) == 'pemasok'
             || $this->uri->segment(1) == 'kategori'
             || $this->uri->segment(1) == 'satuan'
-            || $this->uri->segment(1) == 'stock-in'
+            || $this->uri->segment(1) == 'persediaan/masuk'
             || $this->uri->segment(1) == 'stock-out'
             || $this->uri->segment(1) == 'stock-missing'
             || $this->uri->segment(1) == 'stock-founded' ? 'active' : ''?>">
@@ -312,7 +314,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url('stock-in')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-in' ? 'active' : ''?>">
+                <a href="<?=base_url('persediaan/masuk')?>" class="nav-link <?= $this->uri->segment(1) == 'persediaan/masuk' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Masuk</p>
                 </a>
@@ -425,6 +427,9 @@
     <!-- /.sidebar -->
   </aside>
 
+  <!-- jQuery -->
+  <script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
+  
   <!-- Content Wrapper. Contains page content -->
   <?php echo $contents ?>
   <!-- /.content-wrapper -->
@@ -438,8 +443,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->

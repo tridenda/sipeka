@@ -29,12 +29,12 @@ class Auth extends CI_Controller {
 				$this->session->set_userdata($params);
 				echo "<script>
 						alert('Selamat, berhasil masuk!');
-						window.location='".base_url('cashier/index')."';
+						window.location='".base_url('beranda')."';
 					</script>";
 			} else {
 				echo "<script>
 						alert('Nama pengguna / kata sandi salah!');
-						window.location='".base_url('auth/login')."';
+						window.location='".base_url('masuk')."';
 					</script>";
 			} 
 		} else if( isset($post['guest']) ) {
@@ -46,7 +46,7 @@ class Auth extends CI_Controller {
       $this->session->set_userdata($params);
       echo "<script>
 						alert('Selamat, berhasil masuk!');
-						window.location='".base_url('cashier/index')."';
+						window.location='".base_url('beranda')."';
 					</script>";
     }
   }
@@ -55,6 +55,6 @@ class Auth extends CI_Controller {
 	{
 		$params = array('userid', 'level', 'guest');
 		$this->session->unset_userdata($params);
-		redirect('auth/login');
+		redirect('masuk');
 	}  
 }

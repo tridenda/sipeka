@@ -7,11 +7,7 @@
           <h1>Kategori</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('materials')?>">Bahan Baku</a></li>
-            <li class="breadcrumb-item active">Kategori</li>
-          </ol>
+          <?php $this->load->view('materials/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -24,7 +20,7 @@
         <div class="card-header">
           <h3 class="card-title">Data kategori</h3>
           <div class="float-right">
-            <a href="<?=base_url('categories/add')?>" class="btn btn-primary">
+            <a href="<?=base_url('kategori/tambah')?>" class="btn btn-primary">
               <i class="fa fa-plus"></i> Tambah Kategori
             </a>
           </div>
@@ -46,12 +42,12 @@
             <td><?= $no++ ?></td>
             <td><?= ucwords($category->name) ?></td>
             <td style="width: 10rem;">
-              <form action="<?=base_url('categories/delete')?>" method="post">
+              <form action="<?=base_url('kategori/hapus')?>" method="post">
                 <a class="btn btn-sm btn-outline-primary" href="<?=base_url('categories/edit/'.$category->category_id)?>">
                   <i class="far fa-edit"></i> Ubah
                 </a>
                 <input name="category_id" type="hidden" value="<?=$category->category_id?>">
-                <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
+                <button onclick="return confirm('Anda akan menghapus data kategori, yakin?');" class="btn btn-sm btn-outline-danger">
                   <i class="far fa-trash-alt"></i> Hapus
                 </button>
               </form>

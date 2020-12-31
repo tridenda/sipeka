@@ -53,11 +53,19 @@ $route['default_controller'] = 'cashier/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// Login links
+$route['masuk'] = 'auth/login';
+$route['tamu'] = 'auth/guest';
+
+// Cashier Links
+$route['beranda'] = 'cashier';
+
 // Material Links
+$route['bahan_baku'] = 'materials';
 $route['daftar_bahan'] = 'materials';
 $route['daftar_bahan/tambah'] = 'materials/add';
 $route['daftar_bahan/ubah/(:num)'] = 'materials/edit/$1';
-$route['daftar_bahan/hapus/(:num)'] = 'materials/delete/$1';
+$route['daftar_bahan/hapus'] = 'materials/delete';
 
 // Category Links
 $route['kategori'] = 'categories';
@@ -76,3 +84,23 @@ $route['pemasok'] = 'suppliers';
 $route['pemasok/tambah'] = 'suppliers/add';
 $route['pemasok/ubah/(:num)'] = 'suppliers/edit/$1';
 $route['pemasok/hapus/(:num)'] = 'suppliers/delete/$1';
+
+// Stock-in Links
+$route['persediaan/masuk'] = 'stocks/stock_in_index';
+$route['persediaan/masuk/tambah'] = 'stocks/stock_in_add';
+$route['persediaan/masuk/hapus/(:num)'] = 'stocks/stock_in_delete/$1';
+
+// Stock-out Links
+$route['persediaan/keluar'] = 'stocks/stock_out_index';
+$route['persediaan/keluar/tambah'] = 'stocks/stock_out_add';
+$route['persediaan/keluar/hapus/(:num)'] = 'stocks/stock_out_delete/$1';
+
+// Stock-missing Links
+$route['persediaan/hilang'] = 'stocks/stock_missing_index';
+$route['persediaan/hilang/tambah'] = 'stocks/stock_missing_add';
+$route['persediaan/hilang/hapus/(:num)'] = 'stocks/stock_missing_delete/$1';
+
+// Stock-founded Links
+$route['persediaan/ditemukan'] = 'stocks/stock_founded_index';
+$route['persediaan/ditemukan/tambah'] = 'stocks/stock_founded_add';
+$route['persediaan/ditemukan/hapus/(:num)'] = 'stocks/stock_founded_delete/$1';
