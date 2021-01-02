@@ -68,7 +68,7 @@ class Units extends CI_Controller {
 				$this->template->load('template', 'materials/units/form', $data);
 			} else {
 				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
-				redirect('units');
+				redirect('satuan');
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
@@ -106,20 +106,21 @@ class Units extends CI_Controller {
 		if( $this->db->affected_rows() > 0 ) {
 			$this->session->set_flashdata('success', 'Data berhasil disimpan.');
 		}
-		redirect('units');
+		redirect('satuan');
 	}
 
 	public function delete()
 	{
+		$id = $this->input->post('unit_id');
 		$this->Unit_model->delete($id);
 		$error = $this->db->error();
 
-		if( $error['code'] != 0 ) {
+		if( $error['code'] == 0 ) {
 			$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
-			redirect('units');
+			redirect('satuan');
 		} else {
-			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar bahan, silahkan hapus semua data bahan yang berhubungan dengan kategori ini.');
-			redirect('units');
+			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar bahan, silahkan hapus semua data bahan yang berhubungan dengan satuan ini.');
+			redirect('satuan');
 		}
 	}
 }

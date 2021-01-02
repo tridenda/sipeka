@@ -110,5 +110,11 @@ class Material_model extends CI_Model
 		$material_id = $data['material_id'];
 		$sql = "UPDATE materials SET quantity = quantity + '$quantity' WHERE material_id = '$material_id'";
 		$this->db->query($sql);
+  }
+  
+  function update_stock_out($id, $quantity) 
+	{
+		$sql = "UPDATE materials SET quantity = quantity - '$quantity' WHERE material_id = '$id'";
+		$this->db->query($sql);
 	}
 }

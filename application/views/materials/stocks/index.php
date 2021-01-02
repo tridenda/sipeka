@@ -37,7 +37,7 @@
             <th>Keterangan</th>
             <th>Pemasok</th>
             <th>Waktu Pencatatan</th>
-            <th>Nama Pengguna</th>
+            <th>Nama Pencatat</th>
             <th>Kodebar</th>
             <th>Aksi</th>
           </tr>

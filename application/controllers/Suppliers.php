@@ -72,7 +72,7 @@ class Suppliers extends CI_Controller {
 				$this->template->load('template', 'materials/suppliers/form', $data);
 			} else {
 				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
-				redirect('suppliers');
+				redirect('pemasok');
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
@@ -111,20 +111,21 @@ class Suppliers extends CI_Controller {
 		if( $this->db->affected_rows() > 0 ) {
 			$this->session->set_flashdata('success', 'Data berhasil disimpan.');
 		}
-		redirect('suppliers');
+		redirect('pemasok');
 	}
 
 	public function delete()
 	{
+		$id = $this->input->post('supplier_id');
 		$this->Supplier_model->delete($id);
 		$error = $this->db->error();
 
-		if( $error['code'] != 0 ) {
+		if( $error['code'] == 0 ) {
 			$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
-			redirect('suppliers');
+			redirect('pemasok');
 		} else {
 			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar bahan, silahkan hapus semua data bahan yang berhubungan dengan kategori ini.');
-			redirect('suppliers');
+			redirect('pemasok');
 		}
 	}
 }

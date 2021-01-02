@@ -42,8 +42,8 @@
             <td><?= $no++ ?></td>
             <td><?= ucwords($unit->name) ?></td>
             <td style="width: 10rem;">
-              <form action="<?=base_url('units/delete')?>" method="post">
-                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('units/edit/'.$unit->unit_id)?>">
+              <form action="<?=base_url('satuan/hapus')?>" method="post">
+                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('satuan/ubah/'.$unit->unit_id)?>">
                   <i class="far fa-edit"></i> Ubah
                 </a>
                 <input name="unit_id" type="hidden" value="<?=$unit->unit_id?>">

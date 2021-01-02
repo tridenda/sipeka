@@ -68,4 +68,10 @@ class Stock_model extends CI_Model
         $this->db->insert('stocks', $params);
     }
 
+    public function delete($id)
+    {
+        $this->db->where('stock_id', $id);
+            $this->db->delete('stocks');
+    }
+
 }

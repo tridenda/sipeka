@@ -43,7 +43,7 @@
             <td><?= ucwords($category->name) ?></td>
             <td style="width: 10rem;">
               <form action="<?=base_url('kategori/hapus')?>" method="post">
-                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('categories/edit/'.$category->category_id)?>">
+                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('kategori/ubah/'.$category->category_id)?>">
                   <i class="far fa-edit"></i> Ubah
                 </a>
                 <input name="category_id" type="hidden" value="<?=$category->category_id?>">

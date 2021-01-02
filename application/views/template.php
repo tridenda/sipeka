@@ -181,15 +181,6 @@
           <a href="#" class="d-block"><?=ucfirst($this->login->user_login()->username)?></a>
         </div>
       </div>
-      <!-- Sidebar user (optional) -->
-      <div class="d-flex mt-3 mb-3">
-        <div class="input-group input-group-sm ml-2 mr-2">
-          <input type="text" class="form-control" placeholder="Cari mie kocok">
-          <span class="input-group-append">
-            <button type="button" class="btn btn-secondary btn-flat">Cari</button>
-          </span>
-        </div>
-      </div>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
@@ -267,23 +258,14 @@
           || $this->uri->segment(1) == 'bahan_baku'
           || $this->uri->segment(1) == 'pemasok'
           || $this->uri->segment(1) == 'kategori'
-          || $this->uri->segment(1) == 'satuan'
-          || $this->uri->segment(1) == 'persediaan/masuk'
-          || $this->uri->segment(2) == 'masuk'
-          || $this->uri->segment(2) == 'keluar'
-          || $this->uri->segment(2) == 'hilang'
-          || $this->uri->segment(2) == 'ditemukan' ? 'menu-open active' : ''?>">
+          || $this->uri->segment(1) == 'satuan' ? 'menu-open active' : ''?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'daftar_bahan'
             || $this->uri->segment(1) == 'bahan_baku'
             || $this->uri->segment(1) == 'pemasok'
             || $this->uri->segment(1) == 'kategori'
             || $this->uri->segment(1) == 'satuan'
-            || $this->uri->segment(1) == 'persediaan/masuk'
-            || $this->uri->segment(2) == 'masuk'
-            || $this->uri->segment(2) == 'keluar'
-            || $this->uri->segment(2) == 'hilang'
-            || $this->uri->segment(2) == 'ditemukan' ? 'active' : ''?>">
-              <i class="nav-icon fas fa-truck-loading"></i>
+             ? 'active' : ''?>">
+              <i class="nav-icon fas fa-truck"></i>
               <p>
                 Bahan Baku
                 <i class="fas fa-angle-left right"></i>
@@ -297,13 +279,13 @@
                   <p>Daftar Bahan</p>
                 </a>
               </li>
-              <li class="nav-item ml-4">
+              <li class="nav-item">
                 <a href="<?=base_url('kategori')?>" class="nav-link <?= $this->uri->segment(1) == 'kategori' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Kategori</p>
                 </a>
               </li>
-              <li class="nav-item ml-4">
+              <li class="nav-item">
                 <a href="<?=base_url('satuan')?>" class="nav-link <?= $this->uri->segment(1) == 'satuan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Satuan</p>
@@ -315,6 +297,25 @@
                   <p>Pemasok</p>
                 </a>
               </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview <?= $this->uri->segment(1)  == 'masuk'
+          || $this->uri->segment(2) == 'keluar'
+          || $this->uri->segment(2) == 'hilang'
+          || $this->uri->segment(2) == 'ditemukan'
+          || $this->uri->segment(1) == 'persediaan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'masuk'
+            || $this->uri->segment(2) == 'keluar'
+            || $this->uri->segment(2) == 'hilang'
+            || $this->uri->segment(2) == 'ditemukan'
+            || $this->uri->segment(1) == 'persediaan' ? 'active' : ''?>">
+              <i class="nav-icon fas fa-dolly"></i>
+              <p>
+                Transaksi Persediaan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?=base_url('persediaan/masuk')?>" class="nav-link <?= $this->uri->segment(2) == 'masuk' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
