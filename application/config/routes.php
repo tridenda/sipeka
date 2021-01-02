@@ -88,19 +88,18 @@ $route['pemasok/hapus/(:num)'] = 'suppliers/delete/$1';
 // Stock-in Links
 $route['persediaan/masuk'] = 'stocks/stock_in_index';
 $route['persediaan/masuk/tambah'] = 'stocks/stock_in_add';
-$route['persediaan/masuk/hapus/(:num)'] = 'stocks/stock_in_delete/$1';
 
 // Stock-out Links
 $route['persediaan/keluar'] = 'stocks/stock_out_index';
 $route['persediaan/keluar/tambah'] = 'stocks/stock_out_add';
-$route['persediaan/keluar/hapus/(:num)'] = 'stocks/stock_out_delete/$1';
 
 // Stock-missing Links
 $route['persediaan/hilang'] = 'stocks/stock_missing_index';
 $route['persediaan/hilang/tambah'] = 'stocks/stock_missing_add';
-$route['persediaan/hilang/hapus/(:num)'] = 'stocks/stock_missing_delete/$1';
 
 // Stock-founded Links
 $route['persediaan/ditemukan'] = 'stocks/stock_founded_index';
 $route['persediaan/ditemukan/tambah'] = 'stocks/stock_founded_add';
-$route['persediaan/ditemukan/hapus/(:num)'] = 'stocks/stock_founded_delete/$1';
+
+// Stock-in, stock-out, stock-missing, and stock-founded delete
+$route['persediaan/hapus/(:num)'] = 'stocks/delete/$1';

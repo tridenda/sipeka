@@ -18,59 +18,32 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data bahan</h3>
+          <h3 class="card-title">Data Persediaan Masuk</h3>
           <div class="float-right">
-            <a href="<?=base_url('daftar_bahan/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Bahan
+            <a href="<?=base_url('persediaan/masuk/tambah')?>" class="btn btn-primary">
+              <i class="fa fa-plus"></i> Tambah Persediaan Masuk
             </a>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
         <div class="card-body">
-        <table id="table1" class="table table-bordered table-striped">
+        <table id="stock-table" class="table table-bordered table-striped">
           <thead>
           <tr>
             <th>No</th>
-            <th>Kodebar</th>
-            <th>Nama</th>
-            <th>Kategori</th>
-            <th>Harga</th>
-            <th>Satuan</th>
+            <th>Tanggal Masuk</th>
+            <th>Nama Barang</th>
             <th>Jumlah</th>
-            <th>Gambar</th>
+            <th>Keterangan</th>
+            <th>Pemasok</th>
+            <th>Waktu Pencatatan</th>
+            <th>Nama Pengguna</th>
+            <th>Kodebar</th>
             <th>Aksi</th>
           </tr>
           </thead>
-          <tbody>
-          <?php $no=1 ?>
-          <?php foreach( $row as $material ) : ?>
-          <tr>
-            <td><?= $no++ ?></td>
-            <td><?= $material->barcode ?></td>
-            <td><?= ucwords($material->name) ?></td>
-            <td><?= $material->category_name ?></td>
-            <td><?= $material->price ?></td>
-            <td><?= $material->unit_name ?></td>
-            <td><?= $material->quantity ?></td>
-            <td>
-              <?php if( $material->image != null ) : ?>
-              <img src="<?=base_url('uploads/materials/materials/'.$material->image)?>" alt="" style="width: 5rem; height: 5rem">
-              <?php endif; ?>
-            </td>
-            <td style="width: 10rem;">
-              <form action="<?=base_url('daftar_bahan/delete')?>" method="post">
-                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('materials/edit')?>/<?=$material->material_id?>">
-                  <i class="far fa-edit"></i> Ubah
-                </a>
-                <input name="material_id" type="hidden" value="<?=$material->material_id?>">
-                <button onclick="return confirm('Anda akan menghapus data bahan, yakin?');" class="btn btn-sm btn-outline-danger">
-                  <i class="far fa-trash-alt"></i> Hapus
-                </button>
-              </form>
-            </td>
-          </tr>
-          <?php endforeach; ?>
-          </tfoot>
+          <tbody></tbody>
+          <tfoot></tfoot>
         </table>
         </div><!-- /.card-body -->
       </div>
@@ -78,3 +51,114 @@
   </section>
   <!-- /.content -->
 </div>
+
+<div class="modal fade" id="detail-modal">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Rincian</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <table id="material-table" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Tanggal Masuk</th>
+              <td><span id="date"></span></td>
+            </tr>
+            <tr>
+              <th>Nama Barang</th>
+              <td><span id="material_name"></span></td>
+            </tr>
+            <tr>
+              <th>Jumlah</th>
+              <td><span id="quantity"></span></td>
+            </tr>
+            <tr>
+              <th>Keterangan</th>
+              <td><span id="notes"></span></td>
+            </tr>
+            <tr>
+              <th>Nama Pemasok</th>
+              <td><span id="supplier_name"></span></td>
+            </tr>
+            <tr>
+              <th>Waktu Pencatatan</th>
+              <td><span id="created"></span></td>
+            </tr>
+            <tr>
+              <th>Nama Pengguna</th>
+              <td><span id="user_name"></span></td>
+            </tr>
+            <tr>
+              <th>Kodebar</th>
+              <td><span id="material_barcode"></span></td>
+            </tr>
+          </thead>
+          <tbody>
+            <table>
+            <tr>
+              <th></th>
+              <td></td>
+            </tr>
+            </table>
+          </tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<script>
+  $(function () {
+    $("#stock-table").DataTable({
+      "autoWidth": false,
+      "pageLength": 8,
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        "url": "<?=base_url('stocks/get_stock_ajax/'.$type)?>",
+        "type": "POST"
+      },
+      "columnDefs": [
+        {
+          "targets": [5,6,7,8],
+          "visible": false
+        },
+        {
+          "targets": [9],
+          "className": 'text-center',
+          "width": '10rem',
+          "orderable": false
+        }
+      ]      
+    })
+  })
+
+  $(document).ready(function() {
+    $(document).on('click', '#select', function () {
+      var date = $(this).data('date');
+      var material_name = $(this).data('material_name');
+      var quantity = $(this).data('quantity');
+      var notes = $(this).data('notes');
+      var supplier_name = $(this).data('supplier_name');
+      var created = $(this).data('created');
+      var user_name = $(this).data('user_name');
+      var material_barcode = $(this).data('material_barcode');
+      $('#date').text(date);
+      $('#material_name').text(material_name);
+      $('#quantity').text(quantity);
+      $('#notes').text(notes);
+      $('#supplier_name').text(supplier_name);
+      $('#created').text(created);
+      $('#user_name').text(user_name);
+      $('#material_barcode').text(material_barcode);
+      $('#material-modal').modal('hide');
+    })
+  })
+</script>
