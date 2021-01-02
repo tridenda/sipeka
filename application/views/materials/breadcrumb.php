@@ -3,7 +3,7 @@
   <li class="breadcrumb-item"><a href="<?=base_url('bahan_baku')?>">Bahan Baku</a></li>
   <?php
     if( $this->uri->segment(1) == 'daftar_bahan' ) {
-      echo "<li class=\"breadcrumb-item active\">Daftar bahan</li>";
+      echo "<li class=\"breadcrumb-item active\">Daftar Bahan</li>";
     } else if( $this->uri->segment(1) == 'kategori' ) {
       echo "<li class=\"breadcrumb-item active\">Kategori</li>";
     } else if( $this->uri->segment(1) == 'satuan' ) {
