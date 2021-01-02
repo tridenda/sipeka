@@ -9,14 +9,14 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/others/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/dist/css/adminlte.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/others/font.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 <!-- Site wrapper -->
@@ -181,15 +181,6 @@
           <a href="#" class="d-block"><?=ucfirst($this->login->user_login()->username)?></a>
         </div>
       </div>
-      <!-- Sidebar user (optional) -->
-      <div class="d-flex mt-3 mb-3">
-        <div class="input-group input-group-sm ml-2 mr-2">
-          <input type="text" class="form-control" placeholder="Cari mie kocok">
-          <span class="input-group-append">
-            <button type="button" class="btn btn-secondary btn-flat">Cari</button>
-          </span>
-        </div>
-      </div>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
@@ -263,23 +254,18 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'materials'
-          || $this->uri->segment(1) == 'suppliers'
-          || $this->uri->segment(1) == 'categories'
-          || $this->uri->segment(1) == 'units'
-          || $this->uri->segment(1) == 'stock-in'
-          || $this->uri->segment(1) == 'stock-out'
-          || $this->uri->segment(1) == 'stock-missing'
-          || $this->uri->segment(1) == 'stock-founded' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'materials'
-            || $this->uri->segment(1) == 'suppliers'
-            || $this->uri->segment(1) == 'categories'
-            || $this->uri->segment(1) == 'units'
-            || $this->uri->segment(1) == 'stock-in'
-            || $this->uri->segment(1) == 'stock-out'
-            || $this->uri->segment(1) == 'stock-missing'
-            || $this->uri->segment(1) == 'stock-founded' ? 'active' : ''?>">
-              <i class="nav-icon fas fa-truck-loading"></i>
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'daftar_bahan'
+          || $this->uri->segment(1) == 'bahan_baku'
+          || $this->uri->segment(1) == 'pemasok'
+          || $this->uri->segment(1) == 'kategori'
+          || $this->uri->segment(1) == 'satuan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'daftar_bahan'
+            || $this->uri->segment(1) == 'bahan_baku'
+            || $this->uri->segment(1) == 'pemasok'
+            || $this->uri->segment(1) == 'kategori'
+            || $this->uri->segment(1) == 'satuan'
+             ? 'active' : ''?>">
+              <i class="nav-icon fas fa-truck"></i>
               <p>
                 Bahan Baku
                 <i class="fas fa-angle-left right"></i>
@@ -288,49 +274,68 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('materials')?>" class="nav-link <?= $this->uri->segment(1) == 'materials' ? 'active' : ''?>">
+                <a href="<?=base_url('daftar_bahan')?>" class="nav-link <?= $this->uri->segment(1) == 'daftar_bahan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Daftar Bahan</p>
                 </a>
               </li>
-              <li class="nav-item ml-4">
-                <a href="<?=base_url('categories')?>" class="nav-link <?= $this->uri->segment(1) == 'categories' ? 'active' : ''?>">
+              <li class="nav-item">
+                <a href="<?=base_url('kategori')?>" class="nav-link <?= $this->uri->segment(1) == 'kategori' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Kategori</p>
                 </a>
               </li>
-              <li class="nav-item ml-4">
-                <a href="<?=base_url('units')?>" class="nav-link <?= $this->uri->segment(1) == 'units' ? 'active' : ''?>">
+              <li class="nav-item">
+                <a href="<?=base_url('satuan')?>" class="nav-link <?= $this->uri->segment(1) == 'satuan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Satuan</p>
                 </a>
               </li>
-              <li class="nav-item ml-4">
-                <a href="<?=base_url('suppliers')?>" class="nav-link <?= $this->uri->segment(1) == 'suppliers' ? 'active' : ''?>">
+              <li class="nav-item">
+                <a href="<?=base_url('pemasok')?>" class="nav-link <?= $this->uri->segment(1) == 'pemasok' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pemasok</p>
                 </a>
               </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview <?= $this->uri->segment(1)  == 'masuk'
+          || $this->uri->segment(2) == 'keluar'
+          || $this->uri->segment(2) == 'hilang'
+          || $this->uri->segment(2) == 'ditemukan'
+          || $this->uri->segment(1) == 'persediaan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'masuk'
+            || $this->uri->segment(2) == 'keluar'
+            || $this->uri->segment(2) == 'hilang'
+            || $this->uri->segment(2) == 'ditemukan'
+            || $this->uri->segment(1) == 'persediaan' ? 'active' : ''?>">
+              <i class="nav-icon fas fa-dolly"></i>
+              <p>
+                Transaksi Persediaan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('stock-in')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-in' ? 'active' : ''?>">
+                <a href="<?=base_url('persediaan/masuk')?>" class="nav-link <?= $this->uri->segment(2) == 'masuk' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url('stock-out')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-out' ? 'active' : ''?>">
+                <a href="<?=base_url('persediaan/keluar')?>" class="nav-link <?= $this->uri->segment(2) == 'keluar' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url('stock-missing')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-missing' ? 'active' : ''?>">
+                <a href="<?=base_url('persediaan/hilang')?>" class="nav-link <?= $this->uri->segment(2) == 'hilang' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Hilang</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url('stock-founded')?>" class="nav-link <?= $this->uri->segment(1) == 'stock-founded' ? 'active' : ''?>">
+                <a href="<?=base_url('persediaan/ditemukan')?>" class="nav-link <?= $this->uri->segment(2) == 'ditemukan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Bahan Ditemukan</p>
                 </a>
@@ -415,7 +420,7 @@
           <li class="nav-item">
             <a href="<?=base_url('auth/logout')?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>Logout</p>
+              <p>Logout <?php echo $this->uri->segment(2)?></p>
             </a>
           </li>
         </ul>
@@ -425,6 +430,9 @@
     <!-- /.sidebar -->
   </aside>
 
+  <!-- jQuery -->
+  <script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
+  
   <!-- Content Wrapper. Contains page content -->
   <?php echo $contents ?>
   <!-- /.content-wrapper -->
@@ -438,8 +446,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->

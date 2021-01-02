@@ -7,11 +7,7 @@
           <h1>Satuan</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('materials')?>">Bahan Baku</a></li>
-            <li class="breadcrumb-item active">Satuan</li>
-          </ol>
+          <?php $this->load->view('materials/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -46,12 +42,12 @@
             <td><?= $no++ ?></td>
             <td><?= ucwords($unit->name) ?></td>
             <td style="width: 10rem;">
-              <form action="<?=base_url('units/delete')?>" method="post">
-                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('units/edit/'.$unit->unit_id)?>">
+              <form action="<?=base_url('satuan/hapus')?>" method="post">
+                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('satuan/ubah/'.$unit->unit_id)?>">
                   <i class="far fa-edit"></i> Ubah
                 </a>
                 <input name="unit_id" type="hidden" value="<?=$unit->unit_id?>">
-                <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
+                <button onclick="return confirm('Anda akan menghapus data satuan, yakin?');" class="btn btn-sm btn-outline-danger">
                   <i class="far fa-trash-alt"></i> Hapus
                 </button>
               </form>

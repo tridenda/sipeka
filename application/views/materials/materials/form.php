@@ -7,11 +7,7 @@
           <h1>Daftar Bahan</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="#">Bahan Baku</a></li>
-            <li class="breadcrumb-item active">Daftar Bahan</li>
-          </ol>
+          <?php $this->load->view('materials/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -24,7 +20,7 @@
         <div class="card-header">
           <h3 class="card-title"><?=$page == 'edit' ? 'Ubah' : 'Tambah'?> bahan</h3>
           <div class="float-right">
-            <a href="<?=base_url('materials')?>" class="btn btn-warning">
+            <a href="<?=base_url('daftar_bahan')?>" class="btn btn-warning">
             <i class="fas fa-reply"></i> Kembali
             </a>
           </div>
@@ -44,10 +40,6 @@
             <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
           </div>
           <div class="form-group">
-            <label for="supplier">Pemasok</label>
-            <?php echo form_dropdown('supplier', $supplier, $selected_supplier, ['class' => 'form-control']) ?>
-          </div>
-          <div class="form-group">
             <label for="category">Kategori</label>
             <?php echo form_dropdown('category', $category, $selected_category, ['class' => 'form-control']) ?>
           </div>
@@ -61,7 +53,7 @@
                   </div>
                   <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>">
                 </div>
-                <small class="text-red font-italic"><?php echo form_error('unit'); ?></small>
+                <small class="text-red font-italic"><?php echo form_error('price'); ?></small>
               </div>
             </div>
             <div class="col-sm-5">
@@ -75,8 +67,14 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label>Jumlah</label>
-                <input name="quantity" type="hidden" value="<?=$this->input->post('quantity') ?? $row->quantity?>">
-                <input name="" type="number" class="form-control" placeholder="<?=$this->input->post('quantity') ?? $row->quantity?>" disabled="">
+                <?php if( $page == 'edit') { ?>
+                  <input name="quantity" type="hidden" value="<?=$this->input->post('quantity') ?? $row->quantity?>">
+                  <input name="" type="number" class="form-control" placeholder="<?=$this->input->post('quantity') ?? $row->quantity?>">
+                <?php
+                } else { ?>
+                  <input name="quantity" type="number" class="form-control" placeholder="0" disabled="">
+                <?php
+                }?>
               </div>
             </div>
           </div>
@@ -86,17 +84,16 @@
               <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
             </label>
             <?php 
-            $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
-
             if( $page == 'edit' ) {
+              $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
               if( $image != null ) { ?>
                 <div class="text-center mb-1">
-                <img src="<?=base_url('uploads/materials/materials/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
+                  <img src="<?=base_url('uploads/materials/materials/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
                 </div>
+                <input name="image_form" type="hidden" value="<?=$image?>"?>
             <?php 
               }
             } ?>
-            <input name="image_form" type="hidden" value="<?=$image?>">
             <input name="image" class="form-control form-control-lg pb-5" id="image" type="file"">
           </div>
           <div class="card-footer">

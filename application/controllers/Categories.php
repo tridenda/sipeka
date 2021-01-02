@@ -68,7 +68,7 @@ class Categories extends CI_Controller {
 				$this->template->load('template', 'materials/categories/form', $data);
 			} else {
 				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
-				redirect('categories');
+				redirect('kategori');
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
@@ -106,22 +106,21 @@ class Categories extends CI_Controller {
 		if( $this->db->affected_rows() > 0 ) {
 			$this->session->set_flashdata('success', 'Data berhasil disimpan.');
 		}
-		redirect('categories');
+		redirect('kategori');
 	}
 
 	public function delete()
 	{
 		$id = $this->input->post('category_id');
-		$material = $this->Category_model->get_material($id)->row();
-
-		if( $material != null ) {
-			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar bahan, silahkan hapus semua data bahan yang berhubungan dengan kategori ini.');
-			redirect('categories');
-		}
-
 		$this->Category_model->delete($id);
+		$error = $this->db->error();
 
-		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
-		redirect('categories');
+		if( $error['code'] == 0 ) {
+			$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
+			redirect('kategori');
+		} else {
+			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar bahan, silahkan hapus semua data bahan yang berhubungan dengan kategori ini.');
+			redirect('kategori');
+		}
 	}
 }

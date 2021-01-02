@@ -7,11 +7,7 @@
           <h1>Pemasok</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('materials')?>">Bahan Baku</a></li>
-            <li class="breadcrumb-item active">Pemasok</li>
-          </ol>
+          <?php $this->load->view('materials/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -24,7 +20,7 @@
         <div class="card-header">
           <h3 class="card-title">Data pemasok</h3>
           <div class="float-right">
-            <a href="<?=base_url('suppliers/add')?>" class="btn btn-primary">
+            <a href="<?=base_url('pemasok/tambah')?>" class="btn btn-primary">
               <i class="fa fa-plus"></i> Tambah Pemasok
             </a>
           </div>
@@ -52,12 +48,12 @@
             <td><?= $supplier->address ?></td>
             <td><?= $supplier->notes ?></td>
             <td style="width: 10rem;">
-              <form action="<?=base_url('suppliers/delete')?>" method="post">
+              <form action="<?=base_url('pemasok/hapus')?>" method="post">
                 <a class="btn btn-sm btn-outline-primary" href="<?=base_url('suppliers/edit/'.$supplier->supplier_id)?>">
                   <i class="far fa-edit"></i> Ubah
                 </a>
                 <input name="supplier_id" type="hidden" value="<?=$supplier->supplier_id?>">
-                <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
+                <button onclick="return confirm('Anda akan menghapus data pemasok, yakin?');" class="btn btn-sm btn-outline-danger">
                   <i class="far fa-trash-alt"></i> Hapus
                 </button>
               </form>
