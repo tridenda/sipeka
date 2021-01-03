@@ -32,7 +32,7 @@
             <input name="supplier_id" type="hidden" value="<?=$this->input->post('supplier_id') ?? $row->supplier_id?>">
             <div class="form-group">
               <label for="name">Nama *</label>
-              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>">
+              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
               <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
             </div>
             <div class="form-group">

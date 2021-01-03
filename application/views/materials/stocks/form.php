@@ -8,7 +8,18 @@
         <div class="card-header">
           <h3 class="card-title">Tambah bahan</h3>
           <div class="float-right">
-            <a href="<?=base_url('persediaan/masuk')?>" class="btn btn-warning">
+            <a href="<?php 
+                        if( $this->uri->segment(2) == 'masuk' ) {
+                          echo base_url('persediaan/masuk');
+                        } else if( $this->uri->segment(2) == 'keluar' ) {
+                          echo base_url('persediaan/keluar');
+                        } else if( $this->uri->segment(2) == 'hilang' ) {
+                          echo base_url('persediaan/hilang');
+                        } else if( $this->uri->segment(2) == 'ditemukan' ) {
+                          echo base_url('persediaan/ditemukan');
+                        }
+                      ?>
+            " class="btn btn-warning">
             <i class="fas fa-reply"></i> Kembali
             </a>
           </div>
@@ -18,9 +29,10 @@
           <form action="" style="width: 30rem;" method="post">
             <div class="form-group">
               <label for="date">Tanggal *</label>
-              <input name="date" type="date" class="form-control" id="date" value="<?=date('Y-m-d')?>">
+              <input name="date" type="date" class="form-control" id="date" value="<?=date('Y-m-d')?>" autofocus>
               <small class="text-red font-italic"><?php echo form_error('date'); ?></small>
             </div>
+            <input name="type" id="type" type="hidden" value="<?=$page?>">
             <input name="material_id" id="material_id" type="hidden">
             <div class="form-group">
               <label for="barcode">Kodebar *</label>
@@ -53,10 +65,12 @@
               <label for="notes">Keterangan</label>
               <textarea name="notes" id="notes" class="form-control" rows="3" placeholder="Tambah keterangan"><?=$this->input->post('notes')?></textarea>
             </div>
-            <div class="form-group">
-              <label for="supplier">Pemasok</label>
-              <?php echo form_dropdown('supplier', $supplier, $selected_supplier, ['class' => 'form-control']) ?>
-            </div>
+            <?php if( $this->uri->segment(2) == 'masuk' ) : ?>
+              <div class="form-group">
+                <label for="supplier">Pemasok</label>
+                <?php echo form_dropdown('supplier', $supplier, $selected_supplier, ['class' => 'form-control']) ?>
+              </div>
+            <?php endif; ?>
             <div class="form-group">
               <label for="quantity">Jumlah</label>
               <input name="quantity" id="quantity" type="number" class="form-control" placeholder="Masukan angka" value="<?=$this->input->post('quantity')?>">
