@@ -420,7 +420,7 @@
           <li class="nav-item">
             <a href="<?=base_url('auth/logout')?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>Logout <?php echo $this->uri->segment(2)?></p>
+              <p>Keluar</p>
             </a>
           </li>
         </ul>

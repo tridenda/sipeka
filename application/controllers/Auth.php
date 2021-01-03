@@ -57,4 +57,13 @@ class Auth extends CI_Controller {
 		$this->session->unset_userdata($params);
 		redirect('masuk');
 	}  
+
+	public function turn_off($type) {
+
+		if( $type == "shutdown") {
+			shell_exec("shutdown.exe.lnk");
+		} else if( $type == "restart") {
+			shell_exec("restart.exe.lnk");
+		} 		
+	}
 }

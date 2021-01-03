@@ -55,15 +55,23 @@
           <!-- /.col -->
         </div>
       </form>
-
-      <div class="social-auth-links text-center mb-3">
-        <p>- ATAU -</p>
-        <a href="<?=base_url('auth/guest')?>" class="btn btn-secondary w-100">Bukan Member</a>
-      </div>
-
       <!-- /.social-auth-links -->
     </div>
     <!-- /.login-card-body -->
+  </div>
+  <div class="card">
+    <div class="container text-center mt-2 border-bottom pb-2">
+      <h7 class="pb-2 font-weight-bold">
+      Matikan atau muat ulang komputer</h7>
+    </div>
+    <div class="container mt-3 mb-3 d-flex justify-content-center">
+      <a href="<?=base_url('auth/turn_off/restart')?>" class="btn btn-warning btn-lg mr-1" onclick="return confirm('Anda akan memuat ulang komputer komputer, yakin?');" style="width: 10rem">
+        <i class="fas fa-undo-alt"></i> Muat Ulang
+      </a>     
+      <a href="<?=base_url('auth/turn_off/resasdfrt')?>" class="btn btn-danger btn-lg mr-1" onclick="return confirm('Anda akan mematikan komputer, yakin?');" style="width: 10rem">
+        <i class="fas fa-power-off"></i> Matikan
+      </a>    
+    </div>  
   </div>
 </div>
 <!-- /.login-box -->
