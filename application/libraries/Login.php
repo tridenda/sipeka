@@ -13,56 +13,65 @@ Class Login {
 
     if( !$guest ) {
       $user_data = $this->ci->User_model->get($user_id)->row();
-      // var_dump($user_data);
-      // exit();
     } else {
-      // $user_id = 240;
-      // $user_data = $this->ci->User_model->get($user_id)->row();
-      // var_dump($user_data);
       $user_data = (object) array(
 				'username' => $this->ci->session->userdata('userid'),
 				'name' => $this->ci->session->userdata('userid'),
         'level' => $this->ci->session->userdata('level'),
         'image' => 'login.jpg'
       );
-    }
-    
+    }   
     return $user_data;
   }
 
-  public function check_already_login()
-  {
-    $user_id = $this->ci->session->userdata('userid');
 
-    if( $user_id  ) {
-      redirect('cashier/index');
+  // kick all users except admin and redirect to Beranda
+  public function only_admin()
+  {
+    $user_id = $this->ci->session->userdata('level');
+
+    if( $user_id != "1"  ) {
+      redirect('beranda');
     } 
   }
 
-  public function check_not_login()
+  // Kick all users when them want to visit cashier pages
+  public function not_login_cashier()
   {
     $user_id = $this->ci->session->userdata('userid');
 
     if( !$user_id ) {
-      redirect('auth/login');
+      redirect('kasir');
     } 
   }
 
-  public function check_the_cashier()
+  // Kick all users when them want to visit members pages
+  public function not_login_members()
   {
-    $level = $this->ci->session->userdata('level');
+    $user_id = $this->ci->session->userdata('userid');
 
-    if( $level  == '2') {
-      redirect('cashier');
+    if( !$user_id ) {
+      redirect('pelanggan');
     } 
   }
 
-  public function check_the_guest()
+  // Kick all users when them want to visit members pages
+  public function is_login_cashier()
   {
-    $level = $this->ci->session->userdata('level');
+    $user_id = $this->ci->session->userdata('level');
 
-    if( $level  == '3') {
-      redirect('cashier');
+    if( $user_id == "1" || $user_id == "2" ) {
+      redirect('beranda');
+    } 
+  }
+
+  // Kick all users when them want to visit members pages
+  public function is_login_members()
+  {
+    $user_id = $this->ci->session->userdata('level');
+
+    if( $user_id == "3" || $user_id == "4" ) {
+      redirect('members/index');
     } 
   }
 }

@@ -49,16 +49,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'cashier/index';
+
+$route['default_controller'] = 'members/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Login links
-$route['masuk'] = 'auth/login';
-$route['tamu'] = 'auth/guest';
+// Beranda links
+$route['beranda'] = 'home/index';
 
-// Cashier Links
-$route['beranda'] = 'cashier';
+// Users Login links
+$route['kasir'] = 'auth/login_cashier';
+$route['pelanggan'] = 'auth/login_members';
+$route['tamu'] = 'auth/login_guests';
 
 // Material Links
 $route['bahan_baku'] = 'materials';
@@ -103,3 +105,8 @@ $route['persediaan/ditemukan/tambah'] = 'stocks/stock_founded_add';
 
 // Stock-in, stock-out, stock-missing, and stock-founded delete
 $route['persediaan/hapus/(:num)/(:num)/(:num)/(:any)'] = 'stocks/delete/$1/$2/$3/$4';
+
+// Users Login links
+$route['pengguna'] = 'users/index';
+$route['pelanggan'] = 'auth/login_members';
+$route['tamu'] = 'auth/login_guests';

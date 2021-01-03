@@ -6,13 +6,13 @@ class Home extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->check_not_login();
+		$this->login->not_login_cashier();
   }
 
   public function index()
 	{
 		$this->ci =& get_instance();
-		$this->load->view('index');
+		$this->template->load('template', 'index');
 	}
 
 }
