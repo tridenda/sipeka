@@ -31,7 +31,7 @@
           <input name="material_id" type="hidden" value="<?=$this->input->post('material_id') ?? $row->material_id?>">
           <div class="form-group">
             <label for="barcode">Kodebar *</label>
-            <input name="barcode" type="text" class="form-control" id="barcode" placeholder="Contoh: A0001, AB0231, atau ZHS00001" value="<?=$this->input->post('barcode') ?? $row->barcode?>">
+            <input name="barcode" type="text" class="form-control" id="barcode" placeholder="Contoh: A0001, AB0231, atau ZHS00001" value="<?=$this->input->post('barcode') ?? $row->barcode?>" autofocus>
             <small class="text-red font-italic"><?php echo form_error('barcode'); ?></small>
           </div>
           <div class="form-group">

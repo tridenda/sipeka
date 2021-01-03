@@ -32,7 +32,7 @@
             <input name="category_id" type="hidden" value="<?=$this->input->post('category_id') ?? $row->category_id?>">
             <div class="form-group">
               <label for="name">Nama *</label>
-              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>">
+              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
               <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
             </div>
           </div>

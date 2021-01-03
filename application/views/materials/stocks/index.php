@@ -6,10 +6,43 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data bahan masuk</h3>
+          <h3 class="card-title">
+          <?php 
+            if( $this->uri->segment(2) == 'masuk' ) {
+              echo "Data bahan masuk";
+            } else if( $this->uri->segment(2) == 'keluar' ) {
+              echo "Data bahan keluar";
+            } else if( $this->uri->segment(2) == 'hilang' ) {
+              echo "Data bahan hilang";
+            } else if( $this->uri->segment(2) == 'ditemukan' ) {
+              echo "Data bahan ditemukan";
+            }
+          ?>
+          </h3>
           <div class="float-right">
-            <a href="<?=base_url('persediaan/masuk/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Bahan Masuk
+            <a href="<?php 
+                      if( $this->uri->segment(2) == 'masuk' ) {
+                        echo base_url('persediaan/masuk/tambah');
+                      } else if( $this->uri->segment(2) == 'keluar' ) {
+                        echo base_url('persediaan/keluar/tambah');
+                      } else if( $this->uri->segment(2) == 'hilang' ) {
+                        echo base_url('persediaan/hilang/tambah');
+                      } else if( $this->uri->segment(2) == 'ditemukan' ) {
+                        echo base_url('persediaan/ditemukan/tambah');
+                      }
+                    ?>" class="btn btn-primary">
+              <i class="fa fa-plus"></i> 
+              <?php 
+                if( $this->uri->segment(2) == 'masuk' ) {
+                  echo "Tambah Bahan Masuk";
+                } else if( $this->uri->segment(2) == 'keluar' ) {
+                  echo "Tambah Bahan Keluar";
+                } else if( $this->uri->segment(2) == 'hilang' ) {
+                  echo "Tambah Bahan Hilang";
+                } else if( $this->uri->segment(2) == 'ditemukan' ) {
+                  echo "Tambah Bahan Ditemukan";
+                }
+              ?>
             </a>
           </div>
         </div> <!-- /.card-body -->
@@ -19,14 +52,15 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Tanggal Masuk</th>
             <th>Nama Barang</th>
             <th>Jumlah</th>
+            <th>Tanggal Masuk</th>
             <th>Keterangan</th>
             <th>Pemasok</th>
             <th>Waktu Pencatatan</th>
             <th>Nama Pencatat</th>
             <th>Kodebar</th>
+            <th>Satuan</th>
             <th>Aksi</th>
           </tr>
           </thead>
@@ -44,7 +78,20 @@
   <div class="modal-dialog modal-xs">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Rincian</h4>
+        <h4 class="modal-title">
+          Rincian
+          <?php 
+            if( $this->uri->segment(2) == 'masuk' ) {
+              echo "bahan masuk";
+            } else if( $this->uri->segment(2) == 'keluar' ) {
+              echo "bahan keluar";
+            } else if( $this->uri->segment(2) == 'hilang' ) {
+              echo "bahan hilang";
+            } else if( $this->uri->segment(2) == 'ditemukan' ) {
+              echo "bahan ditemukan";
+            }
+          ?>
+        </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -57,12 +104,20 @@
               <td><span id="date"></span></td>
             </tr>
             <tr>
+              <th>Kodebar</th>
+              <td><span id="material_barcode"></span></td>
+            </tr>
+            <tr>
               <th>Nama Barang</th>
               <td><span id="material_name"></span></td>
             </tr>
             <tr>
               <th>Jumlah</th>
               <td><span id="quantity"></span></td>
+            </tr>
+            <tr>
+              <th>Satuan</th>
+              <td><span id="unit_name"></span></td>
             </tr>
             <tr>
               <th>Keterangan</th>
@@ -77,12 +132,8 @@
               <td><span id="created"></span></td>
             </tr>
             <tr>
-              <th>Nama Pengguna</th>
+              <th>Nama Pencatat</th>
               <td><span id="user_name"></span></td>
-            </tr>
-            <tr>
-              <th>Kodebar</th>
-              <td><span id="material_barcode"></span></td>
             </tr>
           </thead>
           <tbody>
@@ -115,11 +166,12 @@
       },
       "columnDefs": [
         {
-          "targets": [5,6,7,8],
+          // 5,7,8,9
+          "targets": [5,7,8,9],
           "visible": false
         },
         {
-          "targets": [9],
+          "targets": [10],
           "className": 'text-center',
           "width": '10rem',
           "orderable": false
@@ -138,6 +190,7 @@
       var created = $(this).data('created');
       var user_name = $(this).data('user_name');
       var material_barcode = $(this).data('material_barcode');
+      var unit_name = $(this).data('unit_name');
       $('#date').text(date);
       $('#material_name').text(material_name);
       $('#quantity').text(quantity);
@@ -146,6 +199,7 @@
       $('#created').text(created);
       $('#user_name').text(user_name);
       $('#material_barcode').text(material_barcode);
+      $('#unit_name').text(unit_name);
       $('#material-modal').modal('hide');
     })
   })

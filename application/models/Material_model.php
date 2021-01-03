@@ -111,10 +111,29 @@ class Material_model extends CI_Model
 		$sql = "UPDATE materials SET quantity = quantity + '$quantity' WHERE material_id = '$material_id'";
 		$this->db->query($sql);
   }
-  
-  function update_stock_out($id, $quantity) 
+
+  function update_stock_out($data) 
 	{
-		$sql = "UPDATE materials SET quantity = quantity - '$quantity' WHERE material_id = '$id'";
+		$quantity = $data['quantity'];
+		$material_id = $data['material_id'];
+		$sql = "UPDATE materials SET quantity = quantity - '$quantity' WHERE material_id = '$material_id'";
 		$this->db->query($sql);
+  }
+  
+  function delete_stock($id, $quantity, $type) 
+	{
+    if( $type == "in" ) {
+      $sql = "UPDATE materials SET quantity = quantity - '$quantity' WHERE material_id = '$id'";
+		  $this->db->query($sql);
+    } else if( $type == "out" ) {
+      $sql = "UPDATE materials SET quantity = quantity + '$quantity' WHERE material_id = '$id'";
+		  $this->db->query($sql);
+    } else if( $type == "missing" ) {
+      $sql = "UPDATE materials SET quantity = quantity + '$quantity' WHERE material_id = '$id'";
+		  $this->db->query($sql);
+    } else if( $type == "founded" ) {
+      $sql = "UPDATE materials SET quantity = quantity - '$quantity' WHERE material_id = '$id'";
+		  $this->db->query($sql);
+    }
 	}
 }

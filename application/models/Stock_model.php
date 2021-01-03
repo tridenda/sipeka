@@ -8,11 +8,12 @@ class Stock_model extends CI_Model
     var $order = array('stock_id' => 'asc'); // default order 
 
     private function _get_datatables_query($type) {
-        $this->db->select('stocks.*, suppliers.name as supplier_name, materials.name as material_name, materials.barcode as material_barcode, users.name as user_name');
+        $this->db->select('stocks.*, suppliers.name as supplier_name, materials.name as material_name, materials.barcode as material_barcode, users.name as user_name, units.name as unit_name');
         $this->db->from('stocks');
         $this->db->join('materials', 'stocks.material_id = materials.material_id', 'left');
         $this->db->join('suppliers', 'stocks.supplier_id = suppliers.supplier_id', 'left');
         $this->db->join('users', 'stocks.user_id = users.user_id', 'left');
+        $this->db->join('units', 'materials.unit_id = units.unit_id', 'left');
         $this->db->where('type', $type);
         $i = 0;
         foreach ($this->column_search as $stock) { // loop column 
@@ -57,9 +58,17 @@ class Stock_model extends CI_Model
     }
     // End: Datatables
 
-    public function add_stock_in($post) {
+    public function add_stock($post) {
         $params['material_id'] = htmlspecialchars($post['material_id']);
-        $params['type'] = 'in';
+        if( $post['type'] == "in_add") {
+            $params['type'] = 'in';
+        } else if( $post['type'] == "out_add") {
+            $params['type'] = 'out';
+        } else if( $post['type'] == "missing_add") {
+            $params['type'] = 'missing';
+        } else if( $post['type'] == "founded_add") {
+            $params['type'] = 'founded';
+        }
         $params['notes'] = $post['notes'] == '' ? null : htmlspecialchars($post['notes']);
         $params['supplier_id'] = $post['supplier'] == '' ? null : htmlspecialchars($post['supplier']);
         $params['quantity'] = htmlspecialchars($post['quantity']);
@@ -71,7 +80,7 @@ class Stock_model extends CI_Model
     public function delete($id)
     {
         $this->db->where('stock_id', $id);
-            $this->db->delete('stocks');
+        $this->db->delete('stocks');
     }
 
 }

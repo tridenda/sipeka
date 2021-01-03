@@ -36,7 +36,7 @@
             <input name="user_id" type="hidden" value="<?=$this->input->post('user_id') ?? $row->user_id?>">
             <div class="form-group">
               <label for="name">Nama *</label>
-              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>">
+              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
               <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
             </div>
             <div class="form-group">
@@ -74,22 +74,22 @@
               <textarea name="address" id="address" class="form-control" rows="3" placeholder="Alamat"><?=$this->input->post('address') ?? $row->address?></textarea>
             </div>
             <div class="form-group">
-              <label for="formFileLg" class="form-label">
+              <label for="image" class="form-label">
                 Gambar
                 <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
               </label>
-              <?php if( $page == 'edit' ) {
+              <?php 
+              if( $page == 'edit' ) {
                 $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
-
                 if( $image != null ) { ?>
-                <div class="text-center mb-1">
-                <img src="<?=base_url('uploads/users/cashier/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
-                </div>
-              <?php
+                  <div class="text-center mb-1">
+                    <img src="<?=base_url('uploads/users/cashier/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
+                  </div>
+                  <input name="image_form" type="hidden" value="<?=$image?>"?>
+              <?php 
                 }
               } ?>
-              <input name="image_form" type="hidden" value="<?=$image?>">
-              <input name="image" class="form-control form-control-lg pb-5" id="formFileLg" type="file">
+              <input name="image" class="form-control form-control-lg pb-5" id="image" type="file"">
             </div>
           </div>
           <!-- /.card-body -->
