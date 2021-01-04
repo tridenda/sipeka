@@ -80,6 +80,7 @@ class Materials extends CI_Controller {
 			$material->created = null;
 			$material->updated = null;
 			$data = array(
+				'barcode' => $this->Material_model->barcode_no(),
 				'page' => 'add',
 				'row' => $material,
 				'category' => $categories,

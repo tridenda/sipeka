@@ -88,8 +88,8 @@
       <div class="card card-default color-palette-box">
         <div class="card-header">
           <h3 class="card-title">
-            <i class="fas fa-tag"></i>
-            10 Produk Terlaris di Bulan Januari 2021
+            <i class="fas fa-star"></i> 
+            10 Prduk Terlaris Bulan Ini
           </h3>
         </div>
         <div class="card-body">

@@ -135,5 +135,24 @@ class Material_model extends CI_Model
       $sql = "UPDATE materials SET quantity = quantity - '$quantity' WHERE material_id = '$id'";
 		  $this->db->query($sql);
     }
-	}
+  }
+  
+  public function barcode_no() {
+    $curdate = strtotime("now");
+    $sql = "SELECT MAX(MID(barcode,9,4)) AS barcode_no 
+          FROM materials 
+          WHERE MID(barcode,3,6) = ".date("ymd", $curdate);
+    $query = $this->db->query($sql);
+    
+    if( $query->num_rows() > 0 ) {
+      $row = $query->row();
+      var_dump($row->barcode_no);
+      $n = ((int) $row->barcode_no) + 1;
+      $no = sprintf("%'.04d", $n);
+    } else {
+      $no = "0001";
+    }
+    $barcode = "KB".date('ymd').$no;
+    return $barcode;
+  }
 }

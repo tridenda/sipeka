@@ -106,7 +106,15 @@ $route['persediaan/ditemukan/tambah'] = 'stocks/stock_founded_add';
 // Stock-in, stock-out, stock-missing, and stock-founded delete
 $route['persediaan/hapus/(:num)/(:num)/(:num)/(:any)'] = 'stocks/delete/$1/$2/$3/$4';
 
-// Users Login links
-$route['pengguna'] = 'users/index';
-$route['pelanggan'] = 'auth/login_members';
-$route['tamu'] = 'auth/login_guests';
+// Users links
+$route['pengguna'] = 'users';
+$route['pengguna/tambah'] = 'users/add';
+$route['pengguna/ubah/(:num)'] = 'users/edit/$1';
+$route['pengguna/hapus'] = 'users/delete';
+
+// Salaries links
+$route['gaji'] = 'salaries';
+$route['gaji/tambah'] = 'salaries/add';
+$route['gaji/ubah/(:num)'] = 'salaries/edit/$1';
+$route['gaji/hapus'] = 'salaries/delete';
+

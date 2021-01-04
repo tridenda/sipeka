@@ -28,8 +28,11 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      <li>
+        <a class="nav-link" data-toggle="dropdown" href="#"><strong><div id="realtime"></div></strong></a>
+      </li>
     </ul>
-
+    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Cart Dropdown Menu -->
@@ -168,8 +171,7 @@
     <a href="<?=base_url('beranda')?>" class="brand-link elevation-4">
       <img src="<?=base_url()?>assets/img/icon.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kedaibutin</span>
-    </a>
-
+    </a
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
@@ -342,8 +344,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'users' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'users' ? 'active' : ''?>">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'active' : ''?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Pengguna
@@ -353,9 +355,17 @@
             <ul class="nav nav-treeview">
               <?php if( $this->login->user_login()->level == '1') : ?>
               <li class="nav-item">
-                <a href="<?=base_url('users')?>" class="nav-link <?= $this->uri->segment(1) == 'users' || $this->uri->segment(1) == '' ? 'active' : ''?>">
+                <a href="<?=base_url('pengguna')?>" class="nav-link <?= $this->uri->segment(1) == 'pengguna'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pramuniaga</p>
+                </a>
+              </li>
+              <?php endif; ?>
+              <?php if( $this->login->user_login()->level == '1') : ?>
+              <li class="nav-item">
+                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji'  ? 'active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Pembayaran Gaji</p>
                 </a>
               </li>
               <?php endif; ?>
@@ -368,7 +378,7 @@
             </ul>
           </li>
           <?php if( $this->login->user_login()->level == '1'  ) : ?>
-          <!-- <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-area"></i>
               <p>
@@ -402,7 +412,7 @@
                 </a>
               </li>
             </ul>
-          </li> -->
+          </li>
           <?php endif; ?>
           <p class="border-bottom border-secondary mt-3"></p>
           <li class="nav-item">
@@ -468,6 +478,17 @@
       "responsive": true,
     });
   });
+
+  // Begin: Realtime Clock
+  setInterval(
+  function(){
+  $.get("<?=base_url('home/get_date')?>", function(Jam){
+            var xJam = Jam;
+            var x = document.getElementById('realtime');
+                  x.innerHTML = xJam;
+      });
+  },1000);
+  // End: Realtime Clock
 </script>
 
 </body>
