@@ -118,3 +118,6 @@ $route['gaji/tambah'] = 'salaries/add';
 $route['gaji/ubah/(:num)'] = 'salaries/edit/$1';
 $route['gaji/hapus'] = 'salaries/delete';
 
+// Stock Reports links
+$route['laporan_persediaan'] = 'Stock_reports/index';
+

@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="<?=base_url()?>/assets/dist/js/Chart.bundle.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 <!-- Site wrapper -->
@@ -378,8 +379,8 @@
             </ul>
           </li>
           <?php if( $this->login->user_login()->level == '1'  ) : ?>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'menu-open active' : ''?>">
               <i class="nav-icon fas fa-chart-area"></i>
               <p>
                 Laporan
@@ -388,27 +389,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/general.html" class="nav-link">
+                <a href="<?=base_url('laporan_persediaan')?>" class="nav-link">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>General Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/advanced.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/editors.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Editors</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/validation.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Validation</p>
+                  <p>Persediaan</p>
                 </a>
               </li>
             </ul>

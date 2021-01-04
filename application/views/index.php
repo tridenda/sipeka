@@ -94,12 +94,11 @@
         </div>
         <div class="card-body">
           <!-- Bar chart -->
-          <script src="<?=base_url()?>/assets/dist/js/Chart.bundle.min.js"></script>
-            <div class="box-body">
-                <div class="chart">
-                    <canvas id="myChart1"></canvas>
-                </div>
-            </div>
+          <div class="box-body">
+              <div class="chart">
+                  <canvas id="myChart1"></canvas>
+              </div>
+          </div>
         </div>
         <!-- /.card-body -->
       </div>
@@ -109,7 +108,6 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 
 <!-- Page script -->
 <script>
