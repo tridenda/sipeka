@@ -6,9 +6,8 @@ class Users extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->check_not_login();
-		$this->login->check_the_cashier();
-		$this->login->check_the_guest();
+		$this->login->not_login_cashier();
+		$this->login->only_admin();
 		$this->load->model('User_model');
 		$this->load->library('form_validation');
 	}
@@ -74,11 +73,11 @@ class Users extends CI_Controller {
 						);
 						$this->session->set_flashdata('item');
 						$this->User_model->add($post);
-						redirect('users');
+						redirect('pengguna');
 					} else {
 						$error = $this->upload->display_errors();
 						$this->session->set_flashdata('error', $error);
-						redirect('users');
+						redirect('pengguna');
 					} 
 				} else {
 					$post = $this->input->post(null, TRUE);
@@ -108,7 +107,7 @@ class Users extends CI_Controller {
 				$this->template->load('template', 'users/users/form', $data);
 			} else {
 				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
-				redirect('users');
+				redirect('pengguna');
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
@@ -153,11 +152,11 @@ class Users extends CI_Controller {
 						);
 						$this->session->set_flashdata('item');
 						$this->User_model->edit($post);
-						redirect('users');
+						redirect('pengguna');
 					} else {
 						$error = $this->upload->display_errors();
 						$this->session->set_flashdata('error', $error);
-						redirect('users');
+						redirect('pengguna');
 					} 
 				} else {
 					$post = $this->input->post(null, TRUE);
@@ -185,7 +184,7 @@ class Users extends CI_Controller {
 		if( $this->db->affected_rows() > 0 ) {
 			$this->session->set_flashdata('success', 'Data berhasil disimpan.');
 		}
-		redirect('users');
+		redirect('pengguna');
 	}
 
 	public function delete()
@@ -199,7 +198,7 @@ class Users extends CI_Controller {
 		$this->User_model->delete($id);
 
 		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
-		redirect('users');
+		redirect('pengguna');
 	}
 
 	function username_check($str)

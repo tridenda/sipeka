@@ -9,14 +9,14 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/others/ionicons.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/dist/css/adminlte.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/others/font.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 <!-- Site wrapper -->
@@ -28,8 +28,11 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      <li>
+        <a class="nav-link" data-toggle="dropdown" href="#"><strong><div id="realtime"></div></strong></a>
+      </li>
     </ul>
-
+    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Cart Dropdown Menu -->
@@ -165,11 +168,10 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4 sidebar-dark-info">
     <!-- Brand Logo -->
-    <a href="<?=base_url()?>" class="brand-link elevation-4">
+    <a href="<?=base_url('beranda')?>" class="brand-link elevation-4">
       <img src="<?=base_url()?>assets/img/icon.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kedaibutin</span>
-    </a>
-
+    </a
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
@@ -188,7 +190,7 @@
                with font-awesome or any other icon font library -->
                
           <li class="nav-item">
-            <a href="<?=base_url()?>" class="nav-link <?= $this->uri->segment(1) == 'cashier' || $this->uri->segment(1) == '' ? 'active' : ''?>">
+            <a href="<?=base_url('beranda')?>" class="nav-link <?= $this->uri->segment(1) == 'beranda' || $this->uri->segment(1) == '' ? 'active' : ''?>">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Beranda
@@ -196,7 +198,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cash-register"></i>
               <p>
@@ -224,8 +226,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview">
+          </li> -->
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-utensils"></i>
               <p>
@@ -253,7 +255,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'daftar_bahan'
           || $this->uri->segment(1) == 'bahan_baku'
           || $this->uri->segment(1) == 'pemasok'
@@ -342,9 +344,8 @@
               </li>
             </ul>
           </li>
-          <?php if( $this->login->user_login()->level != '3'  ) : ?>
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'users' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'users' ? 'active' : ''?>">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'active' : ''?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Pengguna
@@ -354,21 +355,29 @@
             <ul class="nav nav-treeview">
               <?php if( $this->login->user_login()->level == '1') : ?>
               <li class="nav-item">
-                <a href="<?=base_url('users')?>" class="nav-link <?= $this->uri->segment(1) == 'users' || $this->uri->segment(1) == '' ? 'active' : ''?>">
+                <a href="<?=base_url('pengguna')?>" class="nav-link <?= $this->uri->segment(1) == 'pengguna'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pramuniaga</p>
                 </a>
               </li>
               <?php endif; ?>
+              <?php if( $this->login->user_login()->level == '1') : ?>
               <li class="nav-item">
+                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji'  ? 'active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Pembayaran Gaji</p>
+                </a>
+              </li>
+              <?php endif; ?>
+              <!-- <li class="nav-item">
                 <a href="<?=base_url('users/members')?>" class="nav-link">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pelanggan</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
-          <?php endif; ?>
+          <?php if( $this->login->user_login()->level == '1'  ) : ?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-area"></i>
@@ -404,6 +413,7 @@
               </li>
             </ul>
           </li>
+          <?php endif; ?>
           <p class="border-bottom border-secondary mt-3"></p>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -418,7 +428,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?=base_url('auth/logout')?>" class="nav-link">
+            <a href="<?=base_url('auth/logout_cashier')?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Keluar</p>
             </a>
@@ -468,6 +478,17 @@
       "responsive": true,
     });
   });
+
+  // Begin: Realtime Clock
+  setInterval(
+  function(){
+  $.get("<?=base_url('home/get_date')?>", function(Jam){
+            var xJam = Jam;
+            var x = document.getElementById('realtime');
+                  x.innerHTML = xJam;
+      });
+  },1000);
+  // End: Realtime Clock
 </script>
 
 </body>

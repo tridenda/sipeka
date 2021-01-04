@@ -6,9 +6,7 @@ class Materials extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->check_not_login();
-		// $this->login->check_the_cashier();
-		$this->login->check_the_guest();
+		$this->login->not_login_cashier();
 		$this->load->model(['Material_model','Unit_model', 'Category_model']);
 		$this->load->library('form_validation');
 	}
@@ -27,7 +25,7 @@ class Materials extends CI_Controller {
 				$row[] = indo_currency($material->price);
 				$row[] = $material->unit_name;
 				$row[] = $material->quantity;
-				$row[] = $material->image != null ? '<img src="'.base_url('uploads/materials/materials/'.$material->image).'" class="img" alt="Gambar '.$material->name.'" style="width: 5rem; height: 5rem">' : null;
+				// $row[] = $material->image != null ? '<img src="'.base_url('uploads/materials/materials/'.$material->image).'" class="img" alt="Gambar '.$material->name.'" style="width: 5rem; height: 5rem">' : null;
 				// add html for action
 				$row[] = '
 				<form action="'.base_url('daftar_bahan/hapus').'" method="post">
@@ -82,6 +80,7 @@ class Materials extends CI_Controller {
 			$material->created = null;
 			$material->updated = null;
 			$data = array(
+				'barcode' => $this->Material_model->barcode_no(),
 				'page' => 'add',
 				'row' => $material,
 				'category' => $categories,

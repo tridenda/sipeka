@@ -1,17 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cashier extends CI_Controller {
+class Members extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->not_login_cashier();
 	}
 
 	public function index()
 	{
 		$this->ci =& get_instance();
-		$this->template->load('template', 'cashier/index');
+		$this->template->load('members/template', 'members/index');
 	}
 }

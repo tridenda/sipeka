@@ -37,40 +37,11 @@
             <th>Harga</th>
             <th>Satuan</th>
             <th>Jumlah</th>
-            <th>Gambar</th>
             <th>Aksi</th>
           </tr>
           </thead>
-          <tbody>
-          <?php $no=1 ?>
-          <!-- <?php foreach( $row as $material ) : ?>
-          <tr>
-            <td><?= $no++ ?></td>
-            <td><?= $material->barcode ?></td>
-            <td><?= ucwords($material->name) ?></td>
-            <td><?= $material->category_name ?></td>
-            <td><?= $material->price ?></td>
-            <td><?= $material->unit_name ?></td>
-            <td><?= $material->quantity ?></td>
-            <td>
-              <?php if( $material->image != null ) : ?>
-              <img src="<?=base_url('uploads/materials/materials/'.$material->image)?>" alt="" style="width: 5rem; height: 5rem">
-              <?php endif; ?>
-            </td>
-            <td style="width: 10rem;">
-              <form action="<?=base_url('daftar_bahan/delete')?>" method="post">
-                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('materials/edit')?>/<?=$material->material_id?>">
-                  <i class="far fa-edit"></i> Ubah
-                </a>
-                <input name="material_id" type="hidden" value="<?=$material->material_id?>">
-                <button onclick="return confirm('Anda akan menghapus data bahan, yakin?');" class="btn btn-sm btn-outline-danger">
-                  <i class="far fa-trash-alt"></i> Hapus
-                </button>
-              </form>
-            </td>
-          </tr>
-          <?php endforeach; ?> -->
-          </tfoot>
+          <tbody></tbody>
+          <tfoot></tfoot>
         </table>
         </div><!-- /.card-body -->
       </div>
@@ -97,11 +68,11 @@
       },
       "columnDefs": [
         {
-          "targets": [0,7,-1],
+          "targets": [0,6,7],
           "orderable": false
         },
         {
-          "targets": [7,8],
+          "targets": [7],
           "className": 'text-center',
           "width": '9rem',
           "height": '9rem'

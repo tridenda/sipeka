@@ -167,7 +167,7 @@
       "columnDefs": [
         {
           // 5,7,8,9
-          "targets": [5,7,8,9],
+          "targets": [5,6,8,9],
           "visible": false
         },
         {

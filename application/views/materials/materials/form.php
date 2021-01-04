@@ -14,6 +14,7 @@
   </section>
 
   <!-- Main content -->
+  
   <section class="content">
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
@@ -21,7 +22,7 @@
           <h3 class="card-title"><?=$page == 'edit' ? 'Ubah' : 'Tambah'?> bahan</h3>
           <div class="float-right">
             <a href="<?=base_url('daftar_bahan')?>" class="btn btn-warning">
-            <i class="fas fa-reply"></i> Kembali
+            <i class="fas fa-reply"></i> Kembali 
             </a>
           </div>
         </div> 
@@ -31,12 +32,13 @@
           <input name="material_id" type="hidden" value="<?=$this->input->post('material_id') ?? $row->material_id?>">
           <div class="form-group">
             <label for="barcode">Kodebar *</label>
-            <input name="barcode" type="text" class="form-control" id="barcode" placeholder="Contoh: A0001, AB0231, atau ZHS00001" value="<?=$this->input->post('barcode') ?? $row->barcode?>" autofocus>
+            <input name="barcode" type="hidden" value="<?=$this->input->post('barcode') ?? $barcode?>">
+            <input name="" type="text" class="form-control" id="barcode" placeholder="<?=$this->input->post('barcode') ?? $barcode?>" disabled>
             <small class="text-red font-italic"><?php echo form_error('barcode'); ?></small>
           </div>
           <div class="form-group">
             <label for="name">Nama *</label>
-            <input name="name" type="text" class="form-control" id="name" placeholder="Nama bahan" value="<?=$this->input->post('name') ?? $row->name?>">
+            <input name="name" type="text" class="form-control" id="name" placeholder="Nama bahan" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
             <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
           </div>
           <div class="form-group">
@@ -78,7 +80,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="image" class="form-label">
               Gambar
               <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
@@ -95,7 +97,7 @@
               }
             } ?>
             <input name="image" class="form-control form-control-lg pb-5" id="image" type="file"">
-          </div>
+          </div> -->
           <div class="card-footer">
             <button name="<?=$page?>" type="submit" class="btn btn-primary float-right ml-2"><i class="fas fa-paper-plane"></i> Simpan</button>
             <button type="reset" class="btn btn-secondary float-right ml-2">Reset</button>

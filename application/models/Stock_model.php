@@ -3,8 +3,8 @@
 class Stock_model extends CI_Model 
 {
     // Begin: Datatables
-    var $column_order = array(null, 'stocks.date', 'material_name', 'stocks.quantity', 'stocks.notes', 'supplier_name', 'material_barcode'); //set column field database for datatable orderable
-    var $column_search = array('stocks.date', 'materials.name', 'stocks.quantity', 'stocks.notes', 'suppliers.name', 'materials.barcode'); //set column field database for datatable searchable
+    var $column_order = array(null, 'stocks.date', 'material_name', 'stocks.quantity', 'stocks.notes', 'supplier_name', 'material_barcode', 'users.name'); //set column field database for datatable orderable
+    var $column_search = array('stocks.date', 'materials.name', 'stocks.quantity', 'stocks.notes', 'suppliers.name', 'materials.barcode', 'users.name'); //set column field database for datatable searchable
     var $order = array('stock_id' => 'asc'); // default order 
 
     private function _get_datatables_query($type) {
