@@ -5,7 +5,7 @@ function indo_currency($data) {
   return $result;
 }
 
-function indo_date($date, $day_print = false)
+function indo_date($date, $day_print = false, $not_number = false)
 {
 	$day = array ( 1 =>    'Senin',
 				'Selasa',
@@ -30,7 +30,12 @@ function indo_date($date, $day_print = false)
 				'Desember'
 			);
 	$split 	  = explode('-', $date);
-	$indo_date = $split[2] . ' ' . $month[ (int)$split[1] ] . ' ' . $split[0];
+	if( $not_number ) {
+		$indo_date = $split[2] . ' ' . $month[ (int)$split[1] ] . ' ' . $split[0];
+	} else {
+		$indo_date = $month[ (int)$split[1] ] . ' ' . $split[0];
+	}
+	
 	
 	if ($day_print) {
 		$num = date('N', strtotime($date));

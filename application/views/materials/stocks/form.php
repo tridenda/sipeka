@@ -34,10 +34,12 @@
             </div>
             <input name="type" id="type" type="hidden" value="<?=$page?>">
             <input name="material_id" id="material_id" type="hidden">
+            <input name="material_price" id="material_price" type="hidden">
             <div class="form-group">
               <label for="barcode">Kodebar *</label>
               <div class="input-group input-group-sm">
-                <input name="barcode" id="barcode" type="text" class="form-control" placeholder="Cari kodebar dengan tekan tombol cari dibagian kanan">
+                <input name="barcode" type="hidden" id="barcode">
+                <input type="text" id="barcode2" class="form-control" placeholder="Cari kodebar dengan tekan tombol cari dibagian kanan" disabled>
                 <span class="input-group-append">
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#material-modal"><i class="fas fa-search"></i></button>
               </div>
@@ -72,7 +74,7 @@
               </div>
             <?php endif; ?>
             <div class="form-group">
-              <label for="quantity">Jumlah</label>
+              <label for="quantity">Jumlah *</label>
               <input name="quantity" id="quantity" type="number" class="form-control" placeholder="Masukan angka" value="<?=$this->input->post('quantity')?>">
               <small class="text-red font-italic"><?php echo form_error('quantity'); ?></small>
             </div>
@@ -155,11 +157,14 @@ alert(test);
       var name = $(this).data('name');
       var unit_name = $(this).data('unit_name');
       var initial_qty = $(this).data('initial_qty');
+      var material_price = $(this).data('material_price');
       $('#material_id').val(material_id);
       $('#barcode').val(barcode);
+      $('#barcode2').val(barcode);
       $('#name').val(name);
       $('#unit_name').val(unit_name);
       $('#initial_qty').val(initial_qty);
+      $('#material_price').val(material_price);
       $('#material-modal').modal('hide');
     })
   })

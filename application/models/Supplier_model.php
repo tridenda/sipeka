@@ -47,4 +47,12 @@ class Supplier_model extends CI_Model
     $this->db->where('supplier_id', $id);
 		$this->db->delete('suppliers');
   }
+
+  public function get_rupiah($type) {
+    // $sql
+  }
+
+  public function get_kind($type) {
+    
+  }
 }

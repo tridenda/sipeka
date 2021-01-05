@@ -5,8 +5,7 @@ class Auth extends CI_Controller {
 	// Begin: Cashier functions
 	public function login_cashier()
 	{
-		// $this->login->is_cashier_login();
-		$this->login->is_login_cashier();
+		$this->functions->is_login_cashier();
 		$this->load->view('auth/cashier');
 	}
 

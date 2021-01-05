@@ -32,8 +32,8 @@
           <input name="material_id" type="hidden" value="<?=$this->input->post('material_id') ?? $row->material_id?>">
           <div class="form-group">
             <label for="barcode">Kodebar *</label>
-            <input name="barcode" type="hidden" value="<?=$this->input->post('barcode') ?? $barcode?>">
-            <input name="" type="text" class="form-control" id="barcode" placeholder="<?=$this->input->post('barcode') ?? $barcode?>" disabled>
+            <input name="barcode" type="hidden" value="<?=$this->input->post('barcode') ?? $row->barcode?>">
+            <input name="" type="text" class="form-control" id="barcode" placeholder="<?=$this->input->post('barcode') ?? $row->barcode?>" disabled>
             <small class="text-red font-italic"><?php echo form_error('barcode'); ?></small>
           </div>
           <div class="form-group">
@@ -42,8 +42,9 @@
             <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
           </div>
           <div class="form-group">
-            <label for="category">Kategori</label>
+            <label for="category">Kategori *</label>
             <?php echo form_dropdown('category', $category, $selected_category, ['class' => 'form-control']) ?>
+            <small class="text-red font-italic"><?php echo form_error('category'); ?></small>
           </div>
           <div class="row">
             <div class="col-sm-5">

@@ -6,7 +6,7 @@ class Materials extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->not_login_cashier();
+		$this->functions->not_login_cashier();
 		$this->load->model(['Material_model','Unit_model', 'Category_model']);
 		$this->load->library('form_validation');
 	}
@@ -71,7 +71,7 @@ class Materials extends CI_Controller {
 		if( !isset($_POST['add']) ) {
 			$material = new stdClass();
 			$material->material_id = null;
-			$material->barcode = null;
+			$material->barcode = $this->Material_model->barcode_no();
 			$material->name = null;
 			$material->category_id = null;
 			$material->price = null;
@@ -80,7 +80,6 @@ class Materials extends CI_Controller {
 			$material->created = null;
 			$material->updated = null;
 			$data = array(
-				'barcode' => $this->Material_model->barcode_no(),
 				'page' => 'add',
 				'row' => $material,
 				'category' => $categories,
@@ -95,6 +94,7 @@ class Materials extends CI_Controller {
 			$this->form_validation->set_rules('barcode', 'Kode bar', 'required|is_unique[materials.barcode]');
 			$this->form_validation->set_rules('name', 'Nama', 'required');
 			$this->form_validation->set_rules('price', 'Harga', 'required|numeric');
+			$this->form_validation->set_rules('category', 'Kategori', 'required');
 			$this->form_validation->set_rules('unit', 'Satuan', 'required');
 
 
@@ -156,12 +156,10 @@ class Materials extends CI_Controller {
 			$material = $query_material->row();
 			
 			$query_categories = $this->Category_model->get();
-			$categories[''] = '- Pilih - ';
 			foreach( $query_categories->result() as $category) {
 				$categories[$category->category_id] = $category->name;
 			}
 			$query_units = $this->Unit_model->get();
-			$units[''] = '- Pilih - ';
 			foreach( $query_units->result() as $unit) {
 				$units[$unit->unit_id] = $unit->name;
 			}
@@ -199,6 +197,7 @@ class Materials extends CI_Controller {
 			// Set rules form
 			$this->form_validation->set_rules('barcode', 'Kode bar', 'required|callback_barcode_check');
 			$this->form_validation->set_rules('name', 'Nama', 'required');
+			$this->form_validation->set_rules('category', 'Kategori', 'required');
 			$this->form_validation->set_rules('price', 'Harga', 'required|numeric');
 
 			// Set condition form, if FALSE process is canceled

@@ -8,9 +8,9 @@
           <h1>Beranda</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
+          <!-- <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active">Beranda</li>
-          </ol>
+          </ol> -->
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -26,7 +26,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3>0</h3>
 
               <p>Produk</p>
             </div>
@@ -41,7 +41,10 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3>
+                <?=$this->functions->get_supplier()?>
+                <!-- <sup style="font-size: 20px">%</sup> -->
+              </h3>
 
               <p>Pemasok</p>
             </div>
@@ -56,7 +59,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3>0</h3>
 
               <p>Pelanggan</p>
             </div>
@@ -71,7 +74,10 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3>
+                <?=$this->functions->get_cashier()?>
+                <!-- <sup style="font-size: 20px">%</sup> -->
+              </h3>
 
               <p>Pramuniaga</p>
             </div>
@@ -94,12 +100,11 @@
         </div>
         <div class="card-body">
           <!-- Bar chart -->
-          <script src="<?=base_url()?>/assets/dist/js/Chart.bundle.min.js"></script>
-            <div class="box-body">
-                <div class="chart">
-                    <canvas id="myChart1"></canvas>
-                </div>
-            </div>
+          <div class="box-body">
+              <div class="chart">
+                  <canvas id="myChart1"></canvas>
+              </div>
+          </div>
         </div>
         <!-- /.card-body -->
       </div>
@@ -109,7 +114,6 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 
 <!-- Page script -->
 <script>
@@ -153,6 +157,13 @@ var massPopChart = new Chart(myChart1, {
       text:'Largest Cities In Massachusetts',
       fontSize:25,
       responsive: true
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
     },
     legend:{
       display:false,

@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
+  <!-- Icon Kedaibutin -->
+  <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/img/icon.ico" />
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -32,7 +34,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Masukan nama pengguna dan kata sandi</p>
 
-      <form action="<?=base_url('auth/process')?>" method="post">
+      <form action="<?=base_url('auth/process_cashier')?>" method="post">
         <div class="input-group mb-3">
           <input name="username" type="name" class="form-control" placeholder="Nama pengguna">
         </div>
@@ -42,10 +44,10 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember">
+              <!-- <input type="checkbox" id="remember">
               <label for="remember">
                 Ingat saya
-              </label>
+              </label> -->
             </div>
           </div>
           <!-- /.col -->
@@ -58,20 +60,6 @@
       <!-- /.social-auth-links -->
     </div>
     <!-- /.login-card-body -->
-  </div>
-  <div class="card">
-    <div class="container text-center mt-2 border-bottom pb-2">
-      <h7 class="pb-2 font-weight-bold">
-      Matikan atau muat ulang komputer</h7>
-    </div>
-    <div class="container mt-3 mb-3 d-flex justify-content-center">
-      <a href="<?=base_url('auth/turn_off/restart')?>" class="btn btn-warning btn-lg mr-1" onclick="return confirm('Anda akan memuat ulang komputer komputer, yakin?');" style="width: 10rem">
-        <i class="fas fa-undo-alt"></i> Muat Ulang
-      </a>     
-      <a href="<?=base_url('auth/turn_off/resasdfrt')?>" class="btn btn-danger btn-lg mr-1" onclick="return confirm('Anda akan mematikan komputer, yakin?');" style="width: 10rem">
-        <i class="fas fa-power-off"></i> Matikan
-      </a>    
-    </div>  
   </div>
 </div>
 <!-- /.login-box -->

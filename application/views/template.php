@@ -17,8 +17,10 @@
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="<?=base_url()?>/assets/dist/js/Chart.bundle.min.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/img/icon.ico" />
 </head>
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'sidebar-collapse' : ''?>">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -29,7 +31,15 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li>
-        <a class="nav-link" data-toggle="dropdown" href="#"><strong><div id="realtime"></div></strong></a>
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <strong>
+          <?php
+          echo indo_date(date('Y-m-d'), TRUE, TRUE);
+          echo " — ";
+          echo date('H:i:s');
+          ?>
+          </strong>
+        </a>
       </li>
     </ul>
     
@@ -177,10 +187,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?=base_url('uploads/users/cashier/').$this->login->user_login()->image?>" alt="User Image" class="bg-white rounded-circle">
+          <img src="<?=base_url('uploads/users/cashier/').$this->functions->user_login()->image?>" alt="User Image" class="bg-white rounded-circle">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?=ucfirst($this->login->user_login()->username)?></a>
+          <a href="#" class="d-block"><?=ucfirst($this->functions->user_login()->username)?></a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -353,7 +363,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <?php if( $this->login->user_login()->level == '1') : ?>
+              <?php if( $this->functions->user_login()->level == '1') : ?>
               <li class="nav-item">
                 <a href="<?=base_url('pengguna')?>" class="nav-link <?= $this->uri->segment(1) == 'pengguna'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
@@ -361,7 +371,7 @@
                 </a>
               </li>
               <?php endif; ?>
-              <?php if( $this->login->user_login()->level == '1') : ?>
+              <?php if( $this->functions->user_login()->level == '1') : ?>
               <li class="nav-item">
                 <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
@@ -377,9 +387,9 @@
               </li> -->
             </ul>
           </li>
-          <?php if( $this->login->user_login()->level == '1'  ) : ?>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <?php if( $this->functions->user_login()->level == '1'  ) : ?>
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'menu-open active' : ''?>">
               <i class="nav-icon fas fa-chart-area"></i>
               <p>
                 Laporan
@@ -388,27 +398,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/general.html" class="nav-link">
+                <a href="<?=base_url('laporan_persediaan')?>" class="nav-link">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>General Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/advanced.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/editors.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Editors</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/forms/validation.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Validation</p>
+                  <p>Persediaan</p>
                 </a>
               </li>
             </ul>
@@ -478,17 +470,6 @@
       "responsive": true,
     });
   });
-
-  // Begin: Realtime Clock
-  setInterval(
-  function(){
-  $.get("<?=base_url('home/get_date')?>", function(Jam){
-            var xJam = Jam;
-            var x = document.getElementById('realtime');
-                  x.innerHTML = xJam;
-      });
-  },1000);
-  // End: Realtime Clock
 </script>
 
 </body>

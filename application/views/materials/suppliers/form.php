@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
               <label for="notes">Keterangan</label>
-              <textarea name="notes" id="notes" class="form-control" rows="3" placeholder="Keterangan"><?=$this->input->post('notes') ?? $row->address?></textarea>
+              <textarea name="notes" id="notes" class="form-control" rows="3" placeholder="Keterangan"><?=$this->input->post('notes') ?? $row->notes?></textarea>
             </div>
           </div>
           <!-- /.card-body -->

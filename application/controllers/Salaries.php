@@ -6,8 +6,8 @@ class Salaries extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->not_login_cashier();
-		$this->login->only_admin();
+		$this->functions->not_login_cashier();
+		$this->functions->only_admin();
 		$this->load->model(['Salary_model', 'User_model']);
 		$this->load->library('form_validation');
 	}
@@ -76,7 +76,6 @@ class Salaries extends CI_Controller {
 			$salaries = $query_salaries->row();
 			
 			$query_users = $this->User_model->get();
-			$users[''] = '- Pilih - ';
 			foreach( $query_users->result() as $user) {
 				$users[$user->user_id] = $user->name;
 			}
@@ -95,8 +94,8 @@ class Salaries extends CI_Controller {
 			if( $query->num_rows() > 0 ) {
 				$salary = $query->row();
 				$data = array(
-          'page' => 'edit',
-          'user' => $users,
+					'page' => 'edit',
+					'user' => $users,
 					'selected_user' => $salaries->user_id,
 					'row' => $salary
 				);

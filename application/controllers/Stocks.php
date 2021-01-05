@@ -6,7 +6,7 @@ class Stocks extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->not_login_cashier();
+		$this->functions->not_login_cashier();
     $this->load->model(['Material_model','Supplier_model','Stock_model']);
 		$this->load->library('form_validation');
   }
@@ -30,7 +30,8 @@ class Stocks extends CI_Controller {
         data-barcode="'.$material->barcode.'"
         data-name="'.$material->name.'"
         data-unit_name="'.$material->unit_name.'"
-        data-initial_qty="'.$material->quantity.'">
+        data-initial_qty="'.$material->quantity.'"
+        data-material_price="'.$material->price.'">
           <i class="fas fa-check"></i> Pilih
         </button>';
 				$data[] = $row;
@@ -63,6 +64,7 @@ class Stocks extends CI_Controller {
         $row[] = $stock->user_name;
         $row[] = $stock->material_barcode;
         $row[] = $stock->unit_name;
+        $row[] = $stock->material_price;
         // add html for action
         $row[] = '
         <button class="btn btn-sm btn-outline-info" id="select" 
@@ -75,7 +77,8 @@ class Stocks extends CI_Controller {
           data-created="'.$stock->created.'"
           data-user_name="'.$stock->user_name.'"
           data-material_barcode="'.$stock->material_barcode.'"
-          data-unit_name="'.$stock->unit_name.'">
+          data-unit_name="'.$stock->unit_name.'"
+          data-material_price="'.indo_currency($stock->material_price).'">
           <i class="fas fa-info-circle"></i> Rincian
         </button>
         <a href="'.base_url('persediaan/hapus/').$stock->stock_id.'/'.$stock->material_id.'/'.$stock->quantity.'/'.$type.'" onclick="return confirm(\'Anda akan menghapus data persediaan, yakin?\');" class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i> Hapus</a>
