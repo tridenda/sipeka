@@ -129,7 +129,7 @@ Class Functions {
   public function get_top_five($type, $new_month = null, $new_year = null) {
     $this->ci->load->model('Stock_model');
     
-    $result = $this->ci->Stock_model->get_top_five($type);
+    $result = $this->ci->Stock_model->get_top_five($type, $new_month, $new_year);
 
     return $result->result();
   }
@@ -137,7 +137,7 @@ Class Functions {
   public function get_top_year($type, $new_month = null, $new_year = null) {
     $this->ci->load->model('Stock_model');
     
-    $result = $this->ci->Stock_model->get_top_year($type);
+    $result = $this->ci->Stock_model->get_top_year($type, $new_month, $new_year);
 
     return $result->result();
   }

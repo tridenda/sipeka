@@ -6,22 +6,32 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>Laporan Persediaan 
-            <small class="text-muted">(Bulan Ini)</small>
             <!-- <small class="text-muted">(<?php echo indo_date(date('Y-m-d'))?>)</small> -->
           </h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <!-- <form action="<?=base_url('stock_reports/new_date')?>" method="post">
+            <form action="" method="post">
               <div class="input-group date" id="timepicker" data-target-input="nearest">
               <select name="month" class="form-control datetimepicker-input" style="width: 10rem">
               <?php 
+                $post = $this->input->post(null, TRUE);
+                if( !$post['month'] ) {
+                  $input_month = NULL;
+                } else {
+                  $input_month = $post['month'];
+                }
+                if( !$post['year'] ) {
+                  $input_year = NULL;
+                } else {
+                  $input_year = $post['year'];
+                }
                 $curmonth = date('m');
                 // Activate this condition if there's input
                 // Get the data from flashdata
-                // if( $new_month ) {
-                //   $curmonth = $new_month;
-                // }
+                if( $post['month'] ) {
+                  $curmonth = $post['month'];
+                }
               ?>
                 <option <?= $curmonth == '01' ? 'selected' : ''?> value="01">Januari</option>
                 <option <?= $curmonth == '02' ? 'selected' : ''?> value="02" >Februari</option>
@@ -43,9 +53,9 @@
                   foreach (range($range, $curyear) as $value) :
                     // Activate this condition if there's input
                     // Get the data from flashdata
-                    // if( $new_year ) {
-                    //   $curyear = $new_year;
-                    // }
+                    if( $post['year'] ) {
+                      $curyear = $post['year'];
+                    }
                 ?>
                   <option value="<?=$value?>" <?=$value == $curyear ? 'selected' : ''?>><?=$value?></option>
                 <?php
@@ -54,7 +64,7 @@
               </select>
               <button type="submit" class="ml-1 btn btn-outline-secondary input-group-append">Ubah Tanggal</button>
               </div>
-            </form> -->
+            </form>
           </ol>
         </div>
       </div>
@@ -71,8 +81,8 @@
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Masuk</h6>
-            <span class="info-box-text"><?=$this->functions->get_report("in", "kind")?> Jenis</span>
-            <span class="info-box-number"><?=$this->functions->get_report("in", "rupiah")?></span>
+            <span class="info-box-text"><?=$this->functions->get_report("in", "kind", $input_month, $input_year)?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("in", "rupiah", $input_month, $input_year)?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -85,8 +95,8 @@
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Keluar</h6>
-            <span class="info-box-text"><?=$this->functions->get_report("out", "kind")?> Jenis</span>
-            <span class="info-box-number"><?=$this->functions->get_report("out", "rupiah")?></span>
+            <span class="info-box-text"><?=$this->functions->get_report("out", "kind", $input_month, $input_year)?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("out", "rupiah", $input_month, $input_year)?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -103,8 +113,8 @@
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Hilang</h6>
-            <span class="info-box-text"><?=$this->functions->get_report("missing", "kind")?> Jenis</span>
-            <span class="info-box-number"><?=$this->functions->get_report("missing", "rupiah")?></span>
+            <span class="info-box-text"><?=$this->functions->get_report("missing", "kind", $input_month, $input_year)?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("missing", "rupiah", $input_month, $input_year)?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -117,8 +127,8 @@
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Ditemukan</h6>
-            <span class="info-box-text"><?=$this->functions->get_report("founded", "kind")?> Jenis</span>
-            <span class="info-box-number"><?=$this->functions->get_report("founded", "rupiah")?></span>
+            <span class="info-box-text"><?=$this->functions->get_report("founded", "kind", $input_month, $input_year)?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("founded", "rupiah", $input_month, $input_year)?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -226,7 +236,7 @@ var massPopChart = new Chart(myChart1, {
   data:{
     labels:[
       <?php $no=1 ?>
-      <?php foreach( $this->functions->get_top_five("out") as $material ) : ?>
+      <?php foreach( $this->functions->get_top_five("out", $input_month, $input_year) as $material ) : ?>
         <?php 
         if( $no != 0 ) {
           echo "'".$material->material_name."'";
@@ -241,7 +251,7 @@ var massPopChart = new Chart(myChart1, {
       label:'Produk',
       data:[
         <?php $no=1 ?>
-        <?php foreach( $this->functions->get_top_five("out") as $material ) : ?>
+        <?php foreach( $this->functions->get_top_five("out", $input_month, $input_year) as $material ) : ?>
           <?php 
           if( $no != 0 ) {
             echo "'".$material->num_rows."'";
@@ -315,7 +325,7 @@ var massPopChart = new Chart(myChart2, {
     
     labels:[
       <?php $no=1 ?>
-      <?php foreach( $this->functions->get_top_five("missing") as $material ) : ?>
+      <?php foreach( $this->functions->get_top_five("missing", $input_month, $input_year) as $material ) : ?>
         <?php 
         if( $no != 0 ) {
           echo "'".$material->material_name."'";
@@ -330,7 +340,7 @@ var massPopChart = new Chart(myChart2, {
       label:'Produk',
       data:[
         <?php $no=1 ?>
-        <?php foreach( $this->functions->get_top_five("missing") as $material ) : ?>
+        <?php foreach( $this->functions->get_top_five("missing", $input_month, $input_year) as $material ) : ?>
           <?php 
           if( $no != 0 ) {
             echo "'".$material->num_rows."'";
@@ -409,7 +419,7 @@ $(function () {
     data   : {
       labels  : [
         <?php $no=1 ?>
-        <?php foreach( $this->functions->get_top_year("in") as $material ) : ?>
+        <?php foreach( $this->functions->get_top_year("in", $input_month, $input_year) as $material ) : ?>
           <?php 
           if( $material->month_name == '1' ) {
             $month_name = 'Januari';
@@ -449,7 +459,7 @@ $(function () {
         type                : 'line',
         data                : [
           <?php $no=1 ?>
-          <?php foreach( $this->functions->get_top_year("in") as $material ) : ?>
+          <?php foreach( $this->functions->get_top_year("in", $input_month, $input_year) as $material ) : ?>
             <?php 
             if( $no != 0 ) {
               echo "'".$material->quantity."'";
@@ -472,7 +482,7 @@ $(function () {
           type                : 'line',
           data                : [
             <?php $no=1 ?>
-            <?php foreach( $this->functions->get_top_year("out") as $material ) : ?>
+            <?php foreach( $this->functions->get_top_year("out", $input_month, $input_year) as $material ) : ?>
               <?php 
               if( $no != 0 ) {
                 echo "'".$material->quantity."'";
