@@ -84,7 +84,7 @@ class Stock_model extends CI_Model
         $this->db->delete('stocks');
     }
 
-    public function get_rupiah($type) {
+    public function get_rupiah($type, $new_month = null, $new_year = null) {
 
         $date = date('Y-m', strtotime("now"));
     
@@ -94,7 +94,7 @@ class Stock_model extends CI_Model
         return $query->row()->result;
     }
 
-    public function get_kind($type) {
+    public function get_kind($type, $new_month = null, $new_year = null) {
 
         $date = date('Y-m', strtotime("now"));
         $sql = "SELECT * FROM stocks WHERE type = '$type' AND MID(date,1,7) = '$date'";
@@ -103,10 +103,19 @@ class Stock_model extends CI_Model
         return $query->num_rows();
     }
 
-    public function get_top_five($type) {
+    public function get_top_five($type, $new_month = null, $new_year = null) {
 
         $date = date('Y-m', strtotime("now"));
         $sql = "SELECT materials.name AS material_name, COUNT(materials.name) AS num_rows FROM stocks INNER JOIN materials ON stocks.material_id=materials.material_id WHERE type = '$type' AND MID(date,1,7) = '$date'  GROUP BY materials.name ORDER BY num_rows LIMIT 5";
+        $query = $this->db->query($sql);
+
+        return $query;
+    }
+
+    public function get_top_year($type, $new_month = null, $new_year = null ) {
+
+        $date = date('Y', strtotime("now"));
+        $sql = "SELECT materials.name, MONTH(DATE) AS month_name, COUNT(date) AS quantity FROM stocks INNER JOIN materials ON stocks.material_id=materials.material_id WHERE type = '$type' AND MID(date,1,4) = $date GROUP BY month_name";
         $query = $this->db->query($sql);
 
         return $query;

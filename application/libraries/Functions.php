@@ -94,46 +94,50 @@ Class Functions {
   }
   
   // Get num of rows or sum of price and quantity
-  public function get_report($type, $output_type) {
+  public function get_report($type, $output_type, $new_month = null, $new_year = null) {
     $this->ci->load->model('Stock_model');
     
     if( $type == "in" ) {
       if( $output_type == "rupiah") {
-        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type, $new_month, $new_year));
       } else if( $output_type == "kind" ) {
-        $result = $this->ci->Stock_model->get_kind($type);
+        $result = $this->ci->Stock_model->get_kind($type, $new_month, $new_year);
       }
     } else if( $type == "out" ) {
       if( $output_type == "rupiah") {
-        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type, $new_month, $new_year));
       } else if( $output_type == "kind" ) {
-        $result = $this->ci->Stock_model->get_kind($type);
+        $result = $this->ci->Stock_model->get_kind($type, $new_month, $new_year);
       }
     } else if( $type == "missing" ) {
       if( $output_type == "rupiah") {
-        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type, $new_month, $new_year));
       } else if( $output_type == "kind" ) {
-        $result = $this->ci->Stock_model->get_kind($type);
+        $result = $this->ci->Stock_model->get_kind($type, $new_month, $new_year);
       }
     } else if( $type == "founded" ) {
       if( $output_type == "rupiah") {
-        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type, $new_month, $new_year));
       } else if( $output_type == "kind" ) {
-        $result = $this->ci->Stock_model->get_kind($type);
+        $result = $this->ci->Stock_model->get_kind($type, $new_month, $new_year);
       }
     }
 		
 		return $result;
   }
   
-  public function get_top_five($type) {
+  public function get_top_five($type, $new_month = null, $new_year = null) {
     $this->ci->load->model('Stock_model');
     
-    if( $type == "out" ) {
-      $result = $this->ci->Stock_model->get_top_five($type);
-    } else if( $type == "missing" ) {
-      $result = $this->ci->Stock_model->get_top_five($type);
-    } 
+    $result = $this->ci->Stock_model->get_top_five($type);
+
+    return $result->result();
+  }
+
+  public function get_top_year($type, $new_month = null, $new_year = null) {
+    $this->ci->load->model('Stock_model');
+    
+    $result = $this->ci->Stock_model->get_top_year($type);
 
     return $result->result();
   }

@@ -5,12 +5,57 @@
     <div class="container-fluid border-bottom">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Laporan Persediaan <small class="text-muted">(<?php echo indo_date(date('Y-m-d'))?>)</small></h1>
+          <h1>Laporan Persediaan 
+            <small class="text-muted">(Bulan Ini)</small>
+            <!-- <small class="text-muted">(<?php echo indo_date(date('Y-m-d'))?>)</small> -->
+          </h1>
         </div>
         <div class="col-sm-6">
-          <!-- <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active">Beranda</li>
-          </ol> -->
+          <ol class="breadcrumb float-sm-right">
+            <!-- <form action="<?=base_url('stock_reports/new_date')?>" method="post">
+              <div class="input-group date" id="timepicker" data-target-input="nearest">
+              <select name="month" class="form-control datetimepicker-input" style="width: 10rem">
+              <?php 
+                $curmonth = date('m');
+                // Activate this condition if there's input
+                // Get the data from flashdata
+                // if( $new_month ) {
+                //   $curmonth = $new_month;
+                // }
+              ?>
+                <option <?= $curmonth == '01' ? 'selected' : ''?> value="01">Januari</option>
+                <option <?= $curmonth == '02' ? 'selected' : ''?> value="02" >Februari</option>
+                <option <?= $curmonth == '03' ? 'selected' : ''?> value="03">Maret</option>
+                <option <?= $curmonth == '04' ? 'selected' : ''?> value="04">April</option>
+                <option <?= $curmonth == '05' ? 'selected' : ''?> value="05">Mei</option>
+                <option <?= $curmonth == '06' ? 'selected' : ''?> value="06">Juni</option>
+                <option <?= $curmonth == '07' ? 'selected' : ''?> value="07">Juli</option>
+                <option <?= $curmonth == '08' ? 'selected' : ''?> value="08">Agustus</option>
+                <option <?= $curmonth == '09' ? 'selected' : ''?> value="09">September</option>
+                <option <?= $curmonth == '10' ? 'selected' : ''?> value="10">Oktober</option>
+                <option <?= $curmonth == '11' ? 'selected' : ''?> value="11">November</option>
+                <option <?= $curmonth == '12' ? 'selected' : ''?> value="12">Desember</option>
+              </select>
+              <select name="year" class="ml-2 form-control datetimepicker-input">
+                <?php
+                  $curyear = date('Y');
+                  $range = $curyear - 4;
+                  foreach (range($range, $curyear) as $value) :
+                    // Activate this condition if there's input
+                    // Get the data from flashdata
+                    // if( $new_year ) {
+                    //   $curyear = $new_year;
+                    // }
+                ?>
+                  <option value="<?=$value?>" <?=$value == $curyear ? 'selected' : ''?>><?=$value?></option>
+                <?php
+                  endforeach;
+                ?>
+              </select>
+              <button type="submit" class="ml-1 btn btn-outline-secondary input-group-append">Ubah Tanggal</button>
+              </div>
+            </form> -->
+          </ol>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -362,10 +407,59 @@ $(function () {
   var $visitorsChart = $('#stock-in')
   var visitorsChart  = new Chart($visitorsChart, {
     data   : {
-      labels  : ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+      labels  : [
+        <?php $no=1 ?>
+        <?php foreach( $this->functions->get_top_year("in") as $material ) : ?>
+          <?php 
+          if( $material->month_name == '1' ) {
+            $month_name = 'Januari';
+          } else if( $material->month_name == '2' ) {
+            $month_name = 'Februari';
+          } else if( $material->month_name == '3' ) {
+            $month_name = 'Maret';
+          } else if( $material->month_name == '4' ) {
+            $month_name = 'April';
+          } else if( $material->month_name == '5' ) {
+            $month_name = 'Mei';
+          } else if( $material->month_name == '6' ) {
+            $month_name = 'Juni';
+          } else if( $material->month_name == '7' ) {
+            $month_name = 'Juli';
+          } else if( $material->month_name == '8' ) {
+            $month_name = 'Agustus';
+          } else if( $material->month_name == '9' ) {
+            $month_name = 'September';
+          } else if( $material->month_name == '10' ) {
+            $month_name = 'Oktober';
+          } else if( $material->month_name == '11' ) {
+            $month_name = 'November';
+          } else if( $material->month_name == '12' ) {
+            $month_name = 'Desember';
+          }
+          if( $no != 0 ) {
+            echo "'".$month_name."'";
+            echo ",";
+          } else {
+            echo "'".$month_name."'";
+          }
+          ?>
+        <?php endforeach; ?>
+      ],
       datasets: [{
         type                : 'line',
-        data                : [100000, 120, 170, 167, 180, 177, 160, 170, 167, 180, 177, 160],
+        data                : [
+          <?php $no=1 ?>
+          <?php foreach( $this->functions->get_top_year("in") as $material ) : ?>
+            <?php 
+            if( $no != 0 ) {
+              echo "'".$material->quantity."'";
+              echo ",";
+            } else {
+              echo "'".$material->quantity."'";
+            }
+            ?>
+          <?php endforeach; ?>
+        ],
         backgroundColor     : 'transparent',
         borderColor         : '#007bff',
         pointBorderColor    : '#007bff',
@@ -376,7 +470,19 @@ $(function () {
       },
         {
           type                : 'line',
-          data                : [60, 80, 70, 67, 80, 77, 100, 170, 167, 180, 177, 160],
+          data                : [
+            <?php $no=1 ?>
+            <?php foreach( $this->functions->get_top_year("out") as $material ) : ?>
+              <?php 
+              if( $no != 0 ) {
+                echo "'".$material->quantity."'";
+                echo ",";
+              } else {
+                echo "'".$material->quantity."'";
+              }
+              ?>
+            <?php endforeach; ?>
+          ],
           backgroundColor     : 'tansparent',
           borderColor         : '#ced4da',
           pointBorderColor    : '#ced4da',
@@ -410,7 +516,7 @@ $(function () {
           },
           ticks    : $.extend({
             beginAtZero : true,
-            suggestedMax: 200
+            // suggestedMax: 200
           }, ticksStyle)
         }],
         xAxes: [{
