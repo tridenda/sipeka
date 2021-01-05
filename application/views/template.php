@@ -407,12 +407,12 @@
           </li>
           <?php endif; ?>
           <p class="border-bottom border-secondary mt-3"></p>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p class="text">Pengaturan</p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-question-circle"></i>
