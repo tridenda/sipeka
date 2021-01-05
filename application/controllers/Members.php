@@ -6,6 +6,7 @@ class Members extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		// $this->functions->not_login_members()
 	}
 
 	public function index()

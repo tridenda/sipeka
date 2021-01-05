@@ -18,6 +18,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="<?=base_url()?>/assets/dist/js/Chart.bundle.min.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/img/icon.ico" />
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 <!-- Site wrapper -->
@@ -186,10 +187,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?=base_url('uploads/users/cashier/').$this->login->user_login()->image?>" alt="User Image" class="bg-white rounded-circle">
+          <img src="<?=base_url('uploads/users/cashier/').$this->functions->user_login()->image?>" alt="User Image" class="bg-white rounded-circle">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?=ucfirst($this->login->user_login()->username)?></a>
+          <a href="#" class="d-block"><?=ucfirst($this->functions->user_login()->username)?></a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -362,7 +363,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <?php if( $this->login->user_login()->level == '1') : ?>
+              <?php if( $this->functions->user_login()->level == '1') : ?>
               <li class="nav-item">
                 <a href="<?=base_url('pengguna')?>" class="nav-link <?= $this->uri->segment(1) == 'pengguna'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
@@ -370,7 +371,7 @@
                 </a>
               </li>
               <?php endif; ?>
-              <?php if( $this->login->user_login()->level == '1') : ?>
+              <?php if( $this->functions->user_login()->level == '1') : ?>
               <li class="nav-item">
                 <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
@@ -386,7 +387,7 @@
               </li> -->
             </ul>
           </li>
-          <?php if( $this->login->user_login()->level == '1'  ) : ?>
+          <?php if( $this->functions->user_login()->level == '1'  ) : ?>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'menu-open active' : ''?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'menu-open active' : ''?>">
               <i class="nav-icon fas fa-chart-area"></i>

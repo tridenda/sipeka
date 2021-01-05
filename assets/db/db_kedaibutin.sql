@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2021 at 07:00 PM
+-- Generation Time: Jan 05, 2021 at 06:35 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.3.22
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `activities` (
   `activity_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `notes` varchar(100) NOT NULL,
+  `notes` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -67,7 +67,7 @@ CREATE TABLE `customers` (
   `name` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `phone` varchar(20) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
@@ -83,7 +83,7 @@ CREATE TABLE `materials` (
   `material_id` int(11) NOT NULL,
   `barcode` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
   `price` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 0,
@@ -119,7 +119,7 @@ CREATE TABLE `salaries` (
   `salary_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `salary` varchar(50) NOT NULL,
-  `notes` varchar(200) NOT NULL,
+  `notes` varchar(200) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
@@ -146,7 +146,7 @@ CREATE TABLE `stocks` (
   `supplier_id` int(11) DEFAULT NULL,
   `price` varchar(20) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `date` date DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -170,9 +170,9 @@ INSERT INTO `stocks` (`stock_id`, `material_id`, `type`, `notes`, `supplier_id`,
 CREATE TABLE `suppliers` (
   `supplier_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `phone` text NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `notes` varchar(100) NOT NULL,
+  `phone` text DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `notes` varchar(100) DEFAULT NULL,
   `created` datetime DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -220,8 +220,8 @@ CREATE TABLE `users` (
   `username` varchar(25) NOT NULL,
   `password` varchar(50) NOT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `level` int(11) NOT NULL,
-  `image` varchar(50) DEFAULT 'login.jpg' COMMENT '1:admin 2:pramuniaga',
+  `level` int(11) NOT NULL COMMENT '1:admin 2:pramuniaga',
+  `image` varchar(50) DEFAULT 'login.jpg',
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -124,6 +124,39 @@
           <!-- /.card -->
         </div>
         <!-- /.col-md-6 -->
+        <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header border-0">
+                <div class="d-flex justify-content-between">
+                  <h3 class="card-title">Grafik Keluar/Masuk Bahan Perbulan <small>(Hitung Perjenis)</small></h3>
+                </div>
+              </div>
+              <div class="card-body" style="position: relative;">
+                <div class="position-relative mb-4">
+                  <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                      <div class=""></div>
+                    </div>
+                  <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div>
+                  </div>
+                </div>
+                  <canvas id="stock-in" class="chartjs-render-monitor"></canvas>
+                </div>
+
+                <div class="d-flex flex-row justify-content-end">
+                  <span class="mr-2">
+                    <i class="fas fa-square text-primary"></i> Bahan Masuk
+                  </span>
+
+                  <span>
+                    <i class="fas fa-square text-gray"></i> Bahan Keluar
+                  </span>
+                </div>
+              </div>
+            </div>
+          <!-- /.col -->
+        </div>
       </div>
       <!-- /.row -->
     </div>
@@ -257,4 +290,82 @@ var massPopChart = new Chart(myChart2, {
     }
   }
 });
+
+// test
+$(function () {
+  'use strict'
+
+  var ticksStyle = {
+    fontColor: '#495057',
+    fontStyle: 'bold'
+  }
+
+  var mode      = 'index'
+  var intersect = true
+
+  var $visitorsChart = $('#stock-in')
+  var visitorsChart  = new Chart($visitorsChart, {
+    data   : {
+      labels  : ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+      datasets: [{
+        type                : 'line',
+        data                : [100000, 120, 170, 167, 180, 177, 160, 170, 167, 180, 177, 160],
+        backgroundColor     : 'transparent',
+        borderColor         : '#007bff',
+        pointBorderColor    : '#007bff',
+        pointBackgroundColor: '#007bff',
+        fill                : false
+        // pointHoverBackgroundColor: '#007bff',
+        // pointHoverBorderColor    : '#007bff'
+      },
+        {
+          type                : 'line',
+          data                : [60, 80, 70, 67, 80, 77, 100, 170, 167, 180, 177, 160],
+          backgroundColor     : 'tansparent',
+          borderColor         : '#ced4da',
+          pointBorderColor    : '#ced4da',
+          pointBackgroundColor: '#ced4da',
+          fill                : false
+          // pointHoverBackgroundColor: '#ced4da',
+          // pointHoverBorderColor    : '#ced4da'
+        }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips           : {
+        mode     : mode,
+        intersect: intersect
+      },
+      hover              : {
+        mode     : mode,
+        intersect: intersect
+      },
+      legend             : {
+        display: false
+      },
+      scales             : {
+        yAxes: [{
+          // display: false,
+          gridLines: {
+            display      : true,
+            lineWidth    : '4px',
+            color        : 'rgba(0, 0, 0, .2)',
+            zeroLineColor: 'transparent'
+          },
+          ticks    : $.extend({
+            beginAtZero : true,
+            suggestedMax: 200
+          }, ticksStyle)
+        }],
+        xAxes: [{
+          display  : true,
+          gridLines: {
+            display: false
+          },
+          ticks    : ticksStyle
+        }]
+      }
+    }
+  })
+})
 </script>

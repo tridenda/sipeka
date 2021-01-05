@@ -26,7 +26,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3>0</h3>
 
               <p>Produk</p>
             </div>
@@ -41,7 +41,10 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3>
+                <?=$this->functions->get_supplier()?>
+                <!-- <sup style="font-size: 20px">%</sup> -->
+              </h3>
 
               <p>Pemasok</p>
             </div>
@@ -56,7 +59,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3>0</h3>
 
               <p>Pelanggan</p>
             </div>
@@ -71,7 +74,10 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3>
+                <?=$this->functions->get_cashier()?>
+                <!-- <sup style="font-size: 20px">%</sup> -->
+              </h3>
 
               <p>Pramuniaga</p>
             </div>

@@ -1,6 +1,6 @@
 <?php
 
-Class Login {
+Class Functions {
 
   function __construct() {
     $this->ci =& get_instance();
@@ -74,4 +74,22 @@ Class Login {
       redirect('members/index');
     } 
   }
+
+  // Get number rows of supplier table
+	public function get_supplier() {
+		$this->ci->load->model('Supplier_model');
+    $query = $this->ci->Supplier_model->get();	
+    $num_rows = $query->num_rows();
+		
+		return $num_rows;
+  }
+  
+  // Get number rows of supplier table
+	public function get_cashier() {
+		$this->ci->load->model('User_model');
+    $query = $this->ci->User_model->get();	
+    $num_rows = $query->num_rows();
+		
+		return $num_rows;
+	}
 }

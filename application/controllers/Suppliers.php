@@ -6,7 +6,7 @@ class Suppliers extends CI_Controller {
 	public function __construct()
 	{
     parent::__construct();
-    $this->login->not_login_cashier();
+    $this->functions->not_login_cashier();
 		$this->load->model('Supplier_model');
 		$this->load->library('form_validation');
   }

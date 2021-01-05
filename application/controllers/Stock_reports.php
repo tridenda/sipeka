@@ -6,8 +6,8 @@ class Stock_reports extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login->not_login_cashier();
-		$this->login->only_admin();
+		$this->functions->not_login_cashier();
+		$this->functions->only_admin();
 	}
 
   public function index()
