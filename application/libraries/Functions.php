@@ -84,12 +84,57 @@ Class Functions {
 		return $num_rows;
   }
   
-  // Get number rows of supplier table
+  // Get number rows of CASHIER table
 	public function get_cashier() {
 		$this->ci->load->model('User_model');
     $query = $this->ci->User_model->get();	
     $num_rows = $query->num_rows();
 		
 		return $num_rows;
-	}
+  }
+  
+  // Get num of rows or sum of price and quantity
+  public function get_report($type, $output_type) {
+    $this->ci->load->model('Stock_model');
+    
+    if( $type == "in" ) {
+      if( $output_type == "rupiah") {
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+      } else if( $output_type == "kind" ) {
+        $result = $this->ci->Stock_model->get_kind($type);
+      }
+    } else if( $type == "out" ) {
+      if( $output_type == "rupiah") {
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+      } else if( $output_type == "kind" ) {
+        $result = $this->ci->Stock_model->get_kind($type);
+      }
+    } else if( $type == "missing" ) {
+      if( $output_type == "rupiah") {
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+      } else if( $output_type == "kind" ) {
+        $result = $this->ci->Stock_model->get_kind($type);
+      }
+    } else if( $type == "founded" ) {
+      if( $output_type == "rupiah") {
+        $result = indo_currency($this->ci->Stock_model->get_rupiah($type));
+      } else if( $output_type == "kind" ) {
+        $result = $this->ci->Stock_model->get_kind($type);
+      }
+    }
+		
+		return $result;
+  }
+  
+  public function get_top_five($type) {
+    $this->ci->load->model('Stock_model');
+    
+    if( $type == "out" ) {
+      $result = $this->ci->Stock_model->get_top_five($type);
+    } else if( $type == "missing" ) {
+      $result = $this->ci->Stock_model->get_top_five($type);
+    } 
+
+    return $result->result();
+  }
 }

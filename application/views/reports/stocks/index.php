@@ -22,12 +22,12 @@
       <div class="row">
       <div class="col-12 col-sm-6 col-md-3 text-right">
         <div class="info-box">
-          <span class="info-box-icon bg-info elevation-1"><i class="fas fa-file-import"></i></span>
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-file-import"></i></span>
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Masuk</h6>
-            <span class="info-box-text">10 Jenis</span>
-            <span class="info-box-number">Rp 2.500.000,00</span>
+            <span class="info-box-text"><?=$this->functions->get_report("in", "kind")?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("in", "rupiah")?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -36,12 +36,12 @@
       <!-- /.col -->
       <div class="col-12 col-sm-6 col-md-3 text-right">
         <div class="info-box mb-3">
-          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-file-export"></i></span>
+          <span class="info-box-icon bg-info elevation-1"><i class="fas fa-file-export"></i></span>
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Keluar</h6>
-            <span class="info-box-text">10 Jenis</span>
-            <span class="info-box-number">Rp 2.500.000,00</span>
+            <span class="info-box-text"><?=$this->functions->get_report("out", "kind")?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("out", "rupiah")?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -54,12 +54,12 @@
 
       <div class="col-12 col-sm-6 col-md-3 text-right">
         <div class="info-box mb-3">
-          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-ban"></i></span>
+          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-ban"></i></span>
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Hilang</h6>
-            <span class="info-box-text">10 Jenis</span>
-            <span class="info-box-number">Rp 2.500.000,00</span>
+            <span class="info-box-text"><?=$this->functions->get_report("missing", "kind")?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("missing", "rupiah")?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -72,8 +72,8 @@
 
           <div class="info-box-content">
             <h6 class="font-weight-bold text-muted border-bottom">Bahan Ditemukan</h6>
-            <span class="info-box-text">10 Jenis</span>
-            <span class="info-box-number">Rp 2.500.000,00</span>
+            <span class="info-box-text"><?=$this->functions->get_report("founded", "kind")?> Jenis</span>
+            <span class="info-box-number"><?=$this->functions->get_report("founded", "rupiah")?></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -88,7 +88,7 @@
           <div class="card">
             <div class="card-header border-1">
               <div class="d-flex justify-content-between">
-                <h3 class="card-title">5 Bahan Paling Sering Dipakai</h3>
+                <h3 class="card-title">5 Bahan Paling Sering Dikeluarkan</h3>
                 <!-- <a href="javascript:void(0);">View Report</a> -->
               </div>
             </div>
@@ -179,11 +179,33 @@ ctx.height = 80;
 var massPopChart = new Chart(myChart1, {
   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
-    labels:['Produk 1', 'Produk 2', 'Produk 3', 'Produk 4', 'Produk 5'],
+    labels:[
+      <?php $no=1 ?>
+      <?php foreach( $this->functions->get_top_five("out") as $material ) : ?>
+        <?php 
+        if( $no != 0 ) {
+          echo "'".$material->material_name."'";
+          echo ",";
+        } else {
+          echo "'".$material->material_name."'";
+        }
+        ?>
+      <?php endforeach; ?>
+    ],
     datasets:[{
       label:'Produk',
       data:[
-        5,5,5,5,5
+        <?php $no=1 ?>
+        <?php foreach( $this->functions->get_top_five("out") as $material ) : ?>
+          <?php 
+          if( $no != 0 ) {
+            echo "'".$material->num_rows."'";
+            echo ",";
+          } else {
+            echo "'".$material->num_rows."'";
+          }
+          ?>
+        <?php endforeach; ?>
       ],
       //backgroundColor:'green',
       backgroundColor:[
@@ -207,6 +229,13 @@ var massPopChart = new Chart(myChart1, {
       text:'Largest Cities In Massachusetts',
       fontSize:25,
       responsive: true
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
     },
     legend:{
       display:false,
@@ -231,9 +260,6 @@ var massPopChart = new Chart(myChart1, {
 
 var myChart2 = document.getElementById('myChart2').getContext('2d');
 
-// Global Options
-Chart.defaults.global.defaultFontFamily = 'Lato';
-Chart.defaults.global.defaultFontSize = 12;
 Chart.defaults.global.defaultFontColor = '#777';
 var ctx = document.getElementById("myChart2");
 ctx.height = 80;
@@ -241,11 +267,34 @@ ctx.height = 80;
 var massPopChart = new Chart(myChart2, {
   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
-    labels:['Produk 1', 'Produk 2', 'Produk 3', 'Produk 4', 'Produk 5'],
+    
+    labels:[
+      <?php $no=1 ?>
+      <?php foreach( $this->functions->get_top_five("missing") as $material ) : ?>
+        <?php 
+        if( $no != 0 ) {
+          echo "'".$material->material_name."'";
+          echo ",";
+        } else {
+          echo "'".$material->material_name."'";
+        }
+        ?>
+      <?php endforeach; ?>
+    ],
     datasets:[{
       label:'Produk',
       data:[
-        5,5,5,5,5
+        <?php $no=1 ?>
+        <?php foreach( $this->functions->get_top_five("missing") as $material ) : ?>
+          <?php 
+          if( $no != 0 ) {
+            echo "'".$material->num_rows."'";
+            echo ",";
+          } else {
+            echo "'".$material->num_rows."'";
+          }
+          ?>
+        <?php endforeach; ?>
       ],
       //backgroundColor:'green',
       backgroundColor:[
@@ -269,6 +318,13 @@ var massPopChart = new Chart(myChart2, {
       text:'Largest Cities In Massachusetts',
       fontSize:25,
       responsive: true
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
     },
     legend:{
       display:false,

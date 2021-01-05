@@ -20,7 +20,7 @@
   <script src="<?=base_url()?>/assets/dist/js/Chart.bundle.min.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/img/icon.ico" />
 </head>
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'sidebar-collapse' : ''?>">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->

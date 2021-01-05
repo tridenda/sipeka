@@ -30,7 +30,8 @@ class Stocks extends CI_Controller {
         data-barcode="'.$material->barcode.'"
         data-name="'.$material->name.'"
         data-unit_name="'.$material->unit_name.'"
-        data-initial_qty="'.$material->quantity.'">
+        data-initial_qty="'.$material->quantity.'"
+        data-material_price="'.$material->price.'">
           <i class="fas fa-check"></i> Pilih
         </button>';
 				$data[] = $row;

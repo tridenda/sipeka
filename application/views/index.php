@@ -158,6 +158,13 @@ var massPopChart = new Chart(myChart1, {
       fontSize:25,
       responsive: true
     },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
     legend:{
       display:false,
       position:'right',

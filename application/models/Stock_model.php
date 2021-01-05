@@ -73,7 +73,7 @@ class Stock_model extends CI_Model
         $params['supplier_id'] = $post['supplier'] == '' ? null : htmlspecialchars($post['supplier']);
         $params['quantity'] = htmlspecialchars($post['quantity']);
         $params['date'] = htmlspecialchars($post['date']);
-        $params['price'] = htmlspecialchars($post['price']);
+        $params['price'] = htmlspecialchars($post['material_price']);
         $params['user_id'] = $this->session->userdata('userid');
         $this->db->insert('stocks', $params);
     }
@@ -82,6 +82,34 @@ class Stock_model extends CI_Model
     {
         $this->db->where('stock_id', $id);
         $this->db->delete('stocks');
+    }
+
+    public function get_rupiah($type) {
+
+        $date = date('Y-m', strtotime("now"));
+    
+        $sql = "SELECT SUM(price*quantity) AS result FROM stocks WHERE type = '$type' AND MID(date,1,7) = '$date'";
+        $query = $this->db->query($sql);
+
+        return $query->row()->result;
+    }
+
+    public function get_kind($type) {
+
+        $date = date('Y-m', strtotime("now"));
+        $sql = "SELECT * FROM stocks WHERE type = '$type' AND MID(date,1,7) = '$date'";
+        $query = $this->db->query($sql);
+
+        return $query->num_rows();
+    }
+
+    public function get_top_five($type) {
+
+        $date = date('Y-m', strtotime("now"));
+        $sql = "SELECT materials.name AS material_name, COUNT(materials.name) AS num_rows FROM stocks INNER JOIN materials ON stocks.material_id=materials.material_id WHERE type = '$type' AND MID(date,1,7) = '$date'  GROUP BY materials.name ORDER BY num_rows LIMIT 5";
+        $query = $this->db->query($sql);
+
+        return $query;
     }
 
 }
