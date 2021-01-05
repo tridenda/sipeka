@@ -61,6 +61,7 @@
             <th>Nama Pencatat</th>
             <th>Kodebar</th>
             <th>Satuan</th>
+            <th>Harga</th>
             <th>Aksi</th>
           </tr>
           </thead>
@@ -110,6 +111,10 @@
             <tr>
               <th>Nama Barang</th>
               <td><span id="material_name"></span></td>
+            </tr>
+            <tr>
+              <th>Harga</th>
+              <td><span id="material_price"></span></td>
             </tr>
             <tr>
               <th>Jumlah</th>
@@ -167,11 +172,11 @@
       "columnDefs": [
         {
           // 5,7,8,9
-          "targets": [5,6,8,9],
+          "targets": [5,6,8,9,10],
           "visible": false
         },
         {
-          "targets": [10],
+          "targets": [11],
           "className": 'text-center',
           "width": '10rem',
           "orderable": false
@@ -191,6 +196,7 @@
       var user_name = $(this).data('user_name');
       var material_barcode = $(this).data('material_barcode');
       var unit_name = $(this).data('unit_name');
+      var material_price = $(this).data('material_price');
       $('#date').text(date);
       $('#material_name').text(material_name);
       $('#quantity').text(quantity);
@@ -200,6 +206,7 @@
       $('#user_name').text(user_name);
       $('#material_barcode').text(material_barcode);
       $('#unit_name').text(unit_name);
+      $('#material_price').text(material_price);
       $('#material-modal').modal('hide');
     })
   })

@@ -8,7 +8,7 @@ class Stock_model extends CI_Model
     var $order = array('stock_id' => 'asc'); // default order 
 
     private function _get_datatables_query($type) {
-        $this->db->select('stocks.*, suppliers.name as supplier_name, materials.name as material_name, materials.barcode as material_barcode, users.name as user_name, units.name as unit_name');
+        $this->db->select('stocks.*, suppliers.name as supplier_name, materials.name as material_name, materials.price as material_price, materials.barcode as material_barcode, users.name as user_name, units.name as unit_name');
         $this->db->from('stocks');
         $this->db->join('materials', 'stocks.material_id = materials.material_id', 'left');
         $this->db->join('suppliers', 'stocks.supplier_id = suppliers.supplier_id', 'left');
@@ -73,6 +73,7 @@ class Stock_model extends CI_Model
         $params['supplier_id'] = $post['supplier'] == '' ? null : htmlspecialchars($post['supplier']);
         $params['quantity'] = htmlspecialchars($post['quantity']);
         $params['date'] = htmlspecialchars($post['date']);
+        $params['price'] = htmlspecialchars($post['price']);
         $params['user_id'] = $this->session->userdata('userid');
         $this->db->insert('stocks', $params);
     }

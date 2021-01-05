@@ -76,7 +76,6 @@ class Salaries extends CI_Controller {
 			$salaries = $query_salaries->row();
 			
 			$query_users = $this->User_model->get();
-			$users[''] = '- Pilih - ';
 			foreach( $query_users->result() as $user) {
 				$users[$user->user_id] = $user->name;
 			}
@@ -95,8 +94,8 @@ class Salaries extends CI_Controller {
 			if( $query->num_rows() > 0 ) {
 				$salary = $query->row();
 				$data = array(
-          'page' => 'edit',
-          'user' => $users,
+					'page' => 'edit',
+					'user' => $users,
 					'selected_user' => $salaries->user_id,
 					'row' => $salary
 				);

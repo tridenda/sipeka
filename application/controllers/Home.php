@@ -8,15 +8,8 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->login->not_login_cashier();
 	}
-	
-	public function get_date() {
-		date_default_timezone_set('Asia/Jakarta');
-		echo indo_date(date('Y-m-d'), TRUE);
-		echo " - ";
-		echo date('H:i:s'); 
-	}
 
-  public function index()
+  	public function index()
 	{
 		$this->ci =& get_instance();
 		$this->template->load('template', 'index');

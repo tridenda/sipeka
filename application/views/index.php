@@ -8,9 +8,9 @@
           <h1>Beranda</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
+          <!-- <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active">Beranda</li>
-          </ol>
+          </ol> -->
         </div>
       </div>
     </div><!-- /.container-fluid -->

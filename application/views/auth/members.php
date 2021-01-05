@@ -32,7 +32,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Masukan nama pengguna dan kata sandi</p>
 
-      <form action="<?=base_url('auth/process')?>" method="post">
+      <form action="<?=base_url('auth/process_cashier')?>" method="post">
         <div class="input-group mb-3">
           <input name="username" type="name" class="form-control" placeholder="Nama pengguna">
         </div>
@@ -65,10 +65,10 @@
       Matikan atau muat ulang komputer</h7>
     </div>
     <div class="container mt-3 mb-3 d-flex justify-content-center">
-      <a href="<?=base_url('auth/turn_off/restart')?>" class="btn btn-warning btn-lg mr-1" onclick="return confirm('Anda akan memuat ulang komputer komputer, yakin?');" style="width: 10rem">
+      <a href="<?=base_url('auth/turn_off/restart')?>" class="btn btn-warning btn-lg mr-1" onclick="return confirm('Anda akan memuat ulang komputer, yakin?');" style="width: 10rem">
         <i class="fas fa-undo-alt"></i> Muat Ulang
       </a>     
-      <a href="<?=base_url('auth/turn_off/resasdfrt')?>" class="btn btn-danger btn-lg mr-1" onclick="return confirm('Anda akan mematikan komputer, yakin?');" style="width: 10rem">
+      <a href="<?=base_url('auth/turn_off/shutdown')?>" class="btn btn-danger btn-lg mr-1" onclick="return confirm('Anda akan mematikan komputer, yakin?');" style="width: 10rem">
         <i class="fas fa-power-off"></i> Matikan
       </a>    
     </div>  

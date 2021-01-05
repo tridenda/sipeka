@@ -30,7 +30,15 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li>
-        <a class="nav-link" data-toggle="dropdown" href="#"><strong><div id="realtime"></div></strong></a>
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <strong>
+          <?php
+          echo indo_date(date('Y-m-d'), TRUE, TRUE);
+          echo " — ";
+          echo date('H:i:s');
+          ?>
+          </strong>
+        </a>
       </li>
     </ul>
     
@@ -461,17 +469,6 @@
       "responsive": true,
     });
   });
-
-  // Begin: Realtime Clock
-  setInterval(
-  function(){
-  $.get("<?=base_url('home/get_date')?>", function(Jam){
-            var xJam = Jam;
-            var x = document.getElementById('realtime');
-                  x.innerHTML = xJam;
-      });
-  },1000);
-  // End: Realtime Clock
 </script>
 
 </body>

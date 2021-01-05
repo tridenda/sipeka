@@ -146,7 +146,6 @@ class Material_model extends CI_Model
     
     if( $query->num_rows() > 0 ) {
       $row = $query->row();
-      var_dump($row->barcode_no);
       $n = ((int) $row->barcode_no) + 1;
       $no = sprintf("%'.04d", $n);
     } else {

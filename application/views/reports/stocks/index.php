@@ -5,7 +5,7 @@
     <div class="container-fluid border-bottom">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Laporan Persediaan <small class="text-muted">(Januari 2021)</small></h1>
+          <h1>Laporan Persediaan <small class="text-muted">(<?php echo indo_date(date('Y-m-d'))?>)</small></h1>
         </div>
         <div class="col-sm-6">
           <!-- <ol class="breadcrumb float-sm-right">
