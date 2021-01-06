@@ -16,6 +16,16 @@ class Salary_model extends CI_Model
     return $query;
   }
 
+  public function get_salary($id = null) 
+  {
+    $this->db->select('salaries.salary_id');
+    $this->db->from('salaries');
+    $this->db->where('user_id', $id);
+    $query = $this->db->get();
+    
+    return $query;
+  }
+
   public function add($post)
   {
     $params['user_id'] = htmlspecialchars($post['user']);

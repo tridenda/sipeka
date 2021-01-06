@@ -121,3 +121,7 @@ $route['gaji/hapus'] = 'salaries/delete';
 // Stock Reports links
 $route['laporan_persediaan'] = 'Stock_reports/index';
 
+// Attendances links
+$route['pengisian_kehadiran'] = 'attendances/index';
+$route['penghasilan'] = 'attendances/income';
+

@@ -121,7 +121,21 @@ class Stock_model extends CI_Model
         return $query;
     }
 
-    public function get_top_year($type, $new_month, $new_year ) {
+    public function top_year_rupiah($type, $new_month, $new_year ) {
+
+        $date = date('Y', strtotime("now"));
+        if( $new_year ) {
+            $date = $new_year;
+        }
+    
+        $sql = "SELECT materials.name, MONTH(DATE) AS month_name, SUM(stocks.price*stocks.quantity) AS total FROM stocks INNER JOIN materials ON stocks.material_id=materials.material_id WHERE type = '$type' AND MID(date,1,4) = '$date' GROUP BY month_name";
+        
+        $query = $this->db->query($sql);
+
+        return $query;
+    }
+
+    public function top_year_kind($type, $new_month, $new_year ) {
 
         $date = date('Y', strtotime("now"));
         if( $new_year ) {

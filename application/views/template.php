@@ -354,6 +354,31 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengisian_kehadiran' || $this->uri->segment(1) == 'penghasilan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengisian_kehadiran' || $this->uri->segment(1) == 'penghasilan' ? 'active' : ''?>">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <p>
+                Kehadiran
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('pengisian_kehadiran')?>" class="nav-link <?= $this->uri->segment(1) == 'pengisian_kehadiran' ? 'menu-open active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Pengisian kehadiran</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('pengisian_kehadiran')?>" class="nav-link <?= $this->uri->segment(1) == 'penghasilan' ? 'menu-open active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Pendapatan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'active' : ''?>">
               <i class="nav-icon fas fa-user-alt"></i>
@@ -375,7 +400,7 @@
               <li class="nav-item">
                 <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Pembayaran Gaji</p>
+                  <p>Gaji Karyawan</p>
                 </a>
               </li>
               <?php endif; ?>
@@ -470,6 +495,8 @@
       "responsive": true,
     });
   });
+  // Activate this if wanna use this app
+  // document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 
 </body>

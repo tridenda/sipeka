@@ -151,7 +151,7 @@
               <!-- Bar chart -->
               <div class="box-body">
                 <div class="chart">
-                    <canvas id="myChart1"></canvas>
+                    <canvas id="inChart"></canvas>
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@
               <!-- Bar chart -->
               <div class="box-body">
                 <div class="chart">
-                    <canvas id="myChart2"></canvas>
+                    <canvas id="missingChart"></canvas>
                 </div>
               </div>
             </div>
@@ -179,37 +179,71 @@
           <!-- /.card -->
         </div>
         <!-- /.col-md-6 -->
-        <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Grafik Keluar/Masuk Bahan Perbulan <small>(Hitung Perjenis)</small></h3>
-                </div>
-              </div>
-              <div class="card-body" style="position: relative;">
-                <div class="position-relative mb-4">
-                  <div class="chartjs-size-monitor">
-                    <div class="chartjs-size-monitor-expand">
-                      <div class=""></div>
-                    </div>
-                  <div class="chartjs-size-monitor-shrink">
-                    <div class=""></div>
-                  </div>
-                </div>
-                  <canvas id="stock-in" class="chartjs-render-monitor"></canvas>
-                </div>
-
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> Bahan Masuk
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Bahan Keluar
-                  </span>
-                </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="d-flex justify-content-between">
+                <h3 class="card-title">Grafik Keluar/Masuk Bahan Perbulan <small>(Hitung Perjenis)</small></h3>
               </div>
             </div>
+            <div class="card-body" style="position: relative;">
+              <div class="position-relative mb-4">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand">
+                    <div class=""></div>
+                  </div>
+                <div class="chartjs-size-monitor-shrink">
+                  <div class=""></div>
+                </div>
+              </div>
+                <canvas id="inout_kind" class="chartjs-render-monitor"></canvas>
+              </div>
+
+              <div class="d-flex flex-row justify-content-end">
+                <span class="mr-2">
+                  <i class="fas fa-square text-primary"></i> Bahan Masuk
+                </span>
+
+                <span>
+                  <i class="fas fa-square text-gray"></i> Bahan Keluar
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.col-md-6 -->
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="d-flex justify-content-between">
+                <h3 class="card-title">Grafik Keluar/Masuk Bahan Perbulan <small>(Hitung Rupiah)</small></h3>
+              </div>
+            </div>
+            <div class="card-body" style="position: relative;">
+              <div class="position-relative mb-4">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand">
+                    <div class=""></div>
+                  </div>
+                <div class="chartjs-size-monitor-shrink">
+                  <div class=""></div>
+                </div>
+              </div>
+                <canvas id="inout_rupiah" class="chartjs-render-monitor"></canvas>
+              </div>
+
+              <div class="d-flex flex-row justify-content-end">
+                <span class="mr-2">
+                  <i class="fas fa-square text-primary"></i> Bahan Masuk
+                </span>
+
+                <span>
+                  <i class="fas fa-square text-gray"></i> Bahan Keluar
+                </span>
+              </div>
+            </div>
+          </div>
           <!-- /.col -->
         </div>
       </div>
@@ -222,16 +256,18 @@
 
 <!-- Page script -->
 <script>
-var myChart1 = document.getElementById('myChart1').getContext('2d');
+
+// Begin : Stock-in Chart
+var inChart = document.getElementById('inChart').getContext('2d');
 
 // Global Options
 Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 12;
 Chart.defaults.global.defaultFontColor = '#777';
-var ctx = document.getElementById("myChart1");
+var ctx = document.getElementById("inChart");
 ctx.height = 80;
 
-var massPopChart = new Chart(myChart1, {
+var massPopChart = new Chart(inChart, {
   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
     labels:[
@@ -312,14 +348,16 @@ var massPopChart = new Chart(myChart1, {
     }
   }
 });
+// End : Stock-in Chart
 
-var myChart2 = document.getElementById('myChart2').getContext('2d');
+// Begin : Stock-missing Chart
+var missingChart = document.getElementById('missingChart').getContext('2d');
 
 Chart.defaults.global.defaultFontColor = '#777';
-var ctx = document.getElementById("myChart2");
+var ctx = document.getElementById("missingChart");
 ctx.height = 80;
 
-var massPopChart = new Chart(myChart2, {
+var massPopChart = new Chart(missingChart, {
   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
     
@@ -401,8 +439,9 @@ var massPopChart = new Chart(myChart2, {
     }
   }
 });
+// End : Stock-in Chart
 
-// test
+// Begin : In/out Kind Chart 
 $(function () {
   'use strict'
 
@@ -414,12 +453,12 @@ $(function () {
   var mode      = 'index'
   var intersect = true
 
-  var $visitorsChart = $('#stock-in')
-  var visitorsChart  = new Chart($visitorsChart, {
+  var $inout_charts = $('#inout_kind')
+  var inout_chart  = new Chart($inout_charts, {
     data   : {
       labels  : [
         <?php $no=1 ?>
-        <?php foreach( $this->functions->get_top_year("in", $input_month, $input_year) as $material ) : ?>
+        <?php foreach( $this->functions->get_top_year("in", "kind", $input_month, $input_year) as $material ) : ?>
           <?php 
           if( $material->month_name == '1' ) {
             $month_name = 'Januari';
@@ -459,7 +498,7 @@ $(function () {
         type                : 'line',
         data                : [
           <?php $no=1 ?>
-          <?php foreach( $this->functions->get_top_year("in", $input_month, $input_year) as $material ) : ?>
+          <?php foreach( $this->functions->get_top_year("in", "kind", $input_month, $input_year) as $material ) : ?>
             <?php 
             if( $no != 0 ) {
               echo "'".$material->quantity."'";
@@ -482,7 +521,7 @@ $(function () {
           type                : 'line',
           data                : [
             <?php $no=1 ?>
-            <?php foreach( $this->functions->get_top_year("out", $input_month, $input_year) as $material ) : ?>
+            <?php foreach( $this->functions->get_top_year("out", "kind", $input_month, $input_year) as $material ) : ?>
               <?php 
               if( $no != 0 ) {
                 echo "'".$material->quantity."'";
@@ -504,9 +543,14 @@ $(function () {
     },
     options: {
       maintainAspectRatio: false,
-      tooltips           : {
-        mode     : mode,
-        intersect: intersect
+      tooltips: {
+        callbacks: {
+            label: function(t, d) {
+              // var xLabel = d.datasets[t.datasetIndex].label;
+              var yLabel = t.yLabel >= 1000 ? t.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Jenis' : t.yLabel + ' Jenis';
+              return yLabel;
+            }
+        }
       },
       hover              : {
         mode     : mode,
@@ -540,4 +584,150 @@ $(function () {
     }
   })
 })
+// End : In/out Kind Chart 
+
+// Begin : In/out Rupiah Chart 
+$(function () {
+  'use strict'
+
+  var ticksStyle = {
+    fontColor: '#495057',
+    fontStyle: 'bold'
+  }
+
+  var mode      = 'index'
+  var intersect = true
+
+  var $inout_charts = $('#inout_rupiah')
+    var inout_chart  = new Chart($inout_charts, {
+    data   : {
+      labels  : [
+        <?php $no=1 ?>
+        <?php foreach( $this->functions->get_top_year("in", "rupiah", $input_month, $input_year) as $material ) : ?>
+          <?php 
+          if( $material->month_name == '1' ) {
+            $month_name = 'Januari';
+          } else if( $material->month_name == '2' ) {
+            $month_name = 'Februari';
+          } else if( $material->month_name == '3' ) {
+            $month_name = 'Maret';
+          } else if( $material->month_name == '4' ) {
+            $month_name = 'April';
+          } else if( $material->month_name == '5' ) {
+            $month_name = 'Mei';
+          } else if( $material->month_name == '6' ) {
+            $month_name = 'Juni';
+          } else if( $material->month_name == '7' ) {
+            $month_name = 'Juli';
+          } else if( $material->month_name == '8' ) {
+            $month_name = 'Agustus';
+          } else if( $material->month_name == '9' ) {
+            $month_name = 'September';
+          } else if( $material->month_name == '10' ) {
+            $month_name = 'Oktober';
+          } else if( $material->month_name == '11' ) {
+            $month_name = 'November';
+          } else if( $material->month_name == '12' ) {
+            $month_name = 'Desember';
+          }
+          if( $no != 0 ) {
+            echo "'".$month_name."'";
+            echo ",";
+          } else {
+            echo "'".$month_name."'";
+          }
+          ?>
+        <?php endforeach; ?>
+      ],
+      datasets: [{
+        type                : 'line',
+        data                : [
+          <?php $no=1 ?>
+          <?php foreach( $this->functions->get_top_year("in", "rupiah", $input_month, $input_year) as $material ) : ?>
+            <?php 
+            if( $no != 0 ) {
+              echo "'".$material->total."'";
+              echo ",";
+            } else {
+              echo "'".$material->total."'";
+            }
+            ?>
+          <?php endforeach; ?>
+        ],
+        backgroundColor     : 'transparent',
+        borderColor         : '#007bff',
+        pointBorderColor    : '#007bff',
+        pointBackgroundColor: '#007bff',
+        fill                : false
+        // pointHoverBackgroundColor: '#007bff',
+        // pointHoverBorderColor    : '#007bff'
+      },
+        {
+          type                : 'line',
+          data                : [
+            <?php $no=1 ?>
+            <?php foreach( $this->functions->get_top_year("out", "rupiah", $input_month, $input_year) as $material ) : ?>
+              <?php 
+              if( $no != 0 ) {
+                echo "'".$material->total."'";
+                echo ",";
+              } else {
+                echo "'".$material->total."'";
+              }
+              ?>
+            <?php endforeach; ?>
+          ],
+          backgroundColor     : 'tansparent',
+          borderColor         : '#ced4da',
+          pointBorderColor    : '#ced4da',
+          pointBackgroundColor: '#ced4da',
+          fill                : false
+          // pointHoverBackgroundColor: '#ced4da',
+          // pointHoverBorderColor    : '#ced4da'
+        }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        callbacks: {
+            label: function(t, d) {
+              // var xLabel = d.datasets[t.datasetIndex].label;
+              var yLabel = t.yLabel >= 1000 ? 'Rp ' + t.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ',00' : 'Rp ' + t.yLabel + ',00';
+              return yLabel;
+            }
+        }
+      },
+      hover              : {
+        mode     : mode,
+        intersect: intersect
+      },
+      legend             : {
+        display: false
+      },
+      scales             : {
+        yAxes: [{
+          // display: false,
+          gridLines: {
+            display      : true,
+            lineWidth    : '4px',
+            color        : 'rgba(0, 0, 0, .2)',
+            zeroLineColor: 'transparent'
+          },
+          ticks    : $.extend({
+            beginAtZero : true,
+            // suggestedMax: 200
+          }, ticksStyle)
+        }],
+        xAxes: [{
+          display  : true,
+          gridLines: {
+            display: false
+          },
+          ticks    : ticksStyle
+        }]
+      }
+    }
+  })
+})
+// End : In/out Rupiah Chart 
 </script>

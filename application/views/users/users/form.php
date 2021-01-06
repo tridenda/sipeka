@@ -36,19 +36,19 @@
             <input name="user_id" type="hidden" value="<?=$this->input->post('user_id') ?? $row->user_id?>">
             <div class="form-group">
               <label for="name">Nama *</label>
-              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
+              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>" autocomplete="off" autofocus>
               <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
             </div>
             <div class="form-group">
               <label for="username">Nama pengguna *</label>
-              <input name="username" type="text" class="form-control" id="username" placeholder="Nama pengguna" value="<?=$this->input->post('username') ?? $row->username?>">
+              <input name="username" type="text" class="form-control" id="username" placeholder="Nama pengguna" value="<?=$this->input->post('username') ?? $row->username?>" autocomplete="off">
               <small class="text-red font-italic"><?php echo form_error('username'); ?></small>
             </div>
             <div class="form-group">
               <label for="password">
                 Kata sandi
                 <?=$page == 'edit' ? '<small>(Kosongkan bila tidak ingin diganti)</small>' : '*'?></label>
-              <input name="password" type="password" class="form-control" id="password" placeholder="Kata sandi" value="<?=$this->input->post('passconf') ?? $row->passconf?>">
+              <input name="password" type="password" class="form-control" id="password" placeholder="Kata sandi" value="<?=$this->input->post('passconf') ?? $row->passconf?>" autocomplete="off">
               <small class="text-red font-italic"><?php echo form_error('password'); ?></small>
             </div>
             <div class="form-group">
@@ -56,7 +56,7 @@
                 Konfirmasi kata sandi 
                 <?=$page == 'edit' ? '<small>(Kosongkan bila tidak ingin diganti)</small>' : '*'?></label>
               </label>
-              <input name="passconf" type="password" class="form-control" id="passconf" placeholder="Konfirmasi kata sandi">
+              <input name="passconf" type="password" class="form-control" id="passconf" placeholder="Konfirmasi kata sandi" autocomplete="off">
               <small class="text-red font-italic"><?php echo form_error('passconf'); ?></small>
             </div>
             <div class="form-group">

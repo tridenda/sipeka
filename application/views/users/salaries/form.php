@@ -45,8 +45,8 @@
               <small class="text-red font-italic"><?php echo form_error('user'); ?></small>
             </div>
             <div class="form-group">
-              <label for="salary">Gaji *</label>
-              <input name="salary" type="number" class="form-control" id="salary" placeholder="Isi dengan angka" value="<?=$this->input->post('salary') ?? $row->salary?>">
+              <label for="salary">Gaji *</label> <small class="font-italic">(Isikan gaji perhari kerja)</small>
+              <input name="salary" type="number" class="form-control" id="salary" placeholder="Isi dengan angka" value="<?=$this->input->post('salary') ?? $row->salary?>" autocomplete="off">
               <small class="text-red font-italic"><?php echo form_error('salary'); ?></small>
             </div>
             <div class="form-group">

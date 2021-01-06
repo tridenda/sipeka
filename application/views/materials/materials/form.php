@@ -38,7 +38,7 @@
           </div>
           <div class="form-group">
             <label for="name">Nama *</label>
-            <input name="name" type="text" class="form-control" id="name" placeholder="Nama bahan" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Nama bahan" value="<?=$this->input->post('name') ?? $row->name?>" autocomplete="off" autofocus>
             <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
           </div>
           <div class="form-group">
@@ -54,7 +54,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Rp</span>
                   </div>
-                  <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>">
+                  <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>" autocomplete="off">
                 </div>
                 <small class="text-red font-italic"><?php echo form_error('price'); ?></small>
               </div>
