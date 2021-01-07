@@ -16,6 +16,19 @@ class Attendance_model extends CI_Model
     return $query;
   }
 
+  public function month_salaries($id = null) 
+  {
+    $date = date('Y', strtotime("now"));
+    $sql = "SELECT attendance_id, SUM(salary) AS salary, created, status FROM attendances 
+            WHERE MID(created,1,4) = '$date' AND attendances.user_id = $id AND notes = 'hadir'
+            GROUP BY MONTH(created)
+            ORDER BY MONTH(created) DESC
+            ";
+    $query = $this->db->query($sql);
+
+    return $query;
+  }
+
   public function add($post)
   {
     $params['user_id'] = htmlspecialchars($post['user_id']);

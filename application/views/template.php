@@ -372,7 +372,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('pengisian_kehadiran')?>" class="nav-link <?= $this->uri->segment(1) == 'penghasilan' ? 'menu-open active' : ''?>">
+                <a href="<?=base_url('penghasilan')?>" class="nav-link <?= $this->uri->segment(1) == 'penghasilan' ? 'menu-open active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pendapatan</p>
                 </a>

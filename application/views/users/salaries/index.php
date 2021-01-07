@@ -38,7 +38,8 @@
             <th>Tanggal</th>
             <th>Nama Pramuniaga</th>
             <th>Gaji</th>
-            <th>Keterangan</th>
+            <th>Upah Lembur</th>
+            <th>Jam Kerja Perhari</th>
             <th>Aksi</th>
           </tr>
           </thead>
@@ -47,10 +48,12 @@
           <?php foreach( $row as $salary ) : ?>
           <tr>
             <td><?= $no++ ?></td>
-            <td><?= indo_date($salary->date, TRUE) ?></td>
+            <?php $date = substr($salary->created, -20, 10);?>
+            <td><?= indo_date($date, TRUE, TRUE) ?></td>
             <td><?= ucwords($salary->user_name) ?></td>
             <td><?= indo_currency($salary->salary) ?></td>
-            <td><?= $salary->notes ?></td>
+            <td><?= indo_currency($salary->overtime_rupiah) ?></td>
+            <td><?= $salary->worktime_hour." jam" ?></td>
             <td style="width: 10rem;">
               <form action="<?=base_url('gaji/hapus')?>" method="post">
                 <a class="btn btn-sm btn-outline-primary" href="<?=base_url('gaji/ubah/'.$salary->salary_id)?>">

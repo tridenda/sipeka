@@ -56,7 +56,7 @@ class Users extends CI_Controller {
 				$this->template->load('template', 'users/users/form', $data);
 			} else {
 				// Image configuration before upload
-				$config['upload_path'] = './uploads/users/users/';
+				$config['upload_path'] = './uploads/users/cashier/';
 				$config['allowed_types'] = 'jpg|jpeg|png';
 				$config['max_size'] = 2048;
 				$config['file_name'] = 'user-'.date('ymd').'-'.substr(md5(rand()),0,10);
@@ -73,6 +73,7 @@ class Users extends CI_Controller {
 						);
 						$this->session->set_flashdata('item');
 						$this->User_model->add($post);
+						$this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
 						redirect('pengguna');
 					} else {
 						$error = $this->upload->display_errors();
@@ -129,7 +130,7 @@ class Users extends CI_Controller {
 				$this->template->load('template', 'users/users/form', $data);
 			} else {
 				// Image configuration before upload
-				$config['upload_path'] = './uploads/users/users/';
+				$config['upload_path'] = './uploads/users/cashier/';
 				$config['allowed_types'] = 'jpg|jpeg|png';
 				$config['max_size'] = 2048;
 				$config['file_name'] = 'user-'.date('ymd').'-'.substr(md5(rand()),0,10);
@@ -140,7 +141,7 @@ class Users extends CI_Controller {
 					if( $this->upload->do_upload('image') ) {
 						$user = $this->User_model->get($post['id'])->row();
 						if( $user->image != null  && $user->image != 'login.jpg') {
-							$target_file = './uploads/users/users/'.$user->image;
+							$target_file = './uploads/users/cashier/'.$user->image;
 							unlink($target_file);
 						}
 
@@ -152,6 +153,7 @@ class Users extends CI_Controller {
 						);
 						$this->session->set_flashdata('item');
 						$this->User_model->edit($post);
+						$this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
 						redirect('pengguna');
 					} else {
 						$error = $this->upload->display_errors();
@@ -192,7 +194,7 @@ class Users extends CI_Controller {
 		$id = $this->input->post('user_id');
 		$user = $this->User_model->get($id)->row();
 		if( $user->image != null && $user->image != 'login.jpg') {
-			$target_file = './uploads/users/users/'.$user->image;
+			$target_file = './uploads/users/cashier/'.$user->image;
 			unlink($target_file);
 		}
 		$this->User_model->delete($id);

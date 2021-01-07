@@ -85,11 +85,11 @@
                   <div class="text-center mb-1">
                     <img src="<?=base_url('uploads/users/cashier/'.$image)?>" alt="" style="width: 15rem; height: 15rem">
                   </div>
-                  <input name="image_form" type="hidden" value="<?=$image?>"?>
+                  <input name="image" type="hidden" value="<?=$image?>"?>
               <?php 
                 }
               } ?>
-              <input name="image" class="form-control form-control-lg pb-5" id="image" type="file"">
+              <input name="image" class="form-control form-control-lg pb-5" id="image" type="file">
             </div>
           </div>
           <!-- /.card-body -->

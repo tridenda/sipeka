@@ -31,6 +31,8 @@ class Salaries extends CI_Controller {
 			$salary->salary_id = null;
 			$salary->user_id = null;
 			$salary->salary = null;
+			$salary->overtime_rupiah = null;
+			$salary->worktime_hour = null;
 			$salary->notes = null;
 			$salary->created = null;
 			$salary->updated = null;
@@ -44,8 +46,10 @@ class Salaries extends CI_Controller {
 			$this->template->load('template', 'users/salaries/form', $data);
 		} else if( isset($_POST['add']) ){
 			// Set rules form
-      $this->form_validation->set_rules('user', 'Nama pramuniaga', 'required');
-      $this->form_validation->set_rules('salary', 'Gaji', 'required|numeric');
+      $this->form_validation->set_rules('user', 'Nama tersebut', 'required|is_unique[salaries.user_id]');
+			$this->form_validation->set_rules('salary', 'Gaji', 'required|numeric');
+			$this->form_validation->set_rules('overtime_rupiah', 'Upah lembur', 'required|numeric');
+			$this->form_validation->set_rules('worktime_hour', 'Jam kerja perhari', 'required|numeric');
 
 			// Set condition form, if FALSE process is canceled
 			if ($this->form_validation->run() == FALSE) {
@@ -106,8 +110,10 @@ class Salaries extends CI_Controller {
 			}
 		} else if( isset($_POST['edit']) ){
 			// Set rules form
-      $this->form_validation->set_rules('user', 'Nama pramuniaga', 'required');
-      $this->form_validation->set_rules('salary', 'Gaji', 'required|numeric');
+			$this->form_validation->set_rules('user', 'Nama tersebut', 'required|callback_user_id_check');
+			$this->form_validation->set_rules('salary', 'Gaji', 'required|numeric');
+			$this->form_validation->set_rules('overtime_rupiah', 'Upah lembur', 'required|numeric');
+			$this->form_validation->set_rules('worktime_hour', 'Jam kerja perhari', 'required|numeric');
 
 			// Set condition form, if FALSE process is canceled
 			if ($this->form_validation->run() == FALSE) {
@@ -156,6 +162,18 @@ class Salaries extends CI_Controller {
 
 		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
 		redirect('gaji');
-  }
+	}
+	
+	function user_id_check($str)
+	{
+		$post = $this->input->post(null, TRUE);	
+		$query = $this->db->query("SELECT * FROM salaries WHERE user_id = '$post[user_id]' AND user_id !='$post[user_id]'");
+		if( $query->num_rows() > 0 ) {
+			$this->form_validation->set_message('user_id_check', '{field} sudah terpakai.');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
   
 }

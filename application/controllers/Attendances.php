@@ -29,8 +29,8 @@ class Attendances extends CI_Controller {
 		$this->template->load('template', 'attendances/fill_attendance', $data);
   }
   
-  public function income()
+  public function absence()
 	{
-		$this->template->load('template', 'attendances/income');
+		$this->template->load('template', 'attendances/absence');
 	}
 }

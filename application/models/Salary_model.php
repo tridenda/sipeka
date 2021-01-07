@@ -30,8 +30,8 @@ class Salary_model extends CI_Model
   {
     $params['user_id'] = htmlspecialchars($post['user']);
     $params['salary'] = htmlspecialchars($post['salary']);
-    $params['notes'] = htmlspecialchars($post['notes']);
-    $params['date'] = htmlspecialchars($post['date']);
+    $params['overtime_rupiah'] = htmlspecialchars($post['overtime_rupiah']);
+    $params['worktime_hour'] = htmlspecialchars($post['worktime_hour']);
     $this->db->insert('salaries', $params);
   }
 
@@ -39,8 +39,8 @@ class Salary_model extends CI_Model
   {
     $params['user_id'] = htmlspecialchars($post['user']);
     $params['salary'] = htmlspecialchars($post['salary']);
-    $params['notes'] = htmlspecialchars($post['notes']);
-    $params['date'] = htmlspecialchars($post['date']);
+    $params['overtime_rupiah'] = htmlspecialchars($post['overtime_rupiah']);
+    $params['worktime_hour'] = htmlspecialchars($post['worktime_hour']);
     $params['updated'] = date('Y-m-d H:i:s');
     $this->db->where('salary_id', $post["salary_id"]);
     $this->db->update('salaries', $params); 
