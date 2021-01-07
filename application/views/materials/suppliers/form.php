@@ -32,12 +32,12 @@
             <input name="supplier_id" type="hidden" value="<?=$this->input->post('supplier_id') ?? $row->supplier_id?>">
             <div class="form-group">
               <label for="name">Nama *</label>
-              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
+              <input name="name" type="text" class="form-control" id="name" placeholder="Nama" value="<?=$this->input->post('name') ?? $row->name?>" autocomplete="off" autofocus>
               <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
             </div>
             <div class="form-group">
               <label for="phone">Nomor telepon</label>
-              <input name="phone" type="text" class="form-control" id="phone" placeholder="Contoh: 085177661596" value="<?=$this->input->post('phone') ?? $row->phone?>">
+              <input name="phone" type="text" class="form-control" id="phone" placeholder="Contoh: 085177661596" value="<?=$this->input->post('phone') ?? $row->phone?>" autocomplete="off">
               <small class="text-red font-italic"><?php echo form_error('phone'); ?></small>
             </div>
             <div class="form-group">

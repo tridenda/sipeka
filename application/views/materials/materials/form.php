@@ -38,7 +38,7 @@
           </div>
           <div class="form-group">
             <label for="name">Nama *</label>
-            <input name="name" type="text" class="form-control" id="name" placeholder="Nama bahan" value="<?=$this->input->post('name') ?? $row->name?>" autofocus>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Nama bahan" value="<?=$this->input->post('name') ?? $row->name?>" autocomplete="off" autofocus>
             <small class="text-red font-italic"><?php echo form_error('name'); ?></small>
           </div>
           <div class="form-group">
@@ -48,23 +48,23 @@
           </div>
           <div class="row">
             <div class="col-sm-5">
+              <!-- select -->
+              <div class="form-group">
+                <label for="unit">Satuan *</label>
+                <?php echo form_dropdown('unit', $unit, $selected_unit, ['class' => 'form-control']) ?>
+                <small class="text-red font-italic"><?php echo form_error('unit'); ?></small>
+              </div>
+            </div>
+            <div class="col-sm-5">
               <div class="form-group">
                 <label>Harga *</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Rp</span>
                   </div>
-                  <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>">
+                  <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>" autocomplete="off">
                 </div>
                 <small class="text-red font-italic"><?php echo form_error('price'); ?></small>
-              </div>
-            </div>
-            <div class="col-sm-5">
-              <!-- select -->
-              <div class="form-group">
-                <label for="unit">Satuan *</label>
-                <?php echo form_dropdown('unit', $unit, $selected_unit, ['class' => 'form-control']) ?>
-                <small class="text-red font-italic"><?php echo form_error('unit'); ?></small>
               </div>
             </div>
             <div class="col-sm-2">

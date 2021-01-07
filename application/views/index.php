@@ -19,7 +19,6 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      
       <!-- Begin:  -->
       <div class="row">
         <div class="col-lg-3 col-6">
@@ -114,7 +113,6 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 <!-- Page script -->
 <script>
 var myChart1 = document.getElementById('myChart1').getContext('2d');

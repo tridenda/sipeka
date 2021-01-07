@@ -38,3 +38,13 @@
 </div>
 <?php endif; ?>
 <!-- End: Delete -->
+
+<!-- Begin: Delete -->
+<?php if( $this->session->has_userdata('done') ) : ?>
+<div class="alert alert-warning alert-dismissible m-3">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fas fa-exclamation-triangle"></i> Sudah isi!</h5>
+  <?=$this->session->flashdata('done');?>
+</div>
+<?php endif; ?>
+<!-- End: Delete -->
