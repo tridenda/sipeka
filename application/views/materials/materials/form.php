@@ -48,6 +48,14 @@
           </div>
           <div class="row">
             <div class="col-sm-5">
+              <!-- select -->
+              <div class="form-group">
+                <label for="unit">Satuan *</label>
+                <?php echo form_dropdown('unit', $unit, $selected_unit, ['class' => 'form-control']) ?>
+                <small class="text-red font-italic"><?php echo form_error('unit'); ?></small>
+              </div>
+            </div>
+            <div class="col-sm-5">
               <div class="form-group">
                 <label>Harga *</label>
                 <div class="input-group">
@@ -57,14 +65,6 @@
                   <input name="price" type="text" class="form-control" placeholder="Contoh: 25000" value="<?=$this->input->post('price') ?? $row->price?>" autocomplete="off">
                 </div>
                 <small class="text-red font-italic"><?php echo form_error('price'); ?></small>
-              </div>
-            </div>
-            <div class="col-sm-5">
-              <!-- select -->
-              <div class="form-group">
-                <label for="unit">Satuan *</label>
-                <?php echo form_dropdown('unit', $unit, $selected_unit, ['class' => 'form-control']) ?>
-                <small class="text-red font-italic"><?php echo form_error('unit'); ?></small>
               </div>
             </div>
             <div class="col-sm-2">

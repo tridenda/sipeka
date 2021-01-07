@@ -187,7 +187,7 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?=base_url('uploads/users/cashier/').$this->functions->user_login()->image?>" alt="User Image" class="bg-white rounded-circle">
+          <img src="<?=base_url('uploads/users/cashier/').$this->functions->user_login()->image?>" alt="User Image" class="bg-white rounded-circle" style="width: 2rem; height: 2rem;">
         </div>
         <div class="info">
           <a href="#" class="d-block"><?=ucfirst($this->functions->user_login()->username)?></a>

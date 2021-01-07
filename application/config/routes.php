@@ -116,7 +116,7 @@ $route['pengguna/hapus'] = 'users/delete';
 $route['gaji'] = 'salaries';
 $route['gaji/tambah'] = 'salaries/add';
 $route['gaji/ubah/(:num)'] = 'salaries/edit/$1';
-$route['gaji/hapus'] = 'salaries/delete';
+$route['gaji/hapus/(:num)'] = 'salaries/delete/$1';
 
 // Stock Reports links
 $route['laporan_persediaan'] = 'Stock_reports/index';

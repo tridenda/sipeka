@@ -50,13 +50,24 @@
               <input name="name" type="text" id="name" class="form-control" placeholder="-" disabled="">
             </div>
             <div class="row">
-              <div class="col-sm-8">
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label for="unit_name">Satuan barang</label>
                   <input name="unit_name" id="unit_name" type="text" class="form-control" placeholder="-" disabled="">
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label for="material_price">Harga</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Rp</span>
+                    </div>
+                    <input name="material_price2" type="text" id="material_price2" class="form-control" placeholder="-" disabled>
+                </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
                 <div class="form-group">
                   <label for="initial_qty">Jumlah awal</label>
                   <input name="initial_qty" id="initial_qty" type="number" class="form-control" placeholder="-" disabled="">
@@ -158,6 +169,7 @@ alert(test);
       var unit_name = $(this).data('unit_name');
       var initial_qty = $(this).data('initial_qty');
       var material_price = $(this).data('material_price');
+      var material_price2 = $(this).data('material_price');
       $('#material_id').val(material_id);
       $('#barcode').val(barcode);
       $('#barcode2').val(barcode);
@@ -165,6 +177,7 @@ alert(test);
       $('#unit_name').val(unit_name);
       $('#initial_qty').val(initial_qty);
       $('#material_price').val(material_price);
+      $('#material_price2').val(material_price);
       $('#material-modal').modal('hide');
     })
   })

@@ -29,6 +29,7 @@
             </a>
           </div>
         </div> 
+        <?php $this->view('messages'); ?>
         <!-- /.card-body -->
         <div class="d-flex justify-content-center mb-4">
         <form action="" style="width: 30rem;" method="post" enctype="multipart/form-data">
@@ -41,19 +42,101 @@
               <small class="text-red font-italic"><?php echo form_error('user'); ?></small>
             </div>
             <div class="form-group">
-              <label for="salary">Gaji Pokok *</label>
-              <input name="salary" type="number" class="form-control" id="salary" placeholder="Contoh: 1500000" value="<?=$this->input->post('salary') ?? $row->salary?>" autocomplete="off">
+              <label for="date">Tahun *</label>   
+              <select name="date" class="form-control">
+                <?php
+                  $curyear = date('Y');
+                  $future_year = $curyear + 2;
+                  $range = $curyear - 2;
+                  foreach (range($range, $future_year) as $value) :
+                    // Activate this condition if there's input
+                    // Get the data from flashdata
+                    if( $this->input->post('date') || $row->date ) {
+                      $curyear = $this->input->post('date') ?? $row->date;
+                    }
+                ?>
+                  <option value="<?=$value?>" <?=$value == $curyear ? 'selected' : ''?>><?=$value?></option>
+                <?php
+                  endforeach;
+                ?>
+              </select>
+              <small class="text-red font-italic"><?php echo form_error('date'); ?></small>
+            </div>
+            <div class="form-group">
+              <label>Gaji Pokok Perbulan *</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Rp</span>
+                </div>
+                <input name="salary" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('salary') ?? $row->salary?>" autocomplete="off">
+              </div>
               <small class="text-red font-italic"><?php echo form_error('salary'); ?></small>
             </div>
             <div class="form-group">
-              <label for="overtime_rupiah">Upah Lembur Perjam *</label>
-              <input name="overtime_rupiah" type="number" class="form-control" id="overtime_rupiah" placeholder="Contoh: 10000" value="<?=$this->input->post('overtime_rupiah') ?? $row->overtime_rupiah?>" autocomplete="off">
-              <small class="text-red font-italic"><?php echo form_error('overtime_rupiah'); ?></small>
+              <label>Uang Makan Perbulan</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Rp</span>
+                </div>
+                <input name="meal_allowance" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('meal_allowance') ?? $row->meal_allowance?>" autocomplete="off">
+              </div>
+              <small class="text-red font-italic"><?php echo form_error('meal_allowance'); ?></small>
             </div>
             <div class="form-group">
-              <label for="worktime_hour">Jam Kerja Perhari *</label>
-              <input name="worktime_hour" type="number" class="form-control" id="worktime_hour" placeholder="Contoh: 12" value="<?=$this->input->post('worktime_hour') ?? $row->worktime_hour?>" autocomplete="off">
-              <small class="text-red font-italic"><?php echo form_error('worktime_hour'); ?></small>
+              <label>Uang Transfortasi Perbulan</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Rp</span>
+                </div>
+                <input name="transport_allowance" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('transport_allowance') ?? $row->transport_allowance?>" autocomplete="off">
+              </div>
+              <small class="text-red font-italic"><?php echo form_error('transport_allowance'); ?></small>
+            </div>
+            <div class="form-group">
+              <label>Uang Lainnya Perbulan</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Rp</span>
+                </div>
+                <input name="other_allowance" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('other_allowance') ?? $row->other_allowance?>" autocomplete="off">
+              </div>
+              <small class="text-red font-italic"><?php echo form_error('other_allowance'); ?></small>
+            </div>
+            <div class="form-group">
+              <label>Upah Lembur Perjam *</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Rp</span>
+                </div>
+                <input name="overtime_allowance" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('overtime_allowance') ?? $row->overtime_allowance?>" autocomplete="off">
+              </div>
+              <small class="text-red font-italic"><?php echo form_error('overtime_allowance'); ?></small>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Waktu Kerja Perhari *</label>
+                  <div class="input-group">
+                    <input name="worktime" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('worktime') ?? $row->worktime?>" autocomplete="off">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">jam</span>
+                    </div>
+                  </div>
+                  <small class="text-red font-italic"><?php echo form_error('worktime'); ?></small>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Hak Cuti Pertahun *</label>
+                  <div class="input-group">
+                    <input name="annual_leave" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('annual_leave') ?? $row->annual_leave?>" autocomplete="off">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">hari</span>
+                    </div>
+                  </div>
+                  <small class="text-red font-italic"><?php echo form_error('annual_leave'); ?></small>
+                </div>
+              </div>
             </div>
           </div>
           <!-- /.card-body -->
