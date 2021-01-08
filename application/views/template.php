@@ -354,8 +354,11 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengisian_kehadiran' || $this->uri->segment(1) == 'penghasilan' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengisian_kehadiran' || $this->uri->segment(1) == 'penghasilan' ? 'active' : ''?>">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengisian_kehadiran' || $this->uri->segment(1) == 'pengisian_cuti'
+          || $this->uri->segment(1) == 'pengisian_lembur' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengisian_kehadiran' 
+            || $this->uri->segment(1) == 'pengisian_cuti'
+            || $this->uri->segment(1) == 'pengisian_lembur' ? 'active' : ''?>">
               <i class="nav-icon fas fa-file-signature"></i>
               <p>
                 Kehadiran
@@ -366,15 +369,23 @@
               <li class="nav-item">
                 <a href="<?=base_url('pengisian_kehadiran')?>" class="nav-link <?= $this->uri->segment(1) == 'pengisian_kehadiran' ? 'menu-open active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Pengisian kehadiran</p>
+                  <p>Pengisian Kehadiran</p>
                 </a>
               </li>
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('penghasilan')?>" class="nav-link <?= $this->uri->segment(1) == 'penghasilan' ? 'menu-open active' : ''?>">
+                <a href="<?=base_url('pengisian_cuti')?>" class="nav-link <?= $this->uri->segment(1) == 'pengisian_cuti' ? 'menu-open active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Pendapatan</p>
+                  <p>Pengisian Cuti</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('pengisian_lembur')?>" class="nav-link <?= $this->uri->segment(1) == 'pengisian_lembur' ? 'menu-open active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Pengisian Lembur</p>
                 </a>
               </li>
             </ul>

@@ -1,19 +1,14 @@
 
-
 <div class="content-wrapper" style="min-height: 1416.81px;">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid border-bottom">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Absensi</h1>
+          <h1>Lembur</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('pengguna')?>">Pengguna</a></li>
-            <li class="breadcrumb-item active">Absensi</li>
-          </ol>
+          <?php $this->load->view('attendances/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -24,10 +19,10 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data Absensi</h3>
+          <h3 class="card-title">Data lembur</h3>
           <div class="float-right">
-            <a href="<?=base_url('pengguna/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Pramuniaga
+            <a href="<?=base_url('pengisian_lembur/tambah')?>" class="btn btn-primary">
+              <i class="fa fa-plus"></i> Tambah Lembur
             </a>
           </div>
         </div> <!-- /.card-body -->
@@ -37,24 +32,28 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Bulan</th>
-            <th>Pendapatan</th>
-            <th>Keterangan</th>
+            <th>Tangal</th>
+            <th>Nama</th>
+            <th>Jumlah</th>
+            <th>Status</th>
+            <th>Aksi</th>
           </tr>
           </thead>
           <tbody>
           <?php $no=1 ?>
-          <?php foreach( $row as $salary ) : ?>
+          <?php foreach( $row as $overtime ) : ?>
           <tr>
             <td><?= $no++ ?></td>
-            <td><?= indo_date($salary->created) ?></td>
-            <td><?= indo_currency($salary->salary) ?></td>
-            <?php 
-              if( $salary->status == 'done' ) {
-                $salary->status = "Sudah dibayar";
-              }
-            ?>
-            <td><?= $salary->status == NULL ? 'Belum dibayar' : $salary->status ?></td>
+            <?php $date = substr($overtime->created, -20, 10);?>
+            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($overtime->created, -8, 8) ?></td>
+            <td><?= $overtime->user_name ?></td>
+            <td><?= $overtime->overtime_hour ?> jam</td>
+            <td><?= $overtime->notes ?></td>
+            <td>
+              <a class="btn btn-sm btn-outline-primary" href="http://192.168.1.2/kedaibutin-app/kategori/ubah/1">
+                <i class="far fa-edit"></i> Ubah
+              </a>
+            </td>
           </tr>
           <?php endforeach; ?>
           </tfoot>

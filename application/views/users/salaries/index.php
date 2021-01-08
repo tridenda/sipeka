@@ -78,23 +78,23 @@
               <td><span id="salary"></span></td>
             </tr>
             <tr>
-              <th>Uang Makan Perbulan</th>
+              <th>Uang Makan</th>
               <td><span id="meal_allowance"></span></td>
             </tr>
             <tr>
-              <th>Uang Transformasi Perbulan</th>
+              <th>Uang Transformasi</th>
               <td><span id="transport_allowance"></span></td>
             </tr>
             <tr>
-              <th>Upah Lembur Perjam</th>
+              <th>Upah Lembur</th>
               <td><span id="overtime_allowance"></span></td>
             </tr>
             <tr>
-              <th>Uang Lainnya Perbulan</th>
+              <th>Uang Lainnya</th>
               <td><span id="other_allowance"></span></td>
             </tr>
             <tr>
-              <th>Jam Kerja Perhari</th>
+              <th>Jam Kerja</th>
               <td><span id="worktime"></span></td>
             </tr>
             <tr>
