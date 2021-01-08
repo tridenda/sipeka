@@ -41,7 +41,9 @@ class User_model extends CI_Model
   public function edit($post)
   {
     $params['name'] = htmlspecialchars($post['name']);
-    $params['username'] = htmlspecialchars($post['username']);
+    if( !empty($post["username"]) ) {
+      $params['username'] = htmlspecialchars($post['username']);
+    }
     if( !empty($post["password"]) ) {
       $params['password'] = sha1(htmlspecialchars($post["password"]));
     }

@@ -111,6 +111,7 @@ $route['pengguna'] = 'users';
 $route['pengguna/tambah'] = 'users/add';
 $route['pengguna/ubah/(:num)'] = 'users/edit/$1';
 $route['pengguna/hapus'] = 'users/delete';
+$route['pengguna/pengaturan'] = 'users/settings';
 
 // Salaries links
 $route['gaji'] = 'salaries';
@@ -122,6 +123,8 @@ $route['gaji/hapus/(:num)'] = 'salaries/delete/$1';
 $route['laporan_persediaan'] = 'Stock_reports/index';
 
 // Attendances links
-$route['pengisian_kehadiran'] = 'attendances/index';
-$route['penghasilan'] = 'attendances/income';
+$route['pengisian_kehadiran'] = 'attendances/attendance';
+$route['pengisian_lembur'] = 'attendances/overtime';
+$route['pengisian_lembur/tambah'] = 'attendances/add_overtime';
+$route['pengisian_cuti'] = 'attendances/annual_leave';
 
