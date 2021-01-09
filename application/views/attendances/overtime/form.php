@@ -34,14 +34,18 @@
           <div class="card-body">
             <div class="form-group">
               <label for="user">Nama Karyawan *</label>
-              <?php echo form_dropdown('user', $user, $selected_user, ['class' => 'form-control']) ?>
+              <input name="user" type="hidden" value="<?=$this->input->post('user') ?? $selected_user?>">
+              <input name="user_name" type="hidden" value="<?=$this->input->post('user') ?? $selected_user?>">
+              <input class="form-control" id="user" type="text" placeholder="<?=$this->input->post('user_name') ?? $row->user_name?>" disabled>
               <small class="text-red font-italic"><?php echo form_error('user'); ?></small>
             </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="created">Tanggal *</label>
-                  <input name="created" type="date" class="form-control" id="created" value="<?=date('Y-m-d')?>">
+                  
+                  <input name="created" type="hidden" value="<?=$this->input->post('created') ?? substr($row->created, -19, 10)?>">
+                  <input name="" type="date" class="form-control" id="created" value="<?=$this->input->post('created') ?? substr($row->created, -19, 10)?>" <?= $page == 'edit' ? 'disabled' : ''?>>
                   <small class="text-red font-italic"><?php echo form_error('created'); ?></small>
                 </div>
               </div>
@@ -49,7 +53,7 @@
                 <div class="form-group">
                   <label>Jumlah *</label>
                   <div class="input-group">
-                    <input name="overtime_hour" type="text" class="form-control" placeholder="Isi dengan angka" value="" autocomplete="off">
+                    <input name="overtime_hour" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('overtime_hour') ?? $row->overtime_hour?>" autocomplete="off">
                     <div class="input-group-prepend">
                       <span class="input-group-text">jam</span>
                     </div>
@@ -62,7 +66,7 @@
           <!-- /.card-body -->
 
           <div class="card-footer">
-            <button name="submit" type="submit" class="btn btn-primary float-right ml-2"><i class="fas fa-paper-plane"></i> Simpan</button>
+            <button name="<?=$page?>" type="submit" class="btn btn-primary float-right ml-2"><i class="fas fa-paper-plane"></i> Simpan</button>
             <button type="reset" class="btn btn-secondary float-right ml-2">Reset</button>
           </div>
         </form>

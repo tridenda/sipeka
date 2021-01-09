@@ -3,6 +3,20 @@
 class Attendance_model extends CI_Model 
 {
 
+  public function get($id = null) 
+  {
+    $this->db->select('attendances.*, users.name AS user_name, salaries.salary AS salary');
+    $this->db->from('attendances');
+    $this->db->join('users', 'users.user_id = attendances.user_id');
+    $this->db->join('salaries', 'salaries.salary_id = attendances.salary_id');
+    if( $id != null ) {
+      $this->db->where('attendance_id', $id);
+    }
+    $query = $this->db->get();
+    
+    return $query;
+  }
+  
   public function get_attendance($id = null) 
   {
     $date = date('Y-m', strtotime("now"));
@@ -19,11 +33,11 @@ class Attendance_model extends CI_Model
 
   public function get_overtime($id = null) 
   {
-    $date = date('Y-m', strtotime("now"));
+    $date = date('Y', strtotime("now"));
     $sql = "SELECT attendances.*, users.name AS user_name  
             FROM attendances 
             INNER JOIN users ON attendances.user_id=users.user_id
-            WHERE MID(attendances.created,1,7) = '$date' AND notes = 'lembur'
+            WHERE MID(attendances.created,1,4) = '$date' AND notes = 'lembur'
             ORDER BY attendances.created DESC";
     $query = $this->db->query($sql);
 
@@ -43,21 +57,12 @@ class Attendance_model extends CI_Model
     return $query;
   }
 
-  public function add($post, $salary_id = null)
+  public function add($post)
   {
-    if( isset($post['user']) ) {
-      $params['user_id'] = htmlspecialchars($post['user']);
-    } else {
-      $params['user_id'] = htmlspecialchars($post['user_id']);
-    }
-    if( !isset($salary_id) ) {
-      $params['salary_id'] = htmlspecialchars($post['salary_id']);
-    } else {
-      $params['salary_id'] = htmlspecialchars($salary_id);
-      $params['overtime_hour'] = htmlspecialchars($post['overtime_hour']);
-    }
+    
+    $params['user_id'] = htmlspecialchars($post['user_id']);
+    $params['salary_id'] = htmlspecialchars($post['salary_id']);
     $params['notes'] = htmlspecialchars($post['notes']);
-
     $this->db->insert('attendances', $params);
   }
 

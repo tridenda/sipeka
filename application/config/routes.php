@@ -126,5 +126,6 @@ $route['laporan_persediaan'] = 'Stock_reports/index';
 $route['pengisian_kehadiran'] = 'attendances/attendance';
 $route['pengisian_lembur'] = 'attendances/overtime';
 $route['pengisian_lembur/tambah'] = 'attendances/add_overtime';
+$route['pengisian_lembur/ubah/(:num)'] = 'attendances/edit_overtime/$1';
 $route['pengisian_cuti'] = 'attendances/annual_leave';
 

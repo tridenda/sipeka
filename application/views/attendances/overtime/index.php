@@ -32,7 +32,7 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Tangal</th>
+            <th>Tanggal</th>
             <th>Nama</th>
             <th>Jumlah</th>
             <th>Status</th>
@@ -49,9 +49,12 @@
             <td><?= $overtime->user_name ?></td>
             <td><?= $overtime->overtime_hour ?> jam</td>
             <td><?= $overtime->notes ?></td>
-            <td>
-              <a class="btn btn-sm btn-outline-primary" href="http://192.168.1.2/kedaibutin-app/kategori/ubah/1">
+            <td class="text-center" style="width: 10rem">
+              <a class="btn btn-sm btn-outline-primary" href="<?=base_url('pengisian_lembur/ubah/'.$overtime->attendance_id)?>">
                 <i class="far fa-edit"></i> Ubah
+              </a>
+              <a class="btn btn-sm btn-outline-danger" onclick="return confirm('Menghapus berarti merubah status menjadi hadir, yakin?');" href="<?=base_url('pengisian_lembur/ubah/'.$overtime->attendance_id)?>">
+              <i class="far fa-trash-alt"></i> Hapus
               </a>
             </td>
           </tr>

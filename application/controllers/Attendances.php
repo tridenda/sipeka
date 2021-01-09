@@ -37,6 +37,7 @@ class Attendances extends CI_Controller {
 		$this->template->load('template', 'attendances/overtime/index', $data);
 	}
 
+	
 	public function add_overtime()
 	{
 		$this->functions->only_admin();
@@ -46,14 +47,25 @@ class Attendances extends CI_Controller {
 			$users[$user->user_id] = $user->name;
 		}
 
-		if( !isset($_POST['submit']) ) {
+		$attendance = new stdClass();
+		$attendance->attendance_id = null;
+		$attendance->user_id = null;
+		$attendance->salary_id = null;
+		$attendance->overtime_hour = null;
+		$attendance->hour = null;
+		$attendance->status = null;
+		$attendance->created = date('Y-m-d');
+
+		if( !isset($_POST['add']) ) {
 			$data = array(
+				'page' => 'add',
+				'row' => $attendance,
         'user' => $users,
-				'selected_user' => null,
+				'selected_user' => null
 			);
 
 			$this->template->load('template', 'attendances/overtime/form', $data);
-		} else if( isset($_POST['submit']) ){
+		} else if( isset($_POST['add']) ){
 			// Set rules form
 			$this->form_validation->set_rules('user', 'Nama', 'required');
 			$this->form_validation->set_rules('overtime_hour', 'Jumlah ', 'required|numeric');
@@ -62,6 +74,7 @@ class Attendances extends CI_Controller {
 			if ($this->form_validation->run() == FALSE) {
 				$post = $this->input->post(null, TRUE);	
 				$data = array(
+					'page' => 'add',
           'user' => $users,
 					'selected_user' => $this->input->post('user'),
 					'row' => $post
@@ -71,21 +84,99 @@ class Attendances extends CI_Controller {
 				$post = $this->input->post(null, TRUE);
 				
 				$query = $this->Attendance_model->is_attend($post['user'], $post['created']);
-				
+				$salary_id = $this->Salary_model->get_salary($post['user'])->row()->salary_id;
+				if( !isset($salary_id) ) {
+					$this->session->set_flashdata('empty', 'Tidak ada data gaji dari pegawai tersebut, mohon isi data gaji sebelum mengisi data lembur.');
+
+					redirect('gaji');
+					exit();
+				}
+
 				if( $query->num_rows() > 0 ) {
 					$this->Attendance_model->edit($post);
 
-					$this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
+					$this->session->set_flashdata('success', 'Status kehadiran dirubah menjadi lembur.');
+					redirect('pengisian_lembur');
+				} else {
+					$this->session->set_flashdata('empty', 'Karyawan belum mengisi kehadiran.');
+
 					redirect('pengisian_lembur');
 				}
-				$salary_id = $this->Salary_model->get_salary($post['user'])->row()->salary_id;
-				$this->Attendance_model->add($post, $salary_id);
-				
+			}
+		}
+	}
 
-				if( $this->db->affected_rows() > 0 ) {
-					$this->session->set_flashdata('success', 'Data berhasil disimpan.');
-				}
+	public function edit_overtime($id)
+	{		
+		$query_attendance = $this->Attendance_model->get($id);
+		if( $query_attendance->num_rows() > 0 ) {
+			$attendance = $query_attendance->row();
+			
+			$query_users = $this->User_model->get();
+			$users[''] = '- Pilih - ';
+			foreach( $query_users->result() as $user) {
+				$users[$user->user_id] = $user->name;
+			}
+			
+		} else {
+			$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
+			redirect('pengisian_lembur');
+		}
+
+		if( $this->input->post('user') ) {
+			$attendance->user_id = $this->input->post('user');
+		}
+
+		if( !isset($_POST['edit']) ) {	
+			if( $query_attendance->num_rows() > 0 ) {
+				$data = array(
+					'page' => 'edit',
+					'row' => $attendance,
+					'user' => $users,
+					'selected_user' => $attendance->user_id,
+				);
+				$this->template->load('template', 'attendances/overtime/form', $data);
+			} else {
+				$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
 				redirect('pengisian_lembur');
+			}
+		} else if( isset($_POST['edit']) ){
+			// Set rules form
+			$this->form_validation->set_rules('user', 'Nama', 'required');
+			$this->form_validation->set_rules('overtime_hour', 'Jumlah ', 'required|numeric');
+
+			// Set condition form, if FALSE process is canceled
+			if ($this->form_validation->run() == FALSE) {
+				$post = $this->input->post(null, TRUE);	
+				$data = array(
+					'page' => 'edit',
+					'row' => $attendance,
+					'user' => $users,
+					'selected_user' => $attendance->user_id,
+				);
+				$this->template->load('template', 'attendances/overtime/form', $data);
+			} else {
+				$post = $this->input->post(null, TRUE);
+				
+				$query = $this->Attendance_model->is_attend($post['user'], $post['created']);
+				$salary_id = $this->Salary_model->get_salary($post['user'])->row()->salary_id;
+				if( !isset($salary_id) ) {
+					$this->session->set_flashdata('empty', 'Tidak ada data gaji dari pegawai tersebut, mohon isi data gaji sebelum mengisi data lembur.');
+
+					redirect('gaji');
+					exit();
+				}
+
+				if( $query->num_rows() > 0 ) {
+					$this->Attendance_model->edit($post);
+
+					$this->session->set_flashdata('success', 'Data berhasil dirubah.');
+					redirect('pengisian_lembur');
+				} else {
+					$this->session->set_flashdata('empty', 'Karyawan belum mengisi kehadiran.');
+
+					redirect('pengisian_lembur');
+				}
 			}
 		}
 	}
