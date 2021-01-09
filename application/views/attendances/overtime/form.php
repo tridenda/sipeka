@@ -29,24 +29,37 @@
         <!-- /.card-body -->
         <div class="d-flex justify-content-center mb-4">
         <form action="" style="width: 30rem;" method="post" enctype="multipart/form-data">
+          <div class="card-header">
+          <?php if( $page == 'add' ) : ?>
+            <span>
+              <strong>Catatan:</strong> 
+              Sebelum mengisi data lembur pastikan bahwa karyawan sudah mengisi kehadiran.
+            </span>
+          </div>
+          <?php endif; ?>
           <!-- Input salary_id hidden for edit table -->
           <input name="notes" type="hidden" value="lembur">
           <div class="card-body">
             <div class="form-group">
               <label for="user">Nama Karyawan *</label>
-              <input name="user" type="hidden" value="<?=$this->input->post('user') ?? $selected_user?>">
-              <input name="user_name" type="hidden" value="<?=$this->input->post('user') ?? $selected_user?>">
-              <input class="form-control" id="user" type="text" placeholder="<?=$this->input->post('user_name') ?? $row->user_name?>" disabled>
+              <?php $disabled = $page=='edit' ? 'disabled' : '';?>
+              <?php 
+                if( $disabled == 'disabled' ) {
+              ?>
+                <input name="user" type="hidden" value="<?=$this->input->post('user_id') ?? $row->user_id?>">
+                <input name="date" type="hidden" class="form-control" id="date" value="<?=$this->input->post('date') ?? substr($row->date, -19, 10)?>" >
+              <?php                  
+                }
+              ?>
+              <?php echo form_dropdown('user', $user, $selected_user, ['class' => 'form-control', $disabled => ''])?>
               <small class="text-red font-italic"><?php echo form_error('user'); ?></small>
             </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="created">Tanggal *</label>
-                  
-                  <input name="created" type="hidden" value="<?=$this->input->post('created') ?? substr($row->created, -19, 10)?>">
-                  <input name="" type="date" class="form-control" id="created" value="<?=$this->input->post('created') ?? substr($row->created, -19, 10)?>" <?= $page == 'edit' ? 'disabled' : ''?>>
-                  <small class="text-red font-italic"><?php echo form_error('created'); ?></small>
+                  <label for="date">Tanggal *</label>
+                  <input name="date" type="date" class="form-control" id="date" value="<?=$this->input->post('date') ?? substr($row->date, -19, 10)?>" <?= $page == 'edit' ? 'disabled' : ''?>>
+                  <small class="text-red font-italic"><?php echo form_error('date'); ?></small>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -64,7 +77,7 @@
             </div>
           </div>
           <!-- /.card-body -->
-
+          
           <div class="card-footer">
             <button name="<?=$page?>" type="submit" class="btn btn-primary float-right ml-2"><i class="fas fa-paper-plane"></i> Simpan</button>
             <button type="reset" class="btn btn-secondary float-right ml-2">Reset</button>

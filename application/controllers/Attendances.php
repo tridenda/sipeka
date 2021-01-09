@@ -11,6 +11,7 @@ class Attendances extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
+	// Begin: Attendance
 	public function attendance()
 	{	
 		$id = $this->session->userdata('userid');	
@@ -21,14 +22,16 @@ class Attendances extends CI_Controller {
 				$this->session->set_flashdata('done', 'Anda sudah mengisi kehadiran.');
 				redirect('pengisian_kehadiran');
 			}
-			$this->Attendance_model->add($post);
+			$this->Attendance_model->add_attendance($post);
 		}
 		$data['row'] = $this->Attendance_model->get_attendance($id)->result();	
 		$data['is_attend'] = $this->Attendance_model->is_attend($id);
 		$data['salary'] = $this->Salary_model->get_salary($id)->row();
 		$this->template->load('template', 'attendances/attendances/index', $data);
-  }
+	}
+	// End: Attendance
 	
+	// Begin: Overtime
 	// Overtime work only by Admin
   public function overtime()
 	{
@@ -50,11 +53,12 @@ class Attendances extends CI_Controller {
 		$attendance = new stdClass();
 		$attendance->attendance_id = null;
 		$attendance->user_id = null;
+		$attendance->user_name = null;
 		$attendance->salary_id = null;
 		$attendance->overtime_hour = null;
 		$attendance->hour = null;
 		$attendance->status = null;
-		$attendance->created = date('Y-m-d');
+		$attendance->date = date('Y-m-d');
 
 		if( !isset($_POST['add']) ) {
 			$data = array(
@@ -83,8 +87,9 @@ class Attendances extends CI_Controller {
 			} else {
 				$post = $this->input->post(null, TRUE);
 				
-				$query = $this->Attendance_model->is_attend($post['user'], $post['created']);
+				$query = $this->Attendance_model->is_attend($post['user'], $post['date']);
 				$salary_id = $this->Salary_model->get_salary($post['user'])->row()->salary_id;
+				
 				if( !isset($salary_id) ) {
 					$this->session->set_flashdata('empty', 'Tidak ada data gaji dari pegawai tersebut, mohon isi data gaji sebelum mengisi data lembur.');
 
@@ -93,14 +98,15 @@ class Attendances extends CI_Controller {
 				}
 
 				if( $query->num_rows() > 0 ) {
-					$this->Attendance_model->edit($post);
+					$this->Attendance_model->edit_overtime($post);
+
+					var_dump($post['user']);
 
 					$this->session->set_flashdata('success', 'Status kehadiran dirubah menjadi lembur.');
 					redirect('pengisian_lembur');
 				} else {
-					$this->session->set_flashdata('empty', 'Karyawan belum mengisi kehadiran.');
-
-					redirect('pengisian_lembur');
+					$this->session->set_flashdata('done', 'Anda sudah mengisi kehadiran.');
+					redirect('pengisian_kehadiran');
 				}
 			}
 		}
@@ -158,7 +164,7 @@ class Attendances extends CI_Controller {
 			} else {
 				$post = $this->input->post(null, TRUE);
 				
-				$query = $this->Attendance_model->is_attend($post['user'], $post['created']);
+				$query = $this->Attendance_model->is_attend($post['user'], $post['date']);
 				$salary_id = $this->Salary_model->get_salary($post['user'])->row()->salary_id;
 				if( !isset($salary_id) ) {
 					$this->session->set_flashdata('empty', 'Tidak ada data gaji dari pegawai tersebut, mohon isi data gaji sebelum mengisi data lembur.');
@@ -168,9 +174,9 @@ class Attendances extends CI_Controller {
 				}
 
 				if( $query->num_rows() > 0 ) {
-					$this->Attendance_model->edit($post);
+					$this->Attendance_model->edit_overtime($post);
 
-					$this->session->set_flashdata('success', 'Data berhasil dirubah.');
+					$this->session->set_flashdata('success', 'Data berhasil diubah.');
 					redirect('pengisian_lembur');
 				} else {
 					$this->session->set_flashdata('empty', 'Karyawan belum mengisi kehadiran.');
@@ -180,6 +186,17 @@ class Attendances extends CI_Controller {
 			}
 		}
 	}
+
+	public function delete_overtime() 
+	{
+		$post = $this->input->post(null, TRUE);
+		$this->Attendance_model->delete_overtime($post);
+
+		$this->session->set_flashdata('deleted', 'Data berhasil dihapus dari data lembur.');
+
+		redirect('pengisian_lembur');
+	}
+	// End: Overtime
 
 	// Annual leave only by Admin
 	public function annual_leave()

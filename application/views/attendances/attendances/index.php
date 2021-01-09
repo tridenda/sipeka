@@ -56,8 +56,8 @@
           <?php foreach( $row as $attendance ) : ?>
           <tr>
             <td><?= $no++ ?></td>
-            <?php $date = substr($attendance->created, -20, 10);?>
-            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($attendance->created, -8, 8) ?></td>
+            <?php $date = substr($attendance->date, -20, 10);?>
+            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($attendance->date, -8, 8) ?></td>
             <td><?= $attendance->notes ?></td>
           </tr>
           <?php endforeach; ?>
