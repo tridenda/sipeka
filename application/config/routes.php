@@ -124,7 +124,16 @@ $route['laporan_persediaan'] = 'Stock_reports/index';
 
 // Attendances links
 $route['pengisian_kehadiran'] = 'attendances/attendance';
+
+// Overtime links
 $route['pengisian_lembur'] = 'attendances/overtime';
 $route['pengisian_lembur/tambah'] = 'attendances/add_overtime';
+$route['pengisian_lembur/ubah/(:num)'] = 'attendances/edit_overtime/$1';
+$route['pengisian_lembur/hapus'] = 'attendances/delete_overtime';
+
+// Annual leave links
 $route['pengisian_cuti'] = 'attendances/annual_leave';
+$route['pengisian_cuti/tambah'] = 'attendances/add_annual_leave';
+$route['pengisian_cuti/ubah/(:num)'] = 'attendances/edit_annual_leave/$1';
+$route['pengisian_cuti/hapus'] = 'attendances/delete_annual_leave';
 

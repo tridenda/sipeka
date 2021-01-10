@@ -19,9 +19,8 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data kehadiran</h3>
-          <div class="float-right">
-                    
+          <h3 class="card-title">Data kehadiran <small>(<?=indo_date(date('Y-m-d'))?></small></h3>
+          <div class="float-right">  
           <form action="" method="post">
             <div class="input-group date" id="timepicker" data-target-input="nearest">
             <input name="user_id" type="hidden" value="<?= $this->session->userdata('userid') ?>">
@@ -56,8 +55,8 @@
           <?php foreach( $row as $attendance ) : ?>
           <tr>
             <td><?= $no++ ?></td>
-            <?php $date = substr($attendance->created, -20, 10);?>
-            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($attendance->created, -8, 8) ?></td>
+            <?php $date = substr($attendance->date, -20, 10);?>
+            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($attendance->date, -8, 8) ?></td>
             <td><?= $attendance->notes ?></td>
           </tr>
           <?php endforeach; ?>

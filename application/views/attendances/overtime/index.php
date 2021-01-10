@@ -19,11 +19,13 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data lembur</h3>
+          <h3 class="card-title">Data lembur <small>(<?=date('Y')?>)</small></h3>
           <div class="float-right">
+          <?php if( $this->functions->user_login()->level == '1') : ?>
             <a href="<?=base_url('pengisian_lembur/tambah')?>" class="btn btn-primary">
               <i class="fa fa-plus"></i> Tambah Lembur
             </a>
+          <?php endif; ?>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
@@ -32,11 +34,13 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Tangal</th>
+            <th>Tanggal</th>
             <th>Nama</th>
             <th>Jumlah</th>
             <th>Status</th>
-            <th>Aksi</th>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <th>Aksi</th>
+            <?php endif; ?>
           </tr>
           </thead>
           <tbody>
@@ -44,20 +48,30 @@
           <?php foreach( $row as $overtime ) : ?>
           <tr>
             <td><?= $no++ ?></td>
-            <?php $date = substr($overtime->created, -20, 10);?>
-            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($overtime->created, -8, 8) ?></td>
+            <?php $date = substr($overtime->date, -20, 10);?>
+            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($overtime->date, -8, 8) ?></td>
             <td><?= $overtime->user_name ?></td>
             <td><?= $overtime->overtime_hour ?> jam</td>
             <td><?= $overtime->notes ?></td>
-            <td>
-              <a class="btn btn-sm btn-outline-primary" href="http://192.168.1.2/kedaibutin-app/kategori/ubah/1">
-                <i class="far fa-edit"></i> Ubah
-              </a>
-            </td>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <td class="text-center" style="width: 10rem">
+                <form action="<?=base_url('pengisian_lembur/hapus')?>" method="post">
+                  <a class="btn btn-sm btn-outline-primary" href="<?=base_url('pengisian_lembur/ubah/'.$overtime->attendance_id)?>">
+                    <i class="far fa-edit"></i> Ubah
+                  </a>
+                  <input name="attendance_id" type="hidden" value="<?=$overtime->attendance_id?>">
+                  <input name="date" type="hidden" value="<?=$overtime->date?>">
+                  <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Menghapus berarti merubah status menjadi hadir, yakin?');">
+                    <i class="far fa-trash-alt"></i> Hapus
+                  </button>
+                </form>
+              </td>
+            <?php endif; ?>
           </tr>
           <?php endforeach; ?>
           </tfoot>
         </table>
+        
         </div><!-- /.card-body -->
       </div>
     </div><!-- /.container-fluid -->
