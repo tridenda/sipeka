@@ -390,8 +390,41 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengguna' || $this->uri->segment(1) == 'gaji' ? 'active' : ''?>">
+          <li class="nav-item has-treeview <?=  $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'gaji' ? 'active' : ''?>">
+              <i class="nav-icon fas fa-hand-holding-usd"></i>
+              <p>
+                Gaji Karyawan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Data Gaji</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Pembayaran Gaji</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Pembarayan Cuti</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengguna' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengguna' ? 'active' : ''?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Pengguna
@@ -404,14 +437,6 @@
                 <a href="<?=base_url('pengguna')?>" class="nav-link <?= $this->uri->segment(1) == 'pengguna'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pramuniaga</p>
-                </a>
-              </li>
-              <?php endif; ?>
-              <?php if( $this->functions->user_login()->level == '1') : ?>
-              <li class="nav-item">
-                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji'  ? 'active' : ''?>">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Gaji Karyawan</p>
                 </a>
               </li>
               <?php endif; ?>

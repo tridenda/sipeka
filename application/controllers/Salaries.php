@@ -7,7 +7,6 @@ class Salaries extends CI_Controller {
 	{
 		parent::__construct();
 		$this->functions->not_login_cashier();
-		$this->functions->only_admin();
 		$this->load->model(['Salary_model', 'User_model']);
 		$this->load->library('form_validation');
 	}
@@ -24,25 +23,45 @@ class Salaries extends CI_Controller {
         $row[] = ucwords($salary->user_name);
 				$row[] = indo_currency($salary->salary);
 				$row[] = $salary->annual_leave." hari";
-        // add html for action
-				$row[] = '
-				<div class="d-flex justify-content-center">
-				<button class="mr-1 btn btn-sm btn-outline-info" id="select" 
-					data-toggle="modal" data-target="#detail-modal"
-					data-date="'.$salary->date.'"
-					data-user_name="'.ucwords($salary->user_name).'"
-					data-salary="'.indo_currency($salary->salary).' / bulan"
-					data-meal_allowance="'.indo_currency($salary->meal_allowance).' / bulan"
-					data-transport_allowance="'.indo_currency($salary->transport_allowance).' / bulan"
-					data-overtime_allowance="'.indo_currency($salary->overtime_allowance).' / jam"
-					data-other_allowance="'.indo_currency($salary->other_allowance).' / bulan"
-					data-worktime="'.$salary->worktime.' jam"
-					data-annual_leave="'.$salary->annual_leave.' hari">
-					<i class="fas fa-info-circle"></i> Rincian
-				</button>
-				<a href="'.base_url('gaji/hapus/').$salary->salary_id.'" onclick="return confirm(\'Anda akan menghapus data persediaan, yakin?\');" class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i> Hapus</a>
-				</div>
-        ';
+				// add html for action
+				if( $this->functions->user_login()->level == '1') {
+					$row[] = '
+					<div class="d-flex justify-content-center">
+					<button class="mr-1 btn btn-sm btn-outline-info" id="select" 
+						data-toggle="modal" data-target="#detail-modal"
+						data-date="'.$salary->date.'"
+						data-user_name="'.ucwords($salary->user_name).'"
+						data-salary="'.indo_currency($salary->salary).' / bulan"
+						data-meal_allowance="'.indo_currency($salary->meal_allowance).' / bulan"
+						data-transport_allowance="'.indo_currency($salary->transport_allowance).' / bulan"
+						data-overtime_allowance="'.indo_currency($salary->overtime_allowance).' / jam"
+						data-other_allowance="'.indo_currency($salary->other_allowance).' / bulan"
+						data-worktime="'.$salary->worktime.' jam"
+						data-annual_leave="'.$salary->annual_leave.' hari">
+						<i class="fas fa-info-circle"></i> Rincian
+					</button>
+					<a href="'.base_url('gaji/hapus/').$salary->salary_id.'" onclick="return confirm(\'Anda akan menghapus data persediaan, yakin?\');" class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i> Hapus</a>
+					</div>
+					';
+				} else {
+					$row[] = '
+					<div class="d-flex justify-content-center">
+					<button class="mr-1 btn btn-sm btn-outline-info" id="select" 
+						data-toggle="modal" data-target="#detail-modal"
+						data-date="'.$salary->date.'"
+						data-user_name="'.ucwords($salary->user_name).'"
+						data-salary="'.indo_currency($salary->salary).' / bulan"
+						data-meal_allowance="'.indo_currency($salary->meal_allowance).' / bulan"
+						data-transport_allowance="'.indo_currency($salary->transport_allowance).' / bulan"
+						data-overtime_allowance="'.indo_currency($salary->overtime_allowance).' / jam"
+						data-other_allowance="'.indo_currency($salary->other_allowance).' / bulan"
+						data-worktime="'.$salary->worktime.' jam"
+						data-annual_leave="'.$salary->annual_leave.' hari">
+						<i class="fas fa-info-circle"></i> Rincian
+					</button>
+					</div>
+					';
+				}
         $data[] = $row;
     }
 		$output = array(
@@ -58,7 +77,7 @@ class Salaries extends CI_Controller {
 	public function index()
 	{
 		$data['row'] = $this->Salary_model->get()->result();
-		$this->template->load('template', 'users/salaries/index', $data);
+		$this->template->load('template', 'salaries/index', $data);
 	}
 	
 	public function add()
@@ -90,7 +109,7 @@ class Salaries extends CI_Controller {
 				'row' => $salary
 			);
 
-			$this->template->load('template', 'users/salaries/form', $data);
+			$this->template->load('template', 'salaries/form', $data);
 		} else if( isset($_POST['add']) ){
 			// Set rules form
 			$this->form_validation->set_rules('date', 'Tahun', 'required|callback_date_check');
@@ -109,7 +128,7 @@ class Salaries extends CI_Controller {
 					'selected_user' => $this->input->post('user'),
 					'row' => $post
 				);
-				$this->template->load('template', 'users/salaries/form', $data);
+				$this->template->load('template', 'salaries/form', $data);
 			} else {
 				$post = $this->input->post(null, TRUE);
         $_SESSION['data'] = array(

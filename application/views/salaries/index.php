@@ -24,9 +24,11 @@
         <div class="card-header">
           <h3 class="card-title">Data gaji</h3>
           <div class="float-right">
-            <a href="<?=base_url('gaji/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Gaji
-            </a>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <a href="<?=base_url('gaji/tambah')?>" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tambah Gaji
+              </a>
+            <?php endif; ?>  
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
@@ -131,11 +133,6 @@
         "type": "POST"
       },
       "columnDefs": [
-        {
-          // 5,7,8,9
-          // "targets": [5,6,8,9,10],
-          // "visible": false
-        },
         {
           "targets": [5],
           "className": 'text-center',

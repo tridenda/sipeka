@@ -42,6 +42,7 @@ class Attendance_model extends CI_Model
   }
   // End: Attendance
 
+  // Begin: Overtime
   public function get_overtime($id = null) 
   {
     $date = date('Y', strtotime("now"));
@@ -93,11 +94,39 @@ class Attendance_model extends CI_Model
             WHERE attendance_id = $attendance_id";
     $query = $this->db->query($sql);
   }
+  // End: Overtime
+
+  // Begin: Annual leave
+  public function get_annual_leave($id = null) 
+  {
+    $date = date('Y', strtotime("now"));
+    $sql = "SELECT attendances.*, users.name AS user_name  
+            FROM attendances 
+            INNER JOIN users ON attendances.user_id=users.user_id
+            WHERE MID(attendances.date,1,4) = '$date' AND notes = 'cuti'
+            ORDER BY attendances.date DESC";
+    $query = $this->db->query($sql);
+
+    return $query;
+  }
+
+  public function edit_annual_leave($post)
+  {
+    $user_id = htmlspecialchars($post['user']);
+    $date = htmlspecialchars($post['date']);
+
+    $updated = date('Y-m-d H:m:s');
+    $sql = "UPDATE attendances
+            SET notes = 'cuti', overtime_hour = 0, updated = '$updated'
+            WHERE user_id = $user_id AND MID(date,1,10) = '$date'";
+    $query = $this->db->query($sql);
+  }
+  // End: Annual leave
 
   public function is_attend($id, $new_date = null) 
   {
     $date = date('Y-m-d', strtotime("now"));
-    if( isset($date) ) {
+    if( isset($new_date) ) {
       $date = $new_date;
     }
 

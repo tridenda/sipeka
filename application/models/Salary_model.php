@@ -4,8 +4,8 @@ class Salary_model extends CI_Model
 {
 
   // Begin: Datatables
-  var $column_order = array(null, 'salaries.date', 'user_name', 'salaries.salary'); //set column field database for datatable orderable
-  var $column_search = array('salaries.date', 'users.name', 'salaries.salary'); //set column field database for datatable searchable
+  var $column_order = array(null, 'salaries.date', 'user_name', 'salaries.salary', 'salaries.annual_leave'); //set column field database for datatable orderable
+  var $column_search = array('salaries.date', 'user_name', 'salaries.salary', 'salaries.annual_leave'); //set column field database for datatable searchable
   var $order = array('salary_id' => 'desc'); // default order 
 
   private function _get_datatables_query() {
@@ -124,5 +124,17 @@ class Salary_model extends CI_Model
   {
     $this->db->where('salary_id', $id);
 		$this->db->delete('salaries');
+  }
+
+  public function update_annual_leave($id)
+  {
+    $updated = date('Y-m-d H:i:s');
+    
+		$sql = "UPDATE salaries
+            SET annual_leave = annual_leave-1, updated = '$updated'
+            WHERE salary_id = '$id'";
+    
+    $this->db->query($sql);
+    
   }
 }

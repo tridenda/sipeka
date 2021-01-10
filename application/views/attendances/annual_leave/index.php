@@ -19,26 +19,13 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data cuti</h3>
+          <h3 class="card-title">Data cuti <small>(<?=date('Y')?>)</small></h3>
           <div class="float-right">
-                    
-          <form action="" method="post">
-            <div class="input-group date" id="timepicker" data-target-input="nearest">
-            <input name="user_id" type="hidden" value="<?= $this->session->userdata('userid') ?>">
-            <input name="salary_id" type="hidden" value="<?=isset($salary->salary_id) == TRUE ? $salary->salary_id : ''?>">
-            <input name="notes" type="hidden" value="hadir">
-            
-            <?php
-              if( !isset($salary->salary_id) ) {
-                echo "<span class=\"text-muted font-italic\">Belum dapat mengisi kehadiran, hubungi Admin untuk mengisikan data gaji.</span>";
-              } else if( $is_attend->num_rows() > 0 ) {
-                echo "<span class=\"text-muted font-italic\">Anda sudah mengisi kehadiran hari ini.</span>";
-              } else {
-                echo "<button name=\"add\" type=\"submit\" class=\"ml-1 btn btn-primary input-group-append\">Isi Kehadiran</button>";
-              }
-            ?>
-            </div>
-          </form>
+          <?php if( $this->functions->user_login()->level == '1') : ?>
+            <a href="<?=base_url('pengisian_cuti/tambah')?>" class="btn btn-primary">
+              <i class="fa fa-plus"></i> Tambah Cuti
+            </a>
+          <?php endif; ?>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
@@ -47,22 +34,42 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Tangal</th>
+            <th>Tanggal</th>
+            <th>Nama</th>
             <th>Status</th>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <th>Aksi</th>
+            <?php endif; ?>
           </tr>
           </thead>
           <tbody>
           <?php $no=1 ?>
-          <?php foreach( $row as $attendance ) : ?>
+          <?php foreach( $row as $overtime ) : ?>
           <tr>
             <td><?= $no++ ?></td>
-            <?php $date = substr($attendance->created, -20, 10);?>
-            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($attendance->created, -8, 8) ?></td>
-            <td><?= $attendance->notes ?></td>
+            <?php $date = substr($overtime->date, -20, 10);?>
+            <td><?= indo_date($date, TRUE, TRUE)." — ".substr($overtime->date, -8, 8) ?></td>
+            <td><?= $overtime->user_name ?></td>
+            <td><?= $overtime->notes ?></td>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <td class="text-center" style="width: 10rem">
+                <form action="<?=base_url('pengisian_cuti/hapus')?>" method="post">
+                  <a class="btn btn-sm btn-outline-primary" href="<?=base_url('pengisian_cuti/ubah/'.$overtime->attendance_id)?>">
+                    <i class="far fa-edit"></i> Ubah
+                  </a>
+                  <input name="attendance_id" type="hidden" value="<?=$overtime->attendance_id?>">
+                  <input name="date" type="hidden" value="<?=$overtime->date?>">
+                  <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Menghapus berarti merubah status menjadi hadir, yakin?');">
+                    <i class="far fa-trash-alt"></i> Hapus
+                  </button>
+                </form>
+              </td>
+            <?php endif; ?>
           </tr>
           <?php endforeach; ?>
           </tfoot>
         </table>
+        
         </div><!-- /.card-body -->
       </div>
     </div><!-- /.container-fluid -->
