@@ -126,7 +126,18 @@ class Salary_model extends CI_Model
 		$this->db->delete('salaries');
   }
 
-  public function update_annual_leave($id)
+  public function add_annual_leave($id)
+  {
+    $updated = date('Y-m-d H:i:s');
+    
+		$sql = "UPDATE salaries
+            SET annual_leave = annual_leave+1, updated = '$updated'
+            WHERE salary_id = '$id'";
+    
+    $this->db->query($sql);
+  }
+
+  public function sub_annual_leave($id)
   {
     $updated = date('Y-m-d H:i:s');
     
@@ -135,6 +146,5 @@ class Salary_model extends CI_Model
             WHERE salary_id = '$id'";
     
     $this->db->query($sql);
-    
   }
 }

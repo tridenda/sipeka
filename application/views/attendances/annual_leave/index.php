@@ -58,6 +58,7 @@
                     <i class="far fa-edit"></i> Ubah
                   </a>
                   <input name="attendance_id" type="hidden" value="<?=$overtime->attendance_id?>">
+                  <input name="salary_id" type="hidden" value="<?= $overtime->salary_id ?>">
                   <input name="date" type="hidden" value="<?=$overtime->date?>">
                   <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Menghapus berarti merubah status menjadi hadir, yakin?');">
                     <i class="far fa-trash-alt"></i> Hapus
@@ -69,7 +70,6 @@
           <?php endforeach; ?>
           </tfoot>
         </table>
-        
         </div><!-- /.card-body -->
       </div>
     </div><!-- /.container-fluid -->

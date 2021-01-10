@@ -252,7 +252,7 @@ class Attendances extends CI_Controller {
 				if( $query->num_rows() > 0 ) {
 					$salary = $this->Salary_model->get($salary_id)->row();
 					if( $salary->annual_leave > 0 ) {
-						$this->Salary_model->update_annual_leave($salary_id);
+						$this->Salary_model->sub_annual_leave($salary_id);
 						$this->Attendance_model->edit_annual_leave($post);
 
 						$this->session->set_flashdata('success', 'Status kehadiran dirubah menjadi cuti.');
@@ -267,6 +267,18 @@ class Attendances extends CI_Controller {
 				}
 			}
 		}
+	}
+
+	public function delete_annual_leave() 
+	{
+		$post = $this->input->post(null, TRUE);
+		
+		$this->Salary_model->add_annual_leave($post['salary_id']);
+		$this->Attendance_model->delete_annual_leave($post);
+
+		$this->session->set_flashdata('deleted', 'Data berhasil dihapus dari data lembur.');
+
+		redirect('pengisian_cuti');
 	}
 	// End: Annual leave
 }

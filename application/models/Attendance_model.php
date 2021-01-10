@@ -121,6 +121,18 @@ class Attendance_model extends CI_Model
             WHERE user_id = $user_id AND MID(date,1,10) = '$date'";
     $query = $this->db->query($sql);
   }
+
+  public function delete_annual_leave($post)
+  {
+    $attendance_id = htmlspecialchars($post['attendance_id']);
+    $notes = 'hadir';
+    $overtime_hour = 0;
+    $updated = date('Y-m-d H:m:s');
+    $sql = "UPDATE attendances
+            SET notes = '$notes', overtime_hour = $overtime_hour, updated = '$updated'
+            WHERE attendance_id = $attendance_id";
+    $query = $this->db->query($sql);
+  }
   // End: Annual leave
 
   public function is_attend($id, $new_date = null) 
