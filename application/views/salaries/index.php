@@ -103,6 +103,10 @@
               <th>Hak Cuti</th>
               <td><span id="annual_leave"></span></td>
             </tr>
+            <tr>
+              <th>Uang Cuti</th>
+              <td><span id="annual_leave_allowance"></span></td>
+            </tr>
           </thead>
           <tbody>
             <table>
@@ -155,6 +159,7 @@
       var overtime_allowance = $(this).data('overtime_allowance');
       var worktime = $(this).data('worktime');
       var annual_leave = $(this).data('annual_leave');
+      var annual_leave_allowance = $(this).data('annual_leave_allowance');
       $('#date').text(date);
       $('#user_name').text(user_name);
       $('#salary').text(salary);
@@ -165,6 +170,7 @@
       $('#overtime_allowance').text(overtime_allowance);
       $('#worktime').text(worktime);
       $('#annual_leave').text(annual_leave);
+      $('#annual_leave_allowance').text(annual_leave_allowance);
       $('#material-modal').modal('hide');
     })
   })

@@ -38,12 +38,13 @@
           <div class="card-body">
             <div class="form-group">
               <label for="user">Nama Karyawan</label>
-              <?php echo form_dropdown('user', $user, $selected_user, ['class' => 'form-control']) ?>
+              <?php $disabled = $page=='edit' ? 'disabled' : '';?>
+              <?php echo form_dropdown('user', $user, $selected_user, ['class' => 'form-control', $disabled => ''])?>
               <small class="text-red font-italic"><?php echo form_error('user'); ?></small>
             </div>
             <div class="form-group">
               <label for="date">Tahun *</label>   
-              <select name="date" class="form-control">
+              <select name="date" class="form-control" <?=$disabled?>>
                 <?php
                   $curyear = date('Y');
                   $future_year = $curyear + 2;
@@ -137,6 +138,16 @@
                   <small class="text-red font-italic"><?php echo form_error('annual_leave'); ?></small>
                 </div>
               </div>
+            </div>
+            <div class="form-group">
+              <label>Uang Cuti Perhari *</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Rp</span>
+                </div>
+                <input name="annual_leave_allowance" type="text" class="form-control" placeholder="Isi dengan angka" value="<?=$this->input->post('annual_leave_allowance') ?? $row->annual_leave_allowance?>" autocomplete="off">
+              </div>
+              <small class="text-red font-italic"><?php echo form_error('annual_leave_allowance'); ?></small>
             </div>
           </div>
           <!-- /.card-body -->

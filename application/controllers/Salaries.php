@@ -37,9 +37,13 @@ class Salaries extends CI_Controller {
 						data-overtime_allowance="'.indo_currency($salary->overtime_allowance).' / jam"
 						data-other_allowance="'.indo_currency($salary->other_allowance).' / bulan"
 						data-worktime="'.$salary->worktime.' jam"
-						data-annual_leave="'.$salary->annual_leave.' hari">
+						data-annual_leave="'.$salary->annual_leave.' hari"
+						data-annual_leave_allowance="'.indo_currency($salary->annual_leave_allowance).' / hari">
 						<i class="fas fa-info-circle"></i> Rincian
 					</button>
+					<a class="btn btn-sm btn-outline-primary mr-1" href="'.base_url('gaji/ubah/').$salary->salary_id.'">
+						<i class="far fa-edit"></i> Ubah
+					</a>
 					<a href="'.base_url('gaji/hapus/').$salary->salary_id.'" onclick="return confirm(\'Anda akan menghapus data persediaan, yakin?\');" class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i> Hapus</a>
 					</div>
 					';
@@ -56,7 +60,7 @@ class Salaries extends CI_Controller {
 						data-overtime_allowance="'.indo_currency($salary->overtime_allowance).' / jam"
 						data-other_allowance="'.indo_currency($salary->other_allowance).' / bulan"
 						data-worktime="'.$salary->worktime.' jam"
-						data-annual_leave="'.$salary->annual_leave.' hari">
+						data-annual_leave="'.$salary->annual_leave.' hari"data-annual_leave_allowance="'.indo_currency($salary->annual_leave_allowance).' / hari">
 						<i class="fas fa-info-circle"></i> Rincian
 					</button>
 					</div>
@@ -100,6 +104,7 @@ class Salaries extends CI_Controller {
 			$salary->worktime = null;
 			$salary->overtime_allowance = null;
 			$salary->annual_leave = null;
+			$salary->annual_leave_allowance = null;
 			$salary->created = null;
 			$salary->updated = null;
 			$data = array(
@@ -118,6 +123,7 @@ class Salaries extends CI_Controller {
 			$this->form_validation->set_rules('overtime_allowance', 'Upah lembur', 'required|numeric');
 			$this->form_validation->set_rules('worktime', 'Waktu kerja', 'required|numeric');
 			$this->form_validation->set_rules('annual_leave', 'Hak cuti', 'required|numeric');
+			$this->form_validation->set_rules('annual_leave_allowance', 'Uang cuti', 'required|numeric');
 
 			// Set condition form, if FALSE process is canceled
 			if ($this->form_validation->run() == FALSE) {
@@ -133,6 +139,60 @@ class Salaries extends CI_Controller {
 				$post = $this->input->post(null, TRUE);
         $_SESSION['data'] = array(
           'page' => 'add',
+          'row' => $post
+				);
+        $this->session->set_flashdata('item');
+        redirect('salaries/process');
+			}
+		}
+	}
+
+	public function edit($id)
+	{	
+		$query_salary = $this->Salary_model->get($id);
+		if( $query_salary->num_rows() > 0 ) {
+			$salary = $query_salary->row();
+			
+			$query_users = $this->User_model->get();
+			$users[''] = '- Pilih - ';
+			foreach( $query_users->result() as $user) {
+				$users[$user->user_id] = $user->name;
+			}			
+		} else {
+			$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
+			redirect('gaji');
+		}	
+
+		if( !isset($_POST['edit']) ) {
+			$data = array(
+				'page' => 'edit',
+				'user' => $users,
+				'selected_user' => $this->input->post('user') ?? $salary->user_id,
+				'row' => $salary
+			);
+			$this->template->load('template', 'salaries/form', $data);
+		} else if( isset($_POST['edit']) ){
+			// Set rules form
+			$this->form_validation->set_rules('salary', 'Gaji pokok', 'required|numeric');
+			$this->form_validation->set_rules('overtime_allowance', 'Upah lembur', 'required|numeric');
+			$this->form_validation->set_rules('worktime', 'Waktu kerja', 'required|numeric');
+			$this->form_validation->set_rules('annual_leave', 'Hak cuti', 'required|numeric');
+			$this->form_validation->set_rules('annual_leave_allowance', 'Uang cuti', 'required|numeric');
+
+			// Set condition form, if FALSE process is canceled
+			if ($this->form_validation->run() == FALSE) {
+				$post = $this->input->post(null, TRUE);	
+				$data = array(
+          'page' => 'edit',
+          'user' => $users,
+					'selected_user' => $this->input->post('user'),
+					'row' => $post
+				);
+				$this->template->load('template', 'salaries/form', $data);
+			} else {
+				$post = $this->input->post(null, TRUE);
+        $_SESSION['data'] = array(
+          'page' => 'edit',
           'row' => $post
 				);
         $this->session->set_flashdata('item');
@@ -160,10 +220,17 @@ class Salaries extends CI_Controller {
 	{
 		$salary = $this->Salary_model->get($id)->row();
 		$this->Salary_model->delete($id);
+		$error = $this->db->error();
 
-		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
-		redirect('gaji');
+		if( $error['code'] == 0 ) {
+			$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
+			redirect('gaji');
+		} else {
+			$this->session->set_flashdata('used', 'Data sedang digunakan digunakan ditabel kehadiran.');
+			redirect('gaji');
+		}		
 	}
+	
 	
 	function date_check($str)
 	{

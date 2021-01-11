@@ -56,7 +56,7 @@ class Salary_model extends CI_Model
   }
   // End: Datatables
 
-  public function get($id = null, $date = null) 
+  public function get($id = null) 
   {
     $this->db->select('salaries.*, users.name as user_name');
     $this->db->from('salaries');
@@ -101,13 +101,12 @@ class Salary_model extends CI_Model
     $params['other_allowance'] = $post['other_allowance'] == '' ? null : htmlspecialchars($post['other_allowance']);
     $params['worktime'] = htmlspecialchars($post['worktime']);
     $params['annual_leave'] = htmlspecialchars($post['annual_leave']);
+    $params['annual_leave_allowance'] = $post['annual_leave_allowance'] == '' ? null : htmlspecialchars($post['annual_leave_allowance']);
     $this->db->insert('salaries', $params);
   }
 
   public function edit($post)
   {
-    $params['date'] = htmlspecialchars($post['date']);
-    $params['user_id'] = htmlspecialchars($post['user']);
     $params['salary'] = htmlspecialchars($post['salary']);
     $params['meal_allowance'] = $post['meal_allowance'] == '' ? null : htmlspecialchars($post['meal_allowance']);
     $params['transport_allowance'] = $post['transport_allowance'] == '' ? null : htmlspecialchars($post['transport_allowance']);
@@ -115,6 +114,7 @@ class Salary_model extends CI_Model
     $params['other_allowance'] = $post['other_allowance'] == '' ? null : htmlspecialchars($post['other_allowance']);
     $params['worktime'] = htmlspecialchars($post['worktime']);
     $params['annual_leave'] = htmlspecialchars($post['annual_leave']);
+    $params['annual_leave_allowance'] = $post['annual_leave_allowance'] == '' ? null : htmlspecialchars($post['annual_leave_allowance']);
     $params['updated'] = date('Y-m-d H:i:s');
     $this->db->where('salary_id', $post["salary_id"]);
     $this->db->update('salaries', $params); 
