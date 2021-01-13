@@ -137,3 +137,9 @@ $route['pengisian_cuti/tambah'] = 'attendances/add_annual_leave';
 $route['pengisian_cuti/ubah/(:num)'] = 'attendances/edit_annual_leave/$1';
 $route['pengisian_cuti/hapus'] = 'attendances/delete_annual_leave';
 
+// Salaries/annual leave payment links
+$route['pembayaran_gaji'] = 'salaries/salary_payment';
+$route['pembayaran_gaji/form'] = 'salaries/salary_payment_form';
+$route['pembayaran_cuti'] = 'salaries/annual_leave_payment';
+$route['pembayaran_cuti/form'] = 'salaries/annual_leave_payment_form';
+

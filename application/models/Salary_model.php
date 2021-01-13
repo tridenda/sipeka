@@ -56,7 +56,7 @@ class Salary_model extends CI_Model
   }
   // End: Datatables
 
-  public function get($id = null, $date = null) 
+  public function get($id = null) 
   {
     $this->db->select('salaries.*, users.name as user_name');
     $this->db->from('salaries');
@@ -80,12 +80,24 @@ class Salary_model extends CI_Model
     return $query->num_rows();
   }
 
-  public function get_salary($id = null) 
+  public function get_salary($id = null, $date = null) 
   {
-    $this->db->select('salaries.salary_id');
-    $this->db->from('salaries');
-    $this->db->where('user_id', $id);
-    $query = $this->db->get();
+
+    if( $id == null && $date == null) {
+      $this->db->from('salaries');
+      $this->db->where('user_id', $id);
+      $query = $this->db->get();
+    } else if( $id != null && $date == null) {
+      $this->db->from('salaries');
+      $this->db->where('user_id', $id);
+      $this->db->where('date', $date);
+      $query = $this->db->get();
+    } else {
+      $date = substr($date, -19, 4);
+      $sql = "SELECT * FROM salaries 
+              WHERE MID(salaries.date,1,4) = '$date' AND user_id = $id";
+      $query = $this->db->query($sql);
+    }   
     
     return $query;
   }
@@ -146,5 +158,24 @@ class Salary_model extends CI_Model
             WHERE salary_id = '$id'";
     
     $this->db->query($sql);
+  }
+
+  public function get_payment() 
+  {
+    $date = date('Y', strtotime("now"));
+    $sql = "SELECT 
+      attendances.date, 
+      users.user_id, 
+      users.name AS user_name, 
+      COUNT(IF(attendances.notes = 'hadir', 1, 0)) AS attendance,
+      COUNT(IF(attendances.notes = 'cuti', 1, 0)) AS annual_leave,
+      SUM(IF(attendances.notes = 'lembur', attendances.overtime_hour, 0)) AS overtime,
+      attendances.status
+      FROM attendances
+      INNER JOIN users ON attendances.user_id=users.user_id 
+      WHERE MID(attendances.date,1,4) = '$date' GROUP BY user_name, MID(attendances.date,1,7) ORDER BY attendances.date DESC";
+    $query = $this->db->query($sql);
+
+    return $query;
   }
 }

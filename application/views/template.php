@@ -390,8 +390,12 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?=  $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'gaji' ? 'active' : ''?>">
+          <li class="nav-item has-treeview <?=  $this->uri->segment(1) == 'gaji'
+          || $this->uri->segment(1) == 'pembayaran_gaji'
+          || $this->uri->segment(1) == 'pembayaran_cuti' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'gaji'
+            || $this->uri->segment(1) == 'pembayaran_gaji'
+            || $this->uri->segment(1) == 'pembayaran_cuti' ? 'active' : ''?>">
               <i class="nav-icon fas fa-hand-holding-usd"></i>
               <p>
                 Gaji Karyawan
@@ -408,7 +412,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+                <a href="<?=base_url('pembayaran_gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'pembayaran_gaji' ? 'menu-open active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pembayaran Gaji</p>
                 </a>
@@ -416,9 +420,9 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('gaji')?>" class="nav-link <?= $this->uri->segment(1) == 'gaji' ? 'menu-open active' : ''?>">
+                <a href="<?=base_url('pembayaran_cuti')?>" class="nav-link <?= $this->uri->segment(1) == 'pembayaran_cuti' ? 'menu-open active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Pembarayan Cuti</p>
+                  <p>Pembayaran Cuti</p>
                 </a>
               </li>
             </ul>
