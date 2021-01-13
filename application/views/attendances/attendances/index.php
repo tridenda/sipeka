@@ -19,7 +19,7 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data kehadiran <small>(<?=indo_date(date('Y-m-d'))?>)</small></h3>
+          <h3 class="card-title">Data kehadiran <small>(<?=indo_date(date('Y-m-d'))?></small></h3>
           <div class="float-right">  
           <form action="" method="post">
             <div class="input-group date" id="timepicker" data-target-input="nearest">
