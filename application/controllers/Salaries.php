@@ -226,12 +226,15 @@ class Salaries extends CI_Controller {
 
 	public function salary_payment_form()
 	{
+		// There's a bug miss algoritm when pay something
+		// In the first input workdaysum will be added
+		// and in the second or else workday is same with the first input
 		$this->functions->only_admin();
 		if( isset($_POST['submit']) ) {
 			$post = $this->input->post(null, TRUE);
 			$this->Salary_model->finish_payment($post);
 			if( isset($post['workdaysum']) ) {
-				$this->Salary_model->update_annual_leave($post);
+				$this->Salary_model->update_workdaysum($post);
 			}
 			
 			$this->session->set_flashdata('success', 'Gaji berhasil terbayar');
@@ -248,8 +251,18 @@ class Salaries extends CI_Controller {
 
 	public function annual_leave_payment_form()
 	{
-		$data['row'] = $this->Salary_model->get()->result();
-		$this->template->load('template', 'salaries/salaries/index', $data);
+		$this->functions->only_admin();
+		if( isset($_POST['submit']) ) {
+			$post = $this->input->post(null, TRUE);
+			$this->Salary_model->update_annual_leave($post);
+						
+			$this->session->set_flashdata('success', 'Cuti berhasil dibayar');
+			redirect('pembayaran_cuti');
+		}
+		$post = $this->input->post(null, TRUE);
+		$data['user_data'] = $this->User_model->get($post['user_id'])->row();
+		$data['row'] = $post;
+		$this->template->load('template', 'salaries/annual_leave_payment/form', $data);
 	}  
 	// End: Payments  
 }

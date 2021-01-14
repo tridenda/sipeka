@@ -36,7 +36,9 @@
             <th>Cuti</th>
             <th>Lembur</th>
             <th>Status</th>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
             <th>Aksi</th>
+            <?php endif; ?>
           </tr>
           </thead>
           <tbody>
@@ -50,20 +52,22 @@
             <td><?=$payment->annual_leave?> hari</td>
             <td><?=$payment->overtime?> jam</td>
             <td><?=$payment->status ? $payment->status : 'Belum dibayar'?></td>
-            <td style="width: 7rem" class="text-center">
-              <button class="mr-1 btn btn-sm btn-<?=$payment->status ? 'secondary' : 'success'?>" id="select" 
-                data-toggle="modal" data-target="#detail-modal"
-                data-modal_date="<?=indo_date($payment->date)?>"
-                data-date="<?=$payment->date?>"
-                data-user_id="<?=$payment->user_id?>"
-                data-user_name="<?=$payment->user_name?>"
-                data-attendance="<?=$payment->attendance?>"
-                data-annual_leave="<?=$payment->annual_leave?>"
-                data-overtime="<?=$payment->overtime?>"
-                data-status="<?=$payment->status?>">
-                <i class="fab fa-telegram-plane"></i> <?=$payment->status ? 'Bayar ulang' : 'Bayar'?>
-              </button>            
-            </td>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <td style="width: 7rem" class="text-center">
+                <button class="mr-1 btn btn-sm btn-<?=$payment->status ? 'secondary' : 'success'?>" id="select" 
+                  data-toggle="modal" data-target="#detail-modal"
+                  data-modal_date="<?=indo_date($payment->date)?>"
+                  data-date="<?=$payment->date?>"
+                  data-user_id="<?=$payment->user_id?>"
+                  data-user_name="<?=$payment->user_name?>"
+                  data-attendance="<?=$payment->attendance?>"
+                  data-annual_leave="<?=$payment->annual_leave?>"
+                  data-overtime="<?=$payment->overtime?>"
+                  data-status="<?=$payment->status?>">
+                  <i class="fab fa-telegram-plane"></i> <?=$payment->status ? 'Bayar ulang' : 'Bayar'?>
+                </button>            
+              </td>
+            <?php endif; ?>
           </tr>
           <?php endforeach; ?>
           </tbody>

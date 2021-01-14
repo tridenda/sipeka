@@ -58,7 +58,7 @@ class Salary_model extends CI_Model
 
   public function get($id = null) 
   {
-    $this->db->select('salaries.*, users.name as user_name');
+    $this->db->select('salaries.*, users.name AS user_name');
     $this->db->from('salaries');
     $this->db->join('users', 'salaries.user_id = users.user_id');
     
@@ -85,12 +85,10 @@ class Salary_model extends CI_Model
 
     if( $id == null && $date == null) {
       $this->db->from('salaries');
-      $this->db->where('user_id', $id);
       $query = $this->db->get();
     } else if( $id != null && $date == null) {
       $this->db->from('salaries');
       $this->db->where('user_id', $id);
-      $this->db->where('date', $date);
       $query = $this->db->get();
     } else {
       $date = substr($date, -19, 4);
@@ -189,7 +187,7 @@ class Salary_model extends CI_Model
     $query = $this->db->query($sql);
   }
 
-  public function update_annual_leave($post)
+  public function update_workdaysum($post)
   {
     $date = substr($post['date'],-19,4);   
     
@@ -198,6 +196,15 @@ class Salary_model extends CI_Model
     $sql = "UPDATE salaries
             SET workdaysum = workdaysum + $workdaysum
             WHERE user_id = $user_id AND MID(date,1,4)='$date'";
+    $query = $this->db->query($sql);
+  }
+
+  public function update_annual_leave($post)
+  {  
+    $user_id = htmlspecialchars($post['user_id']);
+    $sql = "UPDATE salaries
+            SET annual_leave = 0
+            WHERE user_id = $user_id";
     $query = $this->db->query($sql);
   }
 }
