@@ -22,14 +22,7 @@
     <div class="container-fluid">
       <div class="card card-secondary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Data gaji</h3>
-          <div class="float-right">
-            <?php if( $this->functions->user_login()->level == '1') : ?>
-              <a href="<?=base_url('gaji/tambah')?>" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Tambah Gaji
-              </a>
-            <?php endif; ?>  
-          </div>
+          <h3 class="card-title">Data pembayaran gaji</h3>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
         <div class="card-body">
@@ -43,7 +36,9 @@
             <th>Cuti</th>
             <th>Lembur</th>
             <th>Status</th>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
             <th>Aksi</th>
+            <?php endif; ?>
           </tr>
           </thead>
           <tbody>
@@ -57,29 +52,22 @@
             <td><?=$payment->annual_leave?> hari</td>
             <td><?=$payment->overtime?> jam</td>
             <td><?=$payment->status ? $payment->status : 'Belum dibayar'?></td>
-            <td style="width: 7rem" class="text-center">
-            <?php if( !$payment->status ) {
-            ?>
-              <button class="mr-1 btn btn-sm btn-success" id="select" 
-                data-toggle="modal" data-target="#detail-modal"
-                data-modal_date="<?=indo_date($payment->date)?>"
-                data-date="<?=$payment->date?>"
-                data-user_id="<?=$payment->user_id?>"
-                data-user_name="<?=$payment->user_name?>"
-                data-attendance="<?=$payment->attendance?>"
-                data-annual_leave="<?=$payment->annual_leave?>"
-                data-overtime="<?=$payment->overtime?>">
-                <i class="fab fa-telegram-plane"></i> Bayar
-              </button>
-            <?php
-            } else {
-            ?>
-              <button class="btn btn-secondary">
-                <i class="fas fa-check-double"></i> Terbayar
-              </button>
-            <?php
-            }?>
-            </td>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <td style="width: 7rem" class="text-center">
+                <button class="mr-1 btn btn-sm btn-<?=$payment->status ? 'secondary' : 'success'?>" id="select" 
+                  data-toggle="modal" data-target="#detail-modal"
+                  data-modal_date="<?=indo_date($payment->date)?>"
+                  data-date="<?=$payment->date?>"
+                  data-user_id="<?=$payment->user_id?>"
+                  data-user_name="<?=$payment->user_name?>"
+                  data-attendance="<?=$payment->attendance?>"
+                  data-annual_leave="<?=$payment->annual_leave?>"
+                  data-overtime="<?=$payment->overtime?>"
+                  data-status="<?=$payment->status?>">
+                  <i class="fab fa-telegram-plane"></i> <?=$payment->status ? 'Bayar ulang' : 'Bayar'?>
+                </button>            
+              </td>
+            <?php endif; ?>
           </tr>
           <?php endforeach; ?>
           </tbody>
@@ -121,12 +109,13 @@
               <input name="attendance" id="attendance" type="hidden" value="">
               <input name="annual_leave" id="annual_leave" type="hidden" value="">
               <input name="overtime" id="overtime" type="hidden" value="">
+              <input name="status" id="status" type="hidden" value="">
               <input name="workdaysum" type="text" class="form-control" placeholder="Isi dengan angka" autocomplete="off" value="<?=$this->input->post('workdaysum')?? ''?>">
-              <small class="text-red font-italic"><?php echo form_error('workdaysum'); ?></small>
               <div class="input-group-prepend">
                 <span class="input-group-text">hari</span>
               </div>
             </div>
+            <small class="text-red font-italic"><?php echo form_error('workdaysum'); ?></small>
           </div>
           <div class="card-footer">
             <button name="submit" type="submit" class="btn btn-success float-right ml-2"><i class="fas fa-paper-plane"></i> Lanjut bayar</button>
@@ -226,6 +215,7 @@
       var attendance = $(this).data('attendance');
       var annual_leave = $(this).data('annual_leave');
       var overtime = $(this).data('overtime');
+      var status = $(this).data('status');
       $('#modal_date').text(modal_date);
       $('#date').val(date);
       $('#user_id').val(user_id);
@@ -233,6 +223,7 @@
       $('#attendance').val(attendance);
       $('#annual_leave').val(annual_leave);
       $('#overtime').val(overtime);
+      $('#status').val(status);
       $('#material-modal').modal('hide');
     })
   })
