@@ -190,7 +190,7 @@
           <img src="<?=base_url('uploads/users/cashier/').$this->functions->user_login()->image?>" alt="User Image" class="bg-white rounded-circle" style="width: 2rem; height: 2rem;">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?=ucfirst($this->functions->user_login()->username)?></a>
+          <a href="#" class="d-block"><?=ucfirst($this->functions->user_login()->name)?></a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -472,12 +472,12 @@
           </li>
           <?php endif; ?>
           <p class="border-bottom border-secondary mt-3"></p>
-          <!-- <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="<?=base_url('pengguna/pengaturan')?>" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p class="text">Pengaturan</p>
             </a>
-          </li> -->
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-question-circle"></i>
