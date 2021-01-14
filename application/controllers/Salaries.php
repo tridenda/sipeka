@@ -182,30 +182,43 @@ class Salaries extends CI_Controller {
 	{
 		//Preparing to input status on table attendances and add workday on table users
 		if( isset($_POST['submit']) ) {
-			// get the post date, user_id, user_name, attendance, annual_leave, overtime, and workday
-			$post = $this->input->post(null, TRUE);
-			$salary = $this->Salary_model->get_salary($post['user_id'], $post['date'])->row();
+			$this->form_validation->set_rules('workdaysum', 'Hari kerja', 'required');
 
-			// salary perhour
-			// basic salary / (workdaysum * worktime perday)
-			$salary_perhour = $salary->salary / ($post['workdaysum'] * $salary->worktime);
-			
-			// salary permonth
-			// (attendancee + annual_leave) * workdaysum * worktime perday
-			$salary_permonth = ($post['attendance'] + $post['annual_leave']) * $salary_perhour * $salary->worktime;
+			// Set condition form, if FALSE process is canceled
+			if ($this->form_validation->run() == FALSE) {
 
-			// overtime salary per
-			// overtime * overtime allowance
-			$salary_overtime = $post['overtime'] * $salary->overtime_allowance;
+				// Nothing happend
 
-			$_SESSION['data'] = array(
-				'salary_perhour' => $salary_perhour,
-				'salary_permonth' => $salary_permonth,
-				'salary_overtime' => $salary_overtime,
-				'row' => $post
-			);
-			$this->session->set_flashdata('item');
-			redirect('pembayaran_gaji/form');
+			} else {
+				// get the post date, user_id, user_name, attendance, annual_leave, overtime, and workday
+				$post = $this->input->post(null, TRUE);
+				$initial_salary = $this->Salary_model->get_salary($post['user_id'], $post['date'])->row();
+
+				// get user data
+				$user_data = $this->User_model->get($post['user_id'])->row();
+				// salary perhour
+				// basic salary / (workdaysum * worktime perday)
+				$salary_perhour = $initial_salary->salary / ($post['workdaysum'] * $initial_salary->worktime);
+				
+				// salary permonth
+				// (attendancee + annual_leave) * workdaysum * worktime perday
+				$salary_permonth = ($post['attendance'] + $post['annual_leave']) * $salary_perhour * $initial_salary->worktime;
+
+				// overtime salary per
+				// overtime * overtime allowance
+				$salary_overtime = $post['overtime'] * $initial_salary->overtime_allowance;
+
+				$_SESSION['data'] = array(
+					'salary_perhour' => $salary_perhour,
+					'salary_permonth' => $salary_permonth,
+					'salary_overtime' => $salary_overtime,
+					'initial_salary' => $initial_salary,
+					'user_data' => $user_data,
+					'row' => $post
+				);
+				$this->session->set_flashdata('item');
+				redirect('pembayaran_gaji/form');
+			}
 		}
 		$data['row'] = $this->Salary_model->get_payment()->result();
 		$this->template->load('template', 'salaries/salary_payment/index', $data);
@@ -213,8 +226,18 @@ class Salaries extends CI_Controller {
 
 	public function salary_payment_form()
 	{
-		$data['row'] = $this->Salary_model->get()->result();
-		$this->template->load('template', 'salaries/salaries/index', $data);
+		$this->functions->only_admin();
+		if( isset($_POST['submit']) ) {
+			$post = $this->input->post(null, TRUE);
+			$this->Salary_model->finish_payment($post);
+			if( isset($post['workdaysum']) ) {
+				$this->Salary_model->update_annual_leave($post);
+			}
+			
+			$this->session->set_flashdata('success', 'Gaji berhasil terbayar');
+			redirect('pembayaran_gaji');
+		}
+		$this->template->load('template', 'salaries/salary_payment/form');
 	} 
 	
 	public function annual_leave_payment()

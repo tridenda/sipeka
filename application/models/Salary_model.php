@@ -162,7 +162,6 @@ class Salary_model extends CI_Model
 
   public function get_payment() 
   {
-    $date = date('Y', strtotime("now"));
     $sql = "SELECT 
       attendances.date, 
       users.user_id, 
@@ -173,9 +172,32 @@ class Salary_model extends CI_Model
       attendances.status
       FROM attendances
       INNER JOIN users ON attendances.user_id=users.user_id 
-      WHERE MID(attendances.date,1,4) = '$date' GROUP BY user_name, MID(attendances.date,1,7) ORDER BY attendances.date DESC";
+      GROUP BY user_name, MID(attendances.date,1,7) ORDER BY attendances.date DESC";
     $query = $this->db->query($sql);
 
     return $query;
+  }
+
+  public function finish_payment($post)
+  {
+    $date = substr($post['date'],-19,7);    
+    
+    $user_id = htmlspecialchars($post['user_id']);
+    $sql = "UPDATE attendances
+            SET status = 'terbayar'
+            WHERE user_id = $user_id AND MID(date,1,7)='$date' AND notes in ('hadir', 'lembur', 'cuti')";
+    $query = $this->db->query($sql);
+  }
+
+  public function update_annual_leave($post)
+  {
+    $date = substr($post['date'],-19,4);   
+    
+    $user_id = htmlspecialchars($post['user_id']);
+    $workdaysum = htmlspecialchars($post['workdaysum']);
+    $sql = "UPDATE salaries
+            SET workdaysum = workdaysum + $workdaysum
+            WHERE user_id = $user_id AND MID(date,1,4)='$date'";
+    $query = $this->db->query($sql);
   }
 }
