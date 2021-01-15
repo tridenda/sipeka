@@ -22,6 +22,9 @@
           <h3 class="card-title">Data lembur <small>(<?=date('Y')?>)</small></h3>
           <div class="float-right">
           <?php if( $this->functions->user_login()->level == '1') : ?>
+            <button class="btn btn-secondary">
+              <i class="fas fa-question-circle"></i> Tutorial
+            </button>
             <a href="<?=base_url('pengisian_lembur/tambah')?>" class="btn btn-primary">
               <i class="fa fa-plus"></i> Tambah Lembur
             </a>

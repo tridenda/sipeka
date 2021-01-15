@@ -262,7 +262,7 @@ class Attendances extends CI_Controller {
 						redirect('pengisian_cuti');
 					}
 				} else {
-					$this->session->set_flashdata('empty', 'Karaywan belum mengisi kehadiran.');
+					$this->session->set_flashdata('empty', 'Karyawan belum mengisi kehadiran.');
 						redirect('pengisian_cuti');
 				}
 			}

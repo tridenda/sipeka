@@ -19,6 +19,103 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="<?=base_url()?>/assets/dist/js/Chart.bundle.min.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/img/icon.ico" />
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+  }
+
+  .row:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  [class*="col-"] {
+    float: left;
+    padding: 15px;
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .col-s-1 {width: 8.33%;}
+    .col-s-2 {width: 16.66%;}
+    .col-s-3 {width: 25%;}
+    .col-s-4 {width: 33.33%;}
+    .col-s-5 {width: 41.66%;}
+    .col-s-6 {width: 50%;}
+    .col-s-7 {width: 58.33%;}
+    .col-s-8 {width: 66.66%;}
+    .col-s-9 {width: 75%;}
+    .col-s-10 {width: 83.33%;}
+    .col-s-11 {width: 91.66%;}
+    .col-s-12 {width: 100%;}
+  }
+
+  @media only screen and (min-width: 768px) {
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+  }
+
+  html {
+    font-family: "Lucida Sans", sans-serif;
+  }
+
+  .header {
+    background-color: #9933cc;
+    color: #ffffff;
+    padding: 15px;
+  }
+
+  .menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    background-color: #33b5e5;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+
+  .menu li:hover {
+    background-color: #0099cc;
+  }
+
+  .aside {
+    background-color: #33b5e5;
+    padding: 15px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+
+  .footer {
+    background-color: #0099cc;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    padding: 15px;
+  }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'sidebar-collapse' : ''?>">
 <!-- Site wrapper -->
@@ -37,7 +134,7 @@
           echo indo_date(date('Y-m-d'), TRUE, TRUE);
           echo " — ";
           echo date('H:i:s');
-          ?>
+          ?> [ F5 ]
           </strong>
         </a>
       </li>
@@ -46,10 +143,10 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Cart Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-shopping-cart"></i>
-          <!-- <span class="badge badge-danger navbar-badge">2</span> -->
+          <span class="badge badge-danger navbar-badge">2</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
@@ -84,12 +181,12 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li>
+      </li> -->
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-bell"></i>
-          <!-- <span class="badge badge-danger navbar-badge">3</span> -->
+          <span class="badge badge-danger navbar-badge">3</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
@@ -130,12 +227,12 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
-      </li>
+      </li> -->
       <!-- History Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-file-signature"></i>
-          <!-- <span class="badge badge-info navbar-badge">15</span> -->
+          <span class="badge badge-info navbar-badge">15</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
@@ -170,17 +267,20 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li>
+      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
+
+  <!-- Aplikasi penjualan, persediaan, kehadiran, dan laporan -->
+  <!-- Apekela -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4 sidebar-dark-info">
     <!-- Brand Logo -->
     <a href="<?=base_url('beranda')?>" class="brand-link elevation-4">
-      <img src="<?=base_url()?>assets/img/icon.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Kedaibutin</span>
+      <img src="<?=base_url()?>assets/img/sipeka.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">S I P E K A</span>
     </a
     <!-- Sidebar -->
     <div class="sidebar">
@@ -427,8 +527,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'pengguna' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pengguna' ? 'active' : ''?>">
+          <li class="nav-item has-treeview <?= $this->uri->segment(2) == 'pramuniaga' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(2) == 'pramuniaga' ? 'active' : ''?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Pengguna
@@ -438,7 +538,7 @@
             <ul class="nav nav-treeview">
               <?php if( $this->functions->user_login()->level == '1') : ?>
               <li class="nav-item">
-                <a href="<?=base_url('pengguna')?>" class="nav-link <?= $this->uri->segment(1) == 'pengguna'  ? 'active' : ''?>">
+                <a href="<?=base_url('pengguna/pramuniaga')?>" class="nav-link <?= $this->uri->segment(2) == 'pramuniaga'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pramuniaga</p>
                 </a>
@@ -473,13 +573,13 @@
           <?php endif; ?>
           <p class="border-bottom border-secondary mt-3"></p>
           <li class="nav-item">
-            <a href="<?=base_url('pengguna/pengaturan')?>" class="nav-link">
+            <a href="<?=base_url('pengguna/pengaturan')?>" class="nav-link <?= $this->uri->segment(2) == 'pengaturan'  ? 'active' : ''?>">
               <i class="nav-icon fas fa-cog"></i>
               <p class="text">Pengaturan</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?=base_url('pengguna/bantuan')?>" class="nav-link <?= $this->uri->segment(2) == 'bantuan'  ? 'active' : ''?>">
               <i class="nav-icon fas fa-question-circle"></i>
               <p>Bantuan</p>
             </a>

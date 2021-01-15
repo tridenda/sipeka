@@ -20,6 +20,9 @@
         <div class="card-header">
           <h3 class="card-title">Data kategori</h3>
           <div class="float-right">
+            <button class="btn btn-secondary">
+              <i class="fas fa-question-circle"></i> Tutorial
+            </button>
             <a href="<?=base_url('kategori/tambah')?>" class="btn btn-primary">
               <i class="fa fa-plus"></i> Tambah Kategori
             </a>

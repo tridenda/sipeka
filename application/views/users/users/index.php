@@ -7,11 +7,7 @@
           <h1>Pramuniaga</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('pengguna')?>">Pengguna</a></li>
-            <li class="breadcrumb-item active">Pramuniaga</li>
-          </ol>
+          <?php $this->load->view('users/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->

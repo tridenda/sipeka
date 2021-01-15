@@ -11,6 +11,9 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
+            <button class="btn btn-secondary mr-2">
+              <i class="fas fa-question-circle"></i> Tutorial
+            </button>
             <form action="" method="post">
               <div class="input-group date" id="timepicker" data-target-input="nearest">
               <select name="month" class="form-control datetimepicker-input" style="width: 10rem">

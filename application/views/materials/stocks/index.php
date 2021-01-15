@@ -20,6 +20,9 @@
           ?>
           </h3>
           <div class="float-right">
+            <button class="btn btn-secondary">
+              <i class="fas fa-question-circle"></i> Tutorial
+            </button>
             <a href="<?php 
                       if( $this->uri->segment(2) == 'masuk' ) {
                         echo base_url('persediaan/masuk/tambah');

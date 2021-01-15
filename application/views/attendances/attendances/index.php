@@ -21,23 +21,23 @@
         <div class="card-header">
           <h3 class="card-title">Data kehadiran <small>(<?=indo_date(date('Y-m-d'))?>)</small></h3>
           <div class="float-right">  
-          <form action="" method="post">
-            <div class="input-group date" id="timepicker" data-target-input="nearest">
-            <input name="user_id" type="hidden" value="<?= $this->session->userdata('userid') ?>">
-            <input name="salary_id" type="hidden" value="<?=isset($salary->salary_id) == TRUE ? $salary->salary_id : ''?>">
-            <input name="notes" type="hidden" value="hadir">
-            
-            <?php
-              if( !isset($salary->salary_id) ) {
-                echo "<span class=\"text-muted font-italic\">Belum dapat mengisi kehadiran, hubungi Admin untuk mengisikan data gaji.</span>";
-              } else if( $is_attend->num_rows() > 0 ) {
-                echo "<span class=\"text-muted font-italic\">Anda sudah mengisi kehadiran hari ini.</span>";
-              } else {
-                echo "<button name=\"add\" type=\"submit\" class=\"ml-1 btn btn-primary input-group-append\">Isi Kehadiran</button>";
-              }
-            ?>
-            </div>
-          </form>
+            <form action="" method="post">
+              <div class="input-group date" id="timepicker" data-target-input="nearest">
+              <input name="user_id" type="hidden" value="<?= $this->session->userdata('userid') ?>">
+              <input name="salary_id" type="hidden" value="<?=isset($salary->salary_id) == TRUE ? $salary->salary_id : ''?>">
+              <input name="notes" type="hidden" value="hadir">
+              
+              <?php
+                if( !isset($salary->salary_id) ) {
+                  echo "<span class=\"text-muted font-italic\">Belum dapat mengisi kehadiran, hubungi Admin untuk mengisikan data gaji.</span>";
+                } else if( $is_attend->num_rows() > 0 ) {
+                  echo "<span class=\"text-muted font-italic\">Anda sudah mengisi kehadiran hari ini.</span>";
+                } else {
+                  echo "<button name=\"add\" type=\"submit\" class=\"ml-1 btn btn-primary input-group-append\">Isi Kehadiran</button>";
+                }
+              ?>
+              </div>
+            </form>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
