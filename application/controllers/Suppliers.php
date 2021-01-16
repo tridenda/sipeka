@@ -13,6 +13,9 @@ class Suppliers extends CI_Controller {
 
   public function index()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Supplier_model->get()->result();
 		$this->template->load('template', 'materials/suppliers/index', $data);
 	}

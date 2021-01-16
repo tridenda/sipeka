@@ -76,6 +76,9 @@ class Salaries extends CI_Controller {
 
 	public function index()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Salary_model->get()->result();
 		$this->template->load('template', 'salaries/salaries/index', $data);
 	}
@@ -220,6 +223,9 @@ class Salaries extends CI_Controller {
 				redirect('pembayaran_gaji/form');
 			}
 		}
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Salary_model->get_payment()->result();
 		$this->template->load('template', 'salaries/salary_payment/index', $data);
 	}  
@@ -245,6 +251,9 @@ class Salaries extends CI_Controller {
 	
 	public function annual_leave_payment()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Salary_model->get()->result();
 		$this->template->load('template', 'salaries/annual_leave_payment/index', $data);
 	}  

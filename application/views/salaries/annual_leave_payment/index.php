@@ -19,6 +19,15 @@
       <div class="card card-secondary card-outline">
         <div class="card-header">
           <h3 class="card-title">Data pembayaran cuti</h3>
+          <div class="float-right">
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <form action="" method="post">
+                <button name="tutorial" type="submit" class="btn btn-secondary">
+                  <i class="fas fa-question-circle"></i> Tutorial
+                </button>
+              </form>
+            <?php endif; ?>  
+          </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
         <div class="card-body">
@@ -48,12 +57,17 @@
             (basic salary * sum of monthday peryear) / sum of workday peryear
             -->
             <?php 
-            $annual_leave_perday = ($payment->salary * 12) / $payment->workdaysum;
-            $sub_total = ($annual_leave_perday * $payment->annual_leave);
+            if( $payment->workdaysum > 0 ) {
+              $annual_leave_perday = ($payment->salary * 12) / $payment->workdaysum;
+              $sub_total = ($annual_leave_perday * $payment->annual_leave);
+            } else {
+              $sub_total = 0;
+            }
+            
             ?>
             <td><?=indo_currency($sub_total)?></td>
             <td><?=$payment->annual_leave == 0 ? 'Terbayar': 'Belum dibayar'?></td>
-            <?php if( $this->functions->user_login()->level == '1') : ?>
+            <?php if( $this->functions->user_login()->level == '1' ) : ?>
               <td style="width: 8rem" class="text-center">
               <form action="<?=base_url('pembayaran_cuti/form')?>" method="post">
                 <input name="user_id" type="hidden" value="<?=$payment->user_id?>">

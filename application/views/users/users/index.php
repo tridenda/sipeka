@@ -20,9 +20,16 @@
         <div class="card-header">
           <h3 class="card-title">Data pramuniaga</h3>
           <div class="float-right">
-            <a href="<?=base_url('pengguna/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Pramuniaga
-            </a>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <form action="" method="post">
+                <button name="tutorial" type="submit" class="btn btn-secondary">
+                  <i class="fas fa-question-circle"></i> Tutorial
+                </button>
+                  <a href="<?=base_url('pengguna/tambah')?>" class="btn btn-primary">
+                  <i class="fa fa-plus"></i> Tambah Pramuniaga
+                </a>
+              </form>
+            <?php endif; ?>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
@@ -36,7 +43,9 @@
             <th>Alamat</th>
             <th>Tingkat</th>
             <th>Gambar</th>
-            <th>Aksi</th>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <th>Aksi</th>
+            <?php endif; ?>
           </tr>
           </thead>
           <tbody>
@@ -53,17 +62,19 @@
               <img src="<?=base_url('uploads/users/cashier/'.$user->image)?>" alt="" style="width: 5rem; height: 5rem">
               <?php endif; ?>
             </td>
-            <td style="width: 10rem;">
-              <form action="<?=base_url('pengguna/hapus')?>" method="post">
-                <a class="btn btn-sm btn-outline-primary" href="<?=base_url('pengguna/ubah/'.$user->user_id)?>">
-                  <i class="far fa-edit"></i> Ubah
-                </a>
-                <input name="user_id" type="hidden" value="<?=$user->user_id?>">
-                <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
-                  <i class="far fa-trash-alt"></i> Hapus
-                </button>
-              </form>
-            </td>
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <td style="width: 10rem;">
+                <form action="<?=base_url('pengguna/hapus')?>" method="post">
+                  <a class="btn btn-sm btn-outline-primary" href="<?=base_url('pengguna/ubah/'.$user->user_id)?>">
+                    <i class="far fa-edit"></i> Ubah
+                  </a>
+                  <input name="user_id" type="hidden" value="<?=$user->user_id?>">
+                  <button onclick="return confirm('Anda akan menghapus data pengguna, yakin?');" class="btn btn-sm btn-outline-danger">
+                    <i class="far fa-trash-alt"></i> Hapus
+                  </button>
+                </form>
+              </td>
+            <?php endif; ?>
           </tr>
           <?php endforeach; ?>
           </tfoot>

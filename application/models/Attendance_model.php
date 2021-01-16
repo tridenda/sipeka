@@ -81,6 +81,8 @@ class Attendance_model extends CI_Model
             SET notes = '$notes', overtime_hour = $overtime_hour, updated = '$updated'
             WHERE user_id = $user_id AND MID(date,1,10) = '$date'";
     $query = $this->db->query($sql);
+    
+    return($this->db->affected_rows());
   }
 
   public function delete_overtime($post)
@@ -110,6 +112,15 @@ class Attendance_model extends CI_Model
     return $query;
   }
 
+  public function add_annual_leave($post, $salary_id)
+  {
+    
+    $params['user_id'] = htmlspecialchars($post['user']);
+    $params['salary_id'] = $salary_id;
+    $params['notes'] = htmlspecialchars($post['notes']);
+    $this->db->insert('attendances', $params);
+  }
+
   public function edit_annual_leave($post)
   {
     $user_id = htmlspecialchars($post['user']);
@@ -125,12 +136,8 @@ class Attendance_model extends CI_Model
   public function delete_annual_leave($post)
   {
     $attendance_id = htmlspecialchars($post['attendance_id']);
-    $notes = 'hadir';
-    $overtime_hour = 0;
     $updated = date('Y-m-d H:m:s');
-    $sql = "UPDATE attendances
-            SET notes = '$notes', overtime_hour = $overtime_hour, updated = '$updated'
-            WHERE attendance_id = $attendance_id";
+    $sql = "DELETE FROM attendances WHERE attendance_id = $attendance_id";
     $query = $this->db->query($sql);
   }
   // End: Annual leave

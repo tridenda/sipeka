@@ -20,12 +20,14 @@
         <div class="card-header">
           <h3 class="card-title">Data bahan</h3>
           <div class="float-right">
-            <button class="btn btn-secondary">
-              <i class="fas fa-question-circle"></i> Tutorial
-            </button>
-            <a href="<?=base_url('daftar_bahan/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Bahan
-            </a>
+            <form action="" method="post">
+              <button name="tutorial" type="submit" class="btn btn-secondary">
+                <i class="fas fa-question-circle"></i> Tutorial
+              </button>
+              <a href="<?=base_url('daftar_bahan/tambah')?>" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tambah Bahan
+              </a>
+            </form>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>

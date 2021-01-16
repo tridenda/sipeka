@@ -19,6 +19,15 @@
       <div class="card card-secondary card-outline">
         <div class="card-header">
           <h3 class="card-title">Data pembayaran gaji</h3>
+          <div class="float-right">
+            <?php if( $this->functions->user_login()->level == '1') : ?>
+              <form action="" method="post">
+                <button name="tutorial" type="submit" class="btn btn-secondary">
+                  <i class="fas fa-question-circle"></i> Tutorial
+                </button>
+              </form>
+            <?php endif; ?>  
+          </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>
         <div class="card-body">

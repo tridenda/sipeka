@@ -13,7 +13,9 @@ class Users extends CI_Controller {
 
 	public function index()
 	{
-		$this->functions->only_admin();
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->User_model->get()->result();
 		$this->template->load('template', 'users/users/index', $data);
 	}
@@ -178,7 +180,6 @@ class Users extends CI_Controller {
 
 	public function process()
 	{
-		
 		$post = $_SESSION['data']['row'];	
 		if( isset($post['add']) ) {
 			$this->User_model->add($post);

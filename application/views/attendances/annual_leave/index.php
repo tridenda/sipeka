@@ -22,12 +22,14 @@
           <h3 class="card-title">Data cuti <small>(<?=date('Y')?>)</small></h3>
           <div class="float-right">
           <?php if( $this->functions->user_login()->level == '1') : ?>
-            <button class="btn btn-secondary">
-              <i class="fas fa-question-circle"></i> Tutorial
-            </button>
-            <a href="<?=base_url('pengisian_cuti/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Cuti
-            </a>
+            <form action="" method="post">
+              <button name="tutorial" type="submit" class="btn btn-secondary">
+                <i class="fas fa-question-circle"></i> Tutorial
+              </button>
+              <a href="<?=base_url('pengisian_cuti/tambah')?>" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tambah Cuti
+              </a>
+            </form>
           <?php endif; ?>
           </div>
         </div> <!-- /.card-body -->
@@ -57,9 +59,6 @@
             <?php if( $this->functions->user_login()->level == '1') : ?>
               <td class="text-center" style="width: 10rem">
                 <form action="<?=base_url('pengisian_cuti/hapus')?>" method="post">
-                  <a class="btn btn-sm btn-outline-primary" href="<?=base_url('pengisian_cuti/ubah/'.$overtime->attendance_id)?>">
-                    <i class="far fa-edit"></i> Ubah
-                  </a>
                   <input name="attendance_id" type="hidden" value="<?=$overtime->attendance_id?>">
                   <input name="salary_id" type="hidden" value="<?= $overtime->salary_id ?>">
                   <input name="date" type="hidden" value="<?=$overtime->date?>">

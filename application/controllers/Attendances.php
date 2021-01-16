@@ -25,6 +25,9 @@ class Attendances extends CI_Controller {
 			$this->Attendance_model->add_attendance($post);
 		}
 
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Attendance_model->get_attendance($id)->result();	
 		$data['is_attend'] = $this->Attendance_model->is_attend($id);
 		$data['salary'] = $this->Salary_model->get_salary($id)->row();
@@ -35,6 +38,9 @@ class Attendances extends CI_Controller {
 	// Begin: Overtime
   public function overtime()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Attendance_model->get_overtime()->result();	
 		$this->template->load('template', 'attendances/overtime/index', $data);
 	}
@@ -192,6 +198,9 @@ class Attendances extends CI_Controller {
 	// Begin: Annual leave
 	public function annual_leave()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Attendance_model->get_annual_leave()->result();	
 		$this->template->load('template', 'attendances/annual_leave/index', $data);
 	}
@@ -249,20 +258,20 @@ class Attendances extends CI_Controller {
 					exit();
 				}
 
-				if( $query->num_rows() > 0 ) {
+				if( $query->num_rows() == 0 ) {
 					$salary = $this->Salary_model->get($salary_id)->row();
 					if( $salary->annual_leave > 0 ) {
 						$this->Salary_model->sub_annual_leave($salary_id);
-						$this->Attendance_model->edit_annual_leave($post);
+						$this->Attendance_model->add_annual_leave($post, $salary_id);
 
-						$this->session->set_flashdata('success', 'Status kehadiran dirubah menjadi cuti.');
+						$this->session->set_flashdata('success', 'Data cuti telah ditambahkan.');
 						redirect('pengisian_cuti');
 					} else {
 						$this->session->set_flashdata('empty', 'Hak cuti telah habis untuk pegawai tersebut.');
 						redirect('pengisian_cuti');
 					}
 				} else {
-					$this->session->set_flashdata('empty', 'Karyawan belum mengisi kehadiran.');
+					$this->session->set_flashdata('empty', 'Karyawan sudah mengisi kehadiran/cuti.');
 						redirect('pengisian_cuti');
 				}
 			}
@@ -276,7 +285,7 @@ class Attendances extends CI_Controller {
 		$this->Salary_model->add_annual_leave($post['salary_id']);
 		$this->Attendance_model->delete_annual_leave($post);
 
-		$this->session->set_flashdata('deleted', 'Data berhasil dihapus dari data lembur.');
+		$this->session->set_flashdata('deleted', 'Data berhasil dihapus dari data cuti.');
 
 		redirect('pengisian_cuti');
 	}

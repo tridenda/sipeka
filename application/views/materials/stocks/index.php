@@ -20,33 +20,35 @@
           ?>
           </h3>
           <div class="float-right">
-            <button class="btn btn-secondary">
-              <i class="fas fa-question-circle"></i> Tutorial
-            </button>
-            <a href="<?php 
-                      if( $this->uri->segment(2) == 'masuk' ) {
-                        echo base_url('persediaan/masuk/tambah');
-                      } else if( $this->uri->segment(2) == 'keluar' ) {
-                        echo base_url('persediaan/keluar/tambah');
-                      } else if( $this->uri->segment(2) == 'hilang' ) {
-                        echo base_url('persediaan/hilang/tambah');
-                      } else if( $this->uri->segment(2) == 'ditemukan' ) {
-                        echo base_url('persediaan/ditemukan/tambah');
-                      }
-                    ?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> 
-              <?php 
-                if( $this->uri->segment(2) == 'masuk' ) {
-                  echo "Tambah Bahan Masuk";
-                } else if( $this->uri->segment(2) == 'keluar' ) {
-                  echo "Tambah Bahan Keluar";
-                } else if( $this->uri->segment(2) == 'hilang' ) {
-                  echo "Tambah Bahan Hilang";
-                } else if( $this->uri->segment(2) == 'ditemukan' ) {
-                  echo "Tambah Bahan Ditemukan";
-                }
-              ?>
-            </a>
+            <form action="" method="post">
+              <button name="tutorial" type="submit" class="btn btn-secondary">
+                <i class="fas fa-question-circle"></i> Tutorial
+              </button>
+              <a href="<?php 
+                        if( $this->uri->segment(2) == 'masuk' ) {
+                          echo base_url('persediaan/masuk/tambah');
+                        } else if( $this->uri->segment(2) == 'keluar' ) {
+                          echo base_url('persediaan/keluar/tambah');
+                        } else if( $this->uri->segment(2) == 'hilang' ) {
+                          echo base_url('persediaan/hilang/tambah');
+                        } else if( $this->uri->segment(2) == 'ditemukan' ) {
+                          echo base_url('persediaan/ditemukan/tambah');
+                        }
+                      ?>" class="btn btn-primary">
+                <i class="fa fa-plus"></i> 
+                <?php 
+                  if( $this->uri->segment(2) == 'masuk' ) {
+                    echo "Tambah Bahan Masuk";
+                  } else if( $this->uri->segment(2) == 'keluar' ) {
+                    echo "Tambah Bahan Keluar";
+                  } else if( $this->uri->segment(2) == 'hilang' ) {
+                    echo "Tambah Bahan Hilang";
+                  } else if( $this->uri->segment(2) == 'ditemukan' ) {
+                    echo "Tambah Bahan Ditemukan";
+                  }
+                ?>
+              </a>
+            </form>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>

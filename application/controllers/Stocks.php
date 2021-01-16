@@ -97,6 +97,9 @@ class Stocks extends CI_Controller {
   
   // Begin: Stock-in methods
   public function stock_in_index() {
+    if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
     // data type for filtering type in, out, missing, and founded
     $data['type'] = 'in';
 		$this->template->load('template', 'materials/stocks/index', $data);
@@ -148,6 +151,9 @@ class Stocks extends CI_Controller {
 
   // Begin: Stock-out methods
   public function stock_out_index() {
+    if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
     // data type for filtering type in, out, missing, and founded
     $data['type'] = 'out';
 		$this->template->load('template', 'materials/stocks/index', $data);
@@ -200,6 +206,9 @@ class Stocks extends CI_Controller {
 
   // Begin: Stock-missing methods
   public function stock_missing_index() {
+    if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
     // data type for filtering type in, out, missing, and founded
     $data['type'] = 'missing';
 		$this->template->load('template', 'materials/stocks/index', $data);
@@ -251,6 +260,9 @@ class Stocks extends CI_Controller {
 
   // Begin: Stock-founded methods
   public function stock_founded_index() {
+    if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
     // data type for filtering type in, out, missing, and founded
     $data['type'] = 'founded';
 		$this->template->load('template', 'materials/stocks/index', $data);

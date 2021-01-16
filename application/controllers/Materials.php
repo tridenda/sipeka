@@ -51,6 +51,9 @@ class Materials extends CI_Controller {
 
 	public function index()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Material_model->get()->result();
 		$this->template->load('template', 'materials/materials/index', $data);
 	}
