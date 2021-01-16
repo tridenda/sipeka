@@ -13,6 +13,9 @@ class Units extends CI_Controller {
 
   public function index()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Unit_model->get()->result();
 		$this->template->load('template', 'materials/units/index', $data);
 	}

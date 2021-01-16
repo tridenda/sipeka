@@ -7,11 +7,7 @@
           <h1>Gaji</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url('pengguna')?>">Pengguna</a></li>
-            <li class="breadcrumb-item active">Gaji</li>
-          </ol>
+          <?php $this->load->view('salaries/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -25,9 +21,14 @@
           <h3 class="card-title">Data gaji</h3>
           <div class="float-right">
             <?php if( $this->functions->user_login()->level == '1') : ?>
-              <a href="<?=base_url('gaji/tambah')?>" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Tambah Gaji
-              </a>
+              <form action="" method="post">
+                <button name="tutorial" type="submit" class="btn btn-secondary">
+                  <i class="fas fa-question-circle"></i> Tutorial
+                </button>
+                <a href="<?=base_url('gaji/tambah')?>" class="btn btn-primary">
+                  <i class="fa fa-plus"></i> Tambah Gaji
+                </a>
+              </form>
             <?php endif; ?>  
           </div>
         </div> <!-- /.card-body -->

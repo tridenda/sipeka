@@ -107,11 +107,12 @@ $route['persediaan/ditemukan/tambah'] = 'stocks/stock_founded_add';
 $route['persediaan/hapus/(:num)/(:num)/(:num)/(:any)'] = 'stocks/delete/$1/$2/$3/$4';
 
 // Users links
-$route['pengguna'] = 'users';
+$route['pengguna/pramuniaga'] = 'users';
 $route['pengguna/tambah'] = 'users/add';
 $route['pengguna/ubah/(:num)'] = 'users/edit/$1';
 $route['pengguna/hapus'] = 'users/delete';
 $route['pengguna/pengaturan'] = 'users/settings';
+$route['pengguna/bantuan'] = 'users/helper';
 
 // Salaries links
 $route['gaji'] = 'salaries';

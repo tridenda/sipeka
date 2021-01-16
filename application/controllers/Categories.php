@@ -13,6 +13,9 @@ class Categories extends CI_Controller {
 
   public function index()
 	{
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
 		$data['row'] = $this->Category_model->get()->result();
 		$this->template->load('template', 'materials/categories/index', $data);
 	}

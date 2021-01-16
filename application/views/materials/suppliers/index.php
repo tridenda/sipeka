@@ -20,9 +20,14 @@
         <div class="card-header">
           <h3 class="card-title">Data pemasok</h3>
           <div class="float-right">
-            <a href="<?=base_url('pemasok/tambah')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Pemasok
-            </a>
+            <form action="" method="post">
+              <button name="tutorial" type="submit" class="btn btn-secondary">
+                <i class="fas fa-question-circle"></i> Tutorial
+              </button>
+              <a href="<?=base_url('pemasok/tambah')?>" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tambah Pemasok
+              </a>
+            </form>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>

@@ -20,9 +20,14 @@
         <div class="card-header">
           <h3 class="card-title">Data satuan</h3>
           <div class="float-right">
-            <a href="<?=base_url('units/add')?>" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Tambah Satuan
-            </a>
+            <form action="" method="post">
+              <button name="tutorial" type="submit" class="btn btn-secondary">
+                <i class="fas fa-question-circle"></i> Tutorial
+              </button>
+              <a href="<?=base_url('units/add')?>" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tambah Satuan
+              </a>
+            </form>
           </div>
         </div> <!-- /.card-body -->
         <?php $this->view('messages'); ?>

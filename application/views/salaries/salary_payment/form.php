@@ -8,11 +8,7 @@
           <h1>Slip Gaji</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="#">Gaji Karyawan</a></li>
-            <li class="breadcrumb-item active">Slip Gaji</li>
-          </ol>
+          <?php $this->load->view('salaries/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->

@@ -7,10 +7,7 @@
           <h1>Pengaturan</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=base_url()?>">Beranda</a></li>
-            <li class="breadcrumb-item active">Pengaturan</li>
-          </ol>
+          <?php $this->load->view('users/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -26,9 +23,9 @@
         <?php $this->view('messages'); ?>
         <!-- /.card-body -->
         <div class="d-flex justify-content-center mb-4">
-        <form action="<?=base_url('pengguna/pengaturan')?>" style="width: 30rem;" method="post" enctype="multipart/form-data">
+        <form action="" style="width: 30rem;" method="post" enctype="multipart/form-data">
           <div class="card-body">
-            <input name="user_id" type="hidden" value="">
+            <input name="user_id" type="hidden" value="<?=$_SESSION['userid']?>">
             <div class="form-group">
               <label for="name">Nama *</label>
               <input name="name" type="text" class="form-control" id="name" value="<?=$this->functions->user_login()->name?>" autocomplete="off" autofocus>
@@ -60,11 +57,11 @@
             <div class="form-group">
               <label for="image" class="form-label">
                 Gambar
-                <small>(Kosongkan bila tidak ingin diubah)</small>
+                <small>(Kosongkan bila tidak <?=$page == 'edit' ? 'ingin diganti' : 'diperlukan'?>)</small>
               </label>
               <?php 
-              if( $page == 'set' ) {
-                $image = $this->input->post('image_form') ? $this->input->post('image_form') : $this->functions->user_login()->image;
+              if( $page == 'edit' ) {
+                $image = $this->input->post('image_form') ? $this->input->post('image_form') : $row->image;
                 if( $image != null ) { ?>
                   <div class="text-center mb-1">
                     <img src="<?=base_url('uploads/users/cashier/'.$image)?>" alt="" style="width: 15rem; height: 15rem">

@@ -40,6 +40,7 @@ class User_model extends CI_Model
 
   public function edit($post)
   {
+    
     $params['name'] = htmlspecialchars($post['name']);
     if( !empty($post["username"]) ) {
       $params['username'] = htmlspecialchars($post['username']);
@@ -48,12 +49,18 @@ class User_model extends CI_Model
       $params['password'] = sha1(htmlspecialchars($post["password"]));
     }
     $params['address'] = htmlspecialchars($post['address']);
-    $params['level'] = htmlspecialchars($post['level']);
+    if( !empty($post["level"]) ) {
+      $params['level'] = htmlspecialchars($post['level']);
+    }
     if( !empty($post["image"]) ) {
       $params['image'] = htmlspecialchars($post['image']);
     }
+    $user_id = $post["user_id"];
+    if( !$post["user_id"] ) {
+      $user_id = $_SESSION['userid'];
+    }
     $params['updated'] = date('Y-m-d H:i:s');
-    $this->db->where('user_id', $post["user_id"]);
+    $this->db->where('user_id', $user_id);
     $this->db->update('users', $params); 
   }
 
