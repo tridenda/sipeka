@@ -1,4 +1,4 @@
-# Sistem Persediaan & Kasir (SIPEKA)
+# Sistem persediaan & kasir (SIPEKA)
 
 ## System requirements
 - Intel core i3 4130
@@ -10,7 +10,7 @@
 - Thermal printer
 - Sound system
 
-## How to create a page shortcut
+## How to create a shortcut page
 1. Open your Chrome
 3. Visit your application
 2. Select the 3 vercital dots (top right of screen)
