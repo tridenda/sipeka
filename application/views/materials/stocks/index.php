@@ -57,15 +57,10 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Nama Barang</th>
-            <th>Jumlah</th>
             <th>Tanggal Masuk</th>
-            <th>Keterangan</th>
-            <th>Pemasok</th>
-            <th>Waktu Pencatatan</th>
-            <th>Nama Pencatat</th>
-            <th>Kodebar</th>
+            <th>Nama Barang</th>
             <th>Satuan</th>
+            <th>Jumlah</th>
             <th>Harga</th>
             <th>Aksi</th>
           </tr>
@@ -177,14 +172,14 @@
       "columnDefs": [
         {
           // 5,7,8,9
-          "targets": [5,6,8,9,10],
-          "visible": false
+          // "targets": [5,6,8,9,10],
+          // "visible": false
         },
         {
-          "targets": [11],
-          "className": 'text-center',
-          "width": '10rem',
-          "orderable": false
+          // "targets": [11],
+          // "className": 'text-center',
+          // "width": '10rem',
+          // "orderable": false
         }
       ]      
     })

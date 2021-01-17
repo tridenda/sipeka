@@ -22,6 +22,7 @@
           <div class="float-right">
             <?php if( $this->functions->user_login()->level == '1') : ?>
               <form action="" method="post">
+                <span class="mr-3 text-right font-italic text-danger font-weight-bold">Pastikan bahwa anda membayaran cuti ditahun baru.</span>
                 <button name="tutorial" type="submit" class="btn btn-secondary">
                   <i class="fas fa-question-circle"></i> Tutorial
                 </button>

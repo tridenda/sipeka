@@ -164,9 +164,9 @@ class Salary_model extends CI_Model
       attendances.date, 
       users.user_id, 
       users.name AS user_name, 
-      COUNT(IF(attendances.notes = 'hadir', 1, 0)) AS attendance,
-      COUNT(IF(attendances.notes = 'cuti', 1, 0)) AS annual_leave,
-      SUM(IF(attendances.notes = 'lembur', attendances.overtime_hour, 0)) AS overtime,
+      COUNT(IF(attendances.notes = 'hadir', 1, null)) AS attendance,
+      COUNT(IF(attendances.notes = 'cuti', 1, null)) AS annual_leave,
+      SUM(IF(attendances.notes = 'lembur', attendances.overtime_hour, null)) AS overtime,
       attendances.status
       FROM attendances
       INNER JOIN users ON attendances.user_id=users.user_id 
