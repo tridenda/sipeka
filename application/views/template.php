@@ -682,7 +682,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Versi</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2020-2021 <a href="https://tridenda.github.io/" target="_blank">Tri Denda</a>.</strong>
+    <strong>Copyright &copy; 2020-2021 <a href="<?=base_url('pengguna/bantuan')?>" target="_blank">Tri Denda</a>.</strong>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -710,7 +710,7 @@
     });
   });
   // Activate this if wanna use this app
-  document.addEventListener('contextmenu', event => event.preventDefault());
+  // document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 
 </body>

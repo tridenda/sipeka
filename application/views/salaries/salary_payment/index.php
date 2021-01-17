@@ -55,7 +55,7 @@
             <td><?=$payment->user_name?></td>
             <td><?=$payment->attendance?> hari</td>
             <td><?=$payment->annual_leave?> hari</td>
-            <td><?=$payment->overtime?> jam</td>
+            <td><?=$payment->overtime ?? '0' ?> jam</td>
             <td><?=$payment->status ? $payment->status : 'Belum dibayar'?></td>
             <?php if( $this->functions->user_login()->level == '1') : ?>
               <td style="width: 7rem" class="text-center">

@@ -15,6 +15,7 @@ class Stock_model extends CI_Model
         $this->db->join('users', 'stocks.user_id = users.user_id', 'left');
         $this->db->join('units', 'materials.unit_id = units.unit_id', 'left');
         $this->db->where('type', $type);
+        $this->db->order_by('stock_id', 'DESC');
         $i = 0;
         foreach ($this->column_search as $stock) { // loop column 
             if(@$_POST['search']['value']) { // if datatable send POST for search

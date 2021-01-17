@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2021 at 04:56 PM
+-- Generation Time: Jan 17, 2021 at 11:26 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.3.22
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_kedaibutin`
+-- Database: `db_sipeka`
 --
 
 -- --------------------------------------------------------
@@ -57,12 +57,14 @@ CREATE TABLE `attendances` (
 --
 
 INSERT INTO `attendances` (`attendance_id`, `user_id`, `salary_id`, `date`, `overtime_hour`, `notes`, `status`, `created`, `updated`) VALUES
-(29, 1, 11, '2021-01-10 09:24:26', 0, 'hadir', NULL, '2021-01-10 09:24:26', '2021-01-10 16:01:47'),
-(30, 1, 11, '2021-01-10 17:05:35', 12, 'lembur', NULL, '2021-01-10 17:05:35', '2021-01-13 13:01:03'),
-(31, 3, 13, '2021-01-10 17:55:08', 0, 'cuti', NULL, '2021-01-10 17:55:08', '2021-01-10 17:01:29'),
-(32, 1, 11, '2021-02-13 09:46:45', 0, 'hadir', 'terbayar', '2021-01-13 09:46:45', NULL),
-(33, 1, 11, '2021-01-13 13:03:08', 12, 'lembur', NULL, '2021-01-13 13:03:08', '2021-01-13 13:01:25'),
-(38, 1, 11, '2021-01-14 15:53:55', 0, 'hadir', NULL, '2021-01-14 15:53:55', NULL);
+(29, 1, 11, '2020-01-10 09:24:26', 0, 'hadir', NULL, '2021-01-10 09:24:26', '2021-01-10 16:01:47'),
+(30, 1, 11, '2020-01-10 17:05:35', 12, 'lembur', NULL, '2021-01-10 17:05:35', '2021-01-13 13:01:03'),
+(31, 3, 13, '2020-01-10 17:55:08', 0, 'cuti', 'terbayar', '2021-01-10 17:55:08', '2021-01-10 17:01:29'),
+(32, 1, 11, '2020-02-13 09:46:45', 0, 'hadir', 'terbayar', '2021-01-13 09:46:45', NULL),
+(33, 1, 11, '2020-01-13 13:03:08', 12, 'lembur', NULL, '2021-01-13 13:03:08', '2021-01-13 13:01:25'),
+(38, 1, 11, '2020-01-14 15:53:55', 0, 'hadir', NULL, '2021-01-14 15:53:55', NULL),
+(60, 1, 11, '2020-01-15 18:08:02', 0, 'hadir', NULL, '2021-01-15 18:08:02', NULL),
+(61, 3, 13, '2021-01-16 15:27:32', 0, 'hadir', NULL, '2021-01-16 15:27:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -82,9 +84,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `name`, `created`, `updated`) VALUES
-(1, 'Makanan', '2021-01-07 16:18:05', NULL),
-(2, 'Minuman', '2021-01-07 16:18:10', NULL),
-(3, 'Lainnya', '2021-01-07 16:18:16', NULL);
+(8, 'Makanan', '2021-01-15 22:32:52', NULL),
+(9, 'Minuman', '2021-01-15 22:32:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -127,9 +128,7 @@ CREATE TABLE `materials` (
 --
 
 INSERT INTO `materials` (`material_id`, `barcode`, `name`, `category_id`, `price`, `unit_id`, `quantity`, `image`, `created`, `updated`) VALUES
-(1, 'KB2101070001', 'Aqua Gelas', 2, 19000, 3, 17, '', '2021-01-07 16:21:44', NULL),
-(2, 'KB2101070002', 'Teh Gelas', 2, 20000, 3, 10, '', '2021-01-07 16:22:07', NULL),
-(3, 'KB2101070003', 'Beng-beng', 1, 15000, 4, 10, '', '2021-01-07 16:22:24', NULL);
+(5, 'KB2101150001', 'Beng-beng', 8, 20000, 10, 50, '', '2021-01-15 22:33:44', '2021-01-15 22:34:24');
 
 -- --------------------------------------------------------
 
@@ -158,8 +157,9 @@ CREATE TABLE `salaries` (
 --
 
 INSERT INTO `salaries` (`salary_id`, `date`, `user_id`, `salary`, `meal_allowance`, `transport_allowance`, `overtime_allowance`, `other_allowance`, `worktime`, `annual_leave`, `workdaysum`, `created`, `updated`) VALUES
-(11, 2021, 1, '1500000', '200000', '100000', '10000', '2000000', 12, 12, 300, '2021-01-09 19:47:55', '2021-01-13 13:03:03'),
-(13, 2021, 3, '1000000', '200000', '100000', '10000', NULL, 12, 12, 300, '2021-01-10 09:27:54', '2021-01-11 09:39:22');
+(11, 2020, 1, '1500000', '200000', '100000', '10000', '2000000', 12, 0, 300, '2021-01-09 19:47:55', '2021-01-15 17:30:59'),
+(13, 2020, 3, '1000000', '200000', '100000', '10000', NULL, 12, 12, 322, '2021-01-10 09:27:54', '2021-01-15 17:53:17'),
+(17, 2021, 4, '500000', NULL, NULL, '5000', NULL, 12, 12, NULL, '2021-01-15 18:25:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -185,16 +185,8 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`stock_id`, `material_id`, `type`, `notes`, `supplier_id`, `price`, `quantity`, `date`, `created`, `user_id`) VALUES
-(1, 3, 'in', NULL, 1, '15000', 3, '2021-01-07', '2021-01-07 16:34:29', 1),
-(2, 3, 'out', NULL, NULL, '15000', 2, '2021-01-07', '2021-01-07 16:39:39', 1),
-(3, 3, 'out', NULL, NULL, '15000', 1, '2021-01-07', '2021-01-07 16:41:12', 1),
-(4, 1, 'in', NULL, 1, '19000', 20, '2021-01-07', '2021-01-07 16:41:33', 1),
-(5, 2, 'in', NULL, 2, '20000', 12, '2021-01-07', '2021-01-07 16:42:21', 1),
-(6, 3, 'in', NULL, NULL, '15000', 10, '2021-01-07', '2021-01-07 16:42:45', 1),
-(7, 1, 'missing', NULL, NULL, '19000', 2, '2021-01-07', '2021-01-07 16:43:11', 1),
-(8, 2, 'missing', NULL, NULL, '20000', 2, '2021-01-07', '2021-01-07 16:43:21', 1),
-(9, 1, 'out', NULL, NULL, '19000', 3, '2021-01-07', '2021-01-07 16:43:48', 1),
-(10, 1, 'founded', NULL, NULL, '19000', 2, '2021-01-07', '2021-01-07 16:48:28', 1);
+(12, 5, 'out', NULL, NULL, '20000', 20, '2021-01-15', '2021-01-15 23:42:51', 1),
+(13, 5, 'in', NULL, 4, '20000', 20, '2021-01-15', '2021-01-15 23:45:46', 1);
 
 -- --------------------------------------------------------
 
@@ -217,8 +209,7 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`supplier_id`, `name`, `phone`, `address`, `notes`, `created`, `updated`) VALUES
-(1, 'Warung Maemin', '085655553515', 'Puseurjaya', 'Warung kecil-kecilan', '2021-01-07 16:19:45', NULL),
-(2, 'Ko Tiong', '085165487532', 'Karawang Barat', 'Toko China', '2021-01-07 16:20:05', NULL);
+(4, 'Warung baru', '08521656486', 'Puseurjaya', '', '2021-01-15 23:44:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -238,12 +229,8 @@ CREATE TABLE `units` (
 --
 
 INSERT INTO `units` (`unit_id`, `name`, `created`, `updated`) VALUES
-(1, 'Kilo', '2021-01-07 16:18:23', '2021-01-07 16:19:05'),
-(2, 'Gram', '2021-01-07 16:18:27', NULL),
-(3, 'Dus', '2021-01-07 16:18:31', NULL),
-(4, 'Pak', '2021-01-07 16:18:35', NULL),
-(5, 'Kuintal', '2021-01-07 16:18:47', NULL),
-(6, 'Renceng', '2021-01-07 16:18:57', NULL);
+(9, 'Dus', '2021-01-15 22:33:10', NULL),
+(10, 'Pak', '2021-01-15 22:33:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -268,9 +255,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `address`, `level`, `image`, `created`, `updated`) VALUES
-(1, 'Tri Denda', 'tridenda', 'eee6971ffe36d64f05f60cc30219c97a20008f0e', 'Puseurjaya', '1', 'user-210114-97a6d2fe94.jpg', '2021-01-07 15:02:18', '2021-01-14 20:55:27'),
-(3, 'Jamal', 'pramuniaga', '638a014ab7a78f797cf3e93be52f3c09b471855a', 'Tasikmalaya', '2', 'user-210108-33129c2acb.PNG', '2021-01-07 15:35:28', '2021-01-08 22:25:36'),
-(4, 'Kartinah', 'kartinah', 'fa183f7f922672d77047fe8d7872cdea35752d67', 'Sirnabaya', '1', 'login.jpg', '2021-01-08 01:34:38', NULL);
+(1, 'Tri Denda', 'tridenda', 'eee6971ffe36d64f05f60cc30219c97a20008f0e', 'Puseurjaya', '1', 'user-210115-38d9bef226.jpg', '2021-01-07 15:02:18', '2021-01-15 20:17:48'),
+(3, 'Jamaludin', 'pramuniaga', '638a014ab7a78f797cf3e93be52f3c09b471855a', 'Tasikmalaya', '2', 'user-210115-440f04d0ef.jpg', '2021-01-07 15:35:28', '2021-01-16 00:51:53'),
+(4, 'Kartinah', 'kartinah', 'fa183f7f922672d77047fe8d7872cdea35752d67', 'Sirnabaya', '1', 'login.jpg', '2021-01-08 01:34:38', NULL),
+(6, 'Sofan', 'blagoo', '5e0f90d632ba1ec0e36b88ead796f8dedf040c63', 'Paris', '2', 'user-210116-601e5f17f3.jpg', '2021-01-16 01:59:54', '2021-01-16 02:00:39');
 
 --
 -- Indexes for dumped tables
@@ -361,13 +349,13 @@ ALTER TABLE `activities`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -379,37 +367,37 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

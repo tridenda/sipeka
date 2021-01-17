@@ -54,17 +54,11 @@ class Stocks extends CI_Controller {
         $no++;
         $row = array();
         $row[] = $no.".";
+        $row[] = indo_date($stock->date, TRUE, TRUE);
         $row[] = $stock->material_name;
-        $row[] = $stock->quantity;
-        $row[] = indo_date($stock->date, TRUE);
-        $row[] = $stock->notes;
-        // if user klik detail
-        $row[] = $stock->supplier_name;
-        $row[] = $stock->created;
-        $row[] = $stock->user_name;
-        $row[] = $stock->material_barcode;
         $row[] = $stock->unit_name;
-        $row[] = $stock->material_price;
+        $row[] = $stock->quantity;
+        $row[] = indo_currency($stock->price);
         // add html for action
         $row[] = '
         <button class="btn btn-sm btn-outline-info" id="select" 
@@ -78,7 +72,7 @@ class Stocks extends CI_Controller {
           data-user_name="'.$stock->user_name.'"
           data-material_barcode="'.$stock->material_barcode.'"
           data-unit_name="'.$stock->unit_name.'"
-          data-material_price="'.indo_currency($stock->material_price).'">
+          data-material_price="'.indo_currency($stock->price).'">
           <i class="fas fa-info-circle"></i> Rincian
         </button>
         <a href="'.base_url('persediaan/hapus/').$stock->stock_id.'/'.$stock->material_id.'/'.$stock->quantity.'/'.$type.'" onclick="return confirm(\'Anda akan menghapus data persediaan, yakin?\');" class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i> Hapus</a>
@@ -125,6 +119,7 @@ class Stocks extends CI_Controller {
       $this->form_validation->set_rules('date', 'Tanggal', 'required');
       $this->form_validation->set_rules('barcode', 'Kodebar', 'required');
       $this->form_validation->set_rules('quantity', 'Jumlah', 'required');
+      $this->form_validation->set_rules('material_price', 'Jumlah', 'required');
 
 			// Set condition form, if FALSE process is canceled
 			if ($this->form_validation->run() == FALSE) {

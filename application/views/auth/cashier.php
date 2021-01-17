@@ -52,10 +52,10 @@
 
           <form action="<?=base_url('auth/process_cashier')?>" method="post">
             <div class="input-group mb-3">
-              <input name="username" type="name" class="form-control" placeholder="Nama pengguna">
+              <input name="username" type="name" class="form-control" placeholder="Nama pengguna" autocomplete="off">
             </div>
             <div class="input-group mb-3">
-              <input name="password" type="password" class="form-control" placeholder="Kata sandi">
+              <input name="password" type="password" class="form-control" placeholder="Kata sandi" autocomplete="off">
             </div>
             <div class="row">
               <div class="col-8">
