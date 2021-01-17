@@ -710,7 +710,7 @@
     });
   });
   // Activate this if wanna use this app
-  // document.addEventListener('contextmenu', event => event.preventDefault());
+  document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 
 </body>

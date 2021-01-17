@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="<?=base_url()?>assets/AdminLTE-3.0.5/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
-  <!-- Icon Kedaibutin -->
+  <!-- Icon Sipeka -->
   <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/img/icon.ico" />
 </head>
 <body class="hold-transition login-page">

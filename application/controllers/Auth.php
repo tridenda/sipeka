@@ -21,8 +21,8 @@ class Auth extends CI_Controller {
 				'level' => htmlspecialchars($row->level)
 			);
 			// Activate this timeout when you're going to run the program
-			// $this->session->set_tempdata($params, 'userid', 3600);
-			// $this->session->set_tempdata($params, 'level', 3600);
+			$this->session->set_tempdata($params, 'userid', 3600);
+			$this->session->set_tempdata($params, 'level', 3600);
 			$this->session->set_userdata($params);
 			echo "<script>
 					alert('Selamat, berhasil masuk!');
