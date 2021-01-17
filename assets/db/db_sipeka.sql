@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2021 at 11:26 AM
+-- Generation Time: Jan 17, 2021 at 04:01 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.3.22
 
@@ -45,26 +45,12 @@ CREATE TABLE `attendances` (
   `user_id` int(11) NOT NULL,
   `salary_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `overtime_hour` int(11) NOT NULL COMMENT 'hour',
+  `overtime_hour` int(11) DEFAULT 0 COMMENT 'hour',
   `notes` enum('hadir','cuti','lembur','lainnya') DEFAULT NULL,
   `status` text DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `attendances`
---
-
-INSERT INTO `attendances` (`attendance_id`, `user_id`, `salary_id`, `date`, `overtime_hour`, `notes`, `status`, `created`, `updated`) VALUES
-(29, 1, 11, '2020-01-10 09:24:26', 0, 'hadir', NULL, '2021-01-10 09:24:26', '2021-01-10 16:01:47'),
-(30, 1, 11, '2020-01-10 17:05:35', 12, 'lembur', NULL, '2021-01-10 17:05:35', '2021-01-13 13:01:03'),
-(31, 3, 13, '2020-01-10 17:55:08', 0, 'cuti', 'terbayar', '2021-01-10 17:55:08', '2021-01-10 17:01:29'),
-(32, 1, 11, '2020-02-13 09:46:45', 0, 'hadir', 'terbayar', '2021-01-13 09:46:45', NULL),
-(33, 1, 11, '2020-01-13 13:03:08', 12, 'lembur', NULL, '2021-01-13 13:03:08', '2021-01-13 13:01:25'),
-(38, 1, 11, '2020-01-14 15:53:55', 0, 'hadir', NULL, '2021-01-14 15:53:55', NULL),
-(60, 1, 11, '2020-01-15 18:08:02', 0, 'hadir', NULL, '2021-01-15 18:08:02', NULL),
-(61, 3, 13, '2021-01-16 15:27:32', 0, 'hadir', NULL, '2021-01-16 15:27:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -78,14 +64,6 @@ CREATE TABLE `categories` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`category_id`, `name`, `created`, `updated`) VALUES
-(8, 'Makanan', '2021-01-15 22:32:52', NULL),
-(9, 'Minuman', '2021-01-15 22:32:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -123,13 +101,6 @@ CREATE TABLE `materials` (
   `updated` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `materials`
---
-
-INSERT INTO `materials` (`material_id`, `barcode`, `name`, `category_id`, `price`, `unit_id`, `quantity`, `image`, `created`, `updated`) VALUES
-(5, 'KB2101150001', 'Beng-beng', 8, 20000, 10, 50, '', '2021-01-15 22:33:44', '2021-01-15 22:34:24');
-
 -- --------------------------------------------------------
 
 --
@@ -152,15 +123,6 @@ CREATE TABLE `salaries` (
   `updated` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `salaries`
---
-
-INSERT INTO `salaries` (`salary_id`, `date`, `user_id`, `salary`, `meal_allowance`, `transport_allowance`, `overtime_allowance`, `other_allowance`, `worktime`, `annual_leave`, `workdaysum`, `created`, `updated`) VALUES
-(11, 2020, 1, '1500000', '200000', '100000', '10000', '2000000', 12, 0, 300, '2021-01-09 19:47:55', '2021-01-15 17:30:59'),
-(13, 2020, 3, '1000000', '200000', '100000', '10000', NULL, 12, 12, 322, '2021-01-10 09:27:54', '2021-01-15 17:53:17'),
-(17, 2021, 4, '500000', NULL, NULL, '5000', NULL, 12, 12, NULL, '2021-01-15 18:25:37', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -180,14 +142,6 @@ CREATE TABLE `stocks` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `stocks`
---
-
-INSERT INTO `stocks` (`stock_id`, `material_id`, `type`, `notes`, `supplier_id`, `price`, `quantity`, `date`, `created`, `user_id`) VALUES
-(12, 5, 'out', NULL, NULL, '20000', 20, '2021-01-15', '2021-01-15 23:42:51', 1),
-(13, 5, 'in', NULL, 4, '20000', 20, '2021-01-15', '2021-01-15 23:45:46', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -204,13 +158,6 @@ CREATE TABLE `suppliers` (
   `updated` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `suppliers`
---
-
-INSERT INTO `suppliers` (`supplier_id`, `name`, `phone`, `address`, `notes`, `created`, `updated`) VALUES
-(4, 'Warung baru', '08521656486', 'Puseurjaya', '', '2021-01-15 23:44:42', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -223,14 +170,6 @@ CREATE TABLE `units` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `units`
---
-
-INSERT INTO `units` (`unit_id`, `name`, `created`, `updated`) VALUES
-(9, 'Dus', '2021-01-15 22:33:10', NULL),
-(10, 'Pak', '2021-01-15 22:33:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -255,10 +194,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `address`, `level`, `image`, `created`, `updated`) VALUES
-(1, 'Tri Denda', 'tridenda', 'eee6971ffe36d64f05f60cc30219c97a20008f0e', 'Puseurjaya', '1', 'user-210115-38d9bef226.jpg', '2021-01-07 15:02:18', '2021-01-15 20:17:48'),
-(3, 'Jamaludin', 'pramuniaga', '638a014ab7a78f797cf3e93be52f3c09b471855a', 'Tasikmalaya', '2', 'user-210115-440f04d0ef.jpg', '2021-01-07 15:35:28', '2021-01-16 00:51:53'),
-(4, 'Kartinah', 'kartinah', 'fa183f7f922672d77047fe8d7872cdea35752d67', 'Sirnabaya', '1', 'login.jpg', '2021-01-08 01:34:38', NULL),
-(6, 'Sofan', 'blagoo', '5e0f90d632ba1ec0e36b88ead796f8dedf040c63', 'Paris', '2', 'user-210116-601e5f17f3.jpg', '2021-01-16 01:59:54', '2021-01-16 02:00:39');
+(1, 'Admin', 'admin', 'root@localhost', 'Silicon Valley', '1', 'login.jpg', '2021-01-17 22:01:13', NULL);
 
 --
 -- Indexes for dumped tables
@@ -349,13 +285,13 @@ ALTER TABLE `activities`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -367,37 +303,37 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
