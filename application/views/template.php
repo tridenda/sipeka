@@ -527,8 +527,10 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview <?= $this->uri->segment(2) == 'pramuniaga' ? 'menu-open active' : ''?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(2) == 'pramuniaga' ? 'active' : ''?>">
+          <li class="nav-item has-treeview <?= $this->uri->segment(2) == 'pramuniaga'
+          || $this->uri->segment(2) == 'pelanggan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(2) == 'pramuniaga'
+            || $this->uri->segment(2) == 'pelanggan' ? 'active' : ''?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Pengguna
@@ -542,12 +544,12 @@
                   <p>Pramuniaga</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="<?=base_url('users/members')?>" class="nav-link">
+              <li class="nav-item">
+                <a href="<?=base_url('pengguna/pelanggan')?>" class="nav-link <?= $this->uri->segment(2) == 'pelanggan'  ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pelanggan</p>
                 </a>
-              </li> -->
+              </li>
             </ul>
           </li>
           <?php if( $this->functions->user_login()->level == '1'  ) : ?>
@@ -571,13 +573,13 @@
           <?php endif; ?>
           <p class="border-bottom border-secondary mt-3"></p>
           <li class="nav-item">
-            <a href="<?=base_url('pengguna/pengaturan')?>" class="nav-link <?= $this->uri->segment(2) == 'pengaturan'  ? 'active' : ''?>">
+            <a href="<?=base_url('pengguna/pramuniaga/pengaturan')?>" class="nav-link <?= $this->uri->segment(2) == 'pengaturan'  ? 'active' : ''?>">
               <i class="nav-icon fas fa-cog"></i>
               <p class="text">Pengaturan</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?=base_url('pengguna/bantuan')?>" class="nav-link <?= $this->uri->segment(2) == 'bantuan'  ? 'active' : ''?>">
+            <a href="<?=base_url('pengguna/pramuniaga/bantuan')?>" class="nav-link <?= $this->uri->segment(2) == 'bantuan'  ? 'active' : ''?>">
               <i class="nav-icon fas fa-question-circle"></i>
               <p>Bantuan</p>
             </a>
@@ -620,7 +622,7 @@
             } else if( $this->uri->segment(1) == 'gaji' || $this->uri->segment(1) == 'pembayaran_gaji' || $this->uri->segment(1) == 'pembayaran_cuti' ) {
               $modal_title = 'Gaji Karyawan';
               $video_type = 'salaries';
-            } else if( $this->uri->segment(1) == 'pengguna' ) {
+            } else if( $this->uri->segment(1) == 'pengguna' || $this->uri->segment(2) == 'pramuniaga' ) {
               $modal_title = 'Pengguna';
               $video_type = 'users';
             }
@@ -657,6 +659,8 @@
             $base_url = base_url('pembayaran_cuti');
           } else if( $this->uri->segment(1) == 'pengguna' && $this->uri->segment(2) == 'pramuniaga' ) {
             $base_url = base_url('pengguna/pramuniaga');
+          } else if( $this->uri->segment(1) == 'pengguna' && $this->uri->segment(2) == 'pelanggan' ) {
+            $base_url = base_url('pengguna/pelanggan');
           }
           ?>
           <a class="close" href="<?=$base_url?>">×</a>
@@ -682,7 +686,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Versi</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2020-2021 <a href="<?=base_url('pengguna/bantuan')?>" target="_blank">Tri Denda</a>.</strong>
+    <strong>Copyright &copy; 2020-2021 <a href="<?=base_url('pengguna/pramuniaga/bantuan')?>" target="_blank">Tri Denda</a>.</strong>
   </footer>
 </div>
 <!-- ./wrapper -->

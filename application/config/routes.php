@@ -59,8 +59,6 @@ $route['beranda'] = 'home/index';
 
 // Users Login links
 $route['kasir'] = 'auth/login_cashier';
-$route['pelanggan'] = 'auth/login_members';
-$route['tamu'] = 'auth/login_guests';
 
 // Material Links
 $route['bahan_baku'] = 'materials';
@@ -108,11 +106,17 @@ $route['persediaan/hapus/(:num)/(:num)/(:num)/(:any)'] = 'stocks/delete/$1/$2/$3
 
 // Users links
 $route['pengguna/pramuniaga'] = 'users';
-$route['pengguna/tambah'] = 'users/add';
-$route['pengguna/ubah/(:num)'] = 'users/edit/$1';
-$route['pengguna/hapus'] = 'users/delete';
-$route['pengguna/pengaturan'] = 'users/settings';
-$route['pengguna/bantuan'] = 'users/helper';
+$route['pengguna/pramuniaga/tambah'] = 'users/add';
+$route['pengguna/pramuniaga/ubah/(:num)'] = 'users/edit/$1';
+$route['pengguna/pramuniaga/hapus'] = 'users/delete';
+$route['pengguna/pramuniaga/pengaturan'] = 'users/settings';
+$route['pengguna/pramuniaga/bantuan'] = 'users/helper';
+
+// Members links
+$route['pengguna/pelanggan'] = 'members';
+$route['pengguna/pelanggan/tambah'] = 'members/add';
+$route['pengguna/pelanggan/ubah/(:num)'] = 'members/edit/$1';
+$route['pengguna/pelanggan/hapus'] = 'members/delete';
 
 // Salaries links
 $route['gaji'] = 'salaries';

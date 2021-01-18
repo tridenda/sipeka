@@ -44,19 +44,6 @@ class Auth extends CI_Controller {
 	}  
 	// End: Cashier functions
 
-
-	// Begin: Members/Guests functions
-	public function login_members()
-	{
-		$this->load->view('auth/members');
-	}
-
-  public function login_guests()
-	{
-		$this->load->view('auth/guests');
-  }
-	// End: Members/Guests functions
-
 	// Begin: Shutdown/restart function
 	public function turn_off($type) {
 
