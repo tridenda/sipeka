@@ -142,59 +142,19 @@
     
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Cart Dropdown Menu -->
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link border-bottom" data-toggle="dropdown" href="#">
           <i class="fas fa-shopping-cart"></i>
           <span class="badge badge-danger navbar-badge">2</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
             <span class="ml-3 mt-2 text-secondary">
-              Total (5)
+              Belum bayar (3)
             </span>
             <span class="mr-3 mt-2">
-              <a href="unpaid.html" class="link-success">See more</a>
-            </span>
-          </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is name product 1 <br>
-              <small class="fst-italic">5 Unit</small>
-            </span>
-            <span> Rp 20.000</span>
-          </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is name product 2 <br>
-              <small class="fst-italic">5 Unit</small>
-            </span>
-            <span> Rp 50.000</span>
-          </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is name product 3 <br>
-              <small class="fst-italic">5 Unit</small>
-            </span>
-            <span> Rp 20.000</span>
-          </div>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li> -->
-      <!-- Notifications Dropdown Menu -->
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-bell"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
-            <span class="ml-3 mt-2 text-secondary">
-              Unpaid (3)
-            </span>
-            <span class="mr-3 mt-2">
-              <a href="unpaid.html" class="link-success">See more</a>
+              <a href="unpaid.html" class="link-success">Lihat semuanya</a>
             </span>
           </div>
           <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
@@ -227,10 +187,10 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
-      </li> -->
+      </li>
       <!-- History Dropdown Menu -->
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+      <li class="nav-item dropdown">
+        <a class="nav-link border-bottom ml-3" data-toggle="dropdown" href="#">
           <i class="fas fa-file-signature"></i>
           <span class="badge badge-info navbar-badge">15</span>
         </a>
@@ -267,7 +227,7 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li> -->
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -308,11 +268,11 @@
               </p>
             </a>
           </li>
-          <!-- <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cash-register"></i>
               <p>
-                Kasir
+                Penjualan
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -320,25 +280,25 @@
               <li class="nav-item">
                 <a href="<?=base_url()?>" class="nav-link">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>ChartJS</p>
+                  <p>Pesanan Baru</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url()?>" class="nav-link">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Belum Bayar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/flot.html" class="nav-link">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/inline.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Inline</p>
+                  <p>Histori Transaksi</p>
                 </a>
               </li>
             </ul>
-          </li> -->
-          <!-- <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          </li>
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'produk' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'produk' ? 'menu-open active' : ''?>">
               <i class="nav-icon fas fa-utensils"></i>
               <p>
                 Produk
@@ -346,26 +306,20 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/chartjs.html" class="nav-link">
+              <li class="nav-item <?= $this->uri->segment(2) == 'daftar_produk' ? 'menu-open active' : ''?>">
+                <a href="<?=base_url('produk/daftar_produk')?>" class="nav-link <?= $this->uri->segment(1) == 'produk' && $this->uri->segment(2) == 'daftar_produk' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>ChartJS</p>
+                  <p>Daftar Produk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/flot.html" class="nav-link">
+                <a href="<?=base_url('produk/kategori')?>" class="nav-link <?= $this->uri->segment(1) == 'produk' && $this->uri->segment(2) == 'kategori' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/inline.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Inline</p>
+                  <p>Kategori</p>
                 </a>
               </li>
             </ul>
-          </li> -->
+          </li>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'daftar_bahan'
           || $this->uri->segment(1) == 'bahan_baku'
           || $this->uri->segment(1) == 'pemasok'
@@ -573,13 +527,13 @@
           <?php endif; ?>
           <p class="border-bottom border-secondary mt-3"></p>
           <li class="nav-item">
-            <a href="<?=base_url('pengguna/pramuniaga/pengaturan')?>" class="nav-link <?= $this->uri->segment(2) == 'pengaturan'  ? 'active' : ''?>">
+            <a href="<?=base_url('pengguna/pengaturan')?>" class="nav-link <?= $this->uri->segment(2) == 'pengaturan'  ? 'active' : ''?>">
               <i class="nav-icon fas fa-cog"></i>
               <p class="text">Pengaturan</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?=base_url('pengguna/pramuniaga/bantuan')?>" class="nav-link <?= $this->uri->segment(2) == 'bantuan'  ? 'active' : ''?>">
+            <a href="<?=base_url('pengguna/bantuan')?>" class="nav-link <?= $this->uri->segment(2) == 'bantuan'  ? 'active' : ''?>">
               <i class="nav-icon fas fa-question-circle"></i>
               <p>Bantuan</p>
             </a>
@@ -686,7 +640,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Versi</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2020-2021 <a href="<?=base_url('pengguna/pramuniaga/bantuan')?>" target="_blank">Tri Denda</a>.</strong>
+    <strong>Copyright &copy; 2020-2021 <a href="<?=base_url('pengguna/bantuan')?>">Tri Denda</a>.</strong>
   </footer>
 </div>
 <!-- ./wrapper -->

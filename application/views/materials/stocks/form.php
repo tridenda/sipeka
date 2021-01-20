@@ -141,8 +141,13 @@ alert(test);
 <script>
   $(function () {
     $("#material-table").DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
       "autoWidth": false,
-      "pageLength": 8,
+      "responsive": true,
       "processing": true,
       "serverSide": true,
       "ajax": {

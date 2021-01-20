@@ -55,7 +55,7 @@
               <textarea name="address" id="address" class="form-control" rows="3" placeholder="Alamat"><?=$this->input->post('address') ?? $row->address?></textarea>
             </div>
             <div class="form-group">
-              <label for="point">Poin *</label>
+              <label for="point">Poin (satuan rupiah) *</label>
               <input name="point" type="number" class="form-control" id="point" placeholder="Poin dalam bentuk rupiah." value="<?=$this->input->post('point') ?? $row->point?>" autocomplete="off" autofocus>
               <small class="text-red font-italic"><?php echo form_error('point'); ?></small>
             </div>
