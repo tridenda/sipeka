@@ -21,8 +21,8 @@ class Auth extends CI_Controller {
 				'level' => htmlspecialchars($row->level)
 			);
 			// Activate this timeout when you're going to run the program
-			$this->session->set_tempdata($params, 'userid', 3600);
-			$this->session->set_tempdata($params, 'level', 3600);
+			// $this->session->set_tempdata($params, 'userid', 3600);
+			// $this->session->set_tempdata($params, 'level', 3600);
 			$this->session->set_userdata($params);
 			echo "<script>
 					alert('Selamat, berhasil masuk!');
@@ -43,19 +43,6 @@ class Auth extends CI_Controller {
 		redirect('kasir');
 	}  
 	// End: Cashier functions
-
-
-	// Begin: Members/Guests functions
-	public function login_members()
-	{
-		$this->load->view('auth/members');
-	}
-
-  public function login_guests()
-	{
-		$this->load->view('auth/guests');
-  }
-	// End: Members/Guests functions
 
 	// Begin: Shutdown/restart function
 	public function turn_off($type) {

@@ -15,4 +15,10 @@ class Home extends CI_Controller {
 		$this->template->load('template', 'index');
 	}	
 
+	public function phone()
+	{
+		$this->ci =& get_instance();
+		$this->load->view('home/index');
+	}	
+
 }
