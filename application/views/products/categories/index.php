@@ -7,7 +7,7 @@
           <h1>Kategori</h1>
         </div>
         <div class="col-sm-6">
-          <?php $this->load->view('materials/breadcrumb')?>
+          <?php $this->load->view('products/breadcrumb')?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
