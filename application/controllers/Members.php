@@ -11,6 +11,41 @@ class Members extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
+	function get_ajax() {
+		$list = $this->Member_model->get_datatables();
+		$data = array();
+		$no = @$_POST['start'];
+		foreach ($list as $member) {
+				$no++;
+				$row = array();
+				$row[] = $no.".";
+				$row[] = $member->name;
+				$row[] = $member->gender == 'male' ? 'Laki-laki' : 'Perempuan';
+				$row[] = $member->phone;
+				$row[] = $member->address;
+				$row[] = indo_currency($member->point);
+				$row[] = '
+					<form action="'.base_url('pengguna/pelanggan/hapus').'" method="post">
+						<a class="btn btn-sm btn-outline-primary" href="'.base_url('pengguna/pelanggan/ubah/'.$member->member_id).'">
+							<i class="far fa-edit"></i> Ubah
+						</a>
+						<input name="member_id" type="hidden" value="'.$member->member_id.'">
+						<button onclick="return confirm(\'Anda akan menghapus data pelanggan, yakin?\');" class="btn btn-sm btn-outline-danger">
+							<i class="far fa-trash-alt"></i> Hapus
+						</button>
+					</form>';
+				$data[] = $row;
+		}
+		$output = array(
+								"draw" => @$_POST['draw'],
+								"recordsTotal" => $this->Member_model->count_all(),
+								"recordsFiltered" => $this->Member_model->count_filtered(),
+								"data" => $data,
+						);
+		// output to json format
+		echo json_encode($output);
+	}
+
 	public function index()
 	{
 		if( isset($_POST['tutorial']) ) {

@@ -268,8 +268,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'penjualan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'penjualan' ? 'menu-open active' : ''?>">
               <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Penjualan
@@ -278,22 +278,39 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url()?>" class="nav-link">
+                <a href="<?=base_url('penjualan/pesanan_baru')?>" class="nav-link <?= $this->uri->segment(2) == 'pesanan_baru' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pesanan Baru</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>" class="nav-link">
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Belum Bayar</p>
+                  <p>
+                    Daftar Penjualan
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/flot.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Histori Transaksi</p>
-                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Penjualan Hari Ini</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Penjualan Bulan Ini</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Penjualan Tahun Ini</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>
