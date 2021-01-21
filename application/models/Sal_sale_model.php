@@ -10,7 +10,7 @@ class Sal_sale_model extends CI_Model
   private function _get_datatables_query() {
       $this->db->select('sal_sales.*, users.name as user_name', 'sales.name as member_name');
       $this->db->from('sal_sales');
-      $this->db->join('users', 'sal_sales.user_id = users.user_id');
+      $this->db->join('users', 'sal_sales.user_id = users.user_id', 'left');
       $this->db->join('members', 'sal_sales.member_id = members.member_id', 'left');
       $this->db->order_by('sale_id', 'DESC');
       $i = 0;
@@ -56,16 +56,26 @@ class Sal_sale_model extends CI_Model
   }
   // End: Datatables
 
-  public function get($id = null) 
+  public function get($id = null, $first = null) 
   {
-    $this->db->select('sal_sales.*, users.name AS user_name');
-    $this->db->from('sal_sales');
-    $this->db->join('users', 'sal_sales.user_id = users.user_id');
-    
-    if( $id != null ) {
-      $this->db->where('sale_id', $id);
+    if( $first ) {
+        $this->db->select('sal_sales.*, users.name AS user_name');
+        $this->db->from('sal_sales');
+        $this->db->join('users', 'sal_sales.user_id = users.user_id');
+        $this->db->order_by('sale_id', 'DESC');
+        $this->db->limit(1);
+        
+        $query = $this->db->get();
+    } else {
+        $this->db->select('sal_sales.*, users.name AS user_name');
+        $this->db->from('sal_sales');
+        $this->db->join('users', 'sal_sales.user_id = users.user_id');
+        
+        if( $id != null ) {
+        $this->db->where('sale_id', $id);
+        } 
+        $query = $this->db->get();
     }
-    $query = $this->db->get();
     
     return $query;
   }
@@ -73,6 +83,13 @@ class Sal_sale_model extends CI_Model
   public function delete($id)
   {
     $this->db->where('sale_id', $id);
-		$this->db->delete('sal_sales');
+    $this->db->delete('sal_sales');
+  }
+
+  public function add($post) {
+    $params['member_id'] = $post['member_id'] == '' ? null : htmlspecialchars($post['member_id']);
+    $params['name'] = htmlspecialchars($post['member-name-modal']);
+    $params['date'] = date('Y-m-d', strtotime("now"));
+    $this->db->insert('sal_sales', $params);
   }
 }

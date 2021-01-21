@@ -26,7 +26,9 @@ class Sal_sales extends CI_Controller {
 				} else {
 					$row[] = $sale->name;
 				}
-				$row[] = indo_currency($sale->final_price);
+				if( isset($sale->final_price) ) {
+					$row[] = indo_currency($sale->final_price);
+				}
 				$row[] = $sale->notes;
 				// add html for action
 				$row[] = '
@@ -66,6 +68,27 @@ class Sal_sales extends CI_Controller {
 	{
 		if( isset($_POST['tutorial']) ) {
 			$data['tutorial'] = TRUE;
+		}
+
+		// Add new order
+		if( isset($_POST['neworder']) ) {
+			// Set rules form
+      $this->form_validation->set_rules('member-name-modal', 'Nama', 'required');
+
+			// Set condition form, if FALSE process is canceled
+			if( $this->form_validation->run() == FALSE ) {
+				$post = $this->input->post(null, TRUE);	
+				$data = array(
+					'row' => $post
+				);
+				$this->template->load('template', 'sales/new-orders/index', $data);
+			} else {
+				$post = $this->input->post(null, TRUE);
+				$this->Sal_sale_model->add($post);
+				$sale = $this->Sal_sale_model->get(null, TRUE)->row();
+
+				redirect('penjualan/keranjang/'.$sale->sale_id);
+			}
 		}
 		$this->template->load('template', 'sales/new-orders/index');
 	}

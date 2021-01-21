@@ -143,13 +143,22 @@
         </table>
         <form action="" method="post">
           <div class="card-body">
-            <div class="form-group">
-              <label for="phone">No HP</label>
-              <input type="number" class="form-control" id="phone" placeholder="Contoh: 0851556633254">
-            </div>
-            <div class="form-group">
-              <label for="name">Nama *</label>
-              <input type="text" class="form-control" id="name" placeholder="Nama pelanggan">
+            <input type="hidden" name="member_id" id="member_id">
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label for="phone">No HP</label>
+                  <input name="phone" type="number" class="form-control" id="phone" placeholder="Contoh: 0851556633254" disabled>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="member-name-modal">Nama *</label>
+                  <input name="member-name-modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan">
+                  <small class="text-red font-italic"><?php echo form_error('member-name-modal'); ?></small>
+                </div>
+              </div>
             </div>
           </div>
           <!-- /.card-body -->
@@ -250,4 +259,17 @@
     })
   })
   // End: Modal detail
+
+  // Begin:
+  $(document).ready(function() {
+    $(document).on('click', '#select', function () {
+      var member_id = $(this).data('member_id');
+      var phone = $(this).data('phone');
+      var member_name_modal = $(this).data('member_name_modal');
+      $('#member_id').val(member_id);
+      $('#phone').val(phone);
+      $('#member-name-modal').val(member_name_modal);
+    })
+  })
+  // End: 
 </script>

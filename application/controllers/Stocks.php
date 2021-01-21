@@ -25,15 +25,15 @@ class Stocks extends CI_Controller {
 				$row[] = $material->quantity;
 				// add html for action
 				$row[] = '
-        <button class="btn btn-sm btn-primary" id="select" 
-        data-material_id="'.$material->material_id.'"
-        data-barcode="'.$material->barcode.'"
-        data-name="'.$material->name.'"
-        data-unit_name="'.$material->unit_name.'"
-        data-initial_qty="'.$material->quantity.'"
-        data-material_price="'.$material->price.'">
-          <i class="fas fa-check"></i> Pilih
-        </button>';
+          <button class="btn btn-sm btn-primary" id="select" 
+          data-material_id="'.$material->material_id.'"
+          data-barcode="'.$material->barcode.'"
+          data-name="'.$material->name.'"
+          data-unit_name="'.$material->unit_name.'"
+          data-initial_qty="'.$material->quantity.'"
+          data-material_price="'.$material->price.'">
+            <i class="fas fa-check"></i> Pilih
+          </button>';
 				$data[] = $row;
 		}
 		$output = array(
