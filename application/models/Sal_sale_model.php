@@ -87,9 +87,29 @@ class Sal_sale_model extends CI_Model
   }
 
   public function add($post) {
+    $params['invoice'] = $post['invoice'];
+    $params['user_id'] =  $this->session->userdata('userid');;
     $params['member_id'] = $post['member_id'] == '' ? null : htmlspecialchars($post['member_id']);
-    $params['name'] = htmlspecialchars($post['member-name-modal']);
+    $params['name'] = htmlspecialchars($post['member_name_modal']);
     $params['date'] = date('Y-m-d', strtotime("now"));
     $this->db->insert('sal_sales', $params);
+  }
+
+  public function invoice_no() {
+    $curdate = strtotime("now");
+    $sql = "SELECT MAX(MID(invoice,9,4)) AS invoice_no 
+          FROM sal_sales 
+          WHERE MID(invoice,3,6) = ".date("ymd", $curdate);
+    $query = $this->db->query($sql);
+    
+    if( $query->num_rows() > 0 ) {
+      $row = $query->row();
+      $n = ((int) $row->invoice_no) + 1;
+      $no = sprintf("%'.04d", $n);
+    } else {
+      $no = "0001";
+    }
+    $invoice = "IN".date('ymd').$no;
+    return $invoice;
   }
 }

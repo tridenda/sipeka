@@ -26,8 +26,11 @@
                   <i class="fas fa-question-circle"></i> Tutorial
                 </button>
               </form>
-              <button data-toggle="modal" data-target="#neworder-modal" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Tambah Pesanan
+              <button data-toggle="modal" data-target="#neworder-regular-modal" class="mr-1 btn btn-info">
+                <i class="fa fa-plus"></i> Tambah Pesanan [Umum]
+              </button>
+              <button data-toggle="modal" data-target="#neworder-member-modal" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tambah Pesanan [Member]
               </button>
             </div>
           </div>
@@ -115,12 +118,12 @@
 <!-- End: Detail -->
 
 <!-- Begin: New-order -->
-<div class="modal fade" id="neworder-modal">
+<div class="modal fade" id="neworder-member-modal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">
-          Tambah infomasi pelanggan
+          Pilih member
         </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -150,13 +153,14 @@
                 <div class="form-group">
                   <label for="phone">No HP</label>
                   <input name="phone" type="number" class="form-control" id="phone" placeholder="Contoh: 0851556633254" disabled>
+                  <small class="text-red font-italic"><?php echo form_error('member_id'); ?></small>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="member-name-modal">Nama *</label>
-                  <input name="member-name-modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan">
-                  <small class="text-red font-italic"><?php echo form_error('member-name-modal'); ?></small>
+                  <label for="member_name_modal">Nama *</label>
+                  <input name="member_name_modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan">
+                  <small class="text-red font-italic"><?php echo form_error('member_name_modal'); ?></small>
                 </div>
               </div>
             </div>

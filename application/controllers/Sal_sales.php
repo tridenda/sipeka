@@ -73,7 +73,9 @@ class Sal_sales extends CI_Controller {
 		// Add new order
 		if( isset($_POST['neworder']) ) {
 			// Set rules form
-      $this->form_validation->set_rules('member-name-modal', 'Nama', 'required');
+			$this->form_validation->set_rules('member_name_modal', 'Nama', 'required');
+			// To make sure user choosing the member
+			$this->form_validation->set_rules('member_id', 'Nomor telepon', 'required');
 
 			// Set condition form, if FALSE process is canceled
 			if( $this->form_validation->run() == FALSE ) {
@@ -81,9 +83,9 @@ class Sal_sales extends CI_Controller {
 				$data = array(
 					'row' => $post
 				);
-				$this->template->load('template', 'sales/new-orders/index', $data);
 			} else {
 				$post = $this->input->post(null, TRUE);
+				$post['invoice'] = $this->Sal_sale_model->invoice_no();
 				$this->Sal_sale_model->add($post);
 				$sale = $this->Sal_sale_model->get(null, TRUE)->row();
 
