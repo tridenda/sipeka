@@ -34,6 +34,13 @@ class Members extends CI_Controller {
 							<i class="far fa-trash-alt"></i> Hapus
 						</button>
 					</form>';
+				$row[] = '
+					<form action="'.base_url('penjualan/pesanan_baru').'" method="post">
+						<button class="btn btn-sm btn-primary">
+							<i class="fas fa-hand-pointer"></i> Pilih
+						</button>
+					</form>
+					';
 				$data[] = $row;
 		}
 		$output = array(

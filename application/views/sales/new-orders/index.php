@@ -170,37 +170,30 @@
 
 <script>
   // Begin: Members table
-  // $(function () {
-  //   $("#members-table").DataTable({
-  //     "autoWidth": false,
-  //     "pageLength": 2,
-  //     "responsive": true,
-  //     "processing": true,
-  //     "serverSide": true,
-  //     "ajax": {
-  //       "url": "<?=base_url('Members/get_ajax')?>",
-  //       "type": "POST"
-  //     },
-  //     "columnDefs": [
-  //       {
-  //         "targets": [6],
-  //         "className": 'text-center',
-  //         "width": '15rem',
-  //         "orderable": false
-  //       },
-  //       { 
-  //         "targets": [0,2,4,6],
-  //         "visible": false,
-  //       },
-  //       {
-  //         "targets": [7],
-  //         "className": 'text-center',
-  //         "width": '4rem',
-  //         "orderable": false
-  //       }
-  //     ]      
-  //   })
-  // })
+  $(function () {
+    $("#members-table").DataTable({
+      "autoWidth": false,
+      "pageLength": 2,
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        "url": "<?=base_url('Members/get_ajax')?>",
+        "type": "POST"
+      },
+      "columnDefs": [
+        {
+          "targets": [2,4,6],
+          "visible": false
+        },
+        {
+          "targets": [7],
+          "className": 'text-center',
+          "width": '5rem',
+          "orderable": false
+        }
+      ]      
+    })
+  })
   // End: Members table
 
 
