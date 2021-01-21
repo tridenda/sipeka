@@ -12,6 +12,7 @@ class Material_model extends CI_Model
       $this->db->from('materials');
       $this->db->join('categories', 'materials.category_id = categories.category_id');
       $this->db->join('units', 'materials.unit_id = units.unit_id');
+      $this->db->order_by('barcode', 'ASC');
       $i = 0;
       foreach ($this->column_search as $material) { // loop column 
           if(@$_POST['search']['value']) { // if datatable send POST for search
@@ -61,10 +62,10 @@ class Material_model extends CI_Model
     $this->db->from('materials');
     $this->db->join('categories', 'categories.category_id = materials.category_id');
     $this->db->join('units', 'units.unit_id = materials.unit_id');
-    $this->db->order_by('barcode ASC');
     if( $id != null ) {
       $this->db->where('material_id', $id);
     }
+    $this->db->order_by('barcode', 'ASC');
     $query = $this->db->get();
     
     return $query;
