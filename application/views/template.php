@@ -144,48 +144,32 @@
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
+       <?php $neworders = $this->functions->get_neworder() ?>
+
         <a class="nav-link border-bottom" data-toggle="dropdown" href="#">
           Pesanan Baru <i class="fas fa-shopping-cart"></i>
-          <span class="badge badge-danger navbar-badge">2</span>
+          <span class="badge badge-danger navbar-badge"><?=count($neworders)?></span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
           <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
             <span class="ml-3 mt-2 text-secondary">
-              Belum bayar (3)
+              Belum bayar (<?=count($neworders)?>)
             </span>
             <span class="mr-3 mt-2">
-              <a href="unpaid.html" class="link-success">Lihat semuanya</a>
+              <a href="<?=base_url('penjualan/pesanan_baru')?>" class="link-success">Lihat semuanya</a>
             </span>
           </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is customer name 1 <br>
-              <small class="fst-italic">AP020919970001 ~ Rp 2.500.000</small>
-            </span>
-            <span>
-              <button type="button" class="mt-1 btn btn-outline-success btn-sm">Pay Now</button>
-            </span>
-          </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is customer name 2 <br>
-              <small class="fst-italic">AP020919970001 ~ Rp 2.500.000</small>
-            </span>
-            <span>
-              <button type="button" class="mt-1 btn btn-outline-success btn-sm">Pay Now</button>
-            </span>
-          </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is customer name 3 <br>
-              <small class="fst-italic">AP020919970001 ~ Rp 2.500.000</small>
-            </span>
-            <span>
-              <button type="button" class="mt-1 btn btn-outline-success btn-sm">Pay Now</button>
-            </span>
-          </div>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          <?php foreach( $neworders as $neworder ) : ?>
+            <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
+              <span>
+                <?= $neworder->name?> <br>
+                <small class="fst-italic"><?= $neworder->invoice?> ~ <?= $neworder->final_price?></small>
+              </span>
+              <span>
+                <a href="<?=base_url('penjualan/keranjang/'.$neworder->sale_id)?>" class="mt-1 btn btn-outline-success btn-sm">Bayar Sekarang</a>
+              </span>
+            </div>
+          <?php endforeach; ?>
         </div>
       </li>
       <!-- History Dropdown Menu -->
@@ -231,10 +215,7 @@
     </ul>
   </nav>
   <!-- /.navbar -->
-
-  <!-- Aplikasi penjualan, persediaan, kehadiran, dan laporan -->
-  <!-- Apekela -->
-
+  
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4 sidebar-dark-info">
     <!-- Brand Logo -->

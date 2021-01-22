@@ -81,6 +81,16 @@ class Sal_neworder_model extends CI_Model
     return $query;
   }
 
+  public function get_neworder() 
+  {
+    $this->db->from('sal_sales');
+    $this->db->where('status', 'Ditunda');
+    
+    $query = $this->db->get();
+    
+    return $query;
+  }
+
   public function delete($id)
   {
     $this->db->where('sale_id', $id);

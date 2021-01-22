@@ -49,7 +49,7 @@ class Sal_neworder extends CI_Controller {
 						<i class="fas fa-info-circle"></i> Rincian
 					</button>
 					<a href="'.base_url('penjualan/pesanan_baru/hapus/').$sale->sale_id.'" onclick="return confirm(\'Anda akan menghapus data pesanan, yakin?\');" class="mr-1 btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i> Hapus</a>
-					<a href="'.base_url('penjualan/keranjang/'.$sale->sale_id).'" class="btn btn-sm btn-outline-success"><i class="far fa-paper-plane"></i> Bayar Pesanan</a>
+					<a href="'.base_url('penjualan/keranjang/'.$sale->sale_id).'" class="btn btn-sm btn-outline-success"><i class="far fa-paper-plane"></i> Bayar Sekarang</a>
 					</div>
 					';
         $data[] = $row;

@@ -124,4 +124,12 @@ Class Functions {
 
     return $result->result();
   }
+
+  function get_neworder() {
+    $this->ci->load->model('Sal_neworder_model');
+
+    $data = $this->ci->Sal_neworder_model->get_neworder()->result();
+
+    return $data;
+  }
 }
