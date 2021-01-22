@@ -267,7 +267,7 @@
               <li class="nav-item">
                 <a href="<?=base_url('penjualan/daftar_penjualan')?>" class="nav-link <?= $this->uri->segment(2) == 'daftar_penjualan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Penjualan Keseluruhan</p>
+                  <p>Daftar Penjualan</p>
                 </a>
               </li>
             </ul>
