@@ -120,7 +120,7 @@ class Pro_categories extends CI_Controller {
 			$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
 			redirect('produk/kategori');
 		} else {
-			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar produk, silahkan hapus semua data produk yang berhubungan dengan kategori ini.');
+			$this->session->set_flashdata('used', 'Data sedang digunakan di daftar bahan, silahkan hapus semua data bahan yang berhubungan dengan kategori ini.');
 			redirect('produk/kategori');
 		}
 	}

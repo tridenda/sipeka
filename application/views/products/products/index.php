@@ -41,6 +41,7 @@
               <th>Kategori</th>
               <th>Harga</th>
               <th>Aksi</th>
+              <th>Aksi</th>
             </tr>
           </thead>
         </table>
@@ -77,6 +78,10 @@
           "className": 'text-center',
           "width": '9rem',
           "height": '9rem'
+        },
+        {
+          "targets": [6],
+          "visible": false
         }
       ]
     });

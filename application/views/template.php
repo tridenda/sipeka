@@ -117,7 +117,8 @@
     }
   </style>
 </head>
-<body class="hold-transition sidebar-mini layout-navbar-fixed <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'sidebar-collapse' : ''?>">
+<body class="hold-transition sidebar-mini layout-navbar-fixed <?= $this->uri->segment(1) == 'laporan_persediaan'
+|| $this->uri->segment(2) == 'keranjang' ? 'sidebar-collapse' : ''?>">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -144,52 +145,36 @@
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
+       <?php $neworders = $this->functions->get_neworder() ?>
+
         <a class="nav-link border-bottom" data-toggle="dropdown" href="#">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="badge badge-danger navbar-badge">2</span>
+          Pesanan Baru <i class="fas fa-shopping-cart"></i>
+          <span class="badge badge-danger navbar-badge"><?=count($neworders)?></span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
           <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
             <span class="ml-3 mt-2 text-secondary">
-              Belum bayar (3)
+              Belum bayar (<?=count($neworders)?>)
             </span>
             <span class="mr-3 mt-2">
-              <a href="unpaid.html" class="link-success">Lihat semuanya</a>
+              <a href="<?=base_url('penjualan/pesanan_baru')?>" class="link-success">Lihat semuanya</a>
             </span>
           </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is customer name 1 <br>
-              <small class="fst-italic">AP020919970001 ~ Rp 2.500.000</small>
-            </span>
-            <span>
-              <button type="button" class="mt-1 btn btn-outline-success btn-sm">Pay Now</button>
-            </span>
-          </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is customer name 2 <br>
-              <small class="fst-italic">AP020919970001 ~ Rp 2.500.000</small>
-            </span>
-            <span>
-              <button type="button" class="mt-1 btn btn-outline-success btn-sm">Pay Now</button>
-            </span>
-          </div>
-          <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
-            <span>
-              This is customer name 3 <br>
-              <small class="fst-italic">AP020919970001 ~ Rp 2.500.000</small>
-            </span>
-            <span>
-              <button type="button" class="mt-1 btn btn-outline-success btn-sm">Pay Now</button>
-            </span>
-          </div>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          <?php foreach( $neworders as $neworder ) : ?>
+            <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
+              <span>
+                <?= $neworder->name?> <br>
+                <small class="fst-italic"><?= $neworder->invoice?> ~ <?= indo_currency($neworder->final_price)?></small>
+              </span>
+              <span>
+                <a href="<?=base_url('penjualan/keranjang/'.$neworder->sale_id)?>" class="mt-1 btn btn-outline-success btn-sm">Bayar Sekarang</a>
+              </span>
+            </div>
+          <?php endforeach; ?>
         </div>
       </li>
       <!-- History Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link border-bottom ml-3" data-toggle="dropdown" href="#">
           <i class="fas fa-file-signature"></i>
           <span class="badge badge-info navbar-badge">15</span>
@@ -227,14 +212,11 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li>
+      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
-
-  <!-- Aplikasi penjualan, persediaan, kehadiran, dan laporan -->
-  <!-- Apekela -->
-
+  
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4 sidebar-dark-info">
     <!-- Brand Logo -->
@@ -268,8 +250,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'penjualan' ? 'menu-open active' : ''?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'penjualan' ? 'menu-open active' : ''?>">
               <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Penjualan
@@ -278,21 +260,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url()?>" class="nav-link">
+                <a href="<?=base_url('penjualan/pesanan_baru')?>" class="nav-link <?= $this->uri->segment(2) == 'pesanan_baru' || $this->uri->segment(2) == 'keranjang' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pesanan Baru</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url()?>" class="nav-link">
+                <a href="<?=base_url('penjualan/daftar_penjualan')?>" class="nav-link <?= $this->uri->segment(2) == 'daftar_penjualan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Belum Bayar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?=base_url()?>assets/AdminLTE-3.0.5/charts/flot.html" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>Histori Transaksi</p>
+                  <p>Daftar Penjualan</p>
                 </a>
               </li>
             </ul>

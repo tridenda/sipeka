@@ -1,15 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Member_model extends CI_Model 
+class Sal_sale_model extends CI_Model 
 {
-
   // Begin: Datatables
-  var $column_order = array(null, 'name', 'gender', 'phone', 'address', 'point'); //set column field database for datatable orderable
-  var $column_search = array('name', 'gender', 'phone', 'address', 'point'); //set column field database for datatable searchable
-  var $order = array('member_id' => 'desc'); // default order 
+  var $column_order = array(null); //set column field database for datatable orderable
+  var $column_search = array('sal_sales.name', 'members.name'); //set column field database for datatable searchable
+  var $order = array('sale_id' => 'desc'); // default order 
 
   private function _get_datatables_query() {
-      $this->db->from('members');
+      $this->db->select('sal_sales.*, users.name as user_name', 'sales.name as member_name');
+      $this->db->from('sal_sales');
+      $this->db->join('users', 'sal_sales.user_id = users.user_id', 'left');
+      $this->db->join('members', 'sal_sales.member_id = members.member_id', 'left');
+      $this->db->where('status', 'Lunas');
+      $this->db->order_by('sale_id', 'DESC');
       $i = 0;
       foreach ($this->column_search as $member) { // loop column 
           if(@$_POST['search']['value']) { // if datatable send POST for search
@@ -52,47 +56,4 @@ class Member_model extends CI_Model
       return $this->db->count_all_results();
   }
   // End: Datatables
-  
-  public function get($id = null) 
-  {
-    $this->db->from('members');
-    if( $id != null ) {
-      $this->db->where('member_id', $id);
-    }
-    $this->db->order_by('member_id', 'desc');
-    $query = $this->db->get();
-
-    return $query;
-  }
-
-  public function add($post)
-  {
-    $params['name'] = htmlspecialchars($post['name']);
-    $params['gender'] = htmlspecialchars($post['gender']);
-    $params['phone'] = htmlspecialchars($post['phone']);
-    if( !empty($post["address"]) ) {
-      $params['address'] = htmlspecialchars($post['address']);
-    }
-    $params['point'] = htmlspecialchars($post['point']);
-    $this->db->insert('members', $params);
-  }
-
-  public function edit($post)
-  {
-    $params['name'] = htmlspecialchars($post['name']);
-    $params['gender'] = htmlspecialchars($post['gender']);
-    $params['phone'] = htmlspecialchars($post['phone']);
-    if( !empty($post["address"]) ) {
-      $params['address'] = htmlspecialchars($post['address']);
-    }
-    $params['updated'] = date('Y-m-d H:i:s');
-    $this->db->where('member_id', $post['member_id']);
-    $this->db->update('members', $params); 
-  }
-
-  public function delete($id)
-  {
-    $this->db->where('member_id', $id);
-		$this->db->delete('members');
-  }
 }

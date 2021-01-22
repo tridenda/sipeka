@@ -63,6 +63,17 @@ $route['kasir'] = 'auth/login_cashier';
 // End: Others
 
 
+// Begin: Sales
+// New order links
+$route['penjualan/pesanan_baru'] = 'sal_neworders';
+$route['penjualan/pesanan_baru/hapus/(:num)'] = 'sal_neworders/delete/$1';
+// Cart links
+$route['penjualan/keranjang/(:num)'] = 'sal_cart/add/$1';
+// Sale list links
+$route['penjualan/daftar_penjualan'] = 'sal_sales';
+// End: Sales
+
+
 // Begin: Products
 // Product Links
 $route['produk'] = 'pro_products';
@@ -96,7 +107,6 @@ $route['satuan/tambah'] = 'units/add';
 $route['satuan/ubah/(:num)'] = 'units/edit/$1';
 $route['satuan/hapus'] = 'units/delete';
 // End: Materials
-
 
 
 // Begin: Stocks

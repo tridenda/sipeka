@@ -33,6 +33,13 @@ class Pro_products extends CI_Controller {
 						<i class="far fa-trash-alt"></i> Hapus
 					</button>
 				</form>';
+				$row[] = '
+          <button class="btn btn-sm btn-primary" id="select" 
+						data-barcode="'.$product->barcode.'"
+						data-product_id="'.$product->product_id.'"
+						data-price="'.$product->price.'">
+							<i class="fas fa-check"></i> Pilih
+          </button>';
 				$data[] = $row;
 		}
 		$output = array(
