@@ -256,7 +256,7 @@
       "processing": true,
       "serverSide": true,
       "ajax": {
-        "url": "<?=base_url('Sal_neworder/get_ajax')?>",
+        "url": "<?=base_url('Sal_neworders/get_ajax')?>",
         "type": "POST"
       },
       "columnDefs": [

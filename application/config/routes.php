@@ -65,14 +65,12 @@ $route['kasir'] = 'auth/login_cashier';
 
 // Begin: Sales
 // New order links
-$route['penjualan/pesanan_baru'] = 'sal_neworder';
-$route['penjualan/pesanan_baru/hapus/(:num)'] = 'sal_neworder/delete/$1';
+$route['penjualan/pesanan_baru'] = 'sal_neworders';
+$route['penjualan/pesanan_baru/hapus/(:num)'] = 'sal_neworders/delete/$1';
 // Cart links
 $route['penjualan/keranjang'] = 'sal_cart/empty';
 // Sale list links
-$route['penjualan/daftar_penjualan/hari_ini'] = 'sal_sale_list/empty';
-$route['penjualan/daftar_penjualan/bulan_ini'] = 'sal_sale_list/empty';
-$route['penjualan/daftar_penjualan/tahun_ini'] = 'sal_sale_list/empty';
+$route['penjualan/daftar_penjualan'] = 'sal_sales';
 // End: Sales
 
 

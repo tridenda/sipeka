@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sal_neworder extends CI_Controller {
+class Sal_neworders extends CI_Controller {
 
 	public function __construct()
 	{

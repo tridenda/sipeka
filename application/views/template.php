@@ -163,7 +163,7 @@
             <div class="ml-3 mr-3 d-flex mb-2 justify-content-between border-bottom">
               <span>
                 <?= $neworder->name?> <br>
-                <small class="fst-italic"><?= $neworder->invoice?> ~ <?= $neworder->final_price?></small>
+                <small class="fst-italic"><?= $neworder->invoice?> ~ <?= indo_currency($neworder->final_price)?></small>
               </span>
               <span>
                 <a href="<?=base_url('penjualan/keranjang/'.$neworder->sale_id)?>" class="mt-1 btn btn-outline-success btn-sm">Bayar Sekarang</a>
@@ -264,34 +264,11 @@
                   <p>Pesanan Baru</p>
                 </a>
               </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="<?=base_url('penjualan/daftar_penjualan')?>" class="nav-link <?= $this->uri->segment(2) == 'daftar_penjualan' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
-                  <p>
-                    Daftar Penjualan
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
+                  <p>Penjualan Keseluruhan</p>
                 </a>
-                <ul class="nav nav-treeview" style="display: none;">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Penjualan Keseluruhan</p>
-                    </a>
-                  </li>
-                  <!-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Penjualan Bulan Ini</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Penjualan Tahun Ini</p>
-                    </a>
-                  </li> -->
-                </ul>
               </li>
             </ul>
           </li>
