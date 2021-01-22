@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sal_sales extends CI_Controller {
+class Sal_neworder extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->functions->not_login_cashier();
-		$this->load->model('Sal_sale_model');
+		$this->load->model('Sal_neworder_model');
 		$this->load->library('form_validation');
 	}
 
 	function get_ajax() {
-		$list = $this->Sal_sale_model->get_datatables();
+		$list = $this->Sal_neworder_model->get_datatables();
 		$data = array();
 		$no = @$_POST['start'];
 		foreach ($list as $sale) {
@@ -38,8 +38,8 @@ class Sal_sales extends CI_Controller {
 						data-date="'.indo_date($sale->date, TRUE, TRUE).'"
 						data-invoice="'.$sale->invoice.'"
 						data-name="'.$sale->name.'"
-						data-total_price="'.$sale->total_price.'"
-						data-discount="'.$sale->discount.'"
+						data-total_price="'.indo_currency($sale->total_price).'"
+						data-discount="'.indo_currency($sale->discount).'"
 						data-final_price="'.indo_currency($sale->final_price).'"
 						data-cash="'.indo_currency($sale->cash).'"
 						data-remaining="'.indo_currency($sale->remaining).'"
@@ -56,8 +56,8 @@ class Sal_sales extends CI_Controller {
     }
 		$output = array(
 								"draw" => @$_POST['draw'],
-								"recordsTotal" => $this->Sal_sale_model->count_all(),
-								"recordsFiltered" => $this->Sal_sale_model->count_filtered(),
+								"recordsTotal" => $this->Sal_neworder_model->count_all(),
+								"recordsFiltered" => $this->Sal_neworder_model->count_filtered(),
 								"data" => $data,
 						);
 		// output to json format
@@ -71,7 +71,7 @@ class Sal_sales extends CI_Controller {
 		}
 
 		// Add new order
-		if( isset($_POST['neworder']) ) {
+		if( isset($_POST['neworder-member']) ) {
 			// Set rules form
 			$this->form_validation->set_rules('member_name_modal', 'Nama', 'required');
 			// To make sure user choosing the member
@@ -85,9 +85,27 @@ class Sal_sales extends CI_Controller {
 				);
 			} else {
 				$post = $this->input->post(null, TRUE);
-				$post['invoice'] = $this->Sal_sale_model->invoice_no();
-				$this->Sal_sale_model->add($post);
-				$sale = $this->Sal_sale_model->get(null, TRUE)->row();
+				$post['invoice'] = $this->Sal_neworder_model->invoice_no();
+				$this->Sal_neworder_model->add($post);
+				$sale = $this->Sal_neworder_model->get(null, TRUE)->row();
+
+				redirect('penjualan/keranjang/'.$sale->sale_id);
+			}
+		} else {
+			// Set rules form
+			$this->form_validation->set_rules('member_name_modal', 'Nama', 'required');
+
+			// Set condition form, if FALSE process is canceled
+			if( $this->form_validation->run() == FALSE ) {
+				$post = $this->input->post(null, TRUE);	
+				$data = array(
+					'row' => $post
+				);
+			} else {
+				$post = $this->input->post(null, TRUE);
+				$post['invoice'] = $this->Sal_neworder_model->invoice_no();
+				$this->Sal_neworder_model->add($post);
+				$sale = $this->Sal_neworder_model->get(null, TRUE)->row();
 
 				redirect('penjualan/keranjang/'.$sale->sale_id);
 			}
@@ -97,7 +115,7 @@ class Sal_sales extends CI_Controller {
 	
 	public function delete($id)
 	{
-		$this->Sal_sale_model->delete($id);
+		$this->Sal_neworder_model->delete($id);
 
 		$this->session->set_flashdata('deleted', 'Data berhasil dihapus.');
 		redirect('penjualan/pesanan_baru');

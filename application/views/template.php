@@ -145,7 +145,7 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link border-bottom" data-toggle="dropdown" href="#">
-          <i class="fas fa-shopping-cart"></i>
+          Pesanan Baru <i class="fas fa-shopping-cart"></i>
           <span class="badge badge-danger navbar-badge">2</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -189,7 +189,7 @@
         </div>
       </li>
       <!-- History Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link border-bottom ml-3" data-toggle="dropdown" href="#">
           <i class="fas fa-file-signature"></i>
           <span class="badge badge-info navbar-badge">15</span>
@@ -227,7 +227,7 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li>
+      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -295,10 +295,10 @@
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Penjualan Hari Ini</p>
+                      <p>Penjualan Keseluruhan</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Penjualan Bulan Ini</p>
@@ -309,7 +309,7 @@
                       <i class="far fa-circle nav-icon"></i>
                       <p>Penjualan Tahun Ini</p>
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
               </li>
             </ul>

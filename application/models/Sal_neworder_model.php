@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sal_sale_model extends CI_Model 
+class Sal_neworder_model extends CI_Model 
 {
   // Begin: Datatables
   var $column_order = array(null); //set column field database for datatable orderable
@@ -12,6 +12,7 @@ class Sal_sale_model extends CI_Model
       $this->db->from('sal_sales');
       $this->db->join('users', 'sal_sales.user_id = users.user_id', 'left');
       $this->db->join('members', 'sal_sales.member_id = members.member_id', 'left');
+      $this->db->where('status', 'Ditunda');
       $this->db->order_by('sale_id', 'DESC');
       $i = 0;
       foreach ($this->column_search as $member) { // loop column 

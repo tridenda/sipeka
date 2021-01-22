@@ -26,7 +26,7 @@
                   <i class="fas fa-question-circle"></i> Tutorial
                 </button>
               </form>
-              <button data-toggle="modal" data-target="#neworder-regular-modal" class="mr-1 btn btn-info">
+              <button data-toggle="modal" data-target="#neworder-nonmember-modal" class="mr-1 btn btn-info">
                 <i class="fa fa-plus"></i> Tambah Pesanan [Umum]
               </button>
               <button data-toggle="modal" data-target="#neworder-member-modal" class="btn btn-primary">
@@ -117,7 +117,7 @@
 </div>
 <!-- End: Detail -->
 
-<!-- Begin: New-order -->
+<!-- Begin: New-order Member -->
 <div class="modal fade" id="neworder-member-modal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -168,7 +168,7 @@
           <!-- /.card-body -->
 
           <div class="card-footer">
-            <button name="neworder" type="submit" class="btn btn-primary float-right">
+            <button name="neworder-member" type="submit" class="btn btn-primary float-right">
               <i class="far fa-paper-plane"></i> Lanjutkan Pesanan
             </button>
           </div>
@@ -179,7 +179,44 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- End: New-order -->
+<!-- End: New-order Member -->
+
+<!-- Begin: New-order Non-member -->
+<div class="modal fade" id="neworder-nonmember-modal">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Masukan nama
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="member_name_modal">Nama *</label>
+              <input name="member_name_modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan">
+              <small class="text-red font-italic"><?php echo form_error('member_name_modal'); ?></small>
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <button name="neworder-nonmember" type="submit" class="btn btn-primary float-right">
+              <i class="far fa-paper-plane"></i> Lanjutkan Pesanan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- End: New-order Non-member -->
 
 <script>
   // Begin: Members table
@@ -219,7 +256,7 @@
       "processing": true,
       "serverSide": true,
       "ajax": {
-        "url": "<?=base_url('Sal_sales/get_ajax')?>",
+        "url": "<?=base_url('Sal_neworder/get_ajax')?>",
         "type": "POST"
       },
       "columnDefs": [

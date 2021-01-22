@@ -65,8 +65,8 @@ $route['kasir'] = 'auth/login_cashier';
 
 // Begin: Sales
 // New order links
-$route['penjualan/pesanan_baru'] = 'sal_sales';
-$route['penjualan/pesanan_baru/hapus/(:num)'] = 'sal_sales/delete/$1';
+$route['penjualan/pesanan_baru'] = 'sal_neworder';
+$route['penjualan/pesanan_baru/hapus/(:num)'] = 'sal_neworder/delete/$1';
 // Cart links
 $route['penjualan/keranjang'] = 'sal_cart/empty';
 // Sale list links
