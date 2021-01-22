@@ -7,7 +7,7 @@ class Sal_cart_model extends CI_Model
     $query = $this->db->query("SELECT MAX(cart_id) AS cart_no FROM sal_cart");
     if($query->num_rows() > 0) {
       $row = $query->row();
-      $cart_no = ((int)$row->cart_no) + 1;
+      $cart_no = ((int) $row->cart_no) + 1;
     } else {
       $cart_no = "1";
     }
@@ -21,5 +21,19 @@ class Sal_cart_model extends CI_Model
       'total' => ($post['price'] * $post['quantity'])
     );
     $this->db->insert('sal_cart', $params);
+  }
+
+  public function get_cart($params = null, $sale_id = null)
+  {
+    $this->db->select('sal_cart.*, pro_products.barcode AS product_barcode, pro_products.name AS product_name, pro_products.price AS product_price');
+    $this->db->from('sal_cart');
+    $this->db->join('pro_products', 'pro_products.product_id = sal_cart.product_id');
+    if( $params != null ) {
+      $this->db->where($params);
+    }
+    $this->db->where('sale_id', $sale_id);
+    $query = $this->db->get();
+
+    return $query;
   }
 }

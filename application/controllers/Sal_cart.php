@@ -10,9 +10,10 @@ class Sal_cart extends CI_Controller {
 		$this->load->model(['Sal_neworder_model', 'Sal_cart_model']);
 	}
 
-	public function add($id)
+	public function index($id)
 	{
 		$data['row'] = $this->Sal_neworder_model->get($id)->row();
+		$data['cart'] = $this->Sal_cart_model->get_cart(null, $id);
 		$this->template->load('template', 'sales/cart/index', $data);
 	}
 
@@ -33,4 +34,9 @@ class Sal_cart extends CI_Controller {
 		echo json_encode($params);
 	}
 
+	function cart_data($id)
+	{
+		$data['cart'] = $this->Sal_cart_model->get_cart(null, $id);
+		$this->load->view('sales/cart/cart', $data);
+	}
 }

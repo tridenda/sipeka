@@ -86,27 +86,8 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>KB0209970004</td>
-                  <td>Mie Kocok Kaki Sapi + Baso + Iga</td>
-                  <td>Rp 25.000</td>
-                  <td>2</td>
-                  <td>Rp 2.000</td>
-                  <td>Rp 48.000</td>
-                  <td style="width: 5rem">
-                    <form action="'.base_url('daftar_bahan/hapus').'" method="post">
-                      <a class="btn btn-sm btn-outline-primary" href="'.base_url('daftar_bahan/ubah/').$material->material_id.'">
-                        <i class="far fa-edit"></i> Ubah
-                      </a>
-                      <input name="material_id" type="hidden" value="'.$material->material_id.'">
-                      <button onclick="return confirm('Anda akan menghapus data bahan, yakin?');" class="btn btn-sm btn-outline-danger">
-                        <i class="far fa-trash-alt"></i> Hapus
-                      </button>
-                    </form>
-                  </td>
-                </tr>
+              <tbody id="cart-table">
+                <?php $this->view('sales/cart/cart')?>
               </tbody>
             </table>
           </div>
@@ -213,7 +194,6 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- End: Products -->
-
 <script>
   $(document).ready(function() {
     $(document).on('click', '#select', function () {
@@ -282,7 +262,9 @@
           dataType: 'json',
           success: function(result) {
               if(result.success == true) {
-                alert('Berhasil tambah produk ke keranjang')
+                $('#cart-table').load('<?=base_url('sal_cart/cart_data/').$row->sale_id?>', function() {
+
+                })
               } else {
                 alert('Gagal tambah produk ke keranjang')
             }
