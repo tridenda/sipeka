@@ -7,7 +7,7 @@
     } else if( $this->uri->segment(2) == 'daftar_penjualan' ) {
       echo "<li class=\"breadcrumb-item active\">Daftar Penjualan</li>";
     } else {
-      echo "<li class=\"breadcrumb-item active\">Pesanan Baru</li>";
+      echo "<li class=\"breadcrumb-item active\">Keranjang</li>";
     } 
   ?>
 </ol>

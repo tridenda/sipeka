@@ -117,7 +117,8 @@
     }
   </style>
 </head>
-<body class="hold-transition sidebar-mini layout-navbar-fixed <?= $this->uri->segment(1) == 'laporan_persediaan' ? 'sidebar-collapse' : ''?>">
+<body class="hold-transition sidebar-mini layout-navbar-fixed <?= $this->uri->segment(1) == 'laporan_persediaan'
+|| $this->uri->segment(2) == 'keranjang' ? 'sidebar-collapse' : ''?>">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -259,7 +260,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('penjualan/pesanan_baru')?>" class="nav-link <?= $this->uri->segment(2) == 'pesanan_baru' ? 'active' : ''?>">
+                <a href="<?=base_url('penjualan/pesanan_baru')?>" class="nav-link <?= $this->uri->segment(2) == 'pesanan_baru' || $this->uri->segment(2) == 'keranjang' ? 'active' : ''?>">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Pesanan Baru</p>
                 </a>
