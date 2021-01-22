@@ -26,34 +26,37 @@
         <div class="form-group">
           <label for="user_id" class="p-1 col-sm-3 col-form-label col-form-label-sm">Pramuniaga</label>
           <div class="p-1 col-sm-9">
-            <input type="user_id" class="form-control form-control-sm" id="user_id" placeholder="Nama pramuniaga" readonly>
+            <input type="text" class="form-control form-control-sm" id="user_id" value="<?=ucfirst($this->functions->user_login()->name)?>" readonly>
           </div>
         </div>
         <div class="form-group">
           <label for="Pelanggan" class="p-1 col-sm-3 col-form-label col-form-label-sm">Pelanggan</label>
           <div class="p-1 col-sm-9">
-            <input type="Pelanggan" class="form-control form-control-sm" id="Pelanggan" placeholder="Nama pelanggan" readonly>
+            <input type="Pelanggan" class="form-control form-control-sm" id="Pelanggan" value="<?=$row->name?>" readonly>
           </div>
         </div>
       </div>
       <div class="col-sm bg-white ml-1 mr-1">
         <div class="form-group">
-          <label for="user_id" class="p-1 col-sm-3 col-form-label col-form-label-sm">Produk</label>
+          <label for="barcode" class="p-1 col-sm-3 col-form-label col-form-label-sm">Kodebar</label>
           <div class="p-1 col-sm-7">
-            <input type="user_id" class="form-control form-control-sm" id="user_id" placeholder="Klik tombol cari untuk memilih" readonly>
+            <input type="hidden" id="product_id">
+            <input type="hidden" id="sale_id" value="<?=$row->sale_id?>">
+            <input type="hidden" id="price">
+            <input type="text" class="form-control form-control-sm" id="barcode" placeholder="Klik tombol cari untuk memilih" readonly>
           </div>
           <div class="p-1 col-sm-2">
-            <button class="btn btn-outline-primary btn-sm w-100"><i class="fas fa-search"></i></button>
+            <button class="btn btn-outline-primary btn-sm w-100" data-toggle="modal" data-target="#product-modal"><i class="fas fa-search"></i></button>
           </div>
         </div>
         <div class="form-group">
-          <label for="Pelanggan" class="p-1 col-sm-3 col-form-label col-form-label-sm">Jumlah</label>
+          <label for="quantity" class="p-1 col-sm-3 col-form-label col-form-label-sm">Jumlah</label>
           <div class="p-1 col-sm-9">
-            <input type="number" class="form-control form-control-sm" id="Pelanggan">
+            <input type="number" class="form-control form-control-sm" id="quantity" value="1">
           </div>
         </div>
         <div class="form-group float-right mt-2">
-          <button class="btn btn-outline-primary btn-sm">
+          <button id="add_cart" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-cart-plus"></i> Tambah Ke Keranjang
           </button>
         </div>
@@ -176,3 +179,116 @@
   </div>
   <!-- /.content -->
 </div>
+
+<!-- Begin: Products -->
+<div class="modal fade" id="product-modal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Pilih produk
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table id="product-table" class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>No</th>
+            <th>Kodebar</th>
+            <th>Nama</th>
+            <th>Kategori</th>
+            <th>Harga</th>
+            <th>Aksi</th>
+            <th>Aksi</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- End: Products -->
+
+<script>
+  $(document).ready(function() {
+    $(document).on('click', '#select', function () {
+      var barcode = $(this).data('barcode');
+      var product_id = $(this).data('product_id');
+      var price = $(this).data('price');
+      $('#barcode').val(barcode);
+      $('#product_id').val(product_id);
+      $('#price').val(price);
+      $('#product-modal').modal('hide');
+    })
+  })
+
+  $(function () {
+    $("#product-table").DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "pageLength": 6,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        "url": "<?=base_url('pro_products/get_ajax')?>",
+        "type": "POST"
+      },
+      "columnDefs": [
+        {
+          "targets": [0,5],
+          "orderable": false
+        },
+        {
+          "targets": [6],
+          "className": 'text-center',
+          "width": '5rem'
+        },
+        {
+          "targets": [5],
+          "visible": false
+        },
+      ]
+    });
+  });
+
+  $(document).ready(function() {
+    $(document).on('click', '#add_cart', function () {
+      var product_id = $('#product_id').val();
+      var sale_id = $('#sale_id').val();
+      var price = $('#price').val();
+      var quantity = $('#quantity').val();
+      console.log(sale_id);
+      console.log(product_id);
+      console.log(price);
+      console.log(quantity);
+      if( product_id == '' ) {
+        alert('Produk belum dipilih')
+        $('#barcode').focus(); 
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: '<?=base_url('Sal_cart/process')?>',
+          data: {'add_cart' : true, 'product_id' : product_id, 'price' : price, 'quantity' : quantity, 'sale_id' : sale_id},
+          dataType: 'json',
+          success: function(result) {
+              if(result.success == true) {
+                alert('Berhasil tambah produk ke keranjang')
+              } else {
+                alert('Gagal tambah produk ke keranjang')
+            }
+          }
+        })
+      }
+    })
+  })
+</script>
