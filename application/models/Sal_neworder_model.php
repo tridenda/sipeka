@@ -139,4 +139,9 @@ class Sal_neworder_model extends CI_Model
     $this->db->where('sale_id', $post["sale_id"]);
     $this->db->update('sal_sales', $params); 
   }
+
+  public function add_sale_detail($params)
+  {
+    $this->db->insert_batch('sal_details', $params);
+  }
 }

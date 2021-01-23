@@ -14,6 +14,10 @@ class Sal_cart extends CI_Controller {
 	{
 		$data['row'] = $this->Sal_neworder_model->get($id)->row();
 		$data['cart'] = $this->Sal_cart_model->get_cart(null, $id);
+		if( $data['row'] == null || $data['row']->status == 'Lunas') {
+			$this->session->set_flashdata('empty', 'Data tidak ditemukan.');
+			redirect('penjualan/pesanan_baru');
+		}
 		$this->template->load('template', 'sales/cart/index', $data);
 	}
 
@@ -38,7 +42,23 @@ class Sal_cart extends CI_Controller {
 
 		if( isset($_POST['paynow']) ) {
 			$this->Sal_neworder_model->update($post);
+			$cart = $this->Sal_cart_model->get_cart(null, $post['sale_id'])->result();
+			$rows = [];
+			foreach( $cart as $crt => $value) {
+				array_push($rows, array(
+						'sale_id' => $post['sale_id'],
+						'product_id' => $value->product_id,
+						'price' => $value->price,
+						'product_id' => $value->product_id,
+						'quantity' => $cart->product_id,
+						'discount' => $cart->discount,
+						'total' => $cart->total
+					)
+				);
+			}
+			$this->Sal_neworder_model->add_sale_detail($rows);
 			$this->Sal_cart_model->delete_all_cart($post);
+
 		}
 
 		if( $this->db->affected_rows() > 0 ) {
