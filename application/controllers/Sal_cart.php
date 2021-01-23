@@ -50,15 +50,14 @@ class Sal_cart extends CI_Controller {
 						'product_id' => $value->product_id,
 						'price' => $value->price,
 						'product_id' => $value->product_id,
-						'quantity' => $cart->product_id,
-						'discount' => $cart->discount,
-						'total' => $cart->total
+						'quantity' => $value->product_id,
+						'discount' => $value->discount,
+						'total' => $value->total
 					)
 				);
 			}
 			$this->Sal_neworder_model->add_sale_detail($rows);
 			$this->Sal_cart_model->delete_all_cart($post);
-
 		}
 
 		if( $this->db->affected_rows() > 0 ) {

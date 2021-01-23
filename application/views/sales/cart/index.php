@@ -498,7 +498,12 @@
             'date' : date},
           dataType: 'json',
           success: function(result) {
-              
+              if(result.success) {
+                alert('Transaksi berhasil');
+              } else {
+                alert('Transaksi gagal');
+              }
+              location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'
           }
         })
         }
