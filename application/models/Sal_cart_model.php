@@ -36,4 +36,37 @@ class Sal_cart_model extends CI_Model
 
     return $query;
   }
+  
+  public function update_cart_quantity($post = null, $sale_id = null)
+  {
+    $sql = "UPDATE sal_cart SET price = '$post[price]',
+            quantity = quantity + '$post[quantity]',
+            total = '$post[price]' * quantity
+            WHERE sale_id = $sale_id && product_id = '$post[product_id]'";
+    $this->db->query($sql);
+  }
+
+  public function delete_cart($cart_id)
+  {
+    $this->db->where('cart_id', $cart_id);
+		$this->db->delete('sal_cart');
+  }
+
+  public function delete_all_cart($post)
+  {
+    $this->db->where('sale_id', $post['sale_id']);
+		$this->db->delete('sal_cart');
+  }
+
+  public function update_cart($post)
+  { 
+    $params = array(
+      'price' => $post['price'],
+      'quantity' => $post['quantity'],
+      'discount' => $post['discount'],
+      'total' => $post['total']
+    );
+    $this->db->where('cart_id',  $post['cart_id']);
+    $this->db->update('sal_cart', $params);
+  }
 }
