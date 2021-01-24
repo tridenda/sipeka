@@ -25,7 +25,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>0</h3>
+              <h3><?=$this->functions->get_product()?></h3>
 
               <p>Produk</p>
             </div>
@@ -99,11 +99,11 @@
         </div>
         <div class="card-body">
           <!-- Bar chart -->
-          <div class="box-body">
+          <!-- <div class="box-body">
               <div class="chart">
                   <canvas id="myChart1"></canvas>
               </div>
-          </div>
+          </div> -->
         </div>
         <!-- /.card-body -->
       </div>

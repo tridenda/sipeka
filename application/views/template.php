@@ -557,6 +557,12 @@
             } else if( $this->uri->segment(1) == 'pengguna' || $this->uri->segment(2) == 'pramuniaga' ) {
               $modal_title = 'Pengguna';
               $video_type = 'users';
+            } else if( $this->uri->segment(1) == 'produk' || $this->uri->segment(2) == 'daftar_produk' ) {
+              $modal_title = 'produk';
+              $video_type = 'pro_products';
+            } else if( $this->uri->segment(1) == 'penjualan' || $this->uri->segment(2) == 'pesanan_baru' ) {
+              $modal_title = 'penjualan';
+              $video_type = 'sal_sales';
             }
           ?>
           <h4 class="modal-title">Tutorial <?=$modal_title?></h4>
@@ -593,6 +599,12 @@
             $base_url = base_url('pengguna/pramuniaga');
           } else if( $this->uri->segment(1) == 'pengguna' && $this->uri->segment(2) == 'pelanggan' ) {
             $base_url = base_url('pengguna/pelanggan');
+          } else if( $this->uri->segment(1) == 'produk' && $this->uri->segment(2) == 'daftar_produk' ) {
+            $base_url = base_url('produk/daftar_produk');
+          } else if( $this->uri->segment(1) == 'produk' && $this->uri->segment(2) == 'kategori' ) {
+            $base_url = base_url('produk/kategori');
+          } else if( $this->uri->segment(1) == 'penjualan' && $this->uri->segment(2) == 'pesanan_baru' ) {
+            $base_url = base_url('penjualan/pesanan_baru');
           }
           ?>
           <a class="close" href="<?=$base_url?>">×</a>

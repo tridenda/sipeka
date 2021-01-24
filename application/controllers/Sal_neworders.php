@@ -67,10 +67,6 @@ class Sal_neworders extends CI_Controller {
 
 	public function index()
 	{
-		if( isset($_POST['tutorial']) ) {
-			$data['tutorial'] = TRUE;
-		}
-
 		// Add new order
 		if( isset($_POST['neworder-member']) ) {
 			// Set rules form
@@ -113,7 +109,10 @@ class Sal_neworders extends CI_Controller {
 				redirect('penjualan/keranjang/'.$sale->sale_id);
 			}
 		}
-		$this->template->load('template', 'sales/new-orders/index');
+		if( isset($_POST['tutorial']) ) {
+			$data['tutorial'] = TRUE;
+		}
+		$this->template->load('template', 'sales/new-orders/index', $data);
 	}
 	
 	public function delete($id)
