@@ -497,7 +497,7 @@
           success: function(result) {
             if(result.success) {
                 alert('Transaksi berhasil');
-                location.href='<?=base_url('penjualan/cetak_struk/'.$row->sale_id)?>'
+                location.href='<?=base_url('penjualan/keranjang/cetak_struk/'.$row->sale_id)?>'
               } else {
                 alert('Transaksi gagal');
                 location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'

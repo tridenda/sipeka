@@ -99,7 +99,7 @@ class Sal_neworder_model extends CI_Model
 
   public function add($post) {
     $params['invoice'] = $post['invoice'];
-    $params['user_id'] =  $this->session->userdata('userid');;
+    $params['user_id'] =  $this->session->userdata('userid');
     $params['member_id'] = $post['member_id'] == '' ? null : htmlspecialchars($post['member_id']);
     $params['name'] = htmlspecialchars($post['member_name_modal']);
     $params['table_number'] = htmlspecialchars($post['table_number_modal']);
@@ -128,6 +128,7 @@ class Sal_neworder_model extends CI_Model
   public function update($post)
   {
     $params['invoice'] = $post['invoice'];
+    $params['user_id'] =  $this->session->userdata('userid');
     $params['total_price'] = $post['subtotal'];
     $params['discount'] = $post['subdiscount'];
     $params['final_price'] = $post['grandtotal'];
