@@ -29,6 +29,7 @@ class Sal_neworders extends CI_Controller {
 				if( isset($sale->final_price) ) {
 					$row[] = indo_currency($sale->final_price);
 				}
+				$row[] = $sale->table_number;
 				$row[] = $sale->notes;
 				// add html for action
 				$row[] = '
@@ -74,6 +75,7 @@ class Sal_neworders extends CI_Controller {
 		if( isset($_POST['neworder-member']) ) {
 			// Set rules form
 			$this->form_validation->set_rules('member_name_modal', 'Nama', 'required');
+			$this->form_validation->set_rules('table_number_modal', 'Nomor meja', 'required');
 			// To make sure user choosing the member
 			$this->form_validation->set_rules('member_id', 'Nomor telepon', 'required');
 
@@ -94,6 +96,7 @@ class Sal_neworders extends CI_Controller {
 		} else {
 			// Set rules form
 			$this->form_validation->set_rules('member_name_modal', 'Nama', 'required');
+			$this->form_validation->set_rules('table_number_modal', 'Nomor meja', 'required');
 
 			// Set condition form, if FALSE process is canceled
 			if( $this->form_validation->run() == FALSE ) {

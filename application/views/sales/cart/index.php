@@ -150,10 +150,11 @@
       </div>
       <div class="col-3">
         <div class="card p-3">
-          <div class="d-flex justify-content-between">
+          <!-- <div class="d-flex justify-content-between">
             <button id="cancel-payment" class="btn btn-warning w-100 mr-1">Batal Bayar</button>
             <button id="paylater" class="btn btn-secondary w-100 ml-1">Bayar Nanti</button>
-          </div>
+          </div> -->
+          <button id="paylater" class="btn btn-secondary w-100">Bayar Nanti</button>
           <button id="paynow" class="btn btn-success w-100 mt-2" style="height: 4.6rem">Bayar Sekarang</button>
         </div>
         <!-- /.card -->
@@ -511,4 +512,52 @@
       }
     })
   })
+
+  // $(document).ready(function() {
+  //   $(document).on('click', '#paylater', function () {
+  //     var sale_id = $('#sale_id').val()
+  //     var invoice = $('#invoice').val()
+  //     var subtotal = $('#subtotal').val()
+  //     var subdiscount = $('#subdiscount').val()
+  //     var grandtotal = $('#grandtotal').val()
+  //     var cash = $('#cash').val()
+  //     var remaining = $('#remaining').val()
+  //     var notes = $('#notes').val()
+  //     var date = $('#date').val()
+  //     if( subtotal == '' || subtotal < 1 ) {
+  //       alert('Belum ada produk yang ditambahkan')
+  //       $('#barcode').focus(); 
+  //     } else if( cash == '' || cash < 1) {
+  //       alert('Jumlah uang bayar belum dimasukan')
+  //       $('#cash').focus(); 
+  //     }  else {
+  //       if(confirm('Bayar nanti?')) {
+  //         $.ajax({
+  //         type: 'POST',
+  //         url: '<?=base_url('Sal_cart/process')?>',
+  //         data: {'paynow' : true, 
+  //           'sale_id' : sale_id,
+  //           'invoice' : invoice,
+  //           'subtotal' : subtotal, 
+  //           'subdiscount' : subdiscount, 
+  //           'grandtotal' : grandtotal, 
+  //           'cash' : cash, 
+  //           'remaining' : remaining,
+  //           'notes' : notes,
+  //           'date' : date},
+  //         dataType: 'json',
+  //         success: function(result) {
+  //             if(result.success) {
+  //               alert('Transaksi berhasil');
+  //               location.href='<?=base_url('sal_cart/request_print/'.$row->sale_id)?>'
+  //             } else {
+  //               alert('Transaksi gagal');
+  //               location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'
+  //             }
+  //         }
+  //       })
+  //       }
+  //     }
+  //   })
+  // })
 </script>

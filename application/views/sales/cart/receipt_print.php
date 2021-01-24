@@ -166,7 +166,7 @@
             </p>
         </div>
         <button id="btnPrint" class="hidden-print ticket" style="margin-top: 2rem">Print</button><br>
-        <a href="<?=base_url('penjualan/pesanan_baru')?>">
+        <a href="<?=base_url('penjualan/daftar_penjualan')?>">
           <button id="btnPrint" class="hidden-print ticket" style="margin-top: 2rem">Kembali</button>
         </a>
         <script>

@@ -102,6 +102,7 @@ class Sal_neworder_model extends CI_Model
     $params['user_id'] =  $this->session->userdata('userid');;
     $params['member_id'] = $post['member_id'] == '' ? null : htmlspecialchars($post['member_id']);
     $params['name'] = htmlspecialchars($post['member_name_modal']);
+    $params['table_number'] = htmlspecialchars($post['table_number_modal']);
     $params['date'] = date('Y-m-d', strtotime("now"));
     $this->db->insert('sal_sales', $params);
   }

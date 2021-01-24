@@ -95,6 +95,6 @@ class Sal_cart extends CI_Controller {
 			'sale' => $this->Sal_neworder_model->get_sales($sale_id)->row(),
 			'sale_details' => $this->Sal_neworder_model->get_sale_details($sale_id)->result()
 		);
-		$this->load->view('sales/cart/print', $data);
+		$this->load->view('sales/cart/receipt_print', $data);
 	}
 }

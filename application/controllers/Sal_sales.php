@@ -29,6 +29,7 @@ class Sal_sales extends CI_Controller {
 				if( isset($sale->final_price) ) {
 					$row[] = indo_currency($sale->final_price);
 				}
+				$row[] = $sale->table_number;
 				$row[] = $sale->notes;
 				// add html for action
 				$row[] = '
@@ -45,10 +46,11 @@ class Sal_sales extends CI_Controller {
 						data-remaining="'.indo_currency($sale->remaining).'"
 						data-notes="'.$sale->notes.'"
 						data-user_name="'.$sale->user_name.'"
+						data-table_number="'.$sale->table_number.'"
 						data-status="'.$sale->status.'">
 						<i class="fas fa-info-circle"></i> Rincian
 					</button>
-					</div>
+					<a href="'.base_url('penjualan/keranjang/cetak/'.$sale->sale_id).'" class="mr-1 btn btn-sm btn-outline-primary"><i class="fa fa-print"></i> Cetak</a>
 					';
         $data[] = $row;
     }
