@@ -50,7 +50,7 @@ class Sal_cart extends CI_Controller {
 						'product_id' => $value->product_id,
 						'price' => $value->price,
 						'product_id' => $value->product_id,
-						'quantity' => $value->product_id,
+						'quantity' => $value->quantity,
 						'discount' => $value->discount,
 						'total' => $value->total
 					)
@@ -87,5 +87,14 @@ class Sal_cart extends CI_Controller {
 		}
 
 		echo json_encode($params);
+	}
+
+	public function receipt_print($sale_id)
+	{
+		$data = array(
+			'sale' => $this->Sal_neworder_model->get_sales($sale_id)->row(),
+			'sale_details' => $this->Sal_neworder_model->get_sale_details($sale_id)->result()
+		);
+		$this->load->view('sales/cart/print', $data);
 	}
 }

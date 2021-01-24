@@ -144,4 +144,29 @@ class Sal_neworder_model extends CI_Model
   {
     $this->db->insert_batch('sal_details', $params);
   }
+
+  public function get_sale_details($sale_id = null)
+  {
+    $this->db->select('sal_details.*, pro_products.name as product_name');
+    $this->db->from('sal_details');
+    $this->db->join('pro_products', 'sal_details.product_id = pro_products.product_id');
+    if( $sale_id != null ) {
+      $this->db->where('sal_details.sale_id', $sale_id);
+    }
+    $query = $this->db->get();
+
+    return $query;
+  }
+
+  public function get_sales($sale_id = nul)
+  {
+    $this->db->select('sal_sales.*, users.name as user_name');
+    $this->db->from('sal_sales');
+    $this->db->join('users', 'sal_sales.user_id = users.user_id');
+    if( $sale_id != null ) {
+      $this->db->where('sale_id', $sale_id);
+    }
+    $query = $this->db->get();
+    return $query;
+  }
 }
