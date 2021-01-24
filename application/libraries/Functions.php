@@ -76,6 +76,15 @@ Class Functions {
   }
 
   // Get number rows of supplier table
+	public function get_product() {
+		$this->ci->load->model('Pro_product_model');
+    $query = $this->ci->Pro_product_model->get();	
+    $num_rows = $query->num_rows();
+		
+		return $num_rows;
+  }
+
+  // Get number rows of supplier table
 	public function get_supplier() {
 		$this->ci->load->model('Supplier_model');
     $query = $this->ci->Supplier_model->get();	
