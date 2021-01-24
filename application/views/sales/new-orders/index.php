@@ -44,6 +44,7 @@
             <th>Faktur</th>
             <th>Nama Pelanggan</th>
             <th>Total</th>
+            <th>No. Meja</th>
             <th>Catatan</th>
             <th>Aksi</th>
           </tr>
@@ -148,7 +149,7 @@
           <div class="card-body">
             <input type="hidden" name="member_id" id="member_id">
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <!-- text input -->
                 <div class="form-group">
                   <label for="phone">No HP</label>
@@ -156,11 +157,18 @@
                   <small class="text-red font-italic"><?php echo form_error('member_id'); ?></small>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label for="member_name_modal">Nama *</label>
-                  <input name="member_name_modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan">
+                  <input name="member_name_modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan" readonly>
                   <small class="text-red font-italic"><?php echo form_error('member_name_modal'); ?></small>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="table_number_modal">No. Meja *</label>
+                  <input name="table_number_modal" type="number" class="form-control" id="member-name-modal" placeholder="Nomor meja">
+                  <small class="text-red font-italic"><?php echo form_error('table_number_modal'); ?></small>
                 </div>
               </div>
             </div>
@@ -195,11 +203,20 @@
       </div>
       <div class="modal-body">
         <form action="" method="post">
-          <div class="card-body">
-            <div class="form-group">
-              <label for="member_name_modal">Nama *</label>
-              <input name="member_name_modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan">
-              <small class="text-red font-italic"><?php echo form_error('member_name_modal'); ?></small>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="member_name_modal">Nama *</label>
+                <input name="member_name_modal" type="text" class="form-control" id="member-name-modal" placeholder="Nama pelanggan">
+                <small class="text-red font-italic"><?php echo form_error('member_name_modal'); ?></small>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="table_number_modal">No. Meja *</label>
+                <input name="table_number_modal" type="number" class="form-control" id="member-name-modal" placeholder="Nomor meja">
+                <small class="text-red font-italic"><?php echo form_error('table_number_modal'); ?></small>
+              </div>
             </div>
           </div>
           <!-- /.card-body -->
@@ -261,12 +278,12 @@
       },
       "columnDefs": [
         {
-          "targets": [5],
+          "targets": [6],
           "className": 'text-center',
           "width": '18rem',
         },
         {
-          "targets": [0,1,2,3,4,5],
+          "targets": [0,1,2,3,4,5,6],
           "orderable": false
         }
       ]      

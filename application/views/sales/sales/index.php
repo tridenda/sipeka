@@ -32,6 +32,7 @@
             <th>Faktur</th>
             <th>Nama Pelanggan</th>
             <th>Total</th>
+            <th>No. Meja</th>
             <th>Catatan</th>
             <th>Aksi</th>
           </tr>
@@ -92,6 +93,10 @@
               <td><span id="user_name"></span></td>
             </tr>
             <tr>
+              <th>No. Meja</th>
+              <td><span id="table_number"></span></td>
+            </tr>
+            <tr>
               <th>Status</th>
               <td><span id="status"></span></td>
             </tr>
@@ -121,18 +126,14 @@
       },
       "columnDefs": [
         {
-          "targets": [5],
+          "targets": [6],
           "className": 'text-center',
-          "width": '5.5rem',
+          "width": '12rem',
         },
         {
-          "targets": [0,1,2,3,4,5],
+          "targets": [0,1,2,3,4,5,6],
           "orderable": false
-        },
-        {
-          "targets": [4],
-          "width": '20rem',
-        },
+        }
       ]      
     })
   })
@@ -149,6 +150,7 @@
       var final_price = $(this).data('final_price');
       var notes = $(this).data('notes');
       var user_name = $(this).data('user_name');
+      var table_number = $(this).data('table_number');
       var status = $(this).data('status');
       
       $('#invoice').text(invoice);
@@ -159,6 +161,7 @@
       $('#final_price').text(final_price);
       $('#notes').text(notes);
       $('#user_name').text(user_name);
+      $('#table_number').text(table_number);
       $('#status').text(status);
       $('#material-modal').modal('hide');
     })

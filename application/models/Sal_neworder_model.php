@@ -99,9 +99,10 @@ class Sal_neworder_model extends CI_Model
 
   public function add($post) {
     $params['invoice'] = $post['invoice'];
-    $params['user_id'] =  $this->session->userdata('userid');;
+    $params['user_id'] =  $this->session->userdata('userid');
     $params['member_id'] = $post['member_id'] == '' ? null : htmlspecialchars($post['member_id']);
     $params['name'] = htmlspecialchars($post['member_name_modal']);
+    $params['table_number'] = htmlspecialchars($post['table_number_modal']);
     $params['date'] = date('Y-m-d', strtotime("now"));
     $this->db->insert('sal_sales', $params);
   }
@@ -122,5 +123,54 @@ class Sal_neworder_model extends CI_Model
     }
     $invoice = "IN".date('ymd').$no;
     return $invoice;
+  }
+
+  public function update($post)
+  {
+    $params['invoice'] = $post['invoice'];
+    $params['user_id'] =  $this->session->userdata('userid');
+    $params['total_price'] = $post['subtotal'];
+    $params['discount'] = $post['subdiscount'];
+    $params['final_price'] = $post['grandtotal'];
+    $params['remaining'] = $post['remaining'];
+    $params['notes'] = $post['notes'];
+    $params['date'] = $post['date'];
+    if( isset($post['status']) ) {
+      $params['cash'] = $post['cash'];
+      $params['status'] = "Lunas";
+    }
+    $params['updated'] = date('Y-m-d H:i:s');
+    $this->db->where('sale_id', $post["sale_id"]);
+    $this->db->update('sal_sales', $params); 
+  }
+
+  public function add_sale_detail($params)
+  {
+    $this->db->insert_batch('sal_details', $params);
+  }
+
+  public function get_sale_details($sale_id = null)
+  {
+    $this->db->select('sal_details.*, pro_products.name as product_name');
+    $this->db->from('sal_details');
+    $this->db->join('pro_products', 'sal_details.product_id = pro_products.product_id');
+    if( $sale_id != null ) {
+      $this->db->where('sal_details.sale_id', $sale_id);
+    }
+    $query = $this->db->get();
+
+    return $query;
+  }
+
+  public function get_sales($sale_id = nul)
+  {
+    $this->db->select('sal_sales.*, users.name as user_name');
+    $this->db->from('sal_sales');
+    $this->db->join('users', 'sal_sales.user_id = users.user_id');
+    if( $sale_id != null ) {
+      $this->db->where('sale_id', $sale_id);
+    }
+    $query = $this->db->get();
+    return $query;
   }
 }

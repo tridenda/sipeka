@@ -1,7 +1,11 @@
 <?php
 
-function indo_currency($data) {
-  $result = "Rp " . number_format($data, 0, ',', '.');
+function indo_currency($data, $rp = null) {
+	if( $rp ) {
+		$result = number_format($data, 0, ',', '.');
+	} else {
+		$result = "Rp " . number_format($data, 0, ',', '.');
+	}
   return $result;
 }
 

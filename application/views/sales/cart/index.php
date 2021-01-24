@@ -20,19 +20,19 @@
         <div class="form-group">
           <label for="date" class="p-1 col-sm-3 col-form-label col-form-label-sm">Tanggal</label>
           <div class="p-1 col-sm-9">
-            <input type="date" class="form-control form-control-sm" id="date">
+            <input type="date" class="form-control form-control-sm" id="date" value="<?=date('Y-m-d')?>">
           </div>
         </div>
         <div class="form-group">
           <label for="user_id" class="p-1 col-sm-3 col-form-label col-form-label-sm">Pramuniaga</label>
           <div class="p-1 col-sm-9">
-            <input type="text" class="form-control form-control-sm" id="user_id" value="<?=ucfirst($this->functions->user_login()->name)?>" readonly>
+            <input type="text" class="form-control form-control-sm" id="pramuniaga" value="<?=ucfirst($this->functions->user_login()->name)?>" readonly>
           </div>
         </div>
         <div class="form-group">
           <label for="Pelanggan" class="p-1 col-sm-3 col-form-label col-form-label-sm">Pelanggan</label>
           <div class="p-1 col-sm-9">
-            <input type="Pelanggan" class="form-control form-control-sm" id="Pelanggan" value="<?=$row->name?>" readonly>
+            <input type="text" class="form-control form-control-sm" id="pelanggan" value="<?=$row->name?>" readonly>
           </div>
         </div>
       </div>
@@ -62,9 +62,10 @@
         </div>
       </div>
       <div class="col-sm bg-white mr-3">
+        <input type="hidden" id="invoice" value="<?=$row->invoice?>">
         <p class="text-right" style="font-size: 1.5rem">
           Faktur <strong>IN2020100009</strong><br>
-          <strong style="font-size: 3.6rem;">RP 30.000.000</strong>
+          <strong id="grandtotal2" style="font-size: 3.6rem;">0</strong>
         </p>
       </div>
     </div>
@@ -86,27 +87,8 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>KB0209970004</td>
-                  <td>Mie Kocok Kaki Sapi + Baso + Iga</td>
-                  <td>Rp 25.000</td>
-                  <td>2</td>
-                  <td>Rp 2.000</td>
-                  <td>Rp 48.000</td>
-                  <td style="width: 5rem">
-                    <form action="'.base_url('daftar_bahan/hapus').'" method="post">
-                      <a class="btn btn-sm btn-outline-primary" href="'.base_url('daftar_bahan/ubah/').$material->material_id.'">
-                        <i class="far fa-edit"></i> Ubah
-                      </a>
-                      <input name="material_id" type="hidden" value="'.$material->material_id.'">
-                      <button onclick="return confirm('Anda akan menghapus data bahan, yakin?');" class="btn btn-sm btn-outline-danger">
-                        <i class="far fa-trash-alt"></i> Hapus
-                      </button>
-                    </form>
-                  </td>
-                </tr>
+              <tbody id="cart-table">
+                <?php $this->view('sales/cart/cart')?>
               </tbody>
             </table>
           </div>
@@ -119,21 +101,21 @@
       <div class="col-3">
         <div class="card">
           <div class="form-group ml-3 mr-3 mt-3">
-            <label for="Pelanggan" class="p-1 col-sm-4 col-form-label col-form-label-sm">Total</label>
+            <label for="subtotal" class="p-1 col-sm-4 col-form-label col-form-label-sm">Total</label>
             <div class="p-1 col-sm-8">
-              <input type="Pelanggan" class="form-control form-control-sm" id="Pelanggan" placeholder="50000" readonly>
+              <input type="text" class="form-control form-control-sm" id="subtotal" readonly>
             </div>
           </div>
           <div class="form-group ml-3 mr-3" style="margin-top: -1rem">
-            <label for="discount" class="p-1 col-sm-4 col-form-label col-form-label-sm">Potongan</label>
+            <label for="subdiscount" class="p-1 col-sm-4 col-form-label col-form-label-sm">Potongan</label>
             <div class="p-1 col-sm-8">
-              <input type="number" class="form-control form-control-sm" id="discount" placeholder="Masukan angka">
+              <input type="number" class="form-control form-control-sm" id="subdiscount" value="0">
             </div>
           </div>
           <div class="form-group ml-3 mr-3" style="margin-top: -1rem">
-            <label for="Pelanggan" class="p-1 col-sm-4 col-form-label col-form-label-sm">Total bayar</label>
+            <label for="grandtotal" class="p-1 col-sm-4 col-form-label col-form-label-sm">Total bayar</label>
             <div class="p-1 col-sm-8">
-              <input type="Pelanggan" class="form-control form-control-sm" id="Pelanggan" placeholder="Nama pelanggan" readonly>
+              <input type="text" class="form-control form-control-sm" id="grandtotal" readonly>
             </div>
           </div>
         </div>
@@ -142,15 +124,16 @@
       <div class="col-3">
         <div class="card">
           <div class="form-group ml-3 mr-3 mt-3">
-            <label for="Pelanggan" class="p-1 col-sm-4 col-form-label col-form-label-sm">Total</label>
+            <label for="cash" class="p-1 col-sm-4 col-form-label col-form-label-sm">Bayar</label>
             <div class="p-1 col-sm-8">
-              <input type="Pelanggan" class="form-control form-control-sm" id="Pelanggan" placeholder="50000">
+              <input type="text" class="form-control form-control-sm" id="cash" autocomplete="off">
             </div>
           </div>
           <div class="form-group ml-3 mr-3" style="margin-top: -1rem">
-            <label for="discount" class="p-1 col-sm-4 col-form-label col-form-label-sm">Kembalian</label>
-            <div class="p-1 col-sm-8">
-              <input type="number" class="form-control form-control-sm" id="discount" placeholder="15000"  readonly>
+            <div class="form-group" style="margin-bottom: -1.1rem">
+              <label class="ml-1" for="remaining" style="font-size: 0.9rem">Kembalian</label>
+              <input type="hidden" class="form-control" id="remaining" ><br>
+              <p id="remaining2" class="p-0 text-center border font-weight-bold" style="font-size: 24px; height: 3rem"></p>
             </div>
           </div>
         </div>
@@ -159,19 +142,16 @@
       <div class="col-3">
         <div class="card">
           <div class="form-group mt-2 ml-3 mr-3">
-            <label class="p-1 col-sm-4 col-form-label col-form-label-sm">Textarea</label>
-            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+            <label class="p-1 col-sm-4 col-form-label col-form-label-sm">Catatan</label>
+            <textarea id="notes" class="form-control" rows="3"><?=$row->notes?></textarea>
           </div>
         </div>
         <!-- /.card -->
       </div>
       <div class="col-3">
         <div class="card p-3">
-          <div class="d-flex justify-content-between">
-            <button class="btn btn-warning w-100 mr-1">Hapus Semua</button>
-            <button class="btn btn-secondary w-100 ml-1">Bayar Nanti</button>
-          </div>
-          <button class="btn btn-success w-100 mt-2" style="height: 4rem">Bayar Sekarang</button>
+          <button id="paylater" class="btn btn-secondary w-100">Bayar Nanti</button>
+          <button id="paynow" class="btn btn-success w-100 mt-2" style="height: 4.6rem">Bayar Sekarang</button>
         </div>
         <!-- /.card -->
       </div>
@@ -213,6 +193,67 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- End: Products -->
+
+<!-- Begin: Products -->
+<div class="modal fade" id="modal-product-update">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Ubah produk
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="update_cart_id">
+        <div class="row">
+          <div class="col-sm-6 p-1">
+            <!-- text input -->
+            <div class="form-group">
+              <label>Kodebar</label>
+              <input id="update_product_barcode" type="text" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="col-sm-6 p-1">
+            <div class="form-group">
+              <label>Nama</label>
+              <input id="update_product_name" type="text" class="form-control" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label p-1" for="update_price">Harga</label>
+          <input type="number" class="form-control" id="update_price">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label p-1" for="update_quantity">Jumlah</label>
+          <input type="number" class="form-control" id="update_quantity">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label p-1" for="update_total">Harga sebelum</label>
+          <input type="number" class="form-control" id="update_total" readonly>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label p-1" for="update_discount">Potongan harga</label>
+          <input type="number" class="form-control" id="update_discount" autocomplete="on">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label p-1" for="update_final_price">Harga sesudah</label>
+          <input type="number" class="form-control" id="update_final_price" readonly>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button id="update_cart_table" type="submit" class="btn btn-primary float-right"><i class="far fa-paper-plane"></i> Simpan</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- End: Products -->
+
 
 <script>
   $(document).ready(function() {
@@ -267,10 +308,6 @@
       var sale_id = $('#sale_id').val();
       var price = $('#price').val();
       var quantity = $('#quantity').val();
-      console.log(sale_id);
-      console.log(product_id);
-      console.log(price);
-      console.log(quantity);
       if( product_id == '' ) {
         alert('Produk belum dipilih')
         $('#barcode').focus(); 
@@ -282,12 +319,235 @@
           dataType: 'json',
           success: function(result) {
               if(result.success == true) {
-                alert('Berhasil tambah produk ke keranjang')
+                $('#cart-table').load('<?=base_url('sal_cart/cart_data/').$row->sale_id?>', function() {
+                  calculate()
+                })
+                $('#product_id').val('')
+                $('#barcode').val('')
+                $('#quantity').val(1)
               } else {
                 alert('Gagal tambah produk ke keranjang')
             }
           }
         })
+      }
+    })
+  })
+
+  $(document).ready(function() {
+    $(document).on('click', '#delete_cart', function () {
+      if(confirm('Apakah anda yakin?')) {
+        var cart_id = $(this).data(cart_id);
+        $.ajax({
+          type: 'POST',
+          url: '<?=base_url('sal_cart/delete_cart')?>',
+          data: {'cart_id' : cart_id},
+          dataType: 'json',
+          success: function(result) {
+              if(result.success == true) {
+                $('#cart-table').load('<?=base_url('sal_cart/cart_data/').$row->sale_id?>', function() {
+                  calculate()
+                })
+              } else {
+                alert('Gagal hapus produk dari keranjang')
+              }
+          }
+        })
+      }
+    })
+  })
+
+  $(document).ready(function() {
+    $(document).on('click', '#update_cart', function () {
+      var update_cart_id = $(this).data('update_cart_id');
+      var update_product_barcode = $(this).data('update_product_barcode');
+      var update_product_name = $(this).data('update_product_name');
+      var update_price = $(this).data('update_price');
+      var update_quantity = $(this).data('update_quantity');
+      var update_total = $(this).data('update_total');
+      var update_discount = $(this).data('update_discount');
+
+      $('#update_cart_id').val(update_cart_id);
+      $('#update_product_barcode').val(update_product_barcode);
+      $('#update_product_name').val(update_product_name);
+      $('#update_price').val(update_price);
+      $('#update_quantity').val(update_quantity);
+      $('#update_total').val(update_total);
+      $('#update_discount').val(update_discount);
+    })
+  })
+
+  function count_update_modal() {
+    var quantity = $('#update_quantity').val()
+    var price = $('#update_price').val()
+    var discount = $('#update_discount').val()
+
+    final_price = (price - discount) * quantity
+    $('#update_final_price').val(final_price)
+  }
+
+  $(document).on('keyup mouseup', '#update_quantity, #update_price, #update_discount', function() {
+    count_update_modal()
+  })
+
+  $(document).ready(function() {
+    $(document).on('click', '#update_cart_table', function () {
+      var cart_id = $('#update_cart_id').val()
+      var quantity = $('#update_quantity').val()
+      var price = $('#update_price').val()
+      var total = $('#update_final_price').val()
+      var discount = $('#update_discount').val()
+      if( price == '' || price < 1 ) {
+        alert('Harga tidak boleh kosong')
+        $('#update_price').focus(); 
+      } else if( quantity == '' || quantity < 1) {
+        alert('Jumlah minimal satu')
+        $('#update_quantity').focus(); 
+      } else if( total == '' || total < 1 ) {
+        alert('Anda tidak merubah apapun')
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: '<?=base_url('Sal_cart/process')?>',
+          data: {'update_cart_table' : true, 'cart_id' : cart_id, 'price' : price, 'quantity' : quantity, 'discount' : discount, 'total' : total},
+          dataType: 'json',
+          success: function(result) {
+              if(result.success == true) {
+                $('#cart-table').load('<?=base_url('sal_cart/cart_data/').$row->sale_id?>', function() {
+                  calculate()
+                })
+                $('#modal-product-update').modal('hide');
+                alert('Produk berhasil diubah')
+              } else {
+                alert('Anda tidak merubah apapun')
+            }
+          }
+        })
+      }
+    })
+  })
+
+  function calculate() {
+    var subtotal = 0
+    $('#cart-table tr').each(function() {
+      subtotal += parseInt($(this).find('#total').text())
+    })
+    isNaN(subtotal) ? $('#subtotal').val(0) : $('#subtotal').val(subtotal)
+
+    var discount = $('#subdiscount').val()
+    var grandtotal = subtotal - discount
+    if( isNaN(grandtotal) ) {
+      $('#grandtotal').val(0)
+      $('#grandtotal2').text(0)
+    } else {
+      $('#grandtotal').val(grandtotal)
+       var rupiah = 'Rp ' + grandtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");  // 12,345.67
+      $('#grandtotal2').text(rupiah)
+    }
+
+    var cash = $('#cash').val()
+    cash != 0 ? $('#remaining').val(cash - grandtotal) : $('#remaining').val(0)
+    
+    var remaining = 'Rp ' + (cash - grandtotal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    cash != 0 ? $('#remaining2').text(remaining) : $('#remaining2').val(0)
+    
+  }
+
+  $(document).on('keyup mouseup', '#subdiscount, #cash', function() {
+    calculate()
+  })
+
+  $(document).ready(function() {
+    calculate()
+  })
+
+  $(document).ready(function() {
+    $(document).on('click', '#paynow', function () {
+      var sale_id = $('#sale_id').val()
+      var invoice = $('#invoice').val()
+      var subtotal = $('#subtotal').val()
+      var subdiscount = $('#subdiscount').val()
+      var grandtotal = $('#grandtotal').val()
+      var cash = $('#cash').val()
+      var remaining = $('#remaining').val()
+      var notes = $('#notes').val()
+      var date = $('#date').val()
+      if( subtotal == '' || subtotal < 1 ) {
+        alert('Belum ada produk yang ditambahkan')
+        $('#barcode').focus(); 
+      } else if( cash == '' || cash < 1) {
+        alert('Jumlah uang bayar belum dimasukan')
+        $('#cash').focus(); 
+      }  else {
+        if(confirm('Yakin proses transaksi ini?')) {
+          $.ajax({
+          type: 'POST',
+          url: '<?=base_url('Sal_cart/process')?>',
+          data: {'paynow' : true, 
+            'sale_id' : sale_id,
+            'invoice' : invoice,
+            'subtotal' : subtotal, 
+            'subdiscount' : subdiscount, 
+            'grandtotal' : grandtotal, 
+            'cash' : cash, 
+            'remaining' : remaining,
+            'notes' : notes,
+            'date' : date},
+          dataType: 'json',
+          success: function(result) {
+            if(result.success) {
+                alert('Transaksi berhasil');
+                location.href='<?=base_url('penjualan/keranjang/cetak_struk/'.$row->sale_id)?>'
+              } else {
+                alert('Transaksi gagal');
+                location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'
+              }
+          }
+        })
+        }
+      }
+    })
+  })
+
+  $(document).ready(function() {
+    $(document).on('click', '#paylater', function () {
+      var sale_id = $('#sale_id').val()
+      var invoice = $('#invoice').val()
+      var subtotal = $('#subtotal').val()
+      var subdiscount = $('#subdiscount').val()
+      var grandtotal = $('#grandtotal').val()
+      var remaining = $('#remaining').val()
+      var notes = $('#notes').val()
+      var date = $('#date').val()
+      if( subtotal == '' || subtotal < 1 ) {
+        alert('Belum ada produk yang ditambahkan')
+        $('#barcode').focus(); 
+      }  else {
+        if(confirm('Tunda pembayaran?')) {
+          $.ajax({
+          type: 'POST',
+          url: '<?=base_url('Sal_cart/process')?>',
+          data: {'paylater' : true, 
+            'sale_id' : sale_id,
+            'invoice' : invoice,
+            'subtotal' : subtotal, 
+            'subdiscount' : subdiscount, 
+            'grandtotal' : grandtotal, 
+            'remaining' : remaining,
+            'notes' : notes,
+            'date' : date},
+          dataType: 'json',
+          success: function(result) {
+              if(result.success) {
+                alert('Transaksi ditunda');
+                location.href='<?=base_url('penjualan/keranjang/cetak_pesanan/'.$row->sale_id)?>'
+              } else {
+                alert('Transaksi gagal');
+                location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'
+              }
+          }
+        })
+        }
       }
     })
   })

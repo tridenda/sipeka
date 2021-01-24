@@ -149,7 +149,9 @@
 
         <a class="nav-link border-bottom" data-toggle="dropdown" href="#">
           Pesanan Baru <i class="fas fa-shopping-cart"></i>
+          <?php if( count($neworders) > 0 ) : ?>
           <span class="badge badge-danger navbar-badge"><?=count($neworders)?></span>
+          <?php endif; ?>
         </a>
         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
           <div class="border-bottom pb-1 mb-2 d-flex justify-content-between fw-bold">
