@@ -109,7 +109,7 @@
           <div class="form-group ml-3 mr-3" style="margin-top: -1rem">
             <label for="subdiscount" class="p-1 col-sm-4 col-form-label col-form-label-sm">Potongan</label>
             <div class="p-1 col-sm-8">
-              <input type="number" class="form-control form-control-sm" id="subdiscount">
+              <input type="number" class="form-control form-control-sm" id="subdiscount" value="0">
             </div>
           </div>
           <div class="form-group ml-3 mr-3" style="margin-top: -1rem">
@@ -150,10 +150,6 @@
       </div>
       <div class="col-3">
         <div class="card p-3">
-          <!-- <div class="d-flex justify-content-between">
-            <button id="cancel-payment" class="btn btn-warning w-100 mr-1">Batal Bayar</button>
-            <button id="paylater" class="btn btn-secondary w-100 ml-1">Bayar Nanti</button>
-          </div> -->
           <button id="paylater" class="btn btn-secondary w-100">Bayar Nanti</button>
           <button id="paynow" class="btn btn-success w-100 mt-2" style="height: 4.6rem">Bayar Sekarang</button>
         </div>
@@ -499,9 +495,9 @@
             'date' : date},
           dataType: 'json',
           success: function(result) {
-              if(result.success) {
+            if(result.success) {
                 alert('Transaksi berhasil');
-                location.href='<?=base_url('sal_cart/receipt_print/'.$row->sale_id)?>'
+                location.href='<?=base_url('penjualan/cetak_struk/'.$row->sale_id)?>'
               } else {
                 alert('Transaksi gagal');
                 location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'
@@ -513,51 +509,46 @@
     })
   })
 
-  // $(document).ready(function() {
-  //   $(document).on('click', '#paylater', function () {
-  //     var sale_id = $('#sale_id').val()
-  //     var invoice = $('#invoice').val()
-  //     var subtotal = $('#subtotal').val()
-  //     var subdiscount = $('#subdiscount').val()
-  //     var grandtotal = $('#grandtotal').val()
-  //     var cash = $('#cash').val()
-  //     var remaining = $('#remaining').val()
-  //     var notes = $('#notes').val()
-  //     var date = $('#date').val()
-  //     if( subtotal == '' || subtotal < 1 ) {
-  //       alert('Belum ada produk yang ditambahkan')
-  //       $('#barcode').focus(); 
-  //     } else if( cash == '' || cash < 1) {
-  //       alert('Jumlah uang bayar belum dimasukan')
-  //       $('#cash').focus(); 
-  //     }  else {
-  //       if(confirm('Bayar nanti?')) {
-  //         $.ajax({
-  //         type: 'POST',
-  //         url: '<?=base_url('Sal_cart/process')?>',
-  //         data: {'paynow' : true, 
-  //           'sale_id' : sale_id,
-  //           'invoice' : invoice,
-  //           'subtotal' : subtotal, 
-  //           'subdiscount' : subdiscount, 
-  //           'grandtotal' : grandtotal, 
-  //           'cash' : cash, 
-  //           'remaining' : remaining,
-  //           'notes' : notes,
-  //           'date' : date},
-  //         dataType: 'json',
-  //         success: function(result) {
-  //             if(result.success) {
-  //               alert('Transaksi berhasil');
-  //               location.href='<?=base_url('sal_cart/request_print/'.$row->sale_id)?>'
-  //             } else {
-  //               alert('Transaksi gagal');
-  //               location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'
-  //             }
-  //         }
-  //       })
-  //       }
-  //     }
-  //   })
-  // })
+  $(document).ready(function() {
+    $(document).on('click', '#paylater', function () {
+      var sale_id = $('#sale_id').val()
+      var invoice = $('#invoice').val()
+      var subtotal = $('#subtotal').val()
+      var subdiscount = $('#subdiscount').val()
+      var grandtotal = $('#grandtotal').val()
+      var remaining = $('#remaining').val()
+      var notes = $('#notes').val()
+      var date = $('#date').val()
+      if( subtotal == '' || subtotal < 1 ) {
+        alert('Belum ada produk yang ditambahkan')
+        $('#barcode').focus(); 
+      }  else {
+        if(confirm('Tunda pembayaran?')) {
+          $.ajax({
+          type: 'POST',
+          url: '<?=base_url('Sal_cart/process')?>',
+          data: {'paylater' : true, 
+            'sale_id' : sale_id,
+            'invoice' : invoice,
+            'subtotal' : subtotal, 
+            'subdiscount' : subdiscount, 
+            'grandtotal' : grandtotal, 
+            'remaining' : remaining,
+            'notes' : notes,
+            'date' : date},
+          dataType: 'json',
+          success: function(result) {
+              if(result.success) {
+                alert('Transaksi ditunda');
+                location.href='<?=base_url('penjualan/keranjang/cetak_pesanan/'.$row->sale_id)?>'
+              } else {
+                alert('Transaksi gagal');
+                location.href='<?=base_url('penjualan/keranjang/'.$row->sale_id)?>'
+              }
+          }
+        })
+        }
+      }
+    })
+  })
 </script>

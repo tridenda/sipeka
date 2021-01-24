@@ -69,7 +69,8 @@ $route['penjualan/pesanan_baru'] = 'sal_neworders';
 $route['penjualan/pesanan_baru/hapus/(:num)'] = 'sal_neworders/delete/$1';
 // Cart links
 $route['penjualan/keranjang/(:num)'] = 'sal_cart/index/$1';
-$route['penjualan/keranjang/cetak/(:num)'] = 'sal_cart/receipt_print/$1';
+$route['penjualan/keranjang/cetak_struk/(:num)'] = 'sal_cart/receipt_print/$1';
+$route['penjualan/keranjang/cetak_pesanan/(:num)'] = 'sal_cart/request_print/$1';
 // Sale list links
 $route['penjualan/daftar_penjualan'] = 'sal_sales';
 // End: Sales

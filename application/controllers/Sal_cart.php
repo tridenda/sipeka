@@ -41,6 +41,7 @@ class Sal_cart extends CI_Controller {
 		}
 
 		if( isset($_POST['paynow']) ) {
+			$post['status'] = true;
 			$this->Sal_neworder_model->update($post);
 			$cart = $this->Sal_cart_model->get_cart(null, $post['sale_id'])->result();
 			$rows = [];
@@ -58,6 +59,10 @@ class Sal_cart extends CI_Controller {
 			}
 			$this->Sal_neworder_model->add_sale_detail($rows);
 			$this->Sal_cart_model->delete_all_cart($post);
+		}
+
+		if( isset($_POST['paylater']) ) {
+			$this->Sal_neworder_model->update($post);
 		}
 
 		if( $this->db->affected_rows() > 0 ) {
@@ -96,5 +101,14 @@ class Sal_cart extends CI_Controller {
 			'sale_details' => $this->Sal_neworder_model->get_sale_details($sale_id)->result()
 		);
 		$this->load->view('sales/cart/receipt_print', $data);
+	}
+
+	public function request_print($sale_id)
+	{
+		$data = array(
+			'sale' => $this->Sal_neworder_model->get_sales($sale_id)->row(),
+			'sale_details' => $this->Sal_cart_model->get_cart(null, $sale_id)->result()
+		);
+		$this->load->view('sales/cart/request_print', $data);
 	}
 }

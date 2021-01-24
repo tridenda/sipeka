@@ -64,7 +64,7 @@
               </tr>
               <tr>
                 <td>No. Meja</td>
-                <td>: 1</td> 
+                <td>: <?=$sale->table_number?></td> 
               </tr>
               <tr>
                 <td>Pramuniaga</td>

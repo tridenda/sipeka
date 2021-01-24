@@ -131,11 +131,13 @@ class Sal_neworder_model extends CI_Model
     $params['total_price'] = $post['subtotal'];
     $params['discount'] = $post['subdiscount'];
     $params['final_price'] = $post['grandtotal'];
-    $params['cash'] = $post['cash'];
     $params['remaining'] = $post['remaining'];
     $params['notes'] = $post['notes'];
     $params['date'] = $post['date'];
-    $params['status'] = "Lunas";
+    if( isset($post['status']) ) {
+      $params['cash'] = $post['cash'];
+      $params['status'] = "Lunas";
+    }
     $params['updated'] = date('Y-m-d H:i:s');
     $this->db->where('sale_id', $post["sale_id"]);
     $this->db->update('sal_sales', $params); 
